@@ -25,13 +25,13 @@ Esta sendo utilizado o docker para rodar o Banco de Dados MYSQL
 docker pull mysql 
 ```
 
-Para iniciar o container
+> Para iniciar o container
 
 ```
 docker run -p 3306:3306 --name mysql-tcc -e MYSQL_ROOT_PASSWORD=root -d mysql
 ```
 
-Para acessar o banco de dados com o container rodando
+> Para acessar o banco de dados com o container rodando
 
 ```
 docker exec -it  mysql-tcc /bin/bash
