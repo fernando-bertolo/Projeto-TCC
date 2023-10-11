@@ -14,7 +14,7 @@ npm install express sequelize mysql2 bcrypt jsonwebtoken nodemon cors
 > No Frontend é utilizado o <strong>ReactJS</strong> com as seguintes dependencias abaixo:
 
 ```
-npm install styled-components axios react-icons react-toastify react-router-dom
+npm install styled-components axios react-icons react-router-dom
 ```
 
 > Esta sendo utilizado o docker para rodar o Banco de Dados MYSQL
