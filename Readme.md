@@ -8,7 +8,7 @@ O projeto é feito com as seguintes tecnologias:
 Para realizar a instalação dessas dependências, basta rodar o seguinte comando:
 
 ```
-npm install express sequelize mysql2 bcrypt jsonwebtoken
+npm install express sequelize mysql2 bcrypt jsonwebtoken nodemon
 ```
 
 > No Frontend é utilizado o <strong>ReactJS</strong> com as seguintes dependencias abaixo:
