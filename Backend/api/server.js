@@ -12,4 +12,11 @@ app.get("/", (req,res) => {
     res.send("API funcionando na porta 3010")
 })
 
+
+//Importando Usuario
+const criacaoUsuario = require("./Rotas/Usuarios/criacaoUsuario");
+
+//Rota Usuario
+app.use(criacaoUsuario);
+
 module.exports = app;   
