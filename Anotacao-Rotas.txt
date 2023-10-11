@@ -1,0 +1,31 @@
+Rotas da aplicação
+
+/ - Tela de login
+
+Tela Dashboard
+/dashboard - Dashboard (Tela inicial)
+
+
+
+Tela Estoque
+/estoque - Estoque (Visualização de veiculos)
+/cadastro-veiculo - Clicando no Icone "+" (Cadastrar veiculos)
+/editar-veiculo - Ao clicar no card do veículo
+/despesa-veiculo - Ao clicar no botão de despesa do veículo
+/venda-veiculo - Ao clicar no botão "Vender Veiculo" (Venda veículo e associa a um cliente) e fica armazenado no histórico
+
+
+Tela Clientes
+/clientes - Clientes (Visualização de clientes)
+/cadastro-cliente - Ao clicar no ícone de adicionar
+/editar-cliente - Ao selecionar o cliente e clicar no botão de editar
+
+
+Tela Cadastros
+/cadastros - Cadastros (Visualização dos cadatros)
+/cadastro-marca - Clicando no botão "Marcas"
+/editar-marca - Clicando no botão de editar
+/cadastro-modelo - Clicando no botão "Modelo"
+/cadastro-versao - Clicando no botão "Versão"
+
+
