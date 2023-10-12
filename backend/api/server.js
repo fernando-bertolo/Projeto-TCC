@@ -14,9 +14,14 @@ app.get("/", (req,res) => {
 
 
 //Importando Usuario
-const criacaoUsuario = require("./Rotas/Usuarios/criacaoUsuario");
+const criacaoUsuario = require("./Rotas/Usuarios/criacaoUsuario.js");
+const autenticacao = require("./Rotas/Usuarios/Autenticacao/autenticacaoUsuario.js");
 
-//Rota Usuario
+
+//Rota Usuarios
 app.use(criacaoUsuario);
+app.use(autenticacao);
+
+
 
 module.exports = app;   
