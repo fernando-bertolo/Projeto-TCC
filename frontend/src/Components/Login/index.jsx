@@ -50,7 +50,7 @@ function Login(){
         <DivTelaMain>
             <SectionLogin>
                 <DivTitulo>
-                    <Titulo>Login</Titulo>
+                    <Titulo>Logi</Titulo>
                 </DivTitulo>
                 <FormLogin>
                     <DivInput>
