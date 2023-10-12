@@ -68,7 +68,7 @@ function Login(){
 
                 </FormLogin >
                 <DivBotao>
-                    <Botao type="submit" onClick={(e) => handleLogin(e)}>Logi</Botao>
+                    <Botao type="submit" onClick={(e) => handleLogin(e)}>Login</Botao>
                 </DivBotao>
             </SectionLogin>
             <p >{mensagemError}</p>
