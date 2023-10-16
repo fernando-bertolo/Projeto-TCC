@@ -139,3 +139,7 @@ export const Botao = styled.button`
         font-size: clamp(4vw, 5vw, 6vw);
     }
 `;
+
+export const TextoErroLogin = styled.p`
+    color: #FFF;
+`;

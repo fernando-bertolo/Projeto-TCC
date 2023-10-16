@@ -1,6 +1,17 @@
+import Menu from "../Menu/index.jsx";
+
+import {
+    Body,
+} from "./style.jsx"
+
 function Dashboard(){
     return(
-        <h1>Dashboard</h1>
+
+        <Body>
+            <Menu/>
+            <h1>Dashboard</h1>            
+        </Body>
+
     )
 };
 
