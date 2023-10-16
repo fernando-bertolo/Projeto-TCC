@@ -14,7 +14,8 @@ import {
     IconeSenha,
     DivIcones,
     DivBotao,
-    Botao
+    Botao,
+    TextoErroLogin
 
 } from "./styles.jsx"
 
@@ -29,8 +30,8 @@ function Login(){
     const handleLogin = async (event) => {
         try{
             event.preventDefault();
-            const response = await axios.post("http://localhost:3010/", {
-                usuario: inputUsuario,
+            const response = await axios.post("http://192.168.1.12:3010/", {
+                usuario: inputUsuario, // Esta pegando o usuario e senha da rota / do backend
                 senha: inputSenha
             });
             setMensagemError(""); // limpando a mensagem de erro
@@ -39,9 +40,9 @@ function Login(){
         }
         catch(mensagemError){
             if(mensagemError === 401) {
-                setMensagemError(mensagemError.response.data.message);
+                setMensagemError("ERRO AO ACESSAR O SERVIDOR");
             } else{
-                setMensagemError("ERRO AO ACESSAR O SERVIDOR")
+                setMensagemError(mensagemError.response.data.message);
             }
         }
     };
@@ -50,7 +51,7 @@ function Login(){
         <DivTelaMain>
             <SectionLogin>
                 <DivTitulo>
-                    <Titulo>Logi</Titulo>
+                    <Titulo>Login</Titulo>
                 </DivTitulo>
                 <FormLogin>
                     <DivInput>
@@ -65,13 +66,13 @@ function Login(){
                         </DivIcones>
                         <Input type="password" name="senha" placeholder="Senha" required onChange={evento => {setInputSenha(evento.target.value)}}/>
                     </DivInput>
+                    <TextoErroLogin>{mensagemError}</TextoErroLogin>
 
                 </FormLogin >
                 <DivBotao>
                     <Botao type="submit" onClick={(e) => handleLogin(e)}>Login</Botao>
                 </DivBotao>
             </SectionLogin>
-            <p >{mensagemError}</p>
         </DivTelaMain>
     )
 }
