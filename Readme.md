@@ -17,24 +17,31 @@ npm install express sequelize mysql2 bcrypt jsonwebtoken nodemon cors
 npm install styled-components axios react-icons react-router-dom
 ```
 
-Esta sendo utilizado o docker para rodar o Banco de Dados MYSQL
+> Esta sendo utilizado o docker para rodar o Banco de Dados MYSQL
 
-> Para baixar a imagem
+Pode ser iniciado pelos seguintes comandos:
+
+
+Para baixar a imagem
 
 ```
 docker pull mysql 
 ```
 
-> Para iniciar o container
+Para iniciar o container
 
 ```
 docker run -p 3306:3306 --name mysql-tcc -e MYSQL_ROOT_PASSWORD=root -d mysql
 ```
 
-> Para acessar o banco de dados com o container rodando
+Para acessar o container
 
 ```
 docker exec -it  mysql-tcc /bin/bash
 ```
 
+Para acessar o banco de dados dentro do container
 
+```
+mysql -p
+```
