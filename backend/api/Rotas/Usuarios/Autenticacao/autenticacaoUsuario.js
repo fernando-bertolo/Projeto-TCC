@@ -27,7 +27,6 @@ autenticacao.post("/", async (request, response) => { // Utilizamos uma funcão 
     });
 
     response.send({
-        autenticacao: true,
         token: token,
     });
 });

@@ -30,12 +30,13 @@ function Login(){
     const handleLogin = async (event) => {
         try{
             event.preventDefault();
-            const response = await axios.post("http://192.168.1.12:3010/", {
+            const response = await axios.post("http://localhost:3010/", {
                 usuario: inputUsuario, // Esta pegando o usuario e senha da rota / do backend
                 senha: inputSenha
             });
             setMensagemError(""); // limpando a mensagem de erro
             console.log(response);
+            localStorage.setItem("@montanaToken", response.data.token); // Armazenando token de sessão do usuário no local storage do navegador
             navigate("/dashboard");
         }
         catch(mensagemError){
