@@ -8,13 +8,13 @@ O projeto é feito com as seguintes tecnologias:
 Para realizar a instalação dessas dependências, basta rodar o seguinte comando:
 
 ```
-npm install express sequelize mysql2 bcrypt jsonwebtoken nodemon cors
+npm install express sequelize mysql2 bcrypt jsonwebtoken nodemon cors nodemailer
 ```
 
 > No Frontend é utilizado o <strong>ReactJS</strong> com as seguintes dependencias abaixo:
 
 ```
-npm install styled-components axios react-icons react-router-dom
+npm install styled-components axios react-icons react-router-dom react-toastify
 ```
 
 > Esta sendo utilizado o docker para rodar o Banco de Dados MYSQL

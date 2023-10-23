@@ -1,9 +1,11 @@
 Rotas da aplicação
 
+Tela de Login
 / - Tela de login
+/esquecer-senha - Resetar senha
 
-Tela Dashboard
-/dashboard - Dashboard (Tela inicial)
+Tela Home
+/home - Dashboard (Tela inicial)
 
 
 

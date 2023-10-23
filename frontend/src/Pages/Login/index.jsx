@@ -15,9 +15,12 @@ import {
     DivIcones,
     DivBotao,
     Botao,
+    TextoEsqueciSenha,
     TextoErroLogin
 
 } from "./styles.jsx"
+import {ToastContainer, toast} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function Login(){
@@ -30,23 +33,34 @@ function Login(){
     const handleLogin = async (event) => {
         try{
             event.preventDefault();
-            const response = await axios.post("http://localhost:3010/", {
+            const response = await axios.post("http://192.168.15.72:3010/", {
                 usuario: inputUsuario, // Esta pegando o usuario e senha da rota / do backend
                 senha: inputSenha
             });
             setMensagemError(""); // limpando a mensagem de erro
             console.log(response);
             localStorage.setItem("@montanaToken", response.data.token); // Armazenando token de sessão do usuário no local storage do navegador
-            navigate("/dashboard");
+            navigate("/home");
+            
         }
         catch(mensagemError){
             if(mensagemError === 401) {
                 setMensagemError("ERRO AO ACESSAR O SERVIDOR");
             } else{
-                setMensagemError(mensagemError.response.data.message);
+                toast.warn(mensagemError.response.data.message, {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    });
             }
         }
     };
+
 
     return(
         <DivTelaMain>
@@ -72,6 +86,8 @@ function Login(){
                 </FormLogin >
                 <DivBotao>
                     <Botao type="submit" onClick={(e) => handleLogin(e)}>Login</Botao>
+                    <TextoEsqueciSenha to={"/esquecer-senha"}>Esqueci minha senha</TextoEsqueciSenha>
+                    <ToastContainer />
                 </DivBotao>
             </SectionLogin>
         </DivTelaMain>

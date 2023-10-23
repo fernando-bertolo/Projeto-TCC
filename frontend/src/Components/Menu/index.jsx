@@ -12,7 +12,7 @@ import {
     DivOpcaoControle
 } from "./style.jsx";
 
-import LogoImagem from "../Menu/Imagens/Logo.jpeg";
+import LogoImagem from "./Imagens/Logo.jpeg";
 
 function Menu(){
     return(
@@ -21,17 +21,17 @@ function Menu(){
             <DivLogo>
                 <Logo src={LogoImagem}/>
             </DivLogo>
-            <SectionGeral>
+            <SectionGeral>  
                 <DivTextoGeral>
                     <TituloDivisao>Geral</TituloDivisao>
                 </DivTextoGeral>
-                <LinkNavegacao to={"/dashboard"}>
+                <LinkNavegacao to={"/home"}>
                     <DivOpcaoGeral>
-                        Dashboard
+                        Home
                     </DivOpcaoGeral>
                 </LinkNavegacao>
         
-                <LinkNavegacao to={"#"}>
+                <LinkNavegacao to={"/estoque"}>
                     <DivOpcaoGeral>
                         Estoque
                     </DivOpcaoGeral>
@@ -43,31 +43,31 @@ function Menu(){
                     <TituloDivisao>Controle</TituloDivisao>
                 </DivTextoControle>
 
-                <LinkNavegacao to={"#"}>
+                <LinkNavegacao to={"/clientes"}>
                     <DivOpcaoControle>
                         Clientes
                     </DivOpcaoControle>
                 </LinkNavegacao>
 
-                <LinkNavegacao to={"#"}>
+                <LinkNavegacao to={"/cadastros"}>
                     <DivOpcaoControle>
                         Cadastros
                     </DivOpcaoControle>
                 </LinkNavegacao>
 
-                <LinkNavegacao to={"#"}>
+                <LinkNavegacao to={"/relatorios"}>
                     <DivOpcaoControle>
-                        Relatorios
+                        Relatórios
                     </DivOpcaoControle>
                 </LinkNavegacao>
 
-                <LinkNavegacao to={"#"}>
+                <LinkNavegacao to={"/usuarios"}>
                     <DivOpcaoControle>
-                        Funcionarios
+                        Usuários
                     </DivOpcaoControle>
                 </LinkNavegacao>
 
-                <LinkNavegacao to={"#"}>
+                <LinkNavegacao to={"/historico"}>
                     <DivOpcaoControle>
                         Histórico
                     </DivOpcaoControle>

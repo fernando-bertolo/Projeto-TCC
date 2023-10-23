@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import {FaRegUser} from "react-icons/fa";
 import {AiOutlineLock} from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 export const DivTelaMain = styled.div`
     width: 100vw;
@@ -116,12 +117,14 @@ export const Input = styled.input`
 
 export const DivBotao = styled.div`
     width: 100%;
-    height: 20%;
+    height: 25%;
     border-radius: 0px 0px 20px 20px;
     //background-color: green;
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
+    gap: 10px;
 `;
 
 export const Botao = styled.button`
@@ -138,6 +141,11 @@ export const Botao = styled.button`
     @media(max-width: 400px){
         font-size: clamp(4vw, 5vw, 6vw);
     }
+`;
+
+export const TextoEsqueciSenha = styled(Link)`
+    color: #FFF;
+    font-size: 0.9vw;
 `;
 
 export const TextoErroLogin = styled.p`
