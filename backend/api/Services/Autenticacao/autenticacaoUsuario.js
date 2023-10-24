@@ -1,5 +1,5 @@
 const express = require("express");
-const tabelaUsuarios = require("../../../../Database/Tabelas/Usuarios/usuarios.js");
+const tabelaUsuarios = require("../../../Database/Tabelas/Usuarios/usuarios.js");
 const autenticacao = express();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");

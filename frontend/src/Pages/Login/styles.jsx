@@ -104,6 +104,7 @@ export const IconeSenha = styled(AiOutlineLock)`
 export const Input = styled.input`
     width: 100%;
     height: 100%;
+    color: #FFF;
     border: none;
     font-family: 'Raleway', sans-serif;
     border-radius: 10px;

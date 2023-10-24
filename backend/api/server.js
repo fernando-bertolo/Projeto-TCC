@@ -15,12 +15,20 @@ app.get("/", (req,res) => {
 
 //Importando Usuario
 const criacaoUsuario = require("./Rotas/Usuarios/criacaoUsuario.js");
-const autenticacao = require("./Rotas/Usuarios/Autenticacao/autenticacaoUsuario.js");
+const autenticacao = require("./Services/Autenticacao/autenticacaoUsuario.js");
+
+//Importando Valida e-mail
+const EsquecerSenha = require("./Services/EsquecerSenha/EsquecerSenhaUsuario.js");
 
 
 //Rota Usuarios
 app.use(criacaoUsuario);
 app.use(autenticacao);
+
+//Rota Esquecer Senha
+app.use(EsquecerSenha);
+
+
 
 
 

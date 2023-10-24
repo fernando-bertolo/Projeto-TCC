@@ -12,7 +12,8 @@ Tela Home
 Tela Estoque
 /estoque - Estoque (Visualização de veiculos)
 /cadastro-veiculo - Clicando no Icone "+" (Cadastrar veiculos)
-/editar-veiculo - Ao clicar no card do veículo
+/detalhe-veiculo:# - Ao clicar no card do veículo
+/editar-veiculo:# - edição do veículo
 /despesa-veiculo - Ao clicar no botão de despesa do veículo
 /venda-veiculo - Ao clicar no botão "Vender Veiculo" (Venda veículo e associa a um cliente) e fica armazenado no histórico
 

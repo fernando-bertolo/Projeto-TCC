@@ -33,7 +33,7 @@ function Login(){
     const handleLogin = async (event) => {
         try{
             event.preventDefault();
-            const response = await axios.post("http://192.168.15.72:3010/", {
+            const response = await axios.post("http://localhost:3010/", {
                 usuario: inputUsuario, // Esta pegando o usuario e senha da rota / do backend
                 senha: inputSenha
             });

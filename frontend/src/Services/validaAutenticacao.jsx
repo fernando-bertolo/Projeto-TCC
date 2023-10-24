@@ -18,7 +18,7 @@ function ValidaAutenticacao({children}){
             progress: undefined,
             theme: "light",
             });
-        console.log(teste)
+        console.log(teste)  
         return <Navigate to={"/"}/> // Se não volta para a tela de login
     }
 }

@@ -7,6 +7,14 @@ const usuarios = database.define("Usuarios", {
         defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
     },
+    nome:{
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    email: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
     usuario: {
         type: Sequelize.STRING,
         allowNull: false,
