@@ -11,7 +11,11 @@ alterarSenha.post("/esquecer-senha", async (request, response) => {
         }
     })
 
-    return response.status(200).send("Deu certo");
+    if(!validaEmail){
+        return response.status(401).json({message: "E-mail não encontrado"})
+    }else{
+        return response.status(200).json({message: "Sucesso"})
+    }
 });
 
 module.exports = alterarSenha;
