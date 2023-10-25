@@ -14,14 +14,23 @@ const usuarios = database.define("Usuarios", {
     email: {
         type: Sequelize.STRING,
         allowNull: false,
+        require: true,
     },
     usuario: {
         type: Sequelize.STRING,
         allowNull: false,
+        require: true,
     },
     senha: {
         type: Sequelize.STRING,
         allowNull: false,
+        require: true,
+    },
+    senhaResetaToken: {
+        type: Sequelize.STRING,
+    },
+    tokenExpiracao: {
+        type: Sequelize.DATE,
     },
 })
 
