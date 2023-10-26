@@ -2,7 +2,8 @@ const express = require("express");
 const alterarSenha = express();
 const tabelaUsuario = require("../../../Database/Tabelas/Usuarios/usuarios.js");
 const crypto = require("crypto");
-const { where } = require("sequelize");
+const { where, DATE } = require("sequelize");
+const mail = require("../Email/mail.js");
 
 
 alterarSenha.post("/esquecer-senha", async (request, response) => {
@@ -35,12 +36,24 @@ alterarSenha.post("/esquecer-senha", async (request, response) => {
             },
             {where: {id: request.params.id}}    
         );
-        console.log(tokenEmail, horaAtual)
+        mail.sendMail({
+            to: email,
+            from: "fernando.bertolo03@icloud.com",
+            subject: "Esqueceu sua senha?",
+            text: `Você solicitou a alteração de senha. Segue o token para resetar a senha: ${tokenEmail}`,
+
+        }, (error) =>{
+            if(error){
+                console.log(error)
+                return response.status(400).send({error: "Falha ao enviar e-mail de alteração de senha"})
+            }
+        });
 
     } catch(error){
         console.log(error)
         response.status(400).send({error: "ERRO"})
     }
 });
+
 
 module.exports = alterarSenha;
