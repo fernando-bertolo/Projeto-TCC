@@ -29,12 +29,10 @@ alterarSenha.post("/esquecer-senha", async (request, response) => {
 
         await tabelaUsuario.update(
             {
-                '$set': {
-                    senhaResetaToken: tokenEmail,
-                    tokenExpiracao: horaAtual,
-                }
+                tokenSenha: tokenEmail,
+                horaExpiracaoToken: horaAtual,   
             },
-            {where: {id: request.params.id}}    
+            {where: {email: email}}    
         );
         mail.sendMail({
             to: email,
@@ -44,10 +42,11 @@ alterarSenha.post("/esquecer-senha", async (request, response) => {
 
         }, (error) =>{
             if(error){
-                console.log(error)
                 return response.status(400).send({error: "Falha ao enviar e-mail de alteração de senha"})
             }
         });
+
+        response.status(200).send({message: "Sucesso ao enviar o e-mail"})
 
     } catch(error){
         console.log(error)

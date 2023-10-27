@@ -26,10 +26,10 @@ const usuarios = database.define("Usuarios", {
         allowNull: false,
         require: true,
     },
-    senhaResetaToken: {
+    tokenSenha: {
         type: Sequelize.STRING,
     },
-    tokenExpiracao: {
+    horaExpiracaoToken: {
         type: Sequelize.DATE,
     },
 })
