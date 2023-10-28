@@ -26,6 +26,11 @@ const usuarios = database.define("Usuarios", {
         allowNull: false,
         require: true,
     },
+    confirmaSenha: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        require: true,
+    },
     tokenSenha: {
         type: Sequelize.STRING,
     },

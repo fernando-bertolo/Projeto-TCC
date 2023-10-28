@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 import {
     DivTelaMain,
-    SectionLogin,
     DivTitulo,
     Titulo,
     FormLogin,
@@ -18,7 +17,10 @@ import {
     TextoEsqueciSenha,
     TextoErroLogin
 
-} from "./styles.jsx"
+} from "./styles.jsx";
+
+import {SectionAutenticacao} from "../../Components/BodyPages/style.jsx"
+
 import {ToastContainer, toast} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -38,7 +40,6 @@ function Login(){
                 senha: inputSenha
             });
             setMensagemError(""); // limpando a mensagem de erro
-            console.log(response);
             localStorage.setItem("@montanaToken", response.data.token); // Armazenando token de sessão do usuário no local storage do navegador
             navigate("/home");
             
@@ -64,7 +65,7 @@ function Login(){
 
     return(
         <DivTelaMain>
-            <SectionLogin>
+            <SectionAutenticacao>
                 <DivTitulo>
                     <Titulo>Login</Titulo>
                 </DivTitulo>
@@ -73,13 +74,13 @@ function Login(){
                         <DivIcones>
                             <IconeUsuario/>
                         </DivIcones>
-                        <Input type="text" name="usuario" placeholder="Usuario" required onChange={evento => {setInputUsuario(evento.target.value)}}/>
+                        <Input type="text" name="usuario" placeholder="Usuario" required onChange={event => {setInputUsuario(event.target.value)}}/>
                     </DivInput>
                     <DivInput>
                         <DivIcones>
                             <IconeSenha/>
                         </DivIcones>
-                        <Input type="password" name="senha" placeholder="Senha" required onChange={evento => {setInputSenha(evento.target.value)}}/>
+                        <Input type="password" name="senha" placeholder="Senha" required onChange={event => {setInputSenha(event.target.value)}}/>
                     </DivInput>
                     <TextoErroLogin>{mensagemError}</TextoErroLogin>
 
@@ -89,7 +90,7 @@ function Login(){
                     <TextoEsqueciSenha to={"/esquecer-senha"}>Esqueci minha senha</TextoEsqueciSenha>
                     <ToastContainer />
                 </DivBotao>
-            </SectionLogin>
+            </SectionAutenticacao>
         </DivTelaMain>
     )
 }

@@ -14,21 +14,6 @@ export const DivTelaMain = styled.div`
     gap: 3rem;
 `;
 
-export const SectionLogin = styled.section`
-    width: 25%;
-    height: 50%;
-    background-color: #2f2841;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 20px;
-    box-shadow: 0px 0px 10px #FFF;
-
-    @media(max-width: 400px){
-        width: 80%
-    }
-`;
-
 export const DivTitulo = styled.div`
     width: 100%;
     height: 20%;

@@ -1,5 +1,6 @@
 import Login from "../Pages/Login/index.jsx";
 import EsquecerSenha from "../Pages/Login/EsquecerSenha/index.jsx";
+import ResetarSenha from "../Pages/Login/ResetarSenha/index.jsx";
 import Home from "../Pages/Home/index.jsx";
 import Estoque from "../Pages/Estoque/index.jsx";
 import Clientes from "../Pages/Clientes/index.jsx";
@@ -16,6 +17,7 @@ function Rotas(){
             <Route exact path="/" element={<Login/>}/>
 
             <Route path="/esquecer-senha" element={<EsquecerSenha/>}/>
+            <Route path="/resetar-senha" element={<ResetarSenha/>}/>
 
             <Route path="/home" 
             element={
