@@ -25,6 +25,7 @@ function ResetarSenha(){
 
     const Resetar = async (event) => {
         try {
+            event.preventDefault()
             await axios.post("http://localhost:3010/resetar-senha", {
 
             })
