@@ -38,7 +38,7 @@ alterarSenha.post("/esquecer-senha", async (request, response) => {
             to: email,
             from: "fernando.bertolo03@icloud.com",
             subject: "Esqueceu sua senha?",
-            text: `Você solicitou a alteração de senha. Segue o token para resetar a senha: ${tokenEmail}`,
+            text: `Você solicitou a alteração de senha. Segue o link para resetar a senha: http://localhost:3000/resetar-senha/${tokenEmail}`,
 
         }, (error) =>{
             if(error){

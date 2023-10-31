@@ -6,19 +6,19 @@ const saltRounds = 10;
 
 
 
-resetarSenha.post("/resetar-senha", async (request, response) => {
-    const {email, senha,  tokenSenha} = request.body;
+resetarSenha.post("/resetar-senha/:tokenSenha", async (request, response) => {
+    const {email, senha} = request.body;
 
     try {
 
         const usuario = await tabelaUsuario.findOne({
             where: {
                 email: email,
-                tokenSenha: tokenSenha,
+                senha: senha
             }
         })
 
-        if(!usuario){
+        if(!usuario.email){
             return response.status(400).send({ error: "Usuário não existe"})
         }
 
@@ -35,17 +35,17 @@ resetarSenha.post("/resetar-senha", async (request, response) => {
 
     
 
-        const hash = bcrypt.hashSync(request.body.senha, saltRounds);
+        const hashSenha = bcrypt.hashSync(request.body.senha, saltRounds);
 
         const user = {
             ...request.body,
-            senha: hash
+            senha: hashSenha
         }
 
 
         usuario.senha = user.senha;
         await usuario.save();
-        response.send();
+        response.send({message: "Senha alterada com sucesso!!"});
 
         
     } catch (error) {

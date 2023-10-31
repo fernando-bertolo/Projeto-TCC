@@ -31,6 +31,7 @@ autenticacao.post("/", async (request, response) => { // Utilizamos uma funcão 
             token: token,
         });
     } catch (error) {
+        console.log(error);
         return response.status(400).send({Error: "Erro na autenticação, tente novamente!"})
     }
 });
