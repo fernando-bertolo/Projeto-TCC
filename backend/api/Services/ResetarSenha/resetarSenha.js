@@ -7,44 +7,43 @@ const saltRounds = 10;
 
 
 resetarSenha.post("/resetar-senha/:tokenSenha", async (request, response) => {
-    const {email, senha} = request.body;
+    const {senha, confirmaSenha} = request.body; // O confirmaSenha esta pegando apenas do input no front
+    const {tokenSenha} = request.params;
 
     try {
 
         const usuario = await tabelaUsuario.findOne({
             where: {
-                email: email,
-                senha: senha
+                tokenSenha: tokenSenha
             }
         })
 
-        if(!usuario.email){
-            return response.status(400).send({ error: "Usuário não existe"})
-        }
-
-        if(tokenSenha !== usuario.tokenSenha){
+        if(!usuario){
             return response.status(400).send({error: "Token inválido"})
         }
 
+        if(senha !== confirmaSenha){
+            return response.status(400).send({error: "Senhas diferentes"})
+        }
 
         const horaAtual = new Date();
 
+        console.log(usuario.horaExpiracaoToken);
         if(horaAtual > usuario.horaExpiracaoToken){
             return response.status(400).send({error: "Token expirado"})
         }
 
     
-
         const hashSenha = bcrypt.hashSync(request.body.senha, saltRounds);
-
-        const user = {
-            ...request.body,
-            senha: hashSenha
-        }
+        const hashConfirmarSenha = bcrypt.hashSync(request.body.confirmaSenha, saltRounds);
 
 
-        usuario.senha = user.senha;
-        await usuario.save();
+        await tabelaUsuario.update({
+            senha: hashSenha,
+            confirmaSenha: hashConfirmarSenha
+        },
+        {where: {tokenSenha: request.params.tokenSenha}})
+
         response.send({message: "Senha alterada com sucesso!!"});
 
         

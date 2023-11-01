@@ -15,6 +15,18 @@ const usuarios = database.define("Usuarios", {
         type: Sequelize.STRING,
         allowNull: false,
         require: true,
+        unique: {
+            args: true,
+            msg: "Este e-mail já esta registrado, por favor escolha outro",
+        },
+        validate:{
+            isEmail: {
+                msg: "Adicione um e-mail valido",
+            },
+            notEmpty:{
+                msg: "Favor coloque um e-mail"
+            }
+        }
     },
     usuario: {
         type: Sequelize.STRING,
@@ -22,11 +34,6 @@ const usuarios = database.define("Usuarios", {
         require: true,
     },
     senha: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        require: true,
-    },
-    confirmaSenha: {
         type: Sequelize.STRING,
         allowNull: false,
         require: true,

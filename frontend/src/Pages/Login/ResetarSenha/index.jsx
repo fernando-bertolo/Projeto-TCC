@@ -46,14 +46,14 @@ function ResetarSenha(){
                         <DivIcones>
                             <IconeCadeado/>
                         </DivIcones>
-                        <Input type="password" placeholder="Digite a nova senha"/>
+                        <Input type="password" name="senha" id="senha" placeholder="Digite a nova senha"/>
                     </DivInput>
 
                     <DivInput>
                         <DivIcones>
                             <IconeCadeado/>
                         </DivIcones>
-                        <Input type="password" placeholder="Confirme a nova senha"/>
+                        <Input type="password" name="confirmaSenha" id="confirmaSenha" placeholder="Confirme a nova senha"/>
                     </DivInput>
                 </SectionInput>
 
