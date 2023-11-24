@@ -2,7 +2,8 @@ Rotas da aplicação
 
 Tela de Login
 / - Tela de login
-/esquecer-senha - Resetar senha
+/esquecer-senha - Envia link no e-mail para resetar a senha e gera um token
+/resetar-senha/tokenSenha - reseta a senha
 
 Tela Home
 /home - Dashboard (Tela inicial)
