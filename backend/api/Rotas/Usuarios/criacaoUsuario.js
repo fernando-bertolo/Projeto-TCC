@@ -7,13 +7,11 @@ const saltRounds = 10; // saltRounds é a quantidade de vezes que o algoritmo é
 criacaoUsuario.post("/criacao-usuario", (request, response) => {
     try{
         const hashSenha = bcrypt.hashSync(request.body.senha, saltRounds);
-        const hashConfirmaSenha = bcrypt.hashSync(request.body.confirmaSenha, saltRounds);
 
         //Objeto usuario com a senha hasheada
         const usuario = {
             ...request.body, // o "...request.body" estamos pegando o que já tem na requisição e alterando somente um valor, no caso senha passado no objeto
             senha: hashSenha,
-            confirmaSenha: hashConfirmaSenha
         }
         tabelaUsuarios.create(usuario);
         response.send("Usuario criado com sucesso");

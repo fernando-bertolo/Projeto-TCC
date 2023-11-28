@@ -22,9 +22,9 @@ resetarSenha.post("/resetar-senha/:tokenSenha", async (request, response) => {
             return response.status(400).send({error: "Token inválido"})
         }
 
-        if(senha !== confirmaSenha){
-            return response.status(400).send({error: "Senhas diferentes"})
-        }
+        //if(senha !== confirmaSenha){
+        //    return response.status(400).send({error: "Senhas diferentes"})
+        //}
 
         const horaAtual = new Date();
 
@@ -35,12 +35,10 @@ resetarSenha.post("/resetar-senha/:tokenSenha", async (request, response) => {
 
     
         const hashSenha = bcrypt.hashSync(request.body.senha, saltRounds);
-        const hashConfirmarSenha = bcrypt.hashSync(request.body.confirmaSenha, saltRounds);
 
 
         await tabelaUsuario.update({
             senha: hashSenha,
-            confirmaSenha: hashConfirmarSenha
         },
         {where: {tokenSenha: request.params.tokenSenha}})
 

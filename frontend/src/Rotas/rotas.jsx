@@ -17,7 +17,7 @@ function Rotas(){
             <Route exact path="/" element={<Login/>}/>
 
             <Route path="/esquecer-senha" element={<EsquecerSenha/>}/>
-            <Route path="/resetar-senha" element={<ResetarSenha/>}/>
+            <Route path="/resetar-senha/:tokenSenha" element={<ResetarSenha/>}/>
 
             <Route path="/home" 
             element={
