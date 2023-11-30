@@ -21,22 +21,72 @@ import { useNavigate, useParams} from "react-router-dom";
 import {ToastContainer, toast} from "react-toastify";
 
 
-
+// Função de delay
+function delay(n) {
+    return new Promise(function(resolve) {
+        setTimeout(resolve, n * 1000);
+    });
+}
 
 
 function ResetarSenha(){
 
+    // armazenando o estado da senha com useState
     const [inputSenha, setInputSenha] = useState("");
     const [inputConfirmaSenha, setInputConfirmaSenha] = useState("");
     const navigate = useNavigate();
     const { tokenSenha } = useParams();
+    
 
     const Resetar = async (event) => {
         try {
             event.preventDefault();
-            if(inputSenha === inputConfirmaSenha){
+
+
+
+            if(inputSenha === "" && inputConfirmaSenha === ""){
+                toast.warn("O campo de senha deve ser preenchido", {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    });
+            } 
+            
+            else if(inputSenha !== inputConfirmaSenha){
+                toast.warn("Senhas diferentes!", {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    });
+            } 
+            
+            else if(inputSenha.length < 5 || inputConfirmaSenha.length < 5){
+                toast.warn("A senha deverá ter no mínimo 5 caracteres", {
+                    position: "bottom-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "light",
+                    });
+            } 
+            
+            else{
                 await axios.post("http://localhost:3010/resetar-senha/"+ tokenSenha, {
-                    senha: inputSenha
+                    senha: inputSenha, // Enviando o valor do inputSenha da requisição para o backend
+                    confirmaSenha: inputConfirmaSenha
                 })
                 toast.success("Senha alterada com sucesso!!", {
                     position: "bottom-right",
@@ -48,24 +98,10 @@ function ResetarSenha(){
                     progress: undefined,
                     theme: "light",
                     });
-
-            } else{
-                toast.warn("Senhas diferentes!", {
-                    position: "bottom-right",
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                    });
+                await delay(5);
+                navigate("/");
             }
-
-
-        
-            
-            
+                            
         } catch (error) {
         
         }

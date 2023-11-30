@@ -29,11 +29,13 @@ alterarSenha.post("/esquecer-senha", async (request, response) => {
 
         await tabelaUsuario.update(
             {
-                tokenSenha: tokenEmail,
-                horaExpiracaoToken: horaAtual,   
+                tokenSenha: tokenEmail, // Armazena o hash criado na variavel tokenEmail no campo tokenSenha do banco
+                horaExpiracaoToken: horaAtual, //Armazena a horaAtual no campo horaExpiracaoToken no banco
             },
-            {where: {email: email}}    
+            {where: {email: email}} // Só faz o update quando o valor do campo email no banco for o mesmo do campo email da requisição
         );
+
+        //Envia e-mail
         mail.sendMail({
             to: email,
             from: "fernando.bertolo03@icloud.com",
