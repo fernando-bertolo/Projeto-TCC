@@ -9,7 +9,11 @@ import {
     LinkNavegacao,
     SectionControle,
     DivTextoControle,
-    DivOpcaoControle
+    DivOpcaoControle,
+    DivUsuario,
+    DivConteudoUsuario,
+    TextoUsuario,
+    Sair
 } from "./style.jsx";
 
 import LogoImagem from "./Imagens/Logo.jpeg";
@@ -74,6 +78,19 @@ function Menu(){
                 </LinkNavegacao>
             </SectionControle>
 
+            <DivUsuario>
+                <DivConteudoUsuario>
+                    <TextoUsuario>Fernando Bertolo</TextoUsuario>
+                </DivConteudoUsuario>
+                <DivConteudoUsuario>
+                    <TextoUsuario>
+                        Admin
+                    </TextoUsuario>
+                </DivConteudoUsuario>
+                <DivConteudoUsuario>
+                    <Sair to={"/"}>Sair</Sair>
+                </DivConteudoUsuario>
+            </DivUsuario>
         </NavMenu>
         </>
     );
