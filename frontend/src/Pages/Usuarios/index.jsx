@@ -41,9 +41,6 @@ function Usuarios(){
                                     <Td>Administrador</Td>
                                 </Tr>
                             </TBody>
-
-
-
                         </Tabela>
                     </SectionUsuarios>
                 </DivMain>

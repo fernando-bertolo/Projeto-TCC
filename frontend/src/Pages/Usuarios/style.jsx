@@ -35,13 +35,21 @@ export const Tabela = styled.table`
     height: 90%;
     border: 1px solid white;
     color: #FFF;
+    border-collapse: collapse;
 `;
 
 export const THead = styled.thead`
-    
-    //background-color: aqua;
+    //height: 10%;
+    background-color: aqua;
 `;
-export const TBody = styled.tbody``;
+export const TBody = styled.tbody`
+    //height: 10%;
+    background-color: red;
+`;
 export const Tr = styled.tr``;
-export const Td = styled.td``;
-export const Th = styled.th``;
+export const Td = styled.td`
+    padding: 8px;
+`;
+export const Th = styled.th`
+    padding: 1px;
+`;
