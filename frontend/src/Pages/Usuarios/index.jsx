@@ -11,7 +11,9 @@ import {
     Td,
     Th,
     THead,
-    TBody
+    TBody,
+    TrBody,
+    SectionUsuariosExternos
 } from "./style.jsx";
 
 function Usuarios(){
@@ -20,31 +22,162 @@ function Usuarios(){
             <Body>
                 <Menu/>
                 <DivMain>
-                    <SectionUsuarios>
-                        <DivTitulo>
-                            <Titulo>Usuários</Titulo>
-                        </DivTitulo>
+                    <SectionUsuariosExternos>
+                        <SectionUsuarios>
+                            <DivTitulo>
+                                <Titulo>Listagem de Usuários</Titulo>
+                            </DivTitulo>
 
-                        <Tabela>
-                            <THead>
-                                <Tr>
-                                    <Th>Nome</Th>
-                                    <Th>Usuário</Th>
-                                    <Th>Permissão</Th>
-                                </Tr>
-                            </THead>
+                            <Tabela>
+                                <THead>
+                                    <Tr>
+                                        <Th>ID</Th>
+                                        <Th>Nome</Th>
+                                        <Th>Usuário</Th>
+                                        <Th>E-mail</Th>
+                                        <Th>Permissão</Th>
+                                    </Tr>
+                                </THead>
 
-                            <TBody>
-                                <Tr>
-                                    <Td>Fernando Bertolo</Td>
-                                    <Td>fernando.bertolo</Td>
-                                    <Td>Administrador</Td>
-                                </Tr>
-                            </TBody>
-                        </Tabela>
-                    </SectionUsuarios>
+                                <TBody>
+                                    <TrBody>
+                                        <Td>1</Td>
+                                        <Td>Fernando Bertolo</Td>
+                                        <Td>fernando.bertolo</Td>
+                                        <Td>fernando.bertolo@gmail.com</Td>
+                                        <Td>Administrador</Td>
+                                    </TrBody>
+                                </TBody>
+                                <TBody>
+                                    <TrBody>
+                                        <Td>1</Td>
+                                        <Td>Fernando Bertolo</Td>
+                                        <Td>fernando.bertolo</Td>
+                                        <Td>fernando.bertolo@gmail.com</Td>
+                                        <Td>Administrador</Td>
+                                    </TrBody>
+                                </TBody>
+                                <TBody>
+                                    <TrBody>
+                                        <Td>1</Td>
+                                        <Td>Fernando Bertolo</Td>
+                                        <Td>fernando.bertolo</Td>
+                                        <Td>fernando.bertolo@gmail.com</Td>
+                                        <Td>Administrador</Td>
+                                    </TrBody>
+                                </TBody>
+                                <TBody>
+                                    <TrBody>
+                                        <Td>1</Td>
+                                        <Td>Fernando Bertolo</Td>
+                                        <Td>fernando.bertolo</Td>
+                                        <Td>fernando.bertolo@gmail.com</Td>
+                                        <Td>Administrador</Td>
+                                    </TrBody>
+                                </TBody>
+                                <TBody>
+                                    <TrBody>
+                                        <Td>1</Td>
+                                        <Td>Fernando Bertolo</Td>
+                                        <Td>fernando.bertolo</Td>
+                                        <Td>fernando.bertolo@gmail.com</Td>
+                                        <Td>Administrador</Td>
+                                    </TrBody>
+                                </TBody>
+                                <TBody>
+                                    <TrBody>
+                                        <Td>1</Td>
+                                        <Td>Fernando Bertolo</Td>
+                                        <Td>fernando.bertolo</Td>
+                                        <Td>fernando.bertolo@gmail.com</Td>
+                                        <Td>Administrador</Td>
+                                    </TrBody>
+                                </TBody>
+                                <TBody>
+                                    <TrBody>
+                                        <Td>1</Td>
+                                        <Td>Fernando Bertolo</Td>
+                                        <Td>fernando.bertolo</Td>
+                                        <Td>fernando.bertolo@gmail.com</Td>
+                                        <Td>Administrador</Td>
+                                    </TrBody>
+                                </TBody>
+                                <TBody>
+                                    <TrBody>
+                                        <Td>1</Td>
+                                        <Td>Fernando Bertolo</Td>
+                                        <Td>fernando.bertolo</Td>
+                                        <Td>fernando.bertolo@gmail.com</Td>
+                                        <Td>Administrador</Td>
+                                    </TrBody>
+                                </TBody>
+                                <TBody>
+                                    <TrBody>
+                                        <Td>1</Td>
+                                        <Td>Fernando Bertolo</Td>
+                                        <Td>fernando.bertolo</Td>
+                                        <Td>fernando.bertolo@gmail.com</Td>
+                                        <Td>Administrador</Td>
+                                    </TrBody>
+                                </TBody>
+                                <TBody>
+                                    <TrBody>
+                                        <Td>1</Td>
+                                        <Td>Fernando Bertolo</Td>
+                                        <Td>fernando.bertolo</Td>
+                                        <Td>fernando.bertolo@gmail.com</Td>
+                                        <Td>Administrador</Td>
+                                    </TrBody>
+                                </TBody>
+                                <TBody>
+                                    <TrBody>
+                                        <Td>1</Td>
+                                        <Td>Fernando Bertolo</Td>
+                                        <Td>fernando.bertolo</Td>
+                                        <Td>fernando.bertolo@gmail.com</Td>
+                                        <Td>Administrador</Td>
+                                    </TrBody>
+                                </TBody>
+                                <TBody>
+                                    <TrBody>
+                                        <Td>1</Td>
+                                        <Td>Fernando Bertolo</Td>
+                                        <Td>fernando.bertolo</Td>
+                                        <Td>fernando.bertolo@gmail.com</Td>
+                                        <Td>Administrador</Td>
+                                    </TrBody>
+                                </TBody>
+                                <TBody>
+                                    <TrBody>
+                                        <Td>1</Td>
+                                        <Td>Fernando Bertolo</Td>
+                                        <Td>fernando.bertolo</Td>
+                                        <Td>fernando.bertolo@gmail.com</Td>
+                                        <Td>Administrador</Td>
+                                    </TrBody>
+                                </TBody>
+                                <TBody>
+                                    <TrBody>
+                                        <Td>1</Td>
+                                        <Td>Fernando Bertolo</Td>
+                                        <Td>fernando.bertolo</Td>
+                                        <Td>fernando.bertolo@gmail.com</Td>
+                                        <Td>Administrador</Td>
+                                    </TrBody>
+                                </TBody>
+                                <TBody>
+                                    <TrBody>
+                                        <Td>1</Td>
+                                        <Td>Fernando Bertolo</Td>
+                                        <Td>fernando.bertolo</Td>
+                                        <Td>fernando.bertolo@gmail.com</Td>
+                                        <Td>Administrador</Td>
+                                    </TrBody>
+                                </TBody>
+                            </Tabela>
+                        </SectionUsuarios>
+                    </SectionUsuariosExternos>
                 </DivMain>
-                
             </Body>
         </>
     );

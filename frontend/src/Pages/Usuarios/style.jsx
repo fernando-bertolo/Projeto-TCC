@@ -9,11 +9,23 @@ export const DivMain = styled.div`
     //background-color: green;
 `;
 
-export const SectionUsuarios = styled.section`
+export const SectionUsuariosExternos = styled.section`
     width: 80%;
     height: 80%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 30px;
+`;
+
+export const SectionUsuarios = styled.section`
+    width: 100%;
+    height: 100%;
     background-color: #2F2841;
+    border: 1px solid white;
+    border-radius: 30px;
+    overflow-y: scroll;
 `;
 
 export const DivTitulo = styled.div`
@@ -32,24 +44,33 @@ export const Titulo = styled.p`
 
 export const Tabela = styled.table`
     width: 100%;
-    height: 90%;
-    border: 1px solid white;
+    //border: 1px solid white;
+    border-bottom: none;
     color: #FFF;
     border-collapse: collapse;
 `;
 
 export const THead = styled.thead`
-    //height: 10%;
-    background-color: aqua;
-`;
-export const TBody = styled.tbody`
-    //height: 10%;
-    background-color: red;
-`;
-export const Tr = styled.tr``;
-export const Td = styled.td`
-    padding: 8px;
+    background-color: #7176FF;
 `;
 export const Th = styled.th`
-    padding: 1px;
+    padding: 20px;
+    //border-right: 1px solid white;
+    border-bottom: 1px solid white;
+    font-size: 1vw;
+`;
+export const Tr = styled.tr``;
+
+export const TrBody = styled.tr`
+    &&:hover{
+        background-color: #514869;
+    }
+`;
+export const TBody = styled.tbody`
+    text-align: center;
+`;
+export const Td = styled.td`
+    margin-top: 10px;
+    //border-right: 1px solid white;
+    padding: 20px;
 `;
