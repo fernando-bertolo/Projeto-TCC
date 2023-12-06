@@ -1,5 +1,7 @@
 import { Body } from "../../Components/BodyPages/style";
 import Menu from "../../Components/Menu";
+import {useState, useEffect} from "react";
+import axios from "axios";
 
 import {
     DivMain,
@@ -17,6 +19,19 @@ import {
 } from "./style.jsx";
 
 function Usuarios(){
+
+    const [data, setData] = useState([]);
+    const [selecionado, setSelecionado] = useState(null);
+
+    useEffect(() => {
+        axios.get("http://localhost:3010/usuarios")
+        .then(response => {
+            setData(response.data);
+        })
+    })
+
+
+
     return(
         <>
             <Body>
@@ -38,16 +53,21 @@ function Usuarios(){
                                         <Th>Permissão</Th>
                                     </Tr>
                                 </THead>
-
-                                <TBody>
-                                    <TrBody>
-                                        <Td>105e3d78-dea3-4627-9667-52bfc73eee0d</Td>
-                                        <Td>Fernando Bertolo</Td>
-                                        <Td>fernando.bertolo</Td>
-                                        <Td>fernando.bertolo@gmail.com</Td>
-                                        <Td>Administrador</Td>
-                                    </TrBody>
-                                </TBody>
+                                {data.map((user, index) => (
+                                    <TBody>
+                                        <TrBody 
+                                            key={index}
+                                            onClick={() => setSelecionado(index)}
+                                            style={{backgroundColor: selecionado === index ? '#514869' : '#2F2841'}}
+                                        >
+                                            <Td>{user.id}</Td>
+                                            <Td>{user.nome}</Td>
+                                            <Td>{user.usuario}</Td>
+                                            <Td>{user.email}</Td>
+                                            <Td>{user.permissao}</Td>
+                                        </TrBody>
+                                    </TBody>
+                                ))}
                             </Tabela>
                         </SectionUsuarios>
                     </SectionUsuariosExternos>

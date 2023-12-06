@@ -29,6 +29,7 @@ autenticacao.post("/", async (request, response) => { // Utilizamos uma funcão 
     
         response.send({
             token: token,
+            usuario: usuario,
         });
     } catch (error) {
         console.log(error);
