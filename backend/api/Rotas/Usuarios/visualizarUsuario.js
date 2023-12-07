@@ -22,6 +22,7 @@ visualizarUsuario.get("/usuarios/:id", async (request, response) => {
         } else{
             response.send({Error: "Usuário não existe"});
         }
+
     } catch (error) {
         console.log(error)
     }

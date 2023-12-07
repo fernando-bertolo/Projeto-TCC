@@ -17,9 +17,22 @@ import {
 } from "./style.jsx";
 
 import LogoImagem from "./Imagens/Logo.jpeg";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 
 function Menu(){
+
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        axios.get("http://localhost:3010/usuarios")
+        .then(response => {
+            setData(response.data);
+        })
+    })
+
+
     return(
         <>
         <NavMenu>
@@ -81,7 +94,10 @@ function Menu(){
 
             <DivUsuario>
                 <DivConteudoUsuario>
-                    <TextoUsuario>Fernando Bertolo</TextoUsuario>
+                    {data.map(user => (
+                        <TextoUsuario>{user.nome}</TextoUsuario>
+                    ))}
+                    
                 </DivConteudoUsuario>
                 <DivConteudoUsuario>
                     <TextoUsuario>
