@@ -29,12 +29,43 @@ autenticacao.post("/", async (request, response) => { // Utilizamos uma funcão 
     
         response.send({
             token: token,
-            usuario: usuario,
-        });
+        })
+
     } catch (error) {
         console.log(error);
         return response.status(400).send({Error: "Erro na autenticação, tente novamente!"})
     }
 });
+
+
+autenticacao.get("/usuario-logado", async (request, response) => {
+    try {
+        const token =  request.headers.authorization;
+        console.log(token);
+        if(!token){
+            return response.status(401).json({Error: "Token não fornecido"})
+        }
+        
+        const dados =  jwt.verify(token, "your_jwt_secret");
+        const user = await tabelaUsuarios.findOne({
+            where: {
+                id: dados.id,
+            }
+        });
+
+        if(!user){
+            return response.status(404).json({Error: "Usuário não encontrado"})
+        }
+
+        response.json({
+            usuario: user.usuario,
+        });
+
+    } catch (error) {
+        console.log(error)
+        response.status(500).json({Error: "Erro ao buscar usuário"});
+    }
+})
+
 
 module.exports = autenticacao;

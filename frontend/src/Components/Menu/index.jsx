@@ -17,20 +17,23 @@ import {
 } from "./style.jsx";
 
 import LogoImagem from "./Imagens/Logo.jpeg";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import axios from "axios";
 
 
 function Menu(){
 
-    const [data, setData] = useState([]);
+    const [data, setData] = useState();
 
-    useEffect(() => {
-        axios.get("http://localhost:3010/usuarios")
+        axios.get("http://localhost:3010/usuario-logado")
         .then(response => {
-            setData(response.data);
+            headers: {
+                Authorization: localStorage.getItem("@TokenUsuario")
+            }
+            if(localStorage.getItem("@TokenUsuario")){
+                setData(response.data.usuario);
+            }
         })
-    })
 
 
     return(
@@ -94,10 +97,9 @@ function Menu(){
 
             <DivUsuario>
                 <DivConteudoUsuario>
-                    {data.map(user => (
-                        <TextoUsuario>{user.nome}</TextoUsuario>
-                    ))}
-                    
+                        <TextoUsuario>
+                            {data}
+                        </TextoUsuario>            
                 </DivConteudoUsuario>
                 <DivConteudoUsuario>
                     <TextoUsuario>
