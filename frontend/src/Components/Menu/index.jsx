@@ -25,13 +25,16 @@ function Menu(){
 
     const [data, setData] = useState();
 
-        axios.get("http://localhost:3010/usuario-logado")
-        .then(response => {
+        axios.get("http://localhost:3010/", {
             headers: {
                 Authorization: localStorage.getItem("@TokenUsuario")
             }
+        })
+        .then(response => {
             if(localStorage.getItem("@TokenUsuario")){
                 setData(response.data.usuario);
+            } else{
+                setData("Error")
             }
         })
 

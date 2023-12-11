@@ -23,7 +23,7 @@ autenticacao.post("/", async (request, response) => { // Utilizamos uma funcão 
             return response.status(401).json({message: "Usuário ou senha incorreto"});
         }
     
-        const token = jwt.sign({id: tabelaUsuarios.id}, "your_jwt_secret", {
+        const token = jwt.sign({id: user.id}, "your_jwt_secret", {
             expiresIn: "1hr",
         });
     
@@ -38,10 +38,9 @@ autenticacao.post("/", async (request, response) => { // Utilizamos uma funcão 
 });
 
 
-autenticacao.get("/usuario-logado", async (request, response) => {
+autenticacao.get("/", async (request, response) => {
     try {
         const token =  request.headers.authorization;
-        console.log(token);
         if(!token){
             return response.status(401).json({Error: "Token não fornecido"})
         }
@@ -49,8 +48,8 @@ autenticacao.get("/usuario-logado", async (request, response) => {
         const dados =  jwt.verify(token, "your_jwt_secret");
         const user = await tabelaUsuarios.findOne({
             where: {
-                id: dados.id,
-            }
+               id: dados.id,
+           }
         });
 
         if(!user){

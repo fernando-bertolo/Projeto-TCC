@@ -39,7 +39,7 @@ function Login(){
                 usuario: inputUsuario, // Esta pegando o usuario e senha da rota / do backend
                 senha: inputSenha
             });
-            console.log(response)
+            //console.log(response)
             setMensagemError(""); // limpando a mensagem de erro
             localStorage.setItem("@TokenUsuario", response.data.token); // Armazenando token de sessão do usuário no local storage do navegador
             navigate("/home");
