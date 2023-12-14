@@ -47,7 +47,7 @@ function ResetarSenha(){
             if(inputSenha === "" && inputConfirmaSenha === ""){
                 toast.warn("O campo de senha deve ser preenchido", {
                     position: "bottom-right",
-                    autoClose: 5000,
+                    autoClose: 2500,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -60,7 +60,7 @@ function ResetarSenha(){
             else if(inputSenha !== inputConfirmaSenha){
                 toast.warn("Senhas diferentes!", {
                     position: "bottom-right",
-                    autoClose: 5000,
+                    autoClose: 2500,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -73,7 +73,7 @@ function ResetarSenha(){
             else if(inputSenha.length < 5 || inputConfirmaSenha.length < 5){
                 toast.warn("A senha deverá ter no mínimo 5 caracteres", {
                     position: "bottom-right",
-                    autoClose: 5000,
+                    autoClose: 2500,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -90,7 +90,7 @@ function ResetarSenha(){
                 })
                 toast.success("Senha alterada com sucesso!!", {
                     position: "bottom-right",
-                    autoClose: 5000,
+                    autoClose: 2500,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
@@ -98,7 +98,7 @@ function ResetarSenha(){
                     progress: undefined,
                     theme: "light",
                     });
-                await delay(5);
+                await delay(3);
                 navigate("/");
             }
                             

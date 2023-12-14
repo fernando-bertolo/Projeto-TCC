@@ -12,6 +12,7 @@ import {Route, Routes} from "react-router-dom";
 import ValidaAutenticacao from "../Services/validaAutenticacao.jsx";
 
 function Rotas(){
+
     return(
         <Routes>
             <Route exact path="/" element={<Login/>}/>
