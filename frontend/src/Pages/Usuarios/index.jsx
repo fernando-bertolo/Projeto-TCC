@@ -6,6 +6,7 @@ import axios from "axios";
 import {
     DivMain,
     SectionUsuarios,
+    SectionTitulo,
     DivTitulo,
     Titulo,
     Tabela,
@@ -15,7 +16,11 @@ import {
     THead,
     TBody,
     TrBody,
-    SectionUsuariosExternos
+    SectionUsuariosExternos,
+    IconeAdicionar,
+    IconeEditar,
+    IconeExcluir,
+    DivIcones
 } from "./style.jsx";
 
 function Usuarios(){
@@ -39,9 +44,16 @@ function Usuarios(){
                 <DivMain>
                     <SectionUsuariosExternos>
                         <SectionUsuarios>
-                            <DivTitulo>
-                                <Titulo>Listagem de Usuários</Titulo>
-                            </DivTitulo>
+                            <SectionTitulo>
+                                <DivTitulo>
+                                    <Titulo>Listagem de Usuários</Titulo>
+                                    <DivIcones>
+                                        <IconeAdicionar/>
+                                        <IconeEditar/>
+                                        <IconeExcluir/>
+                                    </DivIcones>
+                                </DivTitulo>
+                            </SectionTitulo>
 
                             <Tabela>
                                 <THead>
