@@ -20,7 +20,10 @@ import {
     IconeAdicionar,
     IconeEditar,
     IconeExcluir,
-    DivIcones
+    DivIcones,
+    PrimeiraDivTitulo,
+    SegundaDivTitulo,
+    TerceiraDivTitulo
 } from "./style.jsx";
 
 function Usuarios(){
@@ -46,12 +49,19 @@ function Usuarios(){
                         <SectionUsuarios>
                             <SectionTitulo>
                                 <DivTitulo>
-                                    <Titulo>Listagem de Usuários</Titulo>
-                                    <DivIcones>
-                                        <IconeAdicionar/>
-                                        <IconeEditar/>
-                                        <IconeExcluir/>
-                                    </DivIcones>
+                                    <PrimeiraDivTitulo></PrimeiraDivTitulo>
+                                    <SegundaDivTitulo>
+                                        <Titulo>Listagem de Usuários</Titulo>
+                                    </SegundaDivTitulo>
+                                    
+                                    <TerceiraDivTitulo>
+                                        <DivIcones>
+                                            <IconeAdicionar/>
+                                            <IconeEditar/>
+                                            <IconeExcluir/>
+                                        </DivIcones>
+                                    </TerceiraDivTitulo>
+
                                 </DivTitulo>
                             </SectionTitulo>
 

@@ -50,39 +50,64 @@ export const DivTitulo = styled.div`
     width: 100%;
     height: 100%;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    //background-color: #6efa88;
+`;
+
+export const PrimeiraDivTitulo = styled.div`
+    height: 100%;
+    width: 20%;
+    //background-color: red;
+    display: flex;
+`;
+
+export const SegundaDivTitulo = styled.div`
+    height: 100%;
+    width: 60%;
     justify-content: center;
     align-items: center;
-    background-color: #6efa88;
+    //background-color: pink;
+    display: flex;
+`;
+
+export const TerceiraDivTitulo = styled.div`
+    height: 100%;
+    width: 20%;
+    //background-color: orange;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 `;
 
 export const DivIcones = styled.div`
-    width: 10%;
+    width: 50%;
     height: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    gap: 15px;
-    background-color: purple;
+    //gap: 10px;
+    //background-color: purple;
     //align-self: center;
 `;
 
 export const IconeAdicionar = styled(GrAddCircle)`
     width: 2vw;
-    height: 4vh;
+    height: 3vh;
     color: #4dca4d;
     //background-color: blue;
 `;
 
 export const IconeEditar = styled(FaRegPenToSquare)`
     width: 2vw;
-    height: 3.6vh;
+    height: 2.6vh;
     color: yellow;
 `;
 
 
 export const IconeExcluir = styled(IoMdCloseCircleOutline)`
     width: 2vw;
-    height: 4vh;
+    height: 3vh;
     color: red;
 `;
 
