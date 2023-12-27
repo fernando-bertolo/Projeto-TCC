@@ -1,5 +1,6 @@
 import { Body } from "../../Components/BodyPages/style";
 import Menu from "../../Components/Menu";
+import ModalUser from "../../Components/Modals/Usuarios/modalUsuario.jsx"
 import {useState, useEffect} from "react";
 import axios from "axios";
 
@@ -39,14 +40,17 @@ function Usuarios(){
     })
 
 
+    const [modalOpen, setModalOpen] = useState(false);
+
+
 
     return(
         <>
-            <Body>
+            <Body modalOpen={modalOpen}>
                 <Menu/>
                 <DivMain>
-                    <SectionUsuariosExternos>
-                        <SectionUsuarios>
+                    <SectionUsuariosExternos modalOpen={modalOpen}>
+                        <SectionUsuarios modalOpen={modalOpen}>
                             <SectionTitulo>
                                 <DivTitulo>
                                     <PrimeiraDivTitulo></PrimeiraDivTitulo>
@@ -56,7 +60,7 @@ function Usuarios(){
                                     
                                     <TerceiraDivTitulo>
                                         <DivIcones>
-                                            <IconeAdicionar/>
+                                            <IconeAdicionar onClick={() => {setModalOpen(true)}}/>
                                             <IconeEditar/>
                                             <IconeExcluir/>
                                         </DivIcones>
@@ -65,8 +69,8 @@ function Usuarios(){
                                 </DivTitulo>
                             </SectionTitulo>
 
-                            <Tabela>
-                                <THead>
+                            <Tabela modalOpen={modalOpen}>
+                                <THead modalOpen={modalOpen}>
                                     <Tr>
                                         <Th>ID</Th>
                                         <Th>Nome</Th>
@@ -76,11 +80,12 @@ function Usuarios(){
                                     </Tr>
                                 </THead>
                                 {data.map((user, index) => (
-                                    <TBody>
+                                    <TBody modalOpen={modalOpen}>
                                         <TrBody 
                                             key={index}
                                             onClick={() => setSelecionado(index)}
                                             style={{backgroundColor: selecionado === index ? '#514869' : '#2F2841'}}
+                                            modalOpen={modalOpen}
                                         >
                                             <Td>{user.id}</Td>
                                             <Td>{user.nome}</Td>
@@ -93,8 +98,10 @@ function Usuarios(){
                             </Tabela>
                         </SectionUsuarios>
                     </SectionUsuariosExternos>
+                    <ModalUser isOpen={modalOpen}/>
                 </DivMain>
             </Body>
+            
         </>
     );
 }

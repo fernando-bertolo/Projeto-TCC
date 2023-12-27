@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import {styled, css} from "styled-components";
 import { GrAddCircle } from "react-icons/gr";
 import { FaRegPenToSquare } from "react-icons/fa6";
 import { IoMdCloseCircleOutline } from "react-icons/io";
@@ -20,6 +20,10 @@ export const SectionUsuariosExternos = styled.section`
     justify-content: center;
     align-items: center;
     border-radius: 30px;
+
+    ${({modalOpen}) => modalOpen === true && css`
+        background-color: #cdbaba;
+    `}
 `;
 
 export const SectionUsuarios = styled.section`
@@ -29,6 +33,10 @@ export const SectionUsuarios = styled.section`
     border: 1px solid white;
     border-radius: 30px;
     overflow-y: scroll;
+    
+    ${({modalOpen}) => modalOpen === true && css`
+        background-color: #cdbaba;
+    `}
 `;
 
 export const SectionTitulo = styled.div`
@@ -95,13 +103,14 @@ export const IconeAdicionar = styled(GrAddCircle)`
     width: 2vw;
     height: 3vh;
     color: #4dca4d;
-    //background-color: blue;
+    cursor: pointer;
 `;
 
 export const IconeEditar = styled(FaRegPenToSquare)`
     width: 2vw;
     height: 2.6vh;
     color: yellow;
+    cursor: pointer;
 `;
 
 
@@ -109,6 +118,7 @@ export const IconeExcluir = styled(IoMdCloseCircleOutline)`
     width: 2vw;
     height: 3vh;
     color: red;
+    cursor: pointer;
 `;
 
 
@@ -118,10 +128,18 @@ export const Tabela = styled.table`
     border-bottom: none;
     color: #FFF;
     border-collapse: collapse;
+
+    ${({modalOpen}) => modalOpen === true && css`
+        background-color: #cdbaba;
+    `}
 `;
 
 export const THead = styled.thead`
     background-color: #7176FF;
+
+    ${({modalOpen}) => modalOpen === true && css`
+        background-color: #cdbaba;
+    `}
 `;
 export const Th = styled.th`
     padding: 20px;
@@ -135,9 +153,17 @@ export const TrBody = styled.tr`
     &&:hover{
         background-color: #514869;
     }
+
+    ${({modalOpen}) => modalOpen === true && css`
+        background-color: #cdbaba;
+    `}
 `;
 export const TBody = styled.tbody`
     text-align: center;
+
+    ${({modalOpen}) => modalOpen === true && css`
+        background-color: #cdbaba;
+    `}
 `;
 export const Td = styled.td`
     margin-top: 10px;
