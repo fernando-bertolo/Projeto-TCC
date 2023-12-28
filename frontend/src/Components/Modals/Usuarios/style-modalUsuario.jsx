@@ -40,26 +40,60 @@ export const MainContentbackground = styled.div`
 export const FormCadastro = styled.form`
     width: 100%;
     height: 90%;
-    background-color: red;
+    //background-color: red;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    gap: 2rem;
 `;
+
+export const DivTitulo = styled.div`
+    width: 100%;
+    height: 10%;
+    //background-color: pink;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+export const Titulo = styled.p`
+    color: #FFF;
+    font-size: clamp(1.2vw, 1.5vw, 1.7vw);
+`;
+
+export const Input = styled.input`
+    width: 80%;
+    height: 5%;
+    border-radius: 10px;
+`;
+
+
 
 export const DivBotoes = styled.div`
     width: 100%;
     height: 10%;
-    background-color: blue;
+    //background-color: blue;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    gap: 1rem;
 `;
 
 export const BotaoCancelar = styled.button`
     background-color: red;
     border-radius: 10px;
+    border-style: none;
+    cursor: pointer;
+    width: 20%;
+    height: 40%;
 
 `;
 
 export const BotaoAdicionar = styled.button`
     background-color: green;
     border-radius: 10px;
+    border-style: none;
+    cursor: pointer;
+    width: 20%;
+    height: 40%;
 `;
