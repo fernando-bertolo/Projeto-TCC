@@ -1,12 +1,17 @@
 import {
-    SectionMainContent
+    SectionMainContent,
+    MainContentbackground
 } from "./style-modalUsuario.jsx"
 
 function ModalUser({isOpen}) {
 
     if(isOpen){
         return(
-            <SectionMainContent></SectionMainContent>
+            <>
+                <MainContentbackground>
+                    <SectionMainContent isOpen={isOpen}></SectionMainContent>
+                </MainContentbackground>
+            </>
         )
     }
 };

@@ -46,11 +46,11 @@ function Usuarios(){
 
     return(
         <>
-            <Body modalOpen={modalOpen}>
+            <Body>
                 <Menu/>
                 <DivMain>
-                    <SectionUsuariosExternos modalOpen={modalOpen}>
-                        <SectionUsuarios modalOpen={modalOpen}>
+                    <SectionUsuariosExternos>
+                        <SectionUsuarios>
                             <SectionTitulo>
                                 <DivTitulo>
                                     <PrimeiraDivTitulo></PrimeiraDivTitulo>
@@ -69,8 +69,8 @@ function Usuarios(){
                                 </DivTitulo>
                             </SectionTitulo>
 
-                            <Tabela modalOpen={modalOpen}>
-                                <THead modalOpen={modalOpen}>
+                            <Tabela>
+                                <THead>
                                     <Tr>
                                         <Th>ID</Th>
                                         <Th>Nome</Th>
@@ -80,12 +80,12 @@ function Usuarios(){
                                     </Tr>
                                 </THead>
                                 {data.map((user, index) => (
-                                    <TBody modalOpen={modalOpen}>
+                                    <TBody>
                                         <TrBody 
                                             key={index}
                                             onClick={() => setSelecionado(index)}
                                             style={{backgroundColor: selecionado === index ? '#514869' : '#2F2841'}}
-                                            modalOpen={modalOpen}
+                                            
                                         >
                                             <Td>{user.id}</Td>
                                             <Td>{user.nome}</Td>

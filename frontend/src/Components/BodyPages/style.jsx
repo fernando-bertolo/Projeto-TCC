@@ -1,4 +1,4 @@
-import {styled, css} from "styled-components";
+import {styled} from "styled-components";
 
 export const Body = styled.body`
     width: 100vw;
@@ -6,9 +6,7 @@ export const Body = styled.body`
     background-color: #201B2C;
     display: flex;
 
-    ${({modalOpen}) => modalOpen === true && css`
-        background-color: #cdbaba;
-    `}
+
 `;
 
 export const SectionAutenticacao = styled.section`
