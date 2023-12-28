@@ -45,7 +45,7 @@ export const FormCadastro = styled.form`
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    gap: 2rem;
+    //gap: 1rem;
 `;
 
 export const DivTitulo = styled.div`
@@ -62,11 +62,54 @@ export const Titulo = styled.p`
     font-size: clamp(1.2vw, 1.5vw, 1.7vw);
 `;
 
-export const Input = styled.input`
-    width: 80%;
-    height: 5%;
-    border-radius: 10px;
+export const DivInputs = styled.div`
+    width: 100%;
+    height: 15%;
+    //background-color: pink;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 `;
+
+export const DivNomeInput = styled.div`
+    width: 60%;
+    height: 30%;
+    display: flex;
+    align-items: center;
+    //background-color: blue;
+`;
+
+export const NomeInput = styled.p`
+    color: #FFF;
+    font-site: 1rem;
+`;
+
+export const Input = styled.input`
+    width: 60%;
+    height: 50%;
+    border-radius: 10px;
+    color: #FFF;
+    background-color: #514869;
+    border-style: none;
+    padding-left: 20px;
+
+    &:focus{
+        outline: none // Retira a borda ressaltada ao clicar
+    }
+`;
+
+export const Select = styled.select`
+    width: 60%;
+    height: 50%;
+    color: #FFF;
+    border-radius: 10px;
+    padding-left: 20px;
+    background-color: #514869;
+    border-style: none;
+`;
+
+export const Option = styled.option``;
 
 
 
