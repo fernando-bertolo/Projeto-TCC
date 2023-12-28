@@ -98,7 +98,7 @@ function Usuarios(){
                             </Tabela>
                         </SectionUsuarios>
                     </SectionUsuariosExternos>
-                    <ModalUser isOpen={modalOpen}/>
+                    <ModalUser isOpen={modalOpen} setModalOpen={setModalOpen}/>
                 </DivMain>
             </Body>
             

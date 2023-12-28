@@ -36,3 +36,30 @@ export const MainContentbackground = styled.div`
     align-items: center;
     background-color: rgb(255,255,255, 0.4);
 `;
+
+export const FormCadastro = styled.form`
+    width: 100%;
+    height: 90%;
+    background-color: red;
+`;
+
+export const DivBotoes = styled.div`
+    width: 100%;
+    height: 10%;
+    background-color: blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+`;
+
+export const BotaoCancelar = styled.button`
+    background-color: red;
+    border-radius: 10px;
+
+`;
+
+export const BotaoAdicionar = styled.button`
+    background-color: green;
+    border-radius: 10px;
+`;

@@ -1,15 +1,25 @@
 import {
     SectionMainContent,
-    MainContentbackground
+    MainContentbackground,
+    FormCadastro,
+    DivBotoes,
+    BotaoCancelar,
+    BotaoAdicionar
 } from "./style-modalUsuario.jsx"
 
-function ModalUser({isOpen}) {
+function ModalUser({isOpen, setModalOpen}) {
 
     if(isOpen){
         return(
             <>
                 <MainContentbackground>
-                    <SectionMainContent isOpen={isOpen}></SectionMainContent>
+                    <SectionMainContent isOpen={isOpen}>
+                        <FormCadastro></FormCadastro>
+                        <DivBotoes>
+                            <BotaoCancelar onClick={() => {setModalOpen(false)}}>CANCELAR</BotaoCancelar>
+                            <BotaoAdicionar>ADICIONAR</BotaoAdicionar>
+                        </DivBotoes>
+                    </SectionMainContent>
                 </MainContentbackground>
             </>
         )
