@@ -22,16 +22,13 @@ criacaoUsuario.post("/criacao-usuario", async (request, response) => {
             }
         })
 
-        response.send({
-            usuario: usuario,
-            email: email
-        })
-
         // Validação de usuário e validação de e-mail  
-        if(validaUsuario){
-            return response.status(400).json({Error: "Usuário já existe"})
+        if(validaUsuario && validaEmail){
+            return response.status(400).json({Error: "Usuário e E-mail já cadastrado no sistema"})
         } else if(validaEmail){
             return response.status(400).json({Error: "E-mail já cadastrado no sistema"})
+        } else if(validaUsuario){
+            return response.status(400).json({Error: "Usuário já cadastrado no sistema"})
         }
 
 
@@ -62,9 +59,5 @@ criacaoUsuario.post("/criacao-usuario", async (request, response) => {
     }
 })
 
-
-criacaoUsuario.get("/criacao-usuario",  async (request, response) => {
-
-})
 
 module.exports = criacaoUsuario;

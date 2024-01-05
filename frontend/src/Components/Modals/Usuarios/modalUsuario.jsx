@@ -41,10 +41,10 @@ function ModalUser({isOpen, setModalOpen}) {
 
         const criacaoUsuario = async (event) => {
             try {
-                event.preventDefault();            
+                event.preventDefault();
                 
-                if(inputNome === ""){
-                    toast.warn("O campo de nome deve ser preenchido", {
+                if(inputNome === "" || inputNome === Number){
+                    toast.warn("O campo de nome deve ser preenchido corretamente", {
                         position: "bottom-right",
                         autoClose: 2500,
                         hideProgressBar: false,
@@ -87,46 +87,48 @@ function ModalUser({isOpen, setModalOpen}) {
                         progress: undefined,
                         theme: "light",
                         });
-                } else {
+
+                } else{
+
                     // Enviando os dados para a rota /criacao-usuario
-                    const response = await axios.post("http://localhost:3010/criacao-usuario", {
+                    await axios.post("http://localhost:3010/criacao-usuario", {
                         nome: inputNome,
                         email: inputEmail,
                         usuario: inputUsuario,
                         senha: inputSenha,
                         confirmaSenha: inputConfirmaSenha,
-                    })    
+                    })  
 
-                    if(inputEmail === response.data.email){
-                        toast.warn("o E-mail já esta cadastrado no sistema", {
-                            position: "bottom-right",
-                            autoClose: 2500,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                            theme: "light",
-                            });
-                    } else{
-                        // Mensagem de sucesso
-                        toast.success("Usuario criado com sucesso", {
-                            position: "bottom-right",
-                            autoClose: 2000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                            theme: "light",
-                            });
-                        await delay(4) // aguarda 4 segundos
-                        setModalOpen(false); // fecha o modal
-                        }
+                    // Mensagem de sucesso
+                    toast.success("Usuario criado com sucesso", {
+                        position: "bottom-right",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                        });
+                    await delay(4) // aguarda 4 segundos
+                    setModalOpen(false); // fecha o modal
                 }
-                
+                                
             } catch (error) {
-                console.log(error)
+                if(error.response && error.response.status === 400){
+                    toast.warn(error.response.data.Error, {
+                        position: "bottom-right",
+                        autoClose: 2500,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                        }); 
+                } else{
+                    console.log(error);
+                }
             }
         }
 
