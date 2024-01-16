@@ -98,7 +98,12 @@ function Usuarios(){
                             </Tabela>
                         </SectionUsuarios>
                     </SectionUsuariosExternos>
-                    <ModalUser isOpen={modalOpen} setModalOpen={setModalOpen}/>
+                    <ModalUser 
+                    isOpen={modalOpen} 
+                    setModalOpen={setModalOpen} 
+                    titulo="Cadastro de Usuário"
+                    descricaoBotao="ADICIONAR"
+                    />
                 </DivMain>
             </Body>
             

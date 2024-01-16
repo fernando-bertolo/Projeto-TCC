@@ -22,7 +22,9 @@ import {
 
 
 
-function ModalUser({isOpen, setModalOpen}) {
+function ModalUser(props) {
+
+    const { isOpen, setModalOpen} = props; // Desestruturando o props
 
     const [inputNome, setInputNome] = useState();
     const [inputEmail, setInputEmail] = useState();
@@ -36,7 +38,7 @@ function ModalUser({isOpen, setModalOpen}) {
             setTimeout(resolve, n * 1000);
         });
     }
-
+ 
     if(isOpen){
 
         const criacaoUsuario = async (event) => {
@@ -141,7 +143,7 @@ function ModalUser({isOpen, setModalOpen}) {
                     <SectionMainContent isOpen={isOpen}>
                         <FormCadastro>
                             <DivTitulo>
-                                <Titulo>Cadastre um usuário</Titulo>
+                                <Titulo>{props.titulo}</Titulo>
                             </DivTitulo>
 
                             <DivInputs>
@@ -226,7 +228,7 @@ function ModalUser({isOpen, setModalOpen}) {
                         </FormCadastro>
                         <DivBotoes>
                             <BotaoCancelar onClick={() => {setModalOpen(false)}}>CANCELAR</BotaoCancelar>
-                            <BotaoAdicionar type="submit" onClick={(event) => criacaoUsuario(event)}>ADICIONAR</BotaoAdicionar>
+                            <BotaoAdicionar type="submit" onClick={(event) => criacaoUsuario(event)}>{props.descricaoBotao}</BotaoAdicionar>
                         </DivBotoes>
                     </SectionMainContent>
                     <ToastContainer/>
