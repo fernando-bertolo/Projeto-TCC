@@ -41,6 +41,8 @@ function Usuarios(){
 
 
     const [modalOpen, setModalOpen] = useState(false);
+    const [modalEdicaoOpen, setModalEdicaoOpen] = useState(false);
+
 
 
 
@@ -61,7 +63,7 @@ function Usuarios(){
                                     <TerceiraDivTitulo>
                                         <DivIcones>
                                             <IconeAdicionar onClick={() => {setModalOpen(true)}}/>
-                                            <IconeEditar/>
+                                            <IconeEditar onClick={() => {setModalEdicaoOpen(true)}}/>
                                             <IconeExcluir/>
                                         </DivIcones>
                                     </TerceiraDivTitulo>
@@ -103,6 +105,16 @@ function Usuarios(){
                     setModalOpen={setModalOpen} 
                     titulo="Cadastro de Usuário"
                     descricaoBotao="ADICIONAR"
+                    modo="criar"
+                    />
+
+                    <ModalUser
+                    isOpen={modalEdicaoOpen}
+                    setModalOpen={setModalEdicaoOpen}
+                    titulo="Edição de Usuários"
+                    descricaoBotao="ALTERAR"
+                    dadosUsuarios={data}
+                    modo="editar"
                     />
                 </DivMain>
             </Body>

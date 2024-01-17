@@ -82,7 +82,7 @@ export const DivNomeInput = styled.div`
 
 export const NomeInput = styled.p`
     color: #FFF;
-    font-site: 1rem;
+    font-size: 1rem;
 `;
 
 export const Input = styled.input`

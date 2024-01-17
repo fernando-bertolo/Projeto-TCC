@@ -24,11 +24,11 @@ import {
 
 function ModalUser(props) {
 
-    const { isOpen, setModalOpen} = props; // Desestruturando o props
+    const { isOpen, setModalOpen, modo, dadosUsuarios} = props; // Desestruturando o props
 
-    const [inputNome, setInputNome] = useState();
-    const [inputEmail, setInputEmail] = useState();
-    const [inputUsuario, setInputUsuario] = useState();
+    const [inputNome, setInputNome] = useState(modo === "edicao" ? dadosUsuarios.nome : '');
+    const [inputEmail, setInputEmail] = useState(modo === "edicao" ? dadosUsuarios.email : '');
+    const [inputUsuario, setInputUsuario] = useState(modo === "edicao" ? dadosUsuarios.usuario : '');
     const [inputSenha, setInputSenha] = useState();
     const [inputConfirmaSenha, setInputConfirmaSenha] = useState();
 
@@ -41,7 +41,10 @@ function ModalUser(props) {
  
     if(isOpen){
 
+ 
+
         const criacaoUsuario = async (event) => {
+            
             try {
                 event.preventDefault();
                 
