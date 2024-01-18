@@ -40,13 +40,13 @@ function ModalUser(props) {
     }
  
     if(isOpen){
-
  
 
         const criacaoUsuario = async (event) => {
             
             try {
                 event.preventDefault();
+
                 
                 if(inputNome === "" || inputNome === Number){
                     toast.warn("O campo de nome deve ser preenchido corretamente", {
@@ -159,6 +159,7 @@ function ModalUser(props) {
                                 id="nome" 
                                 placeholder="Digite o nome"
                                 required
+                                value={inputNome}
                                 onChange={(event) => {setInputNome(event.target.value)}}
                                 />
                             </DivInputs>
@@ -173,6 +174,7 @@ function ModalUser(props) {
                                 id="email" 
                                 placeholder="Digite o e-mail"
                                 required
+                                value={inputEmail}
                                 onChange={(event) => {setInputEmail(event.target.value)}}
                                 />
                             </DivInputs>
@@ -187,6 +189,7 @@ function ModalUser(props) {
                                 id="usuario" 
                                 placeholder="Digite o usuário"
                                 required
+                                value={inputUsuario}
                                 onChange={(event) => {setInputUsuario(event.target.value)}}
                                 />
                             </DivInputs>

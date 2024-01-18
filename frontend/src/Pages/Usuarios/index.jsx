@@ -30,7 +30,6 @@ import {
 function Usuarios(){
 
     const [data, setData] = useState([]);
-    const [selecionado, setSelecionado] = useState(null);
 
     useEffect(() => {
         axios.get("http://localhost:3010/usuarios")
@@ -42,6 +41,15 @@ function Usuarios(){
 
     const [modalOpen, setModalOpen] = useState(false);
     const [modalEdicaoOpen, setModalEdicaoOpen] = useState(false);
+    const [dadosUsuarioSelecionado, setDadosUsuarioSelecionado] = useState("");
+    const [selecionado, setSelecionado] = useState(null);
+
+
+    //Criando a função cliqueUsuario para o onclick lidar com dois argumentos
+    const cliqueUsuario = (usuario) => {
+        setSelecionado(usuario.id);
+        setDadosUsuarioSelecionado(usuario);
+    }
 
 
 
@@ -81,22 +89,22 @@ function Usuarios(){
                                         <Th>Permissão</Th>
                                     </Tr>
                                 </THead>
-                                {data.map((user, index) => (
                                     <TBody>
-                                        <TrBody 
-                                            key={index}
-                                            onClick={() => setSelecionado(index)}
-                                            style={{backgroundColor: selecionado === index ? '#514869' : '#2F2841'}}
-                                            
-                                        >
-                                            <Td>{user.id}</Td>
-                                            <Td>{user.nome}</Td>
-                                            <Td>{user.usuario}</Td>
-                                            <Td>{user.email}</Td>
-                                            <Td>{user.permissao}</Td>
-                                        </TrBody>
+                                        {data.map((usuario, index) => (
+                                            <TrBody 
+                                                key={usuario.id}
+                                                onClick={() => cliqueUsuario(usuario)}
+                                                style={{backgroundColor: selecionado === usuario.id ? '#514869' : '#2F2841'}}
+                                                
+                                            >
+                                                <Td>{usuario.id}</Td>
+                                                <Td>{usuario.nome}</Td>
+                                                <Td>{usuario.usuario}</Td>
+                                                <Td>{usuario.email}</Td>
+                                                <Td>{usuario.permissao}</Td>
+                                            </TrBody>
+                                        ))}
                                     </TBody>
-                                ))}
                             </Tabela>
                         </SectionUsuarios>
                     </SectionUsuariosExternos>
@@ -105,7 +113,7 @@ function Usuarios(){
                     setModalOpen={setModalOpen} 
                     titulo="Cadastro de Usuário"
                     descricaoBotao="ADICIONAR"
-                    modo="criar"
+                    modo="criacao"
                     />
 
                     <ModalUser
@@ -113,8 +121,8 @@ function Usuarios(){
                     setModalOpen={setModalEdicaoOpen}
                     titulo="Edição de Usuários"
                     descricaoBotao="ALTERAR"
-                    dadosUsuarios={data}
-                    modo="editar"
+                    dadosUsuarios={dadosUsuarioSelecionado}
+                    modo="edicao"
                     />
                 </DivMain>
             </Body>
