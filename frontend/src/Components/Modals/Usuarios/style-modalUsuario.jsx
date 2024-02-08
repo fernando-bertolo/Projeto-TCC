@@ -7,7 +7,7 @@ export const SectionMainContent = styled.section`
     background-color: #2F2841;
     border-radius: 30px;
 
-    ${({isOpen}) => isOpen === true && css`
+    ${({isOpen}) => true && css`
         animation AnimationOpen 0.4s
 
         @keyframes AnimationOpen {

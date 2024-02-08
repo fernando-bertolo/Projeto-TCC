@@ -17,7 +17,7 @@ import {
 } from "./style.jsx";
 
 import LogoImagem from "./Imagens/Logo.jpeg";
-import { useState} from "react";
+import { useEffect, useState} from "react";
 import axios from "axios";
 
 
@@ -25,6 +25,8 @@ function Menu(){
 
     const [data, setData] = useState();
 
+
+    useEffect(() => {
         axios.get("http://localhost:3010/", {
             headers: {
                 Authorization: localStorage.getItem("@TokenUsuario")
@@ -37,7 +39,7 @@ function Menu(){
                 setData("Error")
             }
         })
-
+    }, [])
 
     return(
         <>
