@@ -3,51 +3,33 @@ const alteracaoUsuario = express();
 const tabelaUsuarios = require("../../../Database/Tabelas/Usuarios/usuarios.js");
 const bcrypt = require("bcrypt");
 const saltRounds = 10; // saltRounds é a quantidade de vezes que o algoritmo é executado
+const { Op } = require("sequelize");
 
 alteracaoUsuario.put("/alterar-usuario/:id", async (request, response) => {
   const { id } = request.params;
   const { nome, email, usuario, senha, confirmaSenha } = request.body;
 
   try {
-    const idUser = await tabelaUsuarios.findOne({
+    const usuarios = await tabelaUsuarios.findOne({
       where: {
-        id: id, //Quando o ID passado por parametro for igual ao do banco
-      },
-    });
-
-    const emailUser = await tabelaUsuarios.findOne({
-      where: {
+        id: { [Op.ne]: id }, // Ignora o usuário atual pelo ID
         email: email, // Quando o e-mail da requisição for igual ao e-mail do banco
-      },
-    });
-
-    const usuarioUser = await tabelaUsuarios.findOne({
-      where: {
         usuario: usuario, // Quando o usuario da requisiçao for igual ao do banco
       },
     });
 
-    if (!idUser) {
-      return response.status(400).json({ Error: "Usuário não encontrado!" });
-    }
-
     // Validação de usuário e validação de e-mail
-    if (usuarioUser && emailUser) {
+    if (usuarios) {
       return response
         .status(400)
-        .json({ Error: "Usuário e E-mail já cadastrado no sistema" });
-    } else if (emailUser) {
-      return response
-        .status(400)
-        .json({ Error: "E-mail já cadastrado no sistema" });
-    } else if (usuarioUser) {
-      return response
-        .status(400)
-        .json({ Error: "Usuário já cadastrado no sistema" });
+        .json({ Error: "Usuário ou E-mail já cadastrado no sistema" });
     }
 
     //Validação de senha
-    if (senha === "" && confirmaSenha === "") {
+    if (
+      (senha === "" && confirmaSenha === "") ||
+      (senha === undefined && confirmaSenha === undefined)
+    ) {
       return response
         .status(400)
         .json({ Error: "Os campos das senhas devem ser preenchidos" });

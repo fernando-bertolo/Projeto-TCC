@@ -5,59 +5,64 @@ const bcrypt = require("bcrypt");
 const saltRounds = 10; // saltRounds é a quantidade de vezes que o algoritmo é executado
 
 criacaoUsuario.post("/criacao-usuario", async (request, response) => {
+  const { nome, email, usuario, senha, confirmaSenha } = request.body;
 
-    const {nome, email, usuario, senha, confirmaSenha} = request.body;
-    
-    try{
+  try {
+    const validaUsuario = await tabelaUsuarios.findOne({
+      where: {
+        usuario: usuario, //Consulta no banco se já existe um usuário igual o passado na requisição
+      },
+    });
 
-        const validaUsuario = await tabelaUsuarios.findOne({
-            where: {
-                usuario: usuario, //Consulta no banco se já existe um usuário igual o passado na requisição
-            }
-        })
+    const validaEmail = await tabelaUsuarios.findOne({
+      where: {
+        email: email, //Consulta no banco se já existe um email igual o passado na requisição
+      },
+    });
 
-        const validaEmail = await tabelaUsuarios.findOne({
-            where: {
-                email: email //Consulta no banco se já existe um email igual o passado na requisição
-            }
-        })
-
-        // Validação de usuário e validação de e-mail  
-        if(validaUsuario && validaEmail){
-            return response.status(400).json({Error: "Usuário e E-mail já cadastrado no sistema"})
-        } else if(validaEmail){
-            return response.status(400).json({Error: "E-mail já cadastrado no sistema"})
-        } else if(validaUsuario){
-            return response.status(400).json({Error: "Usuário já cadastrado no sistema"})
-        }
-
-
-        if(senha === "" && confirmaSenha === ""){
-            return response.status(400).json({Error: "Os campos das senhas devem ser preenchidos"})
-        } else if (senha !== confirmaSenha){
-            return response.status(400).json({Error: "As senhas estão diferentes"})
-        } else if(senha.length < 5 && confirmaSenha.length < 5){
-            return response.status(400).json({Error: "A senha deverá ter no mínimo 5 caracteres"})
-        } else{
-
-        //Realizando o hash da senha
-        const hashSenha = bcrypt.hashSync(request.body.senha, saltRounds);
-
-        tabelaUsuarios.create({
-            nome: nome,
-            email: email,
-            usuario: usuario,
-            senha: hashSenha,
-        });
-
-        return response.status(200).json({message: "Usuario criado com sucesso"});
-
-        }
-
-    } catch(error){
-        console.log(error);
+    // Validação de usuário e validação de e-mail
+    if (validaUsuario && validaEmail) {
+      return response
+        .status(400)
+        .json({ Error: "Usuário e E-mail já cadastrado no sistema" });
+    } else if (validaEmail) {
+      return response
+        .status(400)
+        .json({ Error: "E-mail já cadastrado no sistema" });
+    } else if (validaUsuario) {
+      return response
+        .status(400)
+        .json({ Error: "Usuário já cadastrado no sistema" });
     }
-})
 
+    if (senha === "" && confirmaSenha === "") {
+      return response
+        .status(400)
+        .json({ Error: "Os campos das senhas devem ser preenchidos" });
+    } else if (senha !== confirmaSenha) {
+      return response.status(400).json({ Error: "As senhas estão diferentes" });
+    } else if (senha.length < 5 && confirmaSenha.length < 5) {
+      return response
+        .status(400)
+        .json({ Error: "A senha deverá ter no mínimo 5 caracteres" });
+    } else {
+      //Realizando o hash da senha
+      const hashSenha = bcrypt.hashSync(request.body.senha, saltRounds);
+
+      tabelaUsuarios.create({
+        nome: nome,
+        email: email,
+        usuario: usuario,
+        senha: hashSenha,
+      });
+
+      return response
+        .status(200)
+        .json({ message: "Usuario criado com sucesso" });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 module.exports = criacaoUsuario;

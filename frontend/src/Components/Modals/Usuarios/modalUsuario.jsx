@@ -91,6 +91,7 @@ function ModalUser(props) {
           theme: "light",
         });
       } else {
+        console.log(modo);
         if (modo === "edicao") {
           await axios.put(
             "http://localhost:3010/alterar-usuario/" + dadosUsuarios.id,
@@ -102,6 +103,19 @@ function ModalUser(props) {
               confirmaSenha: inputConfirmaSenha,
             }
           );
+
+          // Mensagem de sucesso
+          toast.success("Usuario alterado com sucesso", {
+            position: "bottom-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          await delay(4); // aguarda 4 segundos
         } else {
           // Enviando os dados para a rota /criacao-usuario
           await axios.post("http://localhost:3010/criacao-usuario", {
@@ -111,20 +125,21 @@ function ModalUser(props) {
             senha: inputSenha,
             confirmaSenha: inputConfirmaSenha,
           });
+
+          // Mensagem de sucesso
+          toast.success("Usuario criado com sucesso", {
+            position: "bottom-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          await delay(4); // aguarda 4 segundos
         }
 
-        // Mensagem de sucesso
-        toast.success("Usuario criado com sucesso", {
-          position: "bottom-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-        await delay(4); // aguarda 4 segundos
         setModalOpen(false); // fecha o modal
       }
     } catch (error) {
