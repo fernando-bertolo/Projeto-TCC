@@ -24,17 +24,18 @@ alteracaoUsuario.put("/alterar-usuario/:id", async (request, response) => {
       },
     });
 
+    // Validação de e-mail
     if (emailUsuario) {
       return response
         .status(400)
-        .json({ Error: "Email ja cadastrado no sistema" });
+        .json({ Error: "Email ou usuário já cadastrado no sistema" });
     }
 
-    // Validação de usuário e validação de e-mail
+    // Validação de usuário
     if (userUsuario) {
       return response
         .status(400)
-        .json({ Error: "Usuário  já cadastrado no sistema" });
+        .json({ Error: "Email ou usuário já cadastrado no sistema" });
     }
 
     //Validação de senha
