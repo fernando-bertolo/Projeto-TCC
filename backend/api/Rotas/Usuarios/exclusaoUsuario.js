@@ -6,7 +6,12 @@ deleteUsuario.delete("/deletar-usuario/:id", async (request, response) => {
   const { id } = request.params;
 
   try {
-    if (id) {
+    const idUsuario = await tabelaUsuarios.findOne({
+      where: {
+        id: id,
+      },
+    });
+    if (idUsuario) {
       tabelaUsuarios.destroy({
         where: {
           id: id,
@@ -16,12 +21,13 @@ deleteUsuario.delete("/deletar-usuario/:id", async (request, response) => {
         .status(200)
         .json({ message: "Usuário excluído com sucesso!!" });
     } else {
-      return response
-        .status(400)
-        .json({ Error: "Ocorreu um erro ao excluir o usuário" });
+      return response.status(400).json({ Error: "Usuário não existe" });
     }
   } catch (error) {
     console.log(error);
+    return response
+      .status(400)
+      .json({ Error: "Não foi possível excluir o usuário" });
   }
 });
 

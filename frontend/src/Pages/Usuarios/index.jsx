@@ -3,6 +3,7 @@ import Menu from "../../Components/Menu";
 import ModalUser from "../../Components/Modals/Usuarios/modalUsuario.jsx";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 import {
   DivMain,
@@ -39,6 +40,45 @@ function Usuarios() {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalEdicaoOpen, setModalEdicaoOpen] = useState(false);
   const [dadosUsuarioSelecionado, setDadosUsuarioSelecionado] = useState("");
+  const [mensagemError, setMensagemError] = useState();
+
+  function exclusaoUsuario() {
+    try {
+      if (dadosUsuarioSelecionado.id) {
+        const response = axios.delete(
+          "http://localhost:3010/deletar-usuario/" + dadosUsuarioSelecionado.id,
+          {
+            id: dadosUsuarioSelecionado.id,
+          }
+        );
+        setMensagemError(response);
+
+        toast.success("Usuario excluído com sucesso", {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      } else if (mensagemError === 400) {
+        toast.error("Falha ao excluir usuário", {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+    } catch (error) {
+      return;
+    }
+  }
 
   return (
     <>
@@ -66,7 +106,7 @@ function Usuarios() {
                           setModalEdicaoOpen(true);
                         }}
                       />
-                      <IconeExcluir />
+                      <IconeExcluir onClick={exclusaoUsuario} />
                     </DivIcones>
                   </TerceiraDivTitulo>
                 </DivTitulo>
@@ -129,6 +169,7 @@ function Usuarios() {
           ) : (
             <></>
           )}
+          <ToastContainer />
         </DivMain>
       </Body>
     </>
