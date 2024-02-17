@@ -10,19 +10,31 @@ alteracaoUsuario.put("/alterar-usuario/:id", async (request, response) => {
   const { nome, email, usuario, senha, confirmaSenha } = request.body;
 
   try {
-    const usuarios = await tabelaUsuarios.findOne({
+    const userUsuario = await tabelaUsuarios.findOne({
       where: {
         id: { [Op.ne]: id }, // Ignora o usuário atual pelo ID
-        email: email, // Quando o e-mail da requisição for igual ao e-mail do banco
         usuario: usuario, // Quando o usuario da requisiçao for igual ao do banco
       },
     });
 
-    // Validação de usuário e validação de e-mail
-    if (usuarios) {
+    const emailUsuario = await tabelaUsuarios.findOne({
+      where: {
+        id: { [Op.ne]: id }, // Ignora o email atual pelo ID
+        email: email, // Quando o e-mail da requisição for igual ao e-mail do banco
+      },
+    });
+
+    if (emailUsuario) {
       return response
         .status(400)
-        .json({ Error: "Usuário ou E-mail já cadastrado no sistema" });
+        .json({ Error: "Email ja cadastrado no sistema" });
+    }
+
+    // Validação de usuário e validação de e-mail
+    if (userUsuario) {
+      return response
+        .status(400)
+        .json({ Error: "Usuário  já cadastrado no sistema" });
     }
 
     //Validação de senha
