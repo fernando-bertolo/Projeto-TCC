@@ -16,7 +16,7 @@ import {
   Sair,
 } from "./style.jsx";
 
-import LogoImagem from "./Imagens/Logo.jpeg";
+import LogoImagem from "../../assets/Imagens/Logo.jpeg";
 import { useEffect, useState } from "react";
 import axios from "axios";
 

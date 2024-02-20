@@ -64,7 +64,7 @@ function Login() {
         <DivTitulo>
           <Titulo>Login</Titulo>
         </DivTitulo>
-        <FormLogin>
+        <FormLogin onSubmit={handleLogin}>
           <DivInput>
             <DivIcones>
               <IconeUsuario />
@@ -96,7 +96,7 @@ function Login() {
           <TextoErroLogin>{mensagemError}</TextoErroLogin>
         </FormLogin>
         <DivBotao>
-          <Botao type="submit" onClick={(e) => handleLogin(e)}>
+          <Botao type="submit" onClick={(e) => handleLogin(e)} value="Login">
             Login
           </Botao>
           <TextoEsqueciSenha to={"/esquecer-senha"}>
