@@ -11,4 +11,18 @@ visualizarClientes.get("/clientes", async (request, response) => {
   }
 });
 
+visualizarClientes.get("/clientes/:id", async (request, response) => {
+  try {
+    const clienteUnico = await tabelaClientes.findByPk(request.params.id);
+
+    if (clienteUnico) {
+      return response.status(200).send(clienteUnico);
+    } else {
+      return response.status(400).json({ Error: "Usuário não existe" });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 module.exports = visualizarClientes;

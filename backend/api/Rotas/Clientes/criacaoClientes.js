@@ -21,6 +21,17 @@ criacaoClientes.post("/criacao-clientes", async (request, response) => {
   } = request.body;
 
   try {
+    const cpfCliente = await tabelaClientes.findOne({
+      where: {
+        cpf: cpf,
+      },
+    });
+
+    if (cpfCliente) {
+      return response
+        .status(400)
+        .json({ Error: "CPF já cadastrado no sistema!!" });
+    }
     tabelaClientes.create({
       nome: nome,
       nacionalidade: nacionalidade,
