@@ -2,8 +2,6 @@ import { Body } from "../BodyPages/style.jsx";
 import Menu from "../Menu/index.jsx";
 import ModalUser from "../Modals/Usuarios/modalUsuario.jsx";
 import { useState } from "react";
-import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
 
 import {
   DivMain,
@@ -28,57 +26,10 @@ import {
   TerceiraDivTitulo,
 } from "./style.jsx";
 
-function Listagem({
-  title,
-  data,
-  primeiraColuna,
-  segundaColuna,
-  terceiraColuna,
-  quartaColuna,
-  quintaColuna,
-}) {
+function Listagem(props) {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalEdicaoOpen, setModalEdicaoOpen] = useState(false);
   const [dadosUsuarioSelecionado, setDadosUsuarioSelecionado] = useState("");
-  const [mensagemError, setMensagemError] = useState();
-
-  function exclusaoUsuario() {
-    try {
-      if (dadosUsuarioSelecionado.id) {
-        const response = axios.delete(
-          "http://localhost:3010/deletar-usuario/" + dadosUsuarioSelecionado.id,
-          {
-            id: dadosUsuarioSelecionado.id,
-          }
-        );
-        setMensagemError(response);
-
-        toast.success("Usuario excluído com sucesso", {
-          position: "bottom-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-      } else if (mensagemError === 400) {
-        toast.error("Falha ao excluir usuário", {
-          position: "bottom-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-      }
-    } catch (error) {
-      return console.log(error);
-    }
-  }
 
   return (
     <>
@@ -91,7 +42,7 @@ function Listagem({
                 <DivTitulo>
                   <PrimeiraDivTitulo></PrimeiraDivTitulo>
                   <SegundaDivTitulo>
-                    <Titulo>{title}</Titulo>
+                    <Titulo>{props.title}</Titulo>
                   </SegundaDivTitulo>
 
                   <TerceiraDivTitulo>
@@ -106,7 +57,11 @@ function Listagem({
                           setModalEdicaoOpen(true);
                         }}
                       />
-                      <IconeExcluir onClick={exclusaoUsuario} />
+                      <IconeExcluir
+                        onClick={() =>
+                          props.excluirUsuario(dadosUsuarioSelecionado)
+                        }
+                      />
                     </DivIcones>
                   </TerceiraDivTitulo>
                 </DivTitulo>
@@ -115,34 +70,40 @@ function Listagem({
               <Tabela>
                 <THead>
                   <Tr>
-                    <Th>{primeiraColuna}</Th>
-                    <Th>{segundaColuna}</Th>
-                    <Th>{terceiraColuna}</Th>
-                    <Th>{quartaColuna}</Th>
-                    <Th>{quintaColuna}</Th>
+                    <Th>{props.primeiraColuna}</Th>
+                    <Th>{props.segundaColuna}</Th>
+                    <Th>{props.terceiraColuna}</Th>
+                    <Th>{props.quartaColuna}</Th>
+                    <Th>{props.quintaColuna}</Th>
                   </Tr>
                 </THead>
                 <TBody>
-                  {data.map((usuario, index) => {
-                    return (
-                      <TrBody
-                        key={index}
-                        onClick={() => setDadosUsuarioSelecionado(usuario)}
-                        style={{
-                          backgroundColor:
-                            dadosUsuarioSelecionado.id === usuario.id
-                              ? "#514869"
-                              : "#2F2841",
-                        }}
-                      >
-                        <Td>{usuario.id}</Td>
-                        <Td>{usuario.nome}</Td>
-                        <Td>{usuario.usuario}</Td>
-                        <Td>{usuario.email}</Td>
-                        <Td>{usuario.permissao}</Td>
-                      </TrBody>
-                    );
-                  })}
+                  {props.rota === "usuarios" ? (
+                    props.data.map((usuario, index) => {
+                      return (
+                        <TrBody
+                          key={index}
+                          onClick={() => {
+                            setDadosUsuarioSelecionado(usuario);
+                          }}
+                          style={{
+                            backgroundColor:
+                              dadosUsuarioSelecionado.id === usuario.id
+                                ? "#514869"
+                                : "#2F2841",
+                          }}
+                        >
+                          <Td>{usuario.id}</Td>
+                          <Td>{usuario.nome}</Td>
+                          <Td>{usuario.usuario}</Td>
+                          <Td>{usuario.email}</Td>
+                          <Td>{usuario.permissao}</Td>
+                        </TrBody>
+                      );
+                    })
+                  ) : (
+                    <></>
+                  )}
                 </TBody>
               </Tabela>
             </SectionUsuarios>
@@ -169,7 +130,6 @@ function Listagem({
           ) : (
             <></>
           )}
-          <ToastContainer />
         </DivMain>
       </Body>
     </>

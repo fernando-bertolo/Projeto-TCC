@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import validator from "validator";
 
 import {
   SectionMainContent,
@@ -50,6 +51,17 @@ function ModalUser(props) {
         toast.warn("O campo de nome deve ser preenchido corretamente", {
           position: "bottom-right",
           autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      } else if (!validator.isEmail(inputEmail)) {
+        toast.warn("E-mail inválido", {
+          position: "bottom-right",
+          autoClose: 2000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
