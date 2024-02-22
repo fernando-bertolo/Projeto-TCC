@@ -1,6 +1,7 @@
 const express = require("express");
 const criacaoClientes = express();
 const tabelaClientes = require("../../../Database/Tabelas/Clientes/clientes");
+const isValidCPF = require("../../Services/CPF/validaCpf.js");
 
 criacaoClientes.post("/criacao-clientes", async (request, response) => {
   const {
@@ -31,6 +32,8 @@ criacaoClientes.post("/criacao-clientes", async (request, response) => {
       return response
         .status(400)
         .json({ Error: "CPF já cadastrado no sistema!!" });
+    } else if (!isValidCPF(cpf)) {
+      return response.status(400).json({ Error: "CPF inválido" });
     }
     tabelaClientes.create({
       nome: nome,

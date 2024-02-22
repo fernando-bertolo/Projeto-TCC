@@ -14,7 +14,8 @@ const exclusaoUsuario = require("../Rotas/Usuarios/exclusaoUsuario.js");
 //Importando Clientes
 const criacaoClientes = require("../Rotas/Clientes/criacaoClientes.js");
 const visualizarClientes = require("../Rotas/Clientes/visualizarClientes.js");
-const alteracaoClientes = require("../Rotas/Clientes/alteracaoUsuario.js");
+const alteracaoClientes = require("../Rotas/Clientes/alteracaoClientes.js");
+const exclusaoClientes = require("../Rotas/Clientes/deletarClientes.js");
 
 //Importando Valida e-mail
 const EsquecerSenha = require("../Services/EsquecerSenha/EsquecerSenhaUsuario.js");
@@ -35,5 +36,6 @@ rotas.use(ResetarSenha);
 rotas.use(criacaoClientes);
 rotas.use(visualizarClientes);
 rotas.use(alteracaoClientes);
+rotas.use(exclusaoClientes);
 
 module.exports = rotas;

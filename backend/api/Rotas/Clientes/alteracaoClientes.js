@@ -3,6 +3,8 @@ const { where } = require("sequelize");
 const alteracaoClientes = express();
 const tabelaClientes = require("../../../Database/Tabelas/Clientes/clientes");
 const { Op } = require("sequelize");
+const axios = require("axios");
+const isValidCPF = require("../../Services/CPF/validaCpf.js");
 
 alteracaoClientes.put("/alterar-cliente/:id", async (request, response) => {
   const { id } = request.params;
@@ -26,8 +28,7 @@ alteracaoClientes.put("/alterar-cliente/:id", async (request, response) => {
   try {
     const cpfUsuario = await tabelaClientes.findOne({
       where: {
-        cpf: { [Op.ne]: cpf }, // Ignora o cliente atual pelo cpf
-        id: id,
+        cpf: cpf, // Ignora o cliente atual pelo cpf
       },
     });
 
@@ -35,6 +36,8 @@ alteracaoClientes.put("/alterar-cliente/:id", async (request, response) => {
       return response
         .status(400)
         .json({ Error: "CPF já cadastrado no sistema!" });
+    } else if (!isValidCPF(cpf)) {
+      return response.status(400).json({ Error: "CPF inválido" });
     }
 
     await tabelaClientes.update(
