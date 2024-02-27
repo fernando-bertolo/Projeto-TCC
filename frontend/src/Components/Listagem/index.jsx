@@ -63,7 +63,7 @@ function Listagem(props) {
                           props.rota === "usuarios" ? (
                             props.excluirUsuario(dadosUsuarioSelecionado)
                           ) : props.rota === "clientes" ? (
-                            props.excluirUsuario()
+                            props.excluirCliente(dataCustomerSelect)
                           ) : (
                             <></>
                           )

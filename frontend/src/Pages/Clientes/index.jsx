@@ -1,9 +1,11 @@
 import Listagem from "../../Components/Listagem/index.jsx";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 function Clientes() {
   const [dataCustomer, setDataCustomer] = useState();
+  const [mensagemError, setMensagemError] = useState();
 
   useEffect(() => {
     axios.get("http://localhost:3010/clientes").then((response) => {
@@ -11,10 +13,49 @@ function Clientes() {
     });
   }, []);
 
+  const excluirCliente = async (cliente) => {
+    try {
+      if (cliente.id) {
+        const response = await axios.delete(
+          "http://localhost:3010/deletar-cliente/" + cliente.id,
+          {
+            id: cliente.id,
+          }
+        );
+        setMensagemError(response);
+
+        toast.success("Cliente excluído com sucesso", {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      } else if (mensagemError === 400) {
+        toast.error("Falha ao excluir cliente", {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <Listagem
         dataCustomer={dataCustomer}
+        excluirCliente={excluirCliente}
         title="Listagem de Clientes"
         rota="clientes"
         nome="Nome"
@@ -32,6 +73,7 @@ function Clientes() {
         numero="Número"
         estado="Estado"
       />
+      <ToastContainer />
     </>
   );
 }
