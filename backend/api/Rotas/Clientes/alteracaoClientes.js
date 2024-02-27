@@ -12,7 +12,6 @@ alteracaoClientes.put("/alterar-cliente/:id", async (request, response) => {
     nome,
     nacionalidade,
     estadoCivil,
-    cpf,
     email,
     dataNascimento,
     rg,
@@ -26,26 +25,11 @@ alteracaoClientes.put("/alterar-cliente/:id", async (request, response) => {
   } = request.body;
 
   try {
-    const cpfUsuario = await tabelaClientes.findOne({
-      where: {
-        cpf: cpf, // Ignora o cliente atual pelo cpf
-      },
-    });
-
-    if (cpfUsuario) {
-      return response
-        .status(400)
-        .json({ Error: "CPF já cadastrado no sistema!" });
-    } else if (!isValidCPF(cpf)) {
-      return response.status(400).json({ Error: "CPF inválido" });
-    }
-
     await tabelaClientes.update(
       {
         nome: nome,
         nacionalidade: nacionalidade,
         estadoCivil: estadoCivil,
-        cpf: cpf,
         email: email,
         dataNascimento: dataNascimento,
         rg: rg,

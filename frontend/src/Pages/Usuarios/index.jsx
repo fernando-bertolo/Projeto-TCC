@@ -1,6 +1,7 @@
-import Listagem from "../../Components/Form/index.jsx";
+import Listagem from "../../Components/Listagem/index.jsx";
 import { useState, useEffect } from "react";
 import axios from "axios";
+
 import { ToastContainer, toast } from "react-toastify";
 
 function Usuarios() {
@@ -54,7 +55,7 @@ function Usuarios() {
   return (
     <>
       <Listagem
-        title="Listagem de Usuario"
+        title="Listagem de Usuários"
         rota="usuarios"
         data={data}
         primeiraColuna="ID"

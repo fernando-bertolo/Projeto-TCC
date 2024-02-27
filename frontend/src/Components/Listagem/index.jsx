@@ -30,6 +30,7 @@ function Listagem(props) {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalEdicaoOpen, setModalEdicaoOpen] = useState(false);
   const [dadosUsuarioSelecionado, setDadosUsuarioSelecionado] = useState("");
+  const [dataCustomerSelect, setDataCustomerSelect] = useState("");
 
   return (
     <>
@@ -59,7 +60,13 @@ function Listagem(props) {
                       />
                       <IconeExcluir
                         onClick={() =>
-                          props.excluirUsuario(dadosUsuarioSelecionado)
+                          props.rota === "usuarios" ? (
+                            props.excluirUsuario(dadosUsuarioSelecionado)
+                          ) : props.rota === "clientes" ? (
+                            props.excluirUsuario()
+                          ) : (
+                            <></>
+                          )
                         }
                       />
                     </DivIcones>
@@ -70,11 +77,27 @@ function Listagem(props) {
               <Tabela>
                 <THead>
                   <Tr>
-                    <Th>{props.primeiraColuna}</Th>
-                    <Th>{props.segundaColuna}</Th>
-                    <Th>{props.terceiraColuna}</Th>
-                    <Th>{props.quartaColuna}</Th>
-                    <Th>{props.quintaColuna}</Th>
+                    {props.rota === "usuarios" ? (
+                      <>
+                        <Th>{props.primeiraColuna}</Th>
+                        <Th>{props.segundaColuna}</Th>
+                        <Th>{props.terceiraColuna}</Th>
+                        <Th>{props.quartaColuna}</Th>
+                        <Th>{props.quintaColuna}</Th>
+                      </>
+                    ) : props.rota === "clientes" ? (
+                      <>
+                        <Th>{props.nome}</Th>
+                        <Th>{props.cpf}</Th>
+                        <Th>{props.email}</Th>
+                        <Th>{props.celular}</Th>
+                        <Th>{props.cep}</Th>
+                        <Th>{props.cidade}</Th>
+                        <Th>{props.estado}</Th>
+                      </>
+                    ) : (
+                      <></>
+                    )}
                   </Tr>
                 </THead>
                 <TBody>
@@ -98,6 +121,31 @@ function Listagem(props) {
                           <Td>{usuario.usuario}</Td>
                           <Td>{usuario.email}</Td>
                           <Td>{usuario.permissao}</Td>
+                        </TrBody>
+                      );
+                    })
+                  ) : props.rota === "clientes" && props.dataCustomer ? (
+                    props.dataCustomer.map((client, index) => {
+                      return (
+                        <TrBody
+                          key={index}
+                          onClick={() => {
+                            setDataCustomerSelect(client);
+                          }}
+                          style={{
+                            backgroundColor:
+                              dataCustomerSelect.id === client.id
+                                ? "#514869"
+                                : "#2F2841",
+                          }}
+                        >
+                          <Td>{client.nome}</Td>
+                          <Td>{client.cpf}</Td>
+                          <Td>{client.email}</Td>
+                          <Td>{client.celular}</Td>
+                          <Td>{client.cep}</Td>
+                          <Td>{client.cidade}</Td>
+                          <Td>{client.estado}</Td>
                         </TrBody>
                       );
                     })

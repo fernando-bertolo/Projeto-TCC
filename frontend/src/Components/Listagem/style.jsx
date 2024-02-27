@@ -40,9 +40,9 @@ export const SectionTitulo = styled.div`
   align-items: center;
 `;
 
-export const Titulo = styled.p`
+export const Titulo = styled.h1`
   color: #fff;
-  font-size: 2vw;
+  font-size: 1.5vw;
 `;
 
 export const DivTitulo = styled.div`
@@ -123,8 +123,8 @@ export const THead = styled.thead`
   background-color: #7176ff;
 `;
 export const Th = styled.th`
-  padding: 20px;
-  //border-right: 1px solid white;
+  padding: 1.1rem;
+  border-right: 1px solid white;
   border-bottom: 1px solid white;
   font-size: 1vw;
 `;
