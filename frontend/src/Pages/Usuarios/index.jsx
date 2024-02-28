@@ -2,6 +2,8 @@ import Listagem from "../../Components/Listagem/index.jsx";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import { Body } from "../../Components/BodyPages/style";
+import Menu from "../../Components/Menu/index";
 
 function Usuarios() {
   const [data, setData] = useState([]);
@@ -53,18 +55,21 @@ function Usuarios() {
 
   return (
     <>
-      <Listagem
-        title="Listagem de Usuários"
-        rota="usuarios"
-        data={data}
-        primeiraColuna="ID"
-        segundaColuna="Nome"
-        terceiraColuna="Usuário"
-        quartaColuna="E-mail"
-        quintaColuna="Permissão"
-        excluirUsuario={excluirUsuario}
-      />
-      <ToastContainer />
+      <Body>
+        <Menu />
+        <Listagem
+          title="Listagem de Usuários"
+          rota="usuarios"
+          data={data}
+          primeiraColuna="ID"
+          segundaColuna="Nome"
+          terceiraColuna="Usuário"
+          quartaColuna="E-mail"
+          quintaColuna="Permissão"
+          excluirUsuario={excluirUsuario}
+        />
+        <ToastContainer />
+      </Body>
     </>
   );
 }

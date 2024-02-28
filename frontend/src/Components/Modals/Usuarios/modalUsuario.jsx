@@ -175,7 +175,7 @@ function ModalUser(props) {
   return (
     <>
       <MainContentbackground>
-        <SectionMainContent isOpen={true}>
+        <SectionMainContent>
           <FormCadastro>
             <DivTitulo>
               <Titulo>{props.titulo}</Titulo>

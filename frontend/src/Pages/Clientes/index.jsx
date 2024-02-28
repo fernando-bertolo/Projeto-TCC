@@ -2,6 +2,8 @@ import Listagem from "../../Components/Listagem/index.jsx";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import { Body } from "../../Components/BodyPages/style";
+import Menu from "../../Components/Menu/index";
 
 function Clientes() {
   const [dataCustomer, setDataCustomer] = useState();
@@ -53,27 +55,30 @@ function Clientes() {
 
   return (
     <>
-      <Listagem
-        dataCustomer={dataCustomer}
-        excluirCliente={excluirCliente}
-        title="Listagem de Clientes"
-        rota="clientes"
-        nome="Nome"
-        nacionalidade="Nacionalidade"
-        estadoCivil="Estado Civil"
-        cpf="CPF"
-        email="E-mail"
-        dataNascimento="Data de Nascimento"
-        rg="RG"
-        celular="Celular"
-        cep="CEP"
-        endereco="Endereço"
-        bairro="Bairro"
-        cidade="Cidade"
-        numero="Número"
-        estado="Estado"
-      />
-      <ToastContainer />
+      <Body>
+        <Menu />
+        <Listagem
+          dataCustomer={dataCustomer}
+          excluirCliente={excluirCliente}
+          title="Listagem de Clientes"
+          rota="clientes"
+          nome="Nome"
+          nacionalidade="Nacionalidade"
+          estadoCivil="Estado Civil"
+          cpf="CPF"
+          email="E-mail"
+          dataNascimento="Data de Nascimento"
+          rg="RG"
+          celular="Celular"
+          cep="CEP"
+          endereco="Endereço"
+          bairro="Bairro"
+          cidade="Cidade"
+          numero="Número"
+          estado="Estado"
+        />
+        <ToastContainer />
+      </Body>
     </>
   );
 }
