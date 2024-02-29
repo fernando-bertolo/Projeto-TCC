@@ -59,6 +59,7 @@ export const SectionInfoPessoalCliente = styled.section`
   display: flex;
   align-items: center;
   flex-direction: column;
+  gap: 1rem;
 `;
 
 export const DivSubtituloInfoPessoalCliente = styled.div`
@@ -103,21 +104,45 @@ export const Input = styled.input`
   padding-left: 20px;
 
   &:focus {
-    outline: none; // Retira a borda ressaltada ao clicar
+    outline: none; // Retira centera borda ressaltada ao clicar
   }
 `;
 
 export const DivInput2 = styled.div`
-  width: 80%;
+  width: 65%;
   height: 20%;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #e939e9;
+  gap: 2px;
+`;
+
+export const DivInterna = styled.div`
+  width: 50%;
+  height: 100%;
+  background-color: yellow;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 `;
 
 export const Input2 = styled.input`
-  width: 30%;
+  width: 60%;
+  height: 50%;
+  border-radius: 10px;
+  color: #fff;
+  background-color: #514869;
+  border-style: none;
+  padding-left: 20px;
+
+  &:focus {
+    outline: none; // Retira a borda ressaltada ao clicar
+  }
+`;
+
+export const InputDataNascimento = styled.input`
+  width: 55%;
   height: 50%;
   border-radius: 10px;
   color: #fff;
