@@ -1,7 +1,7 @@
 import { styled } from "styled-components";
 
 export const SectionMainContent = styled.section`
-  width: 30%;
+  width: 70%;
   height: 80%;
   position: fixed;
   background-color: #2f2841;
@@ -22,52 +22,75 @@ export const MainContentbackground = styled.div`
   background-color: rgb(255, 255, 255, 0.4);
 `;
 
-export const FormCadastro = styled.form`
-  width: 100%;
-  height: 90%;
-  //background-color: red;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
-  //gap: 1rem;
-`;
-
 export const DivTitulo = styled.div`
   width: 100%;
   height: 10%;
-  //background-color: pink;
+  background-color: green;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-export const Titulo = styled.p`
+export const Titulo = styled.h1`
   color: #fff;
   font-size: clamp(1.2vw, 1.5vw, 1.7vw);
 `;
 
-export const DivInputs = styled.div`
+export const MainContent = styled.section`
   width: 100%;
-  height: 15%;
-  //background-color: pink;
+  height: 80%;
+  background-color: pink;
+`;
+
+export const DivBotoes = styled.div`
+  width: 100%;
+  height: 10%;
+  background-color: blue;
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 50%;
+`;
+
+export const SectionInfoPessoalCliente = styled.section`
+  width: 100%;
+  height: 50%;
+  background-color: aqua;
+  display: flex;
   align-items: center;
   flex-direction: column;
 `;
 
-export const DivNomeInput = styled.div`
-  width: 60%;
-  height: 30%;
-  display: flex;
-  align-items: center;
-  //background-color: blue;
+export const DivSubtituloInfoPessoalCliente = styled.div`
+  width: 100%;
+  height: 10%;
+  background-color: gold;
+  padding-left: 10%;
 `;
 
-export const NomeInput = styled.p`
+export const SubtituloInfoPessoalCliente = styled.h3`
   color: #fff;
-  font-size: 1rem;
+  font-size: clamp(1vw, 1.1vw, 1.2vw);
+`;
+
+export const SectionInfoEnderecoCliente = styled.section`
+  width: 100%;
+  height: 50%;
+  background-color: red;
+`;
+
+export const DivInput = styled.div`
+  width: 100%;
+  height: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e939e9;
+`;
+
+export const Label = styled.label`
+  color: #fff;
+  margin-right: 1rem;
 `;
 
 export const Input = styled.input`
@@ -84,25 +107,27 @@ export const Input = styled.input`
   }
 `;
 
-export const Select = styled.select`
-  width: 60%;
-  height: 50%;
-  color: #fff;
-  border-radius: 10px;
-  padding-left: 20px;
-  background-color: #514869;
-  border-style: none;
+export const DivInput2 = styled.div`
+  width: 80%;
+  height: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e939e9;
 `;
 
-export const Option = styled.option``;
+export const Input2 = styled.input`
+  width: 30%;
+  height: 50%;
+  border-radius: 10px;
+  color: #fff;
+  background-color: #514869;
+  border-style: none;
+  padding-left: 20px;
 
-export const DivBotoes = styled.div`
-  width: 100%;
-  height: 10%;
-  //background-color: blue;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+  &:focus {
+    outline: none; // Retira a borda ressaltada ao clicar
+  }
 `;
 
 export const BotaoCancelar = styled.button`
@@ -110,8 +135,8 @@ export const BotaoCancelar = styled.button`
   border-radius: 10px;
   border-style: none;
   cursor: pointer;
-  width: 20%;
-  height: 40%;
+  width: 10%;
+  height: 50%;
 `;
 
 export const BotaoAdicionar = styled.button`
@@ -119,6 +144,6 @@ export const BotaoAdicionar = styled.button`
   border-radius: 10px;
   border-style: none;
   cursor: pointer;
-  width: 20%;
-  height: 40%;
+  width: 10%;
+  height: 50%;
 `;

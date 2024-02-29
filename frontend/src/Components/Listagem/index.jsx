@@ -1,4 +1,5 @@
-import Modal from "../Modals/Usuarios/modalUsuario.jsx";
+import ModalUsuario from "../Modals/Usuarios/modalUsuario";
+import ModalClientes from "../Modals/Clientes/index";
 import { useState } from "react";
 
 import {
@@ -27,6 +28,7 @@ import {
 function Listagem(props) {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalEdicaoOpen, setModalEdicaoOpen] = useState(false);
+  const [modalOpenClient, setModalOpenClient] = useState(false);
   const [dadosUsuarioSelecionado, setDadosUsuarioSelecionado] = useState("");
   const [dataCustomerSelect, setDataCustomerSelect] = useState("");
 
@@ -45,9 +47,15 @@ function Listagem(props) {
                 <TerceiraDivTitulo>
                   <DivIcones>
                     <IconeAdicionar
-                      onClick={() => {
-                        setModalOpen(true);
-                      }}
+                      onClick={() =>
+                        props.rota === "usuarios" ? (
+                          setModalOpen(true)
+                        ) : props.rota === "clientes" ? (
+                          setModalOpenClient(true)
+                        ) : (
+                          <></>
+                        )
+                      }
                     />
                     <IconeEditar
                       onClick={() => {
@@ -153,7 +161,7 @@ function Listagem(props) {
           </SectionUsuarios>
         </SectionUsuariosExternos>
         {modalOpen ? (
-          <Modal
+          <ModalUsuario
             setModalOpen={setModalOpen}
             titulo="Cadastro de Usuário"
             descricaoBotao="ADICIONAR"
@@ -164,12 +172,21 @@ function Listagem(props) {
         )}
 
         {modalEdicaoOpen ? (
-          <Modal
+          <ModalUsuario
             setModalOpen={setModalEdicaoOpen}
             titulo="Edição de Usuários"
             descricaoBotao="ALTERAR"
             dadosUsuarios={dadosUsuarioSelecionado}
             modo="edicao"
+          />
+        ) : (
+          <></>
+        )}
+
+        {modalOpenClient && props.rota === "clientes" ? (
+          <ModalClientes
+            setModalOpenClient={setModalOpenClient}
+            titulo="Cadastro de clientes"
           />
         ) : (
           <></>
