@@ -9,7 +9,8 @@ import {
   SubtituloInfoPessoalCliente,
   DivInput,
   DivInput2,
-  DivInterna,
+  DivInternaInput,
+  DivInternaLabel,
   Label,
   Input,
   Input2,
@@ -43,27 +44,19 @@ function ModalClientes(props) {
               </DivInput>
 
               <DivInput2>
-                <DivInterna>
+                <DivInternaLabel>
                   <Label>Nacionalidade: </Label>
+                </DivInternaLabel>
+                <DivInternaInput>
                   <Input2 type="text" id="nome" />
-                </DivInterna>
+                </DivInternaInput>
 
-                <DivInterna>
-                  <Label>Data de Nascimento: </Label>
+                <DivInternaLabel>
+                  <Label>Data de nascimento: </Label>
+                </DivInternaLabel>
+                <DivInternaInput>
                   <InputDataNascimento type="date" id="nome" />
-                </DivInterna>
-              </DivInput2>
-
-              <DivInput2>
-                <DivInterna>
-                  <Label>Estado Civil:</Label>
-                  <Input2 type="text" id="estadoCivil" />
-                </DivInterna>
-
-                <DivInterna>
-                  <Label>RG: </Label>
-                  <Input2 type="text" id="rg" />
-                </DivInterna>
+                </DivInternaInput>
               </DivInput2>
             </SectionInfoPessoalCliente>
             <SectionInfoEnderecoCliente></SectionInfoEnderecoCliente>

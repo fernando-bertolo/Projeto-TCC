@@ -70,7 +70,7 @@ export const DivSubtituloInfoPessoalCliente = styled.div`
 `;
 
 export const SubtituloInfoPessoalCliente = styled.h3`
-  color: #fff;
+  color: #7176ff;
   font-size: clamp(1vw, 1.1vw, 1.2vw);
 `;
 
@@ -109,7 +109,7 @@ export const Input = styled.input`
 `;
 
 export const DivInput2 = styled.div`
-  width: 65%;
+  width: 100%;
   height: 20%;
   display: flex;
   justify-content: center;
@@ -118,17 +118,26 @@ export const DivInput2 = styled.div`
   gap: 2px;
 `;
 
-export const DivInterna = styled.div`
+export const DivInternaLabel = styled.div`
+  width: 42%;
+  height: 100%;
+  background-color: yellow;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+`;
+
+export const DivInternaInput = styled.div`
   width: 50%;
   height: 100%;
   background-color: yellow;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
 `;
 
 export const Input2 = styled.input`
-  width: 60%;
+  width: 90%;
   height: 50%;
   border-radius: 10px;
   color: #fff;
@@ -142,7 +151,7 @@ export const Input2 = styled.input`
 `;
 
 export const InputDataNascimento = styled.input`
-  width: 55%;
+  width: 70%;
   height: 50%;
   border-radius: 10px;
   color: #fff;
