@@ -160,7 +160,7 @@ function Listagem(props) {
             </Tabela>
           </SectionUsuarios>
         </SectionUsuariosExternos>
-        {modalOpen ? (
+        {modalOpen && props.rota === "usuarios" ? (
           <ModalUsuario
             setModalOpen={setModalOpen}
             titulo="Cadastro de Usuário"
@@ -171,7 +171,7 @@ function Listagem(props) {
           <></>
         )}
 
-        {modalEdicaoOpen ? (
+        {modalEdicaoOpen && props.rota === "usuarios" ? (
           <ModalUsuario
             setModalOpen={setModalEdicaoOpen}
             titulo="Edição de Usuários"

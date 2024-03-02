@@ -1,5 +1,9 @@
 import { useState } from "react";
 import { SectionMainContent, MainContentbackground } from "../Clientes/style";
+import validator from "validator";
+import { ToastContainer, toast } from "react-toastify";
+import validaCPF from "../../../Services/CPF/validaCPF";
+import axios from "axios";
 
 import {
   DivTitulo,
@@ -34,6 +38,68 @@ function ModalClientes(props) {
   const [inputCidade, setInputCidade] = useState();
   const [inputEstado, setInputEstado] = useState();
 
+  const criacaoCliente = async (event) => {
+    try {
+      event.preventDefault();
+
+      if (!validaCPF(inputCPF)) {
+        toast.warn("CPF inválido", {
+          position: "bottom-right",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+
+        if (!validator.isEmail(inputEmail)) {
+          toast.warn("E-mail inválido", {
+            position: "bottom-right",
+            autoClose: 2500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
+
+        await axios.post("http://localhost:3010/criacao-clientes", {
+          nome: inputNome,
+          nacionalidade: inputNacionalidade,
+          dataNascimento: inputDataNascimento,
+          rg: inputRG,
+          cpf: inputCPF,
+          celular: inputCelular,
+          email: inputEmail,
+          endereco: inputEndereco,
+          cep: inputCEP,
+          bairro: inputBairro,
+          numero: inputNumero,
+          cidade: inputCidade,
+          estado: inputEstado,
+        });
+
+        // Mensagem de sucesso
+        toast.success("Cliente cadastrado com sucesso!!", {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <MainContentbackground>
@@ -59,6 +125,9 @@ function ModalClientes(props) {
                     name="nome"
                     placeholder="Digite o nome"
                     value={inputNome}
+                    onChange={(event) => {
+                      setInputNome(event.target.value);
+                    }}
                   />
                 </DivInternaInput>
 
@@ -70,6 +139,9 @@ function ModalClientes(props) {
                     name="nome"
                     placeholder="Digite a nacionalidade"
                     value={inputNacionalidade}
+                    onChange={(event) => {
+                      setInputNacionalidade(event.target.value);
+                    }}
                   />
                 </DivInternaInput>
               </DivInput2>
@@ -82,6 +154,9 @@ function ModalClientes(props) {
                     id="dataNascimento"
                     name="dataNascimento"
                     value={inputDataNascimento}
+                    onChange={(event) => {
+                      setInputDataNascimento(event.target.value);
+                    }}
                   />
                 </DivInternaInput>
 
@@ -93,6 +168,9 @@ function ModalClientes(props) {
                     name="estadoCivil"
                     placeholder="Digite o estado civil"
                     value={inputEstadoCivil}
+                    onChange={(event) => {
+                      setInputEstadoCivil(event.target.value);
+                    }}
                   />
                 </DivInternaInput>
               </DivInput2>
@@ -107,6 +185,9 @@ function ModalClientes(props) {
                     placeholder="Digite o RG"
                     required
                     value={inputRG}
+                    onChange={(event) => {
+                      setInputRG(event.target.value);
+                    }}
                   />
                 </DivInternaInput>
 
@@ -119,6 +200,9 @@ function ModalClientes(props) {
                     required
                     placeholder="Digite o CPF"
                     value={inputCPF}
+                    onChange={(event) => {
+                      setInputCPF(event.target.value);
+                    }}
                   />
                 </DivInternaInput>
               </DivInput2>
@@ -132,6 +216,9 @@ function ModalClientes(props) {
                     name="celular"
                     placeholder="Digite o celular"
                     value={inputCelular}
+                    onChange={(event) => {
+                      setInputCelular(event.target.value);
+                    }}
                   />
                 </DivInternaInput>
 
@@ -143,6 +230,9 @@ function ModalClientes(props) {
                     name="email"
                     placeholder="Digite o e-mail"
                     value={inputEmail}
+                    onChange={(event) => {
+                      setInputEmail(event.target.value);
+                    }}
                   />
                 </DivInternaInput>
               </DivInput2>
@@ -164,6 +254,9 @@ function ModalClientes(props) {
                     name="endereco"
                     placeholder="Digite o endereço"
                     value={inputEndereco}
+                    onChange={(event) => {
+                      setInputEndereco(event.target.value);
+                    }}
                   />
                 </DivInternaInput>
 
@@ -175,6 +268,9 @@ function ModalClientes(props) {
                     name="cep"
                     placeholder="Digite o CEP"
                     value={inputCEP}
+                    onChange={(event) => {
+                      setInputCEP(event.target.value);
+                    }}
                   />
                 </DivInternaInput>
               </DivInput2>
@@ -188,6 +284,9 @@ function ModalClientes(props) {
                     name="bairro"
                     placeholder="Digite o bairro"
                     value={inputBairro}
+                    onChange={(event) => {
+                      setInputBairro(event.target.value);
+                    }}
                   />
                 </DivInternaInput>
 
@@ -199,6 +298,9 @@ function ModalClientes(props) {
                     name="numero"
                     placeholder="Digite o número da residência"
                     value={inputNumero}
+                    onChange={(event) => {
+                      setInputNumero(event.target.value);
+                    }}
                   />
                 </DivInternaInput>
               </DivInput2>
@@ -212,6 +314,9 @@ function ModalClientes(props) {
                     name="cidade"
                     placeholder="Digite o nome da cidade"
                     value={inputCidade}
+                    onChange={(event) => {
+                      setInputCidade(event.target.value);
+                    }}
                   />
                 </DivInternaInput>
 
@@ -223,6 +328,9 @@ function ModalClientes(props) {
                     name="estado"
                     placeholder="Digite o Estado"
                     value={inputEstado}
+                    onChange={(event) => {
+                      setInputEstado(event.target.value);
+                    }}
                   />
                 </DivInternaInput>
               </DivInput2>
@@ -237,9 +345,12 @@ function ModalClientes(props) {
             >
               Cancelar
             </BotaoCancelar>
-            <BotaoAdicionar>Adicionar</BotaoAdicionar>
+            <BotaoAdicionar onClick={(event) => criacaoCliente(event)}>
+              Adicionar
+            </BotaoAdicionar>
           </DivBotoes>
         </SectionMainContent>
+        <ToastContainer />
       </MainContentbackground>
     </>
   );
