@@ -25,7 +25,7 @@ export const MainContentbackground = styled.div`
 export const DivTitulo = styled.div`
   width: 100%;
   height: 10%;
-  background-color: green;
+  //background-color: green;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,13 +39,13 @@ export const Titulo = styled.h1`
 export const MainContent = styled.section`
   width: 100%;
   height: 80%;
-  background-color: pink;
+  //background-color: pink;
 `;
 
 export const DivBotoes = styled.div`
   width: 100%;
   height: 10%;
-  background-color: blue;
+  //background-color: blue;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -55,18 +55,20 @@ export const DivBotoes = styled.div`
 export const SectionInfoPessoalCliente = styled.section`
   width: 100%;
   height: 50%;
-  background-color: aqua;
+  //background-color: aqua;
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 1rem;
 `;
 
 export const DivSubtituloInfoPessoalCliente = styled.div`
   width: 100%;
-  height: 10%;
-  background-color: gold;
-  padding-left: 10%;
+  height: 15%;
+  //background-color: gold;
+  padding-left: 5%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 `;
 
 export const SubtituloInfoPessoalCliente = styled.h3`
@@ -77,16 +79,10 @@ export const SubtituloInfoPessoalCliente = styled.h3`
 export const SectionInfoEnderecoCliente = styled.section`
   width: 100%;
   height: 50%;
-  background-color: red;
-`;
-
-export const DivInput = styled.div`
-  width: 100%;
-  height: 20%;
+  //background-color: red;
   display: flex;
-  justify-content: center;
   align-items: center;
-  background-color: #e939e9;
+  flex-direction: column;
 `;
 
 export const Label = styled.label`
@@ -94,64 +90,26 @@ export const Label = styled.label`
   margin-right: 1rem;
 `;
 
-export const Input = styled.input`
-  width: 60%;
-  height: 50%;
-  border-radius: 10px;
-  color: #fff;
-  background-color: #514869;
-  border-style: none;
-  padding-left: 20px;
-
-  &:focus {
-    outline: none; // Retira centera borda ressaltada ao clicar
-  }
-`;
-
 export const DivInput2 = styled.div`
-  width: 100%;
-  height: 20%;
+  width: 90%;
+  height: 25%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  background-color: #e939e9;
-  gap: 2px;
+  //background-color: #e939e9;
 `;
 
-export const DivInternaLabel = styled.div`
-  width: 42%;
+export const DivInternaInput = styled.div`
+  width: 60%;
   height: 100%;
-  background-color: yellow;
+  //background-color: yellow;
   display: flex;
   justify-content: flex-end;
   align-items: center;
 `;
 
-export const DivInternaInput = styled.div`
-  width: 50%;
-  height: 100%;
-  background-color: yellow;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
 export const Input2 = styled.input`
-  width: 90%;
-  height: 50%;
-  border-radius: 10px;
-  color: #fff;
-  background-color: #514869;
-  border-style: none;
-  padding-left: 20px;
-
-  &:focus {
-    outline: none; // Retira a borda ressaltada ao clicar
-  }
-`;
-
-export const InputDataNascimento = styled.input`
-  width: 70%;
+  width: 67%;
   height: 50%;
   border-radius: 10px;
   color: #fff;
