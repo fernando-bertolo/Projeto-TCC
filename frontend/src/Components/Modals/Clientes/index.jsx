@@ -23,36 +23,38 @@ import {
 } from "./style";
 
 function ModalClientes(props) {
-  const [inputNome, setInputNome] = useState();
-  const [inputNacionalidade, setInputNacionalidade] = useState();
-  const [inputDataNascimento, setInputDataNascimento] = useState();
-  const [inputEstadoCivil, setInputEstadoCivil] = useState();
-  const [inputRG, setInputRG] = useState();
-  const [inputCPF, setInputCPF] = useState();
-  const [inputCelular, setInputCelular] = useState();
-  const [inputEmail, setInputEmail] = useState();
-  const [inputEndereco, setInputEndereco] = useState();
-  const [inputCEP, setInputCEP] = useState();
-  const [inputBairro, setInputBairro] = useState();
-  const [inputNumero, setInputNumero] = useState();
-  const [inputCidade, setInputCidade] = useState();
-  const [inputEstado, setInputEstado] = useState();
+  const [inputNome, setInputNome] = useState("");
+  const [inputNacionalidade, setInputNacionalidade] = useState("");
+  const [inputDataNascimento, setInputDataNascimento] = useState("");
+  const [inputEstadoCivil, setInputEstadoCivil] = useState("teste");
+  const [inputRG, setInputRG] = useState("");
+  const [inputCPF, setInputCPF] = useState("");
+  const [inputCelular, setInputCelular] = useState("");
+  const [inputEmail, setInputEmail] = useState("");
+  const [inputEndereco, setInputEndereco] = useState("");
+  const [inputCEP, setInputCEP] = useState("");
+  const [inputBairro, setInputBairro] = useState("");
+  const [inputNumero, setInputNumero] = useState("");
+  const [inputCidade, setInputCidade] = useState("");
+  const [inputEstado, setInputEstado] = useState("");
 
   const criacaoCliente = async (event) => {
     try {
       event.preventDefault();
 
-      if (!validaCPF(inputCPF)) {
-        toast.warn("CPF inválido", {
-          position: "bottom-right",
-          autoClose: 2500,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
+      if (props.modo === "criacao") {
+        if (!validaCPF(inputCPF)) {
+          toast.warn("CPF inválido", {
+            position: "bottom-right",
+            autoClose: 2500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
 
         if (!validator.isEmail(inputEmail)) {
           toast.warn("E-mail inválido", {
@@ -67,21 +69,40 @@ function ModalClientes(props) {
           });
         }
 
-        await axios.post("http://localhost:3010/criacao-clientes", {
-          nome: inputNome,
-          nacionalidade: inputNacionalidade,
-          dataNascimento: inputDataNascimento,
-          rg: inputRG,
-          cpf: inputCPF,
-          celular: inputCelular,
-          email: inputEmail,
-          endereco: inputEndereco,
-          cep: inputCEP,
-          bairro: inputBairro,
-          numero: inputNumero,
-          cidade: inputCidade,
-          estado: inputEstado,
-        });
+        if (inputEstadoCivil === "") {
+          toast.warn("Estado civil esta em branco!!", {
+            position: "bottom-right",
+            autoClose: 2500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
+
+        const response = await axios.post(
+          "http://localhost:3010/criacao-clientes",
+          {
+            nome: inputNome,
+            nacionalidade: inputNacionalidade,
+            dataNascimento: inputDataNascimento,
+            rg: inputRG,
+            estadoCivil: inputEstadoCivil,
+            cpf: inputCPF,
+            celular: inputCelular,
+            email: inputEmail,
+            endereco: inputEndereco,
+            cep: inputCEP,
+            bairro: inputBairro,
+            numero: inputNumero,
+            cidade: inputCidade,
+            estado: inputEstado,
+          }
+        );
+
+        console.log(response);
 
         // Mensagem de sucesso
         toast.success("Cliente cadastrado com sucesso!!", {
@@ -345,7 +366,10 @@ function ModalClientes(props) {
             >
               Cancelar
             </BotaoCancelar>
-            <BotaoAdicionar onClick={(event) => criacaoCliente(event)}>
+            <BotaoAdicionar
+              type="submit"
+              onClick={(event) => criacaoCliente(event)}
+            >
               Adicionar
             </BotaoAdicionar>
           </DivBotoes>

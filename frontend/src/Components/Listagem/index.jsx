@@ -187,6 +187,7 @@ function Listagem(props) {
           <ModalClientes
             setModalOpenClient={setModalOpenClient}
             titulo="Cadastro de clientes"
+            modo="criacao"
           />
         ) : (
           <></>
