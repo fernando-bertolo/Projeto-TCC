@@ -26,9 +26,10 @@ import {
 } from "./style.jsx";
 
 function Listagem(props) {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalEdicaoOpen, setModalEdicaoOpen] = useState(false);
+  const [modalOpenUser, setModalOpenUser] = useState(false);
+  const [modalEditUser, setModalEditUser] = useState(false);
   const [modalOpenClient, setModalOpenClient] = useState(false);
+  const [modalEditClient, setModalEditClient] = useState(false);
   const [dadosUsuarioSelecionado, setDadosUsuarioSelecionado] = useState("");
   const [dataCustomerSelect, setDataCustomerSelect] = useState("");
 
@@ -49,7 +50,7 @@ function Listagem(props) {
                     <IconeAdicionar
                       onClick={() =>
                         props.rota === "usuarios" ? (
-                          setModalOpen(true)
+                          setModalOpenUser(true)
                         ) : props.rota === "clientes" ? (
                           setModalOpenClient(true)
                         ) : (
@@ -59,7 +60,13 @@ function Listagem(props) {
                     />
                     <IconeEditar
                       onClick={() => {
-                        setModalEdicaoOpen(true);
+                        props.rota === "usuarios" ? (
+                          setModalEditUser(true)
+                        ) : props.rota === "clientes" ? (
+                          setModalEditClient(true)
+                        ) : (
+                          <></>
+                        );
                       }}
                     />
                     <IconeExcluir
@@ -160,9 +167,9 @@ function Listagem(props) {
             </Tabela>
           </SectionUsuarios>
         </SectionUsuariosExternos>
-        {modalOpen && props.rota === "usuarios" ? (
+        {modalOpenUser && props.rota === "usuarios" ? (
           <ModalUsuario
-            setModalOpen={setModalOpen}
+            setModalOpenUser={setModalOpenUser}
             titulo="Cadastro de Usuário"
             descricaoBotao="ADICIONAR"
             modo="criacao"
@@ -171,9 +178,9 @@ function Listagem(props) {
           <></>
         )}
 
-        {modalEdicaoOpen && props.rota === "usuarios" ? (
+        {modalEditUser && props.rota === "usuarios" ? (
           <ModalUsuario
-            setModalOpen={setModalEdicaoOpen}
+            setModalEditUser={setModalEditUser}
             titulo="Edição de Usuários"
             descricaoBotao="ALTERAR"
             dadosUsuarios={dadosUsuarioSelecionado}
@@ -188,6 +195,12 @@ function Listagem(props) {
             setModalOpenClient={setModalOpenClient}
             titulo="Cadastro de clientes"
             modo="criacao"
+          />
+        ) : modalEditClient && props.rota === "clientes" ? (
+          <ModalClientes
+            setModalEditClient={setModalEditClient}
+            titulo="Edição de Clientes"
+            modo="edicao"
           />
         ) : (
           <></>

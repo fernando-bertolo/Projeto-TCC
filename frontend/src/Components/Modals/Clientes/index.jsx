@@ -4,6 +4,7 @@ import validator from "validator";
 import { ToastContainer, toast } from "react-toastify";
 import validaCPF from "../../../Services/CPF/validaCPF";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import {
   DivTitulo,
@@ -26,7 +27,7 @@ function ModalClientes(props) {
   const [inputNome, setInputNome] = useState("");
   const [inputNacionalidade, setInputNacionalidade] = useState("");
   const [inputDataNascimento, setInputDataNascimento] = useState("");
-  const [inputEstadoCivil, setInputEstadoCivil] = useState("teste");
+  const [inputEstadoCivil, setInputEstadoCivil] = useState("");
   const [inputRG, setInputRG] = useState("");
   const [inputCPF, setInputCPF] = useState("");
   const [inputCelular, setInputCelular] = useState("");
@@ -37,6 +38,8 @@ function ModalClientes(props) {
   const [inputNumero, setInputNumero] = useState("");
   const [inputCidade, setInputCidade] = useState("");
   const [inputEstado, setInputEstado] = useState("");
+
+  const navigate = useNavigate();
 
   const criacaoCliente = async (event) => {
     try {
@@ -54,9 +57,7 @@ function ModalClientes(props) {
             progress: undefined,
             theme: "light",
           });
-        }
-
-        if (!validator.isEmail(inputEmail)) {
+        } else if (!validator.isEmail(inputEmail)) {
           toast.warn("E-mail inválido", {
             position: "bottom-right",
             autoClose: 2500,
@@ -67,9 +68,7 @@ function ModalClientes(props) {
             progress: undefined,
             theme: "light",
           });
-        }
-
-        if (inputEstadoCivil === "") {
+        } else if (inputEstadoCivil === "") {
           toast.warn("Estado civil esta em branco!!", {
             position: "bottom-right",
             autoClose: 2500,
@@ -80,11 +79,8 @@ function ModalClientes(props) {
             progress: undefined,
             theme: "light",
           });
-        }
-
-        const response = await axios.post(
-          "http://localhost:3010/criacao-clientes",
-          {
+        } else {
+          await axios.post("http://localhost:3010/criacao-clientes", {
             nome: inputNome,
             nacionalidade: inputNacionalidade,
             dataNascimento: inputDataNascimento,
@@ -99,13 +95,36 @@ function ModalClientes(props) {
             numero: inputNumero,
             cidade: inputCidade,
             estado: inputEstado,
-          }
-        );
+          });
 
-        console.log(response);
-
-        // Mensagem de sucesso
-        toast.success("Cliente cadastrado com sucesso!!", {
+          // Mensagem de sucesso
+          toast.success("Cliente cadastrado com sucesso!!", {
+            position: "bottom-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          navigate("/clientes");
+        }
+      }
+    } catch (error) {
+      if (error.response === 400) {
+        toast.error("Não foi possível cadastrar o cliente!!", {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      } else {
+        toast.warn("CPF já cadastrado no sistema", {
           position: "bottom-right",
           autoClose: 2000,
           hideProgressBar: false,
@@ -116,8 +135,6 @@ function ModalClientes(props) {
           theme: "light",
         });
       }
-    } catch (error) {
-      console.log(error);
     }
   };
 
@@ -361,7 +378,13 @@ function ModalClientes(props) {
           <DivBotoes>
             <BotaoCancelar
               onClick={() => {
-                props.setModalOpenClient(false);
+                props.modo === "criacao" ? (
+                  props.setModalEditClient(false)
+                ) : props.modo === "edicao" ? (
+                  props.setModalEditClient(false)
+                ) : (
+                  <></>
+                );
               }}
             >
               Cancelar
