@@ -19,19 +19,17 @@ import {
   DivBotoes,
   BotaoCancelar,
   BotaoAdicionar,
-} from "./style-modalUsuario.jsx";
+} from "./style";
 
 function ModalUser(props) {
-  const { setModalOpen, modo, dadosUsuarios } = props; // Desestruturando o props
-
   const [inputNome, setInputNome] = useState(
-    modo === "edicao" ? dadosUsuarios.nome : ""
+    props.modo === "edicao" ? props.dadosUsuarios.nome : ""
   );
   const [inputEmail, setInputEmail] = useState(
-    modo === "edicao" ? dadosUsuarios.email : ""
+    props.modo === "edicao" ? props.dadosUsuarios.email : ""
   );
   const [inputUsuario, setInputUsuario] = useState(
-    modo === "edicao" ? dadosUsuarios.usuario : ""
+    props.modo === "edicao" ? props.dadosUsuarios.usuario : ""
   );
   const [inputSenha, setInputSenha] = useState();
   const [inputConfirmaSenha, setInputConfirmaSenha] = useState();
@@ -103,10 +101,9 @@ function ModalUser(props) {
           theme: "light",
         });
       } else {
-        console.log(modo);
-        if (modo === "edicao") {
+        if (props.modo === "edicao") {
           await axios.put(
-            "http://localhost:3010/alterar-usuario/" + dadosUsuarios.id,
+            "http://localhost:3010/alterar-usuario/" + props.dadosUsuarios.id,
             {
               nome: inputNome,
               email: inputEmail,
@@ -152,7 +149,7 @@ function ModalUser(props) {
           await delay(4); // aguarda 4 segundos
         }
 
-        setModalOpen(false); // fecha o modal
+        props.setModalOpenUser(false); // fecha o modal
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {
@@ -277,7 +274,13 @@ function ModalUser(props) {
           <DivBotoes>
             <BotaoCancelar
               onClick={() => {
-                setModalOpen(false);
+                props.modo === "criacao" ? (
+                  props.setModalOpenUser(false)
+                ) : props.modo === "edicao" ? (
+                  props.setModalEditUser(false)
+                ) : (
+                  <></>
+                );
               }}
             >
               CANCELAR

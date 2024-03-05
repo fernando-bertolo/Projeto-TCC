@@ -1,4 +1,4 @@
-import ModalUsuario from "../Modals/Usuarios/modalUsuario";
+import ModalUsuario from "../Modals/Usuarios/index";
 import ModalClientes from "../Modals/Clientes/index";
 import { useState } from "react";
 
@@ -194,12 +194,14 @@ function Listagem(props) {
           <ModalClientes
             setModalOpenClient={setModalOpenClient}
             titulo="Cadastro de clientes"
+            dadosClientes={dataCustomerSelect}
             modo="criacao"
           />
         ) : modalEditClient && props.rota === "clientes" ? (
           <ModalClientes
             setModalEditClient={setModalEditClient}
             titulo="Edição de Clientes"
+            dadosClientes={dataCustomerSelect}
             modo="edicao"
           />
         ) : (

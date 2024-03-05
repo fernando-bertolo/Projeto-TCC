@@ -24,20 +24,48 @@ import {
 } from "./style";
 
 function ModalClientes(props) {
-  const [inputNome, setInputNome] = useState("");
-  const [inputNacionalidade, setInputNacionalidade] = useState("");
-  const [inputDataNascimento, setInputDataNascimento] = useState("");
-  const [inputEstadoCivil, setInputEstadoCivil] = useState("");
-  const [inputRG, setInputRG] = useState("");
-  const [inputCPF, setInputCPF] = useState("");
-  const [inputCelular, setInputCelular] = useState("");
-  const [inputEmail, setInputEmail] = useState("");
-  const [inputEndereco, setInputEndereco] = useState("");
-  const [inputCEP, setInputCEP] = useState("");
-  const [inputBairro, setInputBairro] = useState("");
-  const [inputNumero, setInputNumero] = useState("");
-  const [inputCidade, setInputCidade] = useState("");
-  const [inputEstado, setInputEstado] = useState("");
+  const [inputNome, setInputNome] = useState(
+    props.modo === "edicao" ? props.dadosClientes.nome : ""
+  );
+  const [inputNacionalidade, setInputNacionalidade] = useState(
+    props.modo === "edicao" ? props.dadosClientes.nacionalidade : ""
+  );
+  const [inputDataNascimento, setInputDataNascimento] = useState(
+    props.modo === "edicao" ? props.dadosClientes.dataNascimento : ""
+  );
+  const [inputEstadoCivil, setInputEstadoCivil] = useState(
+    props.modo === "edicao" ? props.dadosClientes.estadoCivil : ""
+  );
+  const [inputRG, setInputRG] = useState(
+    props.modo === "edicao" ? props.dadosClientes.rg : ""
+  );
+  const [inputCPF, setInputCPF] = useState(
+    props.modo === "edicao" ? props.dadosClientes.cpf : ""
+  );
+  const [inputCelular, setInputCelular] = useState(
+    props.modo === "edicao" ? props.dadosClientes.celular : ""
+  );
+  const [inputEmail, setInputEmail] = useState(
+    props.modo === "edicao" ? props.dadosClientes.email : ""
+  );
+  const [inputEndereco, setInputEndereco] = useState(
+    props.modo === "edicao" ? props.dadosClientes.endereco : ""
+  );
+  const [inputCEP, setInputCEP] = useState(
+    props.modo === "edicao" ? props.dadosClientes.cep : ""
+  );
+  const [inputBairro, setInputBairro] = useState(
+    props.modo === "edicao" ? props.dadosClientes.bairro : ""
+  );
+  const [inputNumero, setInputNumero] = useState(
+    props.modo === "edicao" ? props.dadosClientes.numero : ""
+  );
+  const [inputCidade, setInputCidade] = useState(
+    props.modo === "edicao" ? props.dadosClientes.cidade : ""
+  );
+  const [inputEstado, setInputEstado] = useState(
+    props.modo === "edicao" ? props.dadosClientes.estado : ""
+  );
 
   const navigate = useNavigate();
 
@@ -59,17 +87,6 @@ function ModalClientes(props) {
           });
         } else if (!validator.isEmail(inputEmail)) {
           toast.warn("E-mail inválido", {
-            position: "bottom-right",
-            autoClose: 2500,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-        } else if (inputEstadoCivil === "") {
-          toast.warn("Estado civil esta em branco!!", {
             position: "bottom-right",
             autoClose: 2500,
             hideProgressBar: false,
@@ -109,6 +126,49 @@ function ModalClientes(props) {
             theme: "light",
           });
           navigate("/clientes");
+        }
+      } else if (props.modo === "edicao") {
+        if (!validator.isEmail(inputEmail)) {
+          toast.warn("E-mail inválido", {
+            position: "bottom-right",
+            autoClose: 2500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        } else {
+          await axios.put(
+            `http://localhost:3010/alterar-cliente/${props.dadosClientes.id}`,
+            {
+              nome: inputNome,
+              nacionalidade: inputNacionalidade,
+              dataNascimento: inputDataNascimento,
+              rg: inputRG,
+              estadoCivil: inputEstadoCivil,
+              celular: inputCelular,
+              email: inputEmail,
+              endereco: inputEndereco,
+              cep: inputCEP,
+              bairro: inputBairro,
+              numero: inputNumero,
+              cidade: inputCidade,
+              estado: inputEstado,
+            }
+          );
+
+          toast.sucess("Cliente alterado com sucesso", {
+            position: "bottom-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         }
       }
     } catch (error) {
@@ -241,6 +301,7 @@ function ModalClientes(props) {
                     onChange={(event) => {
                       setInputCPF(event.target.value);
                     }}
+                    readOnly={props.modo === "edicao"}
                   />
                 </DivInternaInput>
               </DivInput2>
@@ -379,7 +440,7 @@ function ModalClientes(props) {
             <BotaoCancelar
               onClick={() => {
                 props.modo === "criacao" ? (
-                  props.setModalEditClient(false)
+                  props.setModalOpenClient(false)
                 ) : props.modo === "edicao" ? (
                   props.setModalEditClient(false)
                 ) : (
