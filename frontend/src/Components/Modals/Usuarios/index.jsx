@@ -124,7 +124,9 @@ function ModalUser(props) {
             progress: undefined,
             theme: "light",
           });
-          await delay(4); // aguarda 4 segundos
+          await delay(3.5); // aguarda 4 segundos
+          props.atualizaUsuarios();
+          props.setModalEditUser(false); // fecha o modal
         } else {
           // Enviando os dados para a rota /criacao-usuario
           await axios.post("http://localhost:3010/criacao-usuario", {
@@ -146,10 +148,10 @@ function ModalUser(props) {
             progress: undefined,
             theme: "light",
           });
-          await delay(4); // aguarda 4 segundos
+          await delay(3.5); // aguarda 4 segundos
+          props.atualizaUsuarios();
+          props.setModalOpenUser(false); // fecha o modal
         }
-
-        props.setModalOpenUser(false); // fecha o modal
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {

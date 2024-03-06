@@ -4,7 +4,6 @@ import validator from "validator";
 import { ToastContainer, toast } from "react-toastify";
 import validaCPF from "../../../Services/CPF/validaCPF";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 import {
   DivTitulo,
@@ -67,7 +66,12 @@ function ModalClientes(props) {
     props.modo === "edicao" ? props.dadosClientes.estado : ""
   );
 
-  const navigate = useNavigate();
+  // Função de delay
+  function delay(n) {
+    return new Promise(function (resolve) {
+      setTimeout(resolve, n * 1000);
+    });
+  }
 
   const criacaoCliente = async (event) => {
     try {
@@ -125,7 +129,9 @@ function ModalClientes(props) {
             progress: undefined,
             theme: "light",
           });
-          navigate("/clientes");
+          await delay(3.5); // espera 4 segundos
+          props.atualizaClientes();
+          props.setModalOpenClient(false); //Fecha o modal
         }
       } else if (props.modo === "edicao") {
         if (!validator.isEmail(inputEmail)) {
@@ -159,7 +165,7 @@ function ModalClientes(props) {
             }
           );
 
-          toast.sucess("Cliente alterado com sucesso", {
+          toast.success("Cliente alterado com sucesso", {
             position: "bottom-right",
             autoClose: 2000,
             hideProgressBar: false,
@@ -169,6 +175,9 @@ function ModalClientes(props) {
             progress: undefined,
             theme: "light",
           });
+          props.atualizaClientes();
+          await delay(3.5); // espera 4 segundos
+          props.setModalEditClient(false); //Fecha o modal
         }
       }
     } catch (error) {
@@ -454,7 +463,7 @@ function ModalClientes(props) {
               type="submit"
               onClick={(event) => criacaoCliente(event)}
             >
-              Adicionar
+              {props.botaoSubmit}
             </BotaoAdicionar>
           </DivBotoes>
         </SectionMainContent>

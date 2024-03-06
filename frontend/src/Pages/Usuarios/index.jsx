@@ -9,10 +9,14 @@ function Usuarios() {
   const [data, setData] = useState([]);
   const [mensagemError, setMensagemError] = useState();
 
-  useEffect(() => {
+  const buscaUsuarios = () => {
     axios.get("http://localhost:3010/usuarios").then((response) => {
       setData(response.data);
     });
+  };
+
+  useEffect(() => {
+    buscaUsuarios();
   }, []);
 
   const excluirUsuario = async (usuario) => {
@@ -60,6 +64,7 @@ function Usuarios() {
         <Listagem
           title="Listagem de Usuários"
           rota="usuarios"
+          atualizaUsuarios={buscaUsuarios}
           data={data}
           primeiraColuna="ID"
           segundaColuna="Nome"

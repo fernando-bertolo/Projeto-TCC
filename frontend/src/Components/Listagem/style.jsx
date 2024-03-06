@@ -124,7 +124,7 @@ export const THead = styled.thead`
 `;
 export const Th = styled.th`
   padding: 1.1rem;
-  border-right: 1px solid white;
+  //border-right: 1px solid white;
   border-bottom: 1px solid white;
   font-size: 1vw;
 `;

@@ -9,10 +9,14 @@ function Clientes() {
   const [dataCustomer, setDataCustomer] = useState();
   const [mensagemError, setMensagemError] = useState();
 
-  useEffect(() => {
+  const buscaClientes = () => {
     axios.get("http://localhost:3010/clientes").then((response) => {
       setDataCustomer(response.data);
     });
+  };
+
+  useEffect(() => {
+    buscaClientes();
   }, []);
 
   const excluirCliente = async (cliente) => {
@@ -62,6 +66,7 @@ function Clientes() {
           excluirCliente={excluirCliente}
           title="Listagem de Clientes"
           rota="clientes"
+          atualizaClientes={buscaClientes}
           nome="Nome"
           nacionalidade="Nacionalidade"
           estadoCivil="Estado Civil"

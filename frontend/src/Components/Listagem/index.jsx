@@ -173,6 +173,7 @@ function Listagem(props) {
             titulo="Cadastro de Usuário"
             descricaoBotao="ADICIONAR"
             modo="criacao"
+            atualizaUsuarios={props.atualizaUsuarios}
           />
         ) : (
           <></>
@@ -185,6 +186,7 @@ function Listagem(props) {
             descricaoBotao="ALTERAR"
             dadosUsuarios={dadosUsuarioSelecionado}
             modo="edicao"
+            atualizaUsuarios={props.atualizaUsuarios}
           />
         ) : (
           <></>
@@ -194,15 +196,19 @@ function Listagem(props) {
           <ModalClientes
             setModalOpenClient={setModalOpenClient}
             titulo="Cadastro de clientes"
+            botaoSubmit="Alterar"
             dadosClientes={dataCustomerSelect}
             modo="criacao"
+            atualizaClientes={props.atualizaClientes}
           />
         ) : modalEditClient && props.rota === "clientes" ? (
           <ModalClientes
             setModalEditClient={setModalEditClient}
             titulo="Edição de Clientes"
+            botaoSubmit="Alterar"
             dadosClientes={dataCustomerSelect}
             modo="edicao"
+            atualizaClientes={props.atualizaClientes}
           />
         ) : (
           <></>
