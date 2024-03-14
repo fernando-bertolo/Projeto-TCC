@@ -23,6 +23,8 @@ const ResetarSenha = require("../Services/ResetarSenha/resetarSenha.js");
 
 // Importando Marcas
 const criacaoMarcas = require("../Rotas/Veiculos/Marcas/criacaoMarcas.js");
+const visualizarMarcas = require("../Rotas/Veiculos/Marcas/visualizarMarcas.js");
+const alteracaoMarcas = require("../Rotas/Veiculos/Marcas/alteracaoMarcas.js");
 
 //Rota Usuarios
 rotas.use(criacaoUsuario);
@@ -43,5 +45,7 @@ rotas.use(exclusaoClientes);
 
 //Rota de Marcas
 rotas.use(criacaoMarcas);
+rotas.use(visualizarMarcas);
+rotas.use(alteracaoMarcas);
 
 module.exports = rotas;
