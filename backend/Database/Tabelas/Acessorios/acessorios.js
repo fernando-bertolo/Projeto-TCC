@@ -1,16 +1,15 @@
 const Sequelize = require("sequelize");
 const database = require("../../database");
 
-const Marcas = database.define("Marcas", {
-  idMarca: {
+const Acessorios = database.define("Acessorios", {
+  idAcessorio: {
     type: Sequelize.UUID,
     defaultValue: Sequelize.UUIDV4,
     primaryKey: true,
   },
-  nomeMarca: {
+  nomeAcessorio: {
     type: Sequelize.STRING,
-    allowNull: false,
   },
 });
 
-module.exports = Marcas;
+module.exports = Acessorios;
