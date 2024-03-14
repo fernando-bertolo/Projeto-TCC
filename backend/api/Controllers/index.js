@@ -25,6 +25,7 @@ const ResetarSenha = require("../Services/ResetarSenha/resetarSenha.js");
 const criacaoMarcas = require("../Rotas/Veiculos/Marcas/criacaoMarcas.js");
 const visualizarMarcas = require("../Rotas/Veiculos/Marcas/visualizarMarcas.js");
 const alteracaoMarcas = require("../Rotas/Veiculos/Marcas/alteracaoMarcas.js");
+const deletarMarcas = require("../Rotas/Veiculos/Marcas/exclusaoMarcas.js");
 
 //Rota Usuarios
 rotas.use(criacaoUsuario);
@@ -47,5 +48,6 @@ rotas.use(exclusaoClientes);
 rotas.use(criacaoMarcas);
 rotas.use(visualizarMarcas);
 rotas.use(alteracaoMarcas);
+rotas.use(deletarMarcas);
 
 module.exports = rotas;
