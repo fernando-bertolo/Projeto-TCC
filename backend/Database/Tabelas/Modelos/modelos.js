@@ -16,6 +16,7 @@ const Modelos = database.define("Modelos", {
   },
   nomeModelo: {
     type: Sequelize.STRING,
+    allowNull: false,
   },
 });
 

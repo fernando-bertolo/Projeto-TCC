@@ -27,6 +27,9 @@ const visualizarMarcas = require("../Rotas/Veiculos/Marcas/visualizarMarcas.js")
 const alteracaoMarcas = require("../Rotas/Veiculos/Marcas/alteracaoMarcas.js");
 const deletarMarcas = require("../Rotas/Veiculos/Marcas/exclusaoMarcas.js");
 
+// Importando Modelos
+const criacaoModelo = require("../Rotas/Veiculos/Modelos/criacaoModelo.js");
+
 //Rota Usuarios
 rotas.use(criacaoUsuario);
 rotas.use(autenticacao);
@@ -49,5 +52,8 @@ rotas.use(criacaoMarcas);
 rotas.use(visualizarMarcas);
 rotas.use(alteracaoMarcas);
 rotas.use(deletarMarcas);
+
+//Rota de Modelos
+rotas.use(criacaoModelo);
 
 module.exports = rotas;
