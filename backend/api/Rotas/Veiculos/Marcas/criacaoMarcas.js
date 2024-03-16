@@ -22,7 +22,9 @@ criacaoMarcas.post("/criacao-marcas", async (request, response) => {
       nomeMarca: nomeMarca,
     });
 
-    return response.status(200).json({ message: "Marca cadastrada" });
+    return response
+      .status(200)
+      .json({ message: "Marca cadastrada com sucesso!!" });
   } catch (error) {
     console.log(error);
   }

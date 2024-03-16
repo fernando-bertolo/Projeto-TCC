@@ -29,6 +29,15 @@ const deletarMarcas = require("../Rotas/Veiculos/Marcas/exclusaoMarcas.js");
 
 // Importando Modelos
 const criacaoModelo = require("../Rotas/Veiculos/Modelos/criacaoModelo.js");
+const visualizarModelos = require("../Rotas/Veiculos/Modelos/visualizarModelos.js");
+const alteracaoModelos = require("../Rotas/Veiculos/Modelos/alteracaoModelo.js");
+const deletarModelos = require("../Rotas/Veiculos/Modelos/exclusaoModelos.js");
+
+// Importanto Versões
+const criacaoVersao = require("../Rotas/Veiculos/Versoes/criacaoVersao.js");
+const visualizarVersao = require("../Rotas/Veiculos/Versoes/visualizarVersao.js");
+const alteracaoVersao = require("../Rotas/Veiculos/Versoes/alteracaoVersao.js");
+const deletarVersao = require("../Rotas/Veiculos/Versoes/exclusaoVersao.js");
 
 //Rota Usuarios
 rotas.use(criacaoUsuario);
@@ -55,5 +64,14 @@ rotas.use(deletarMarcas);
 
 //Rota de Modelos
 rotas.use(criacaoModelo);
+rotas.use(visualizarModelos);
+rotas.use(alteracaoModelos);
+rotas.use(deletarModelos);
+
+//Rota de Versões
+rotas.use(criacaoVersao);
+rotas.use(visualizarVersao);
+rotas.use(alteracaoVersao);
+rotas.use(deletarVersao);
 
 module.exports = rotas;
