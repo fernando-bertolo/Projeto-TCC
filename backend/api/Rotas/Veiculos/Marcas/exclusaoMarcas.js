@@ -8,28 +8,23 @@ deletarMarcas.delete("/deletar-marca/:id", async (request, response) => {
   const { id } = request.params;
 
   try {
-    const modelos = await tabelaModelos.findAll({
+    const marcaModelo = await tabelaModelos.findOne({
       where: {
-        idMarca: id,
+        idMarca: id, // Procura marca na tabela modelo
       },
     });
 
-    if (modelos.length > 0) {
-      for (const modelo of modelos) {
-        console.log(modelo.id);
-        const versoes = await tabelaVersoes.findAll({
-          where: {
-            idModelo: modelo.id,
-          },
-        });
+    const marcaVersao = await tabelaVersoes.findOne({
+      where: {
+        idMarca: id, // Procura marca na tabela versão
+      },
+    });
 
-        if (versoes.length > 0) {
-          return response.status(400).json({
-            Error:
-              "Não é possível excluir uma marca que possui modelos e versões associados!!",
-          });
-        }
-      }
+    if (marcaModelo || marcaVersao) {
+      return response.status(400).json({
+        Error:
+          "Não é possível excluir uma marca que possui modelo ou versão associados!!",
+      });
     }
 
     const marca = await tabelaMarcas.findOne({
@@ -37,6 +32,7 @@ deletarMarcas.delete("/deletar-marca/:id", async (request, response) => {
         idMarca: id,
       },
     });
+
     if (!marca) {
       return response.status(400).json({ Error: "ID inválido!!" });
     }

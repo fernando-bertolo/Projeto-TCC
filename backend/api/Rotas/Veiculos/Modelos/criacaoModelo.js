@@ -1,6 +1,7 @@
 const express = require("express");
 const criacaoModelo = express();
 const tabelaModelos = require("../../../../Database/Tabelas/Modelos/modelos.js");
+const tabelaMarcas = require("../../../../Database/Tabelas/Marcas/marcas.js");
 
 criacaoModelo.post("/criacao-modelo", async (request, response) => {
   const { idMarca, nomeModelo } = request.body;
@@ -10,6 +11,16 @@ criacaoModelo.post("/criacao-modelo", async (request, response) => {
         nomeModelo: nomeModelo,
       },
     });
+
+    const marcaID = await tabelaMarcas.findOne({
+      where: {
+        idMarca: idMarca,
+      },
+    });
+
+    if (!marcaID) {
+      return response.status(400).json({ Error: "ID da marca inválido!!" });
+    }
 
     if (modelo) {
       return response
