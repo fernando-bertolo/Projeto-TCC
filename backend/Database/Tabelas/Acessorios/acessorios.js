@@ -9,6 +9,7 @@ const Acessorios = database.define("Acessorios", {
   },
   nomeAcessorio: {
     type: Sequelize.STRING,
+    allowNull: false,
   },
 });
 

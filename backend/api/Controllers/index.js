@@ -33,11 +33,20 @@ const visualizarModelos = require("../Rotas/Veiculos/Modelos/visualizarModelos.j
 const alteracaoModelos = require("../Rotas/Veiculos/Modelos/alteracaoModelo.js");
 const deletarModelos = require("../Rotas/Veiculos/Modelos/exclusaoModelos.js");
 
-// Importanto Versões
+// Importando Versões
 const criacaoVersao = require("../Rotas/Veiculos/Versoes/criacaoVersao.js");
 const visualizarVersao = require("../Rotas/Veiculos/Versoes/visualizarVersao.js");
 const alteracaoVersao = require("../Rotas/Veiculos/Versoes/alteracaoVersao.js");
 const deletarVersao = require("../Rotas/Veiculos/Versoes/exclusaoVersao.js");
+
+// Importando Acessorios
+const criacaoAcessorios = require("../Rotas/Veiculos/Acessorios/criacaoAcessorios.js");
+
+// Importando AcessoriosVeiculos
+const acessorioVeiculo = require("../Rotas/Veiculos/Acessorios_Veiculos/acessorios_veiculos.js");
+
+// Importanto Veiculos
+const criacaoVeiculo = require("../Rotas/Veiculos/criacaoVeiculo.js");
 
 //Rota Usuarios
 rotas.use(criacaoUsuario);
@@ -73,5 +82,14 @@ rotas.use(criacaoVersao);
 rotas.use(visualizarVersao);
 rotas.use(alteracaoVersao);
 rotas.use(deletarVersao);
+
+// Rota de Acessorios
+rotas.use(criacaoAcessorios);
+
+// Rota de AcessoriosVeiculos
+rotas.use(acessorioVeiculo);
+
+// Rota Veiculos
+rotas.use(criacaoVeiculo);
 
 module.exports = rotas;
