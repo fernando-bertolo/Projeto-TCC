@@ -41,10 +41,10 @@ const Veiculos = database.define("Veiculos", {
     type: Sequelize.STRING,
   },
   quilometragem: {
-    type: Sequelize.DOUBLE,
+    type: Sequelize.DECIMAL(10, 3), //  Permite até 10 dígitos no total, com 3 dígitos após o ponto decimal
   },
   valor: {
-    type: Sequelize.DOUBLE,
+    type: Sequelize.DECIMAL(10, 3), //  Permite até 10 dígitos no total, com 3 dígitos após o ponto decimal
   },
   placa: {
     type: Sequelize.STRING,
