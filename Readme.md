@@ -8,24 +8,25 @@ O projeto é feito com as seguintes tecnologias:
 Para realizar a instalação dessas dependências, basta rodar o seguinte comando:
 
 ```
-npm install express sequelize mysql2 bcrypt jsonwebtoken nodemon cors
+npm install express sequelize mysql2 bcrypt jsonwebtoken nodemon cors nodemailer
 ```
 
-> No Frontend é utilizado o <strong>ReactJS</strong> com as seguintes dependencias abaixo:
+> No Frontend é utilizado o <strong>ReactJS</strong>, <strong>styled components</strong> aplicando CSS-in-JS, <strong>axios</strong> para realizar a conexão com o backend, <strong>react-icons<strong> para os ícones, <strong>react-router-dom</strong> para a criação de rotas, <strong>react-toastify</strong> para as notificações de ações dos usuários, <strong>validator</strong> para realizar a validação de e-mail.
+
+Para realizar a instalação dessas dependências, basta rodar o seguinte comando:
 
 ```
-npm install styled-components axios react-icons react-router-dom
+npm install styled-components axios react-icons react-router-dom react-toastify validator
 ```
 
 > Esta sendo utilizado o docker para rodar o Banco de Dados MYSQL
 
 Pode ser iniciado pelos seguintes comandos:
 
-
 Para baixar a imagem
 
 ```
-docker pull mysql 
+docker pull mysql
 ```
 
 Para iniciar o container

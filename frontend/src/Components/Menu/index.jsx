@@ -1,82 +1,109 @@
-import { 
-    NavMenu,
-    DivLogo,
-    Logo,
-    SectionGeral,
-    DivTextoGeral,
-    TituloDivisao,
-    DivOpcaoGeral,
-    LinkNavegacao,
-    SectionControle,
-    DivTextoControle,
-    DivOpcaoControle
+import {
+  NavMenu,
+  DivLogo,
+  Logo,
+  SectionGeral,
+  DivTextoGeral,
+  TituloDivisao,
+  DivOpcaoGeral,
+  LinkNavegacao,
+  SectionControle,
+  DivTextoControle,
+  DivOpcaoControle,
+  DivUsuario,
+  DivConteudoUsuario,
+  TextoUsuario,
+  Sair,
 } from "./style.jsx";
 
-import LogoImagem from "../Menu/Imagens/Logo.jpeg";
+import LogoImagem from "../../assets/Imagens/Logo.jpeg";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-function Menu(){
-    return(
-        <>
-        <NavMenu>
-            <DivLogo>
-                <Logo src={LogoImagem}/>
-            </DivLogo>
-            <SectionGeral>
-                <DivTextoGeral>
-                    <TituloDivisao>Geral</TituloDivisao>
-                </DivTextoGeral>
-                <LinkNavegacao to={"/dashboard"}>
-                    <DivOpcaoGeral>
-                        Dashboard
-                    </DivOpcaoGeral>
-                </LinkNavegacao>
-        
-                <LinkNavegacao to={"#"}>
-                    <DivOpcaoGeral>
-                        Estoque
-                    </DivOpcaoGeral>
-                </LinkNavegacao>
-            </SectionGeral>
+const Menu = () => {
+  const [data, setData] = useState();
 
-            <SectionControle>
-                <DivTextoControle>
-                    <TituloDivisao>Controle</TituloDivisao>
-                </DivTextoControle>
+  useEffect(() => {
+    axios
+      .get("http://localhost:3010/", {
+        headers: {
+          Authorization: localStorage.getItem("@TokenUsuario"),
+        },
+      })
+      .then((response) => {
+        if (localStorage.getItem("@TokenUsuario")) {
+          setData(response.data.usuario);
+        } else {
+          setData("Error");
+        }
+      });
+  }, []);
 
-                <LinkNavegacao to={"#"}>
-                    <DivOpcaoControle>
-                        Clientes
-                    </DivOpcaoControle>
-                </LinkNavegacao>
+  function removeToken() {
+    localStorage.removeItem("@TokenUsuario");
+  }
 
-                <LinkNavegacao to={"#"}>
-                    <DivOpcaoControle>
-                        Cadastros
-                    </DivOpcaoControle>
-                </LinkNavegacao>
+  return (
+    <>
+      <NavMenu>
+        <DivLogo>
+          <Logo src={LogoImagem} />
+        </DivLogo>
+        <SectionGeral>
+          <DivTextoGeral>
+            <TituloDivisao>Geral</TituloDivisao>
+          </DivTextoGeral>
+          <LinkNavegacao to={"/home"}>
+            <DivOpcaoGeral>Home</DivOpcaoGeral>
+          </LinkNavegacao>
 
-                <LinkNavegacao to={"#"}>
-                    <DivOpcaoControle>
-                        Relatorios
-                    </DivOpcaoControle>
-                </LinkNavegacao>
+          <LinkNavegacao to={"/estoque"}>
+            <DivOpcaoGeral>Estoque</DivOpcaoGeral>
+          </LinkNavegacao>
+        </SectionGeral>
 
-                <LinkNavegacao to={"#"}>
-                    <DivOpcaoControle>
-                        Funcionarios
-                    </DivOpcaoControle>
-                </LinkNavegacao>
+        <SectionControle>
+          <DivTextoControle>
+            <TituloDivisao>Controle</TituloDivisao>
+          </DivTextoControle>
 
-                <LinkNavegacao to={"#"}>
-                    <DivOpcaoControle>
-                        Histórico
-                    </DivOpcaoControle>
-                </LinkNavegacao>
-            </SectionControle>
+          <LinkNavegacao to={"/clientes"}>
+            <DivOpcaoControle>Clientes</DivOpcaoControle>
+          </LinkNavegacao>
 
-        </NavMenu>
-        </>
-    );
-}
+          <LinkNavegacao to={"/cadastros"}>
+            <DivOpcaoControle>Cadastros</DivOpcaoControle>
+          </LinkNavegacao>
+
+          <LinkNavegacao to={"/relatorios"}>
+            <DivOpcaoControle>Relatórios</DivOpcaoControle>
+          </LinkNavegacao>
+
+          <LinkNavegacao to={"/usuarios"}>
+            <DivOpcaoControle>Usuários</DivOpcaoControle>
+          </LinkNavegacao>
+
+          <LinkNavegacao to={"/historico"}>
+            <DivOpcaoControle>Histórico</DivOpcaoControle>
+          </LinkNavegacao>
+        </SectionControle>
+
+        <DivUsuario>
+          <DivConteudoUsuario>
+            <TextoUsuario>{data}</TextoUsuario>
+          </DivConteudoUsuario>
+          <DivConteudoUsuario>
+            <TextoUsuario>Admin</TextoUsuario>
+          </DivConteudoUsuario>
+          <DivConteudoUsuario>
+            <Sair to={"/"} onClick={() => removeToken()}>
+              Sair
+            </Sair>
+          </DivConteudoUsuario>
+        </DivUsuario>
+      </NavMenu>
+    </>
+  );
+};
 
 export default Menu;

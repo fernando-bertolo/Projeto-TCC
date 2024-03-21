@@ -94,3 +94,32 @@ export const DivOpcaoControle = styled.div`
         background-color: #514869;
     }
 `;
+
+export const DivUsuario = styled.div`
+    width: 100%;
+    height: 20%;
+    //background-color: purple;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: center;
+`;
+
+export const DivConteudoUsuario = styled.div`
+    width: 100%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    //background-color: green;
+`;
+
+export const TextoUsuario = styled.p`
+    color: #FFF;
+    font-size: 1vw;
+`;
+export const Sair = styled(Link)`
+    color: red;
+    font-size: 1vw;
+    text-decoration: none;
+`;

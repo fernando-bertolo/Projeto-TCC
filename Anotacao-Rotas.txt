@@ -1,16 +1,20 @@
 Rotas da aplicação
 
+Tela de Login
 / - Tela de login
+/esquecer-senha - Envia link no e-mail para resetar a senha e gera um token
+/resetar-senha/tokenSenha - reseta a senha
 
-Tela Dashboard
-/dashboard - Dashboard (Tela inicial)
+Tela Home
+/home - Dashboard (Tela inicial)
 
 
 
 Tela Estoque
 /estoque - Estoque (Visualização de veiculos)
 /cadastro-veiculo - Clicando no Icone "+" (Cadastrar veiculos)
-/editar-veiculo - Ao clicar no card do veículo
+/detalhe-veiculo:# - Ao clicar no card do veículo
+/editar-veiculo:# - edição do veículo
 /despesa-veiculo - Ao clicar no botão de despesa do veículo
 /venda-veiculo - Ao clicar no botão "Vender Veiculo" (Venda veículo e associa a um cliente) e fica armazenado no histórico
 
