@@ -1,6 +1,7 @@
 const express = require("express");
 const alteracaoAcessorios = express();
 const tabelaAcessorio = require("../../../../Database/Tabelas/Acessorios/acessorios.js");
+const { Op } = require("sequelize");
 
 alteracaoAcessorios.put(
   "/alteracao-acessorios/:id",
@@ -8,13 +9,13 @@ alteracaoAcessorios.put(
     const { id } = request.params;
     const { nomeAcessorio } = request.body;
     try {
-      const acessorioID = tabelaAcessorio.findOne({
+      const acessorioID = await tabelaAcessorio.findOne({
         where: {
           idAcessorio: id,
         },
       });
 
-      const acessorioNome = tabelaAcessorio.findOne({
+      const acessorioNome = await tabelaAcessorio.findOne({
         where: {
           nomeAcessorio: nomeAcessorio,
         },

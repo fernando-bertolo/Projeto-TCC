@@ -21,6 +21,19 @@ acessorioVeiculo.post(
         },
       });
 
+      const acessorioVeiculo = await tabelaAcessorioVeiculo.findOne({
+        where: {
+          idVeiculo: idVeiculo,
+          idAcessorio: idAcessorio,
+        },
+      });
+
+      if (acessorioVeiculo) {
+        return response
+          .status(400)
+          .json({ Error: "Relacionamento já cadastrado no sistema!!" });
+      }
+
       if (!veiculoID || !acessorioID) {
         return response.status(400).json({ Error: "Parâmetros inválidos!!" });
       }

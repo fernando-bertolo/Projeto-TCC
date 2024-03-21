@@ -48,6 +48,7 @@ const deletarAcessorios = require("../Rotas/Veiculos/Acessorios/exclusaoAcessori
 // Importando AcessoriosVeiculos
 const criacaoAcessorioVeiculo = require("../Rotas/Veiculos/Acessorios_Veiculos/criacaoAcessoriosVeiculos.js");
 const visualizarAcessorioVeiculo = require("../Rotas/Veiculos/Acessorios_Veiculos/visualizarAcessoriosVeiculos.js");
+const deletarAcessorioVeiculo = require("../Rotas/Veiculos/Acessorios_Veiculos/exclusaoAcessorioVeiculos.js");
 
 // Importanto Veiculos
 const criacaoVeiculo = require("../Rotas/Veiculos/criacaoVeiculo.js");
@@ -99,6 +100,7 @@ rotas.use(deletarAcessorios);
 // Rota de AcessoriosVeiculos
 rotas.use(criacaoAcessorioVeiculo);
 rotas.use(visualizarAcessorioVeiculo);
+rotas.use(deletarAcessorioVeiculo);
 
 // Rota Veiculos
 rotas.use(criacaoVeiculo);
