@@ -171,7 +171,7 @@ function Listagem(props) {
           <ModalUsuario
             setModalOpenUser={setModalOpenUser}
             titulo="Cadastro de Usuário"
-            descricaoBotao="ADICIONAR"
+            descricaoBotao="Adicionar"
             modo="criacao"
             atualizaUsuarios={props.atualizaUsuarios}
           />
@@ -183,7 +183,7 @@ function Listagem(props) {
           <ModalUsuario
             setModalEditUser={setModalEditUser}
             titulo="Edição de Usuários"
-            descricaoBotao="ALTERAR"
+            descricaoBotao="Alterar"
             dadosUsuarios={dadosUsuarioSelecionado}
             modo="edicao"
             atualizaUsuarios={props.atualizaUsuarios}
@@ -196,7 +196,7 @@ function Listagem(props) {
           <ModalClientes
             setModalOpenClient={setModalOpenClient}
             titulo="Cadastro de clientes"
-            botaoSubmit="Alterar"
+            botaoSubmit="Adicionar"
             dadosClientes={dataCustomerSelect}
             modo="criacao"
             atualizaClientes={props.atualizaClientes}
