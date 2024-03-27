@@ -2,8 +2,8 @@ import Listagem from "../../Components/Listagem/index.jsx";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-import { Body } from "../../Components/BodyPages/style";
 import Menu from "../../Components/Menu/index";
+import { Body, DivContentCadastros } from "../../Components/BodyPages/style";
 
 function Clientes() {
   const [dataCustomer, setDataCustomer] = useState();
@@ -61,6 +61,7 @@ function Clientes() {
     <>
       <Body>
         <Menu />
+
         <Listagem
           dataCustomer={dataCustomer}
           excluirCliente={excluirCliente}

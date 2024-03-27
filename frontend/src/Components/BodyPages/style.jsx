@@ -21,3 +21,13 @@ export const SectionAutenticacao = styled.section`
     width: 80%;
   }
 `;
+
+export const DivContentCadastros = styled.div`
+  height: 100%;
+  width: 90%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  //background-color: red;
+`;

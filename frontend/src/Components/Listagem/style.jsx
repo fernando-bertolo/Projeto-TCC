@@ -5,7 +5,7 @@ import { IoMdCloseCircleOutline } from "react-icons/io";
 
 export const DivMain = styled.div`
   width: 85vw;
-  height: 100vh;
+  height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;

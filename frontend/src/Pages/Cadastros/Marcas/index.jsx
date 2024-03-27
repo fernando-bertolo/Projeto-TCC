@@ -1,12 +1,13 @@
-import Menu from "../../Components/Menu/index.jsx";
+import Menu from "../../../Components/Menu/index";
+import Listagem from "../../../Components/Listagem/index.jsx";
 import {
   Body,
   DivContentCadastros,
-} from "../../Components/BodyPages/style.jsx";
+} from "../../../Components/BodyPages/style.jsx";
 
-import { NavigateCadastros, DivNavigate, LinkNavegacao } from "./styled.jsx";
+import { NavigateCadastros, DivNavigate, LinkNavegacao } from "../styled.jsx";
 
-function Cadastros() {
+function Marcas() {
   return (
     <>
       <Body>
@@ -28,10 +29,11 @@ function Cadastros() {
               </LinkNavegacao>
             </DivNavigate>
           </NavigateCadastros>
+          <Listagem title="Marcas" />
         </DivContentCadastros>
       </Body>
     </>
   );
 }
 
-export default Cadastros;
+export default Marcas;
