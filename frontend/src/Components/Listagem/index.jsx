@@ -78,6 +78,8 @@ function Listagem(props) {
                           setModalEditUser(true)
                         ) : props.rota === "clientes" ? (
                           setModalEditClient(true)
+                        ) : props.rota === "marca" ? (
+                          setModalEditMarcas(true)
                         ) : (
                           <></>
                         );
@@ -90,7 +92,7 @@ function Listagem(props) {
                         ) : props.rota === "clientes" ? (
                           props.excluirCliente(dataCustomerSelect)
                         ) : props.rota === "marca" ? (
-                          <></>
+                          props.excluirMarca(dadoMarcaSelecionada)
                         ) : (
                           <></>
                         )
@@ -256,7 +258,18 @@ function Listagem(props) {
         {modalOpenMarcas && props.rota === "marca" ? (
           <ModalMarca
             setModalOpenMarcas={setModalOpenMarcas}
+            titulo="Criação de Marcas"
+            botaoSubmit="Cadastrar"
             modo="criacao"
+            atualizaMarcas={props.atualizaMarcas}
+          />
+        ) : modalEditMarcas && props.rota === "marca" ? (
+          <ModalMarca
+            setModalEditMarcas={setModalEditMarcas}
+            titulo="Edição de Marcas"
+            botaoSubmit="Alterar"
+            modo="edicao"
+            dadoMarcaSelecionada={dadoMarcaSelecionada}
             atualizaMarcas={props.atualizaMarcas}
           />
         ) : (

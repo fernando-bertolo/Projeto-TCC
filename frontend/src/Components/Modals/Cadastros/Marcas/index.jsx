@@ -45,6 +45,27 @@ function ModalMarca(props) {
         await delay(3.5);
         props.atualizaMarcas();
         props.setModalOpenMarcas(false);
+      } else if (props.modo === "edicao") {
+        await axios.put(
+          `http://localhost:3010/alteracao-marcas/${props.dadoMarcaSelecionada.idMarca}`,
+          {
+            nomeMarca: inputMarca,
+          }
+        );
+        // Mensagem de sucesso
+        toast.success("Marca alterada com sucesso!!", {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        await delay(3.5);
+        props.atualizaMarcas();
+        props.setModalEditMarcas(false);
       } else {
         // Mensagem de sucesso
         toast.warn("Não foi possível cadastrar a marca!!", {
@@ -63,13 +84,15 @@ function ModalMarca(props) {
     }
   };
 
-  const [inputMarca, setInputMarca] = useState();
+  const [inputMarca, setInputMarca] = useState(
+    props.modo === "edicao" ? props.dadoMarcaSelecionada.nomeMarca : ""
+  );
   return (
     <>
       <MainContentbackground>
         <SectionMainContent>
           <DivTitulo>
-            <Titulo>Cadastro Marcas</Titulo>
+            <Titulo>{props.titulo}</Titulo>
           </DivTitulo>
 
           <DivContent>
@@ -78,6 +101,7 @@ function ModalMarca(props) {
               type="text"
               id="nomeMarca"
               name="nomeMarca"
+              value={inputMarca}
               onChange={(event) => {
                 setInputMarca(event.target.value);
               }}
@@ -86,7 +110,13 @@ function ModalMarca(props) {
           <DivBotoes>
             <BotaoCancelar
               onClick={() => {
-                props.setModalOpenMarcas(false);
+                props.modo === "criacao" ? (
+                  props.setModalOpenMarcas(false)
+                ) : props.modo === "edicao" ? (
+                  props.setModalEditMarcas(false)
+                ) : (
+                  <></>
+                );
               }}
             >
               Cancelar
@@ -97,7 +127,7 @@ function ModalMarca(props) {
                 CadastraMarca(event);
               }}
             >
-              Adicionar
+              {props.botaoSubmit}
             </BotaoAdicionar>
           </DivBotoes>
           <ToastContainer />
