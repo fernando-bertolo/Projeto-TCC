@@ -1,5 +1,6 @@
 import ModalUsuario from "../Modals/Usuarios/index";
 import ModalClientes from "../Modals/Clientes/index";
+import ModalMarca from "../Modals/Cadastros/Marcas/index";
 import { useState } from "react";
 
 import {
@@ -26,12 +27,23 @@ import {
 } from "./style.jsx";
 
 function Listagem(props) {
+  //Modal Usuario
   const [modalOpenUser, setModalOpenUser] = useState(false);
   const [modalEditUser, setModalEditUser] = useState(false);
+  //Dados Usuarios
+  const [dadosUsuarioSelecionado, setDadosUsuarioSelecionado] = useState("");
+
+  //Modal Cliente
   const [modalOpenClient, setModalOpenClient] = useState(false);
   const [modalEditClient, setModalEditClient] = useState(false);
-  const [dadosUsuarioSelecionado, setDadosUsuarioSelecionado] = useState("");
+  // Dados Cliente
   const [dataCustomerSelect, setDataCustomerSelect] = useState("");
+
+  //Modal Marcas
+  const [modalOpenMarcas, setModalOpenMarcas] = useState("");
+  const [modalEditMarcas, setModalEditMarcas] = useState("");
+  //Dados Marcas
+  const [dadoMarcaSelecionada, setDadoMarcaSelecionada] = useState("");
 
   return (
     <>
@@ -53,6 +65,8 @@ function Listagem(props) {
                           setModalOpenUser(true)
                         ) : props.rota === "clientes" ? (
                           setModalOpenClient(true)
+                        ) : props.rota === "marca" ? (
+                          setModalOpenMarcas(true)
                         ) : (
                           <></>
                         )
@@ -75,6 +89,8 @@ function Listagem(props) {
                           props.excluirUsuario(dadosUsuarioSelecionado)
                         ) : props.rota === "clientes" ? (
                           props.excluirCliente(dataCustomerSelect)
+                        ) : props.rota === "marca" ? (
+                          <></>
                         ) : (
                           <></>
                         )
@@ -105,6 +121,10 @@ function Listagem(props) {
                       <Th>{props.cep}</Th>
                       <Th>{props.cidade}</Th>
                       <Th>{props.estado}</Th>
+                    </>
+                  ) : props.rota === "marca" ? (
+                    <>
+                      <Th>{props.primeiraColuna}</Th>
                     </>
                   ) : (
                     <></>
@@ -160,6 +180,25 @@ function Listagem(props) {
                       </TrBody>
                     );
                   })
+                ) : props.rota === "marca" && props.dadosMarcas ? (
+                  props.dadosMarcas.map((infoMarca, index) => {
+                    return (
+                      <TrBody
+                        key={index}
+                        onClick={() => {
+                          setDadoMarcaSelecionada(infoMarca);
+                        }}
+                        style={{
+                          backgroundColor:
+                            dadoMarcaSelecionada.idMarca === infoMarca.idMarca
+                              ? "#514869"
+                              : "#2F2841",
+                        }}
+                      >
+                        <Td>{infoMarca.nomeMarca}</Td>
+                      </TrBody>
+                    );
+                  })
                 ) : (
                   <></>
                 )}
@@ -209,6 +248,16 @@ function Listagem(props) {
             dadosClientes={dataCustomerSelect}
             modo="edicao"
             atualizaClientes={props.atualizaClientes}
+          />
+        ) : (
+          <></>
+        )}
+
+        {modalOpenMarcas && props.rota === "marca" ? (
+          <ModalMarca
+            setModalOpenMarcas={setModalOpenMarcas}
+            modo="criacao"
+            atualizaMarcas={props.atualizaMarcas}
           />
         ) : (
           <></>

@@ -5,7 +5,7 @@ import {
   DivContentCadastros,
 } from "../../../Components/BodyPages/style.jsx";
 
-import { NavigateCadastros, DivNavigate, LinkNavegacao } from "../styled.jsx";
+import NavegacaoCadastro from "../../../Components/NavegacaoCadastros/index.jsx";
 
 function Modelos() {
   return (
@@ -13,22 +13,7 @@ function Modelos() {
       <Body>
         <Menu />
         <DivContentCadastros>
-          <NavigateCadastros>
-            <DivNavigate>
-              <LinkNavegacao to={"/cadastros/marcas"}>Marcas</LinkNavegacao>
-            </DivNavigate>
-            <DivNavigate>
-              <LinkNavegacao to={"/cadastros/modelos"}>Modelos</LinkNavegacao>
-            </DivNavigate>
-            <DivNavigate>
-              <LinkNavegacao to={"/cadastros/versoes"}>Versoes</LinkNavegacao>
-            </DivNavigate>
-            <DivNavigate>
-              <LinkNavegacao to={"/cadastros/acessorios"}>
-                Acessorios
-              </LinkNavegacao>
-            </DivNavigate>
-          </NavigateCadastros>
+          <NavegacaoCadastro />
           <Listagem title="Modelos" />
         </DivContentCadastros>
       </Body>
