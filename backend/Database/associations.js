@@ -8,7 +8,7 @@ const AcessoriosVeiculos = require("./Tabelas/Acessorios_veiculos/acessoriosVeic
 Marcas.hasMany(Modelos, { foreignKey: "idMarca" }); // hasMany devido a uma marca poder pertencer a diversos modelos
 Modelos.belongsTo(Marcas, { foreignKey: "idMarca" }); // belongsTo devido a um modelo pertencer a somente uma marca
 Modelos.hasMany(Versoes, { foreignKey: "idModelo" }); //hasMany devido a um modelo pertencer a diversas versões
-Versoes.belongsTo(Versoes, { foreignKey: "idModelo" }); // belongsTo devido a uma versão pertencer a somente um modelo
+Versoes.belongsTo(Modelos, { foreignKey: "idModelo" }); // belongsTo devido a uma versão pertencer a somente um modelo
 
 Veiculos.belongsTo(Marcas, { foreignKey: "idMarca" }); // um veiculo possui somente uma marca
 Veiculos.belongsTo(Modelos, { foreignKey: "idModelo" }); // um veiculo possui somente um modelo

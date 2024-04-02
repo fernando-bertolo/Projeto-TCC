@@ -1,5 +1,6 @@
 const Sequelize = require("sequelize");
 const database = require("../../database");
+const Modelos = require("../Modelos/modelos.js");
 
 const Marcas = database.define("Marcas", {
   idMarca: {

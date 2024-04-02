@@ -45,6 +45,13 @@ function Listagem(props) {
   //Dados Marcas
   const [dadoMarcaSelecionada, setDadoMarcaSelecionada] = useState("");
 
+  //Modal Modelos
+  const [modalOpenModelos, setModalOpenModelos] = useState("");
+  const [modalEditModelos, setModalEditModelos] = useState("");
+
+  //Dados Modelos
+  const [dadosModeloSelecionado, setDadosModeloSelecionado] = useState("");
+
   return (
     <>
       <DivMain>
@@ -127,6 +134,13 @@ function Listagem(props) {
                   ) : props.rota === "marca" ? (
                     <>
                       <Th>{props.primeiraColuna}</Th>
+                      <Th>{props.segundaColuna}</Th>
+                    </>
+                  ) : props.rota === "modelo" ? (
+                    <>
+                      <Th>{props.primeiraColuna}</Th>
+                      <Th>{props.segundaColuna}</Th>
+                      <Th>{props.terceiraColuna}</Th>
                     </>
                   ) : (
                     <></>
@@ -197,7 +211,30 @@ function Listagem(props) {
                               : "#2F2841",
                         }}
                       >
+                        <Td>{infoMarca.idMarca}</Td>
                         <Td>{infoMarca.nomeMarca}</Td>
+                      </TrBody>
+                    );
+                  })
+                ) : props.rota === "modelo" && props.dadosModelos ? (
+                  props.dadosModelos.map((infoModelo, index) => {
+                    return (
+                      <TrBody
+                        key={infoModelo.idModelo}
+                        onClick={() => {
+                          setDadosModeloSelecionado(infoModelo);
+                        }}
+                        style={{
+                          backgroundColor:
+                            dadosModeloSelecionado.idModelo ===
+                            infoModelo.idModelo
+                              ? "#514869"
+                              : "#2f2841",
+                        }}
+                      >
+                        <Td>{infoModelo.idModelo}</Td>
+                        <Td>{infoModelo.idMarca}</Td>
+                        <Td>{infoModelo.nomeModelo}</Td>
                       </TrBody>
                     );
                   })

@@ -15,16 +15,18 @@ function Modelos() {
   const buscaModelos = async () => {
     try {
       const response = await axios
-        .get("http://localhost:3010/visualizar-modelos/")
+        .get("http://localhost:3010/visualizar-modelos")
         .then((response) => {
-          setDadosModelos(response);
+          setDadosModelos(response.data);
         });
-
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    buscaModelos();
+  }, []);
 
   return (
     <>
@@ -32,15 +34,14 @@ function Modelos() {
         <Menu />
         <DivContentCadastros>
           <NavegacaoCadastro />
-          <Listagem title="Modelos" rota="modelo" dadosModelos={dadosModelos} />
-          <button
-            type="submit"
-            onClick={() => {
-              buscaModelos();
-            }}
-          >
-            teste
-          </button>
+          <Listagem
+            title="Modelos"
+            rota="modelo"
+            dadosModelos={dadosModelos}
+            primeiraColuna="idModelo"
+            segundaColuna="idMarca"
+            terceiraColuna="nomeModelo"
+          />
         </DivContentCadastros>
       </Body>
     </>
