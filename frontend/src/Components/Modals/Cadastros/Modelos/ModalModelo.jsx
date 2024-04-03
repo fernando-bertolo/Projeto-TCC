@@ -15,13 +15,33 @@ import {
 } from "./ModalModeloStyle";
 
 import { ToastContainer, toast } from "react-toastify";
-
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function ModalModelo(props) {
   const [inputModelo, setInputModelo] = useState(
     props.modo === "edicao" ? props.dadosModeloSelecionado.nomeModelo : ""
   );
+
+  const [dadosMarcas, setDadosMarcas] = useState();
+
+  const buscaMarcas = async () => {
+    const response = await axios
+      .get("http://localhost:3010/visualizar-marcas")
+      .then((response) => {
+        setDadosMarcas(response.data);
+      });
+
+    console.log(response);
+  };
+
+  useEffect(() => {
+    buscaMarcas();
+  }, []);
+
+  function teste() {
+    console.log(dadosMarcas);
+  }
   return (
     <>
       <MainContentbackground>
@@ -34,7 +54,7 @@ function ModalModelo(props) {
             <DivContentInfo>
               <Label>Selecione a Marca: </Label>
               <Select name="marca" id="marca">
-                <Option value="Chevrolet">Chevrolet</Option>
+                <Option>teste</Option>
               </Select>
             </DivContentInfo>
 
@@ -65,7 +85,12 @@ function ModalModelo(props) {
             >
               Cancelar
             </BotaoCancelar>
-            <BotaoAdicionar type="submit" onClick={() => {}}>
+            <BotaoAdicionar
+              type="submit"
+              onClick={() => {
+                teste();
+              }}
+            >
               {props.botaoSubmit}
             </BotaoAdicionar>
           </DivBotoes>

@@ -316,6 +316,7 @@ function Listagem(props) {
           <ModalModelo
             modo="criacao"
             titulo="Cadastro de Modelos"
+            botaoSubmit="Cadastrar"
             setModalOpenModelos={setModalOpenModelos}
             dadosModeloSelecionado={dadosModeloSelecionado}
           />
@@ -323,6 +324,7 @@ function Listagem(props) {
           <ModalModelo
             modo="edicao"
             titulo="Edição de Modelos"
+            botaoSubmit="Alterar"
             setModalEditModelos={setModalEditModelos}
             dadosModeloSelecionado={dadosModeloSelecionado}
           />

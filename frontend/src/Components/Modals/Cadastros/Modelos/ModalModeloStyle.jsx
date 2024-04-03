@@ -56,12 +56,13 @@ export const DivContentInfo = styled.div`
 
 export const Select = styled.select`
   width: 50%;
-  height: 40%;
+  height: 60%;
   border-radius: 10px;
   color: #fff;
   background-color: #514869;
   border-style: none;
   padding-left: 20px;
+  margin-right: 0.5rem;
 `;
 export const Option = styled.option``;
 
@@ -72,7 +73,7 @@ export const Label = styled.label`
 
 export const Input = styled.input`
   width: 50%;
-  height: 40%;
+  height: 60%;
   border-radius: 10px;
   color: #fff;
   background-color: #514869;
