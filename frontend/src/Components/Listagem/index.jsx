@@ -25,6 +25,7 @@ import {
   SegundaDivTitulo,
   TerceiraDivTitulo,
 } from "./style.jsx";
+import ModalModelo from "../Modals/Cadastros/Modelos/ModalModelo.jsx";
 
 function Listagem(props) {
   //Modal Usuario
@@ -74,6 +75,8 @@ function Listagem(props) {
                           setModalOpenClient(true)
                         ) : props.rota === "marca" ? (
                           setModalOpenMarcas(true)
+                        ) : props.rota === "modelo" ? (
+                          setModalOpenModelos(true)
                         ) : (
                           <></>
                         )
@@ -304,6 +307,24 @@ function Listagem(props) {
             modo="edicao"
             dadoMarcaSelecionada={dadoMarcaSelecionada}
             atualizaMarcas={props.atualizaMarcas}
+          />
+        ) : (
+          <></>
+        )}
+
+        {modalOpenModelos && props.rota === "modelo" ? (
+          <ModalModelo
+            modo="criacao"
+            titulo="Cadastro de Modelos"
+            setModalOpenModelos={setModalOpenModelos}
+            dadosModeloSelecionado={dadosModeloSelecionado}
+          />
+        ) : modalEditModelos && props.rota === "modelo" ? (
+          <ModalModelo
+            modo="edicao"
+            titulo="Edição de Modelos"
+            setModalEditModelos={setModalEditModelos}
+            dadosModeloSelecionado={dadosModeloSelecionado}
           />
         ) : (
           <></>
