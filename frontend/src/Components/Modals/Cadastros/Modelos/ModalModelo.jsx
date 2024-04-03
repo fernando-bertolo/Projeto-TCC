@@ -23,25 +23,61 @@ function ModalModelo(props) {
     props.modo === "edicao" ? props.dadosModeloSelecionado.nomeModelo : ""
   );
 
-  const [dadosMarcas, setDadosMarcas] = useState();
+  const [dadosMarcas, setDadosMarcas] = useState([]);
+  const [dadoMarcaUnica, setDadoMarcaUnica] = useState("");
 
   const buscaMarcas = async () => {
-    const response = await axios
+    await axios
       .get("http://localhost:3010/visualizar-marcas")
       .then((response) => {
         setDadosMarcas(response.data);
       });
-
-    console.log(response);
   };
 
   useEffect(() => {
     buscaMarcas();
   }, []);
 
-  function teste() {
-    console.log(dadosMarcas);
+  // Função de delay
+  function delay(n) {
+    return new Promise(function (resolve) {
+      setTimeout(resolve, n * 1000);
+    });
   }
+
+
+  const CadastroModelo =  async (event) => {
+    try {
+      event.preventDefault();
+
+      if(props.modo === "criacao"){
+        await axios.post("http://localhost:3010/criacao-modelo", {
+          nomeModelo: inputModelo,
+          idMarca: dadoMarcaUnica
+        })
+
+      // Mensagem de sucesso
+      toast.success("Modelo cadastrado com sucesso!!", {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      await delay(3.5);
+      props.setModalOpenModelos(false)
+
+      }
+
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <>
       <MainContentbackground>
@@ -53,11 +89,26 @@ function ModalModelo(props) {
           <DivContent>
             <DivContentInfo>
               <Label>Selecione a Marca: </Label>
-              <Select name="marca" id="marca">
-                <Option>teste</Option>
+              <Select 
+                name="marca" 
+                id="marca" 
+                onChange={(event) => setDadoMarcaUnica(event.target.value)}
+              >
+                <Option>Selecione</Option>
+                {dadosMarcas.map((infoMarcas, index) => {
+                  return (
+                    <Option 
+                      key={index}
+                      value={infoMarcas.idMarca}
+                    >
+                      {infoMarcas.nomeMarca}
+                    
+                    </Option>
+                  )
+                })}
               </Select>
+              
             </DivContentInfo>
-
             <DivContentInfo>
               <Label>Informe o modelo: </Label>
               <Input
@@ -87,9 +138,7 @@ function ModalModelo(props) {
             </BotaoCancelar>
             <BotaoAdicionar
               type="submit"
-              onClick={() => {
-                teste();
-              }}
+              onClick={(event) => {CadastroModelo(event)}}
             >
               {props.botaoSubmit}
             </BotaoAdicionar>
