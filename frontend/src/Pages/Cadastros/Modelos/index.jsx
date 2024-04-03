@@ -19,6 +19,7 @@ function Modelos() {
         .then((response) => {
           setDadosModelos(response.data);
         });
+      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -38,9 +39,8 @@ function Modelos() {
             title="Modelos"
             rota="modelo"
             dadosModelos={dadosModelos}
-            primeiraColuna="idModelo"
-            segundaColuna="idMarca"
-            terceiraColuna="nomeModelo"
+            primeiraColuna="Marca"
+            segundaColuna="Modelo"
           />
         </DivContentCadastros>
       </Body>

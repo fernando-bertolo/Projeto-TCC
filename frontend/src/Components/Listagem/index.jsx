@@ -134,13 +134,11 @@ function Listagem(props) {
                   ) : props.rota === "marca" ? (
                     <>
                       <Th>{props.primeiraColuna}</Th>
-                      <Th>{props.segundaColuna}</Th>
                     </>
                   ) : props.rota === "modelo" ? (
                     <>
                       <Th>{props.primeiraColuna}</Th>
                       <Th>{props.segundaColuna}</Th>
-                      <Th>{props.terceiraColuna}</Th>
                     </>
                   ) : (
                     <></>
@@ -211,7 +209,6 @@ function Listagem(props) {
                               : "#2F2841",
                         }}
                       >
-                        <Td>{infoMarca.idMarca}</Td>
                         <Td>{infoMarca.nomeMarca}</Td>
                       </TrBody>
                     );
@@ -232,8 +229,7 @@ function Listagem(props) {
                               : "#2f2841",
                         }}
                       >
-                        <Td>{infoModelo.idModelo}</Td>
-                        <Td>{infoModelo.idMarca}</Td>
+                        <Td>{infoModelo.Marca.nomeMarca}</Td>
                         <Td>{infoModelo.nomeModelo}</Td>
                       </TrBody>
                     );

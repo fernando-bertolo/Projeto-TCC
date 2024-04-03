@@ -60,8 +60,7 @@ function Marcas() {
           <Listagem
             title="Marcas"
             rota="marca"
-            primeiraColuna="idMarca"
-            segundaColuna="Nome"
+            primeiraColuna="Nome"
             dadosMarcas={dadosMarcas}
             excluirMarca={excluirMarca}
             atualizaMarcas={buscaMarcas}

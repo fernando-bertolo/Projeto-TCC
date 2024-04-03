@@ -1,10 +1,32 @@
 const express = require("express");
 const visualizarVeiculos = express();
 const tabelaVeiculo = require("../../../Database/Tabelas/Veiculos/veiculos.js");
+const Marcas = require("../../../Database/Tabelas/Marcas/marcas.js");
+const Modelos = require("../../../Database/Tabelas/Modelos/modelos.js");
+const Versoes = require("../../../Database/Tabelas/Versoes/versoes.js");
 
 visualizarVeiculos.get("/visualizar-veiculo", async (request, response) => {
   try {
-    const veiculos = await tabelaVeiculo.findAll();
+    const veiculos = await tabelaVeiculo.findAll({
+      include: [
+        {
+          model: Versoes,
+          attributes: ["nomeVersao"],
+          include: [
+            {
+              model: Modelos,
+              attributes: ["nomeModelo"],
+              include: [
+                {
+                  model: Marcas,
+                  attributes: ["nomeMarca"],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    });
 
     return response.send(veiculos);
   } catch (error) {

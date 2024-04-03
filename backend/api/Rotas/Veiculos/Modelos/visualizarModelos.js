@@ -1,7 +1,7 @@
 const express = require("express");
 const visualizarModelos = express();
 const tabelaModelos = require("../../../../Database/Tabelas/Modelos/modelos.js");
-const Marcas = require("../../../../Database/Tabelas/Modelos/modelos.js");
+const Marcas = require("../../../../Database/Tabelas/Marcas/marcas.js");
 
 //Rota get para visualizar todos os modelos
 
@@ -11,7 +11,7 @@ visualizarModelos.get("/visualizar-modelos", async (request, response) => {
       include: [
         {
           model: Marcas, // Inclui os dados da Marca
-          attributes: ["nomeMarca"], // Seleciona apenas o nome da Marca
+          attributes: ["nomeMarca"], // Seleciona apenas o nome da Marca,
         },
       ],
     });

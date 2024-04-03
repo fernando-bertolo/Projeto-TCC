@@ -9,6 +9,8 @@ Marcas.hasMany(Modelos, { foreignKey: "idMarca" }); // hasMany devido a uma marc
 Modelos.belongsTo(Marcas, { foreignKey: "idMarca" }); // belongsTo devido a um modelo pertencer a somente uma marca
 Modelos.hasMany(Versoes, { foreignKey: "idModelo" }); //hasMany devido a um modelo pertencer a diversas versões
 Versoes.belongsTo(Modelos, { foreignKey: "idModelo" }); // belongsTo devido a uma versão pertencer a somente um modelo
+Marcas.hasMany(Versoes, { foreignKey: "idMarca" }); //hasMany devido a uma marca pertencer a diversas versões
+Versoes.belongsTo(Marcas, { foreignKey: "idMarca" }); //belongsTo devido a uma versão pertencer a somente uma marca
 
 Veiculos.belongsTo(Marcas, { foreignKey: "idMarca" }); // um veiculo possui somente uma marca
 Veiculos.belongsTo(Modelos, { foreignKey: "idModelo" }); // um veiculo possui somente um modelo
