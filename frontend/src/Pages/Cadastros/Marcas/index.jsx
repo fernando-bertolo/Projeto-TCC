@@ -20,6 +20,13 @@ function Marcas() {
       });
   };
 
+  // Função de delay
+  function delay(n) {
+    return new Promise(function (resolve) {
+      setTimeout(resolve, n * 1000);
+    });
+  }
+
   const excluirMarca = async (dadosMarcas) => {
     try {
       if (dadosMarcas.idMarca) {
@@ -42,8 +49,24 @@ function Marcas() {
           theme: "light",
         });
       }
+
+      await delay(3.5);
+      buscaMarcas();
     } catch (error) {
-      console.log(error);
+      if (error.response && error.response.status === 400) {
+        toast.warn(error.response.data.Error, {
+          position: "bottom-right",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      } else {
+        console.log(error);
+      }
     }
   };
 

@@ -15,9 +15,12 @@ function Clientes() {
     });
   };
 
-  useEffect(() => {
-    buscaClientes();
-  }, []);
+  // Função de delay
+  function delay(n) {
+    return new Promise(function (resolve) {
+      setTimeout(resolve, n * 1000);
+    });
+  }
 
   const excluirCliente = async (cliente) => {
     try {
@@ -40,6 +43,8 @@ function Clientes() {
           progress: undefined,
           theme: "light",
         });
+        await delay(3.5);
+        buscaClientes();
       } else if (mensagemError === 400) {
         toast.error("Falha ao excluir cliente", {
           position: "bottom-right",
@@ -56,6 +61,10 @@ function Clientes() {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    buscaClientes();
+  }, []);
 
   return (
     <>

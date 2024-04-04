@@ -45,38 +45,71 @@ function ModalModelo(props) {
     });
   }
 
-
-  const CadastroModelo =  async (event) => {
+  const CadastroModelo = async (event) => {
     try {
       event.preventDefault();
 
-      if(props.modo === "criacao"){
+      if (props.modo === "criacao") {
         await axios.post("http://localhost:3010/criacao-modelo", {
           nomeModelo: inputModelo,
-          idMarca: dadoMarcaUnica
-        })
+          idMarca: dadoMarcaUnica,
+        });
 
-      // Mensagem de sucesso
-      toast.success("Modelo cadastrado com sucesso!!", {
-        position: "bottom-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-      await delay(3.5);
-      props.setModalOpenModelos(false)
+        // Mensagem de sucesso
+        toast.success("Modelo cadastrado com sucesso!!", {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        await delay(3.5);
+        props.atualizaModelos();
+        props.setModalOpenModelos(false);
+      } else if (props.modo === "edicao") {
+        await axios.put(
+          `http://localhost:3010/alterar-modelo/${props.dadosModeloSelecionado.idModelo}`,
+          {
+            idMarca: dadoMarcaUnica,
+            nomeModelo: inputModelo,
+          }
+        );
 
+        // Mensagem de sucesso
+        toast.success("Modelo alterado com sucesso!!", {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        await delay(3.5);
+        props.atualizaModelos();
+        props.setModalEditModelos(false);
       }
-
-
     } catch (error) {
-      console.log(error);
+      if (error.response && error.response.status === 400) {
+        toast.warn(error.response.data.Error, {
+          position: "bottom-right",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      } else {
+        console.log(error);
+      }
     }
-  }
+  };
 
   return (
     <>
@@ -89,25 +122,20 @@ function ModalModelo(props) {
           <DivContent>
             <DivContentInfo>
               <Label>Selecione a Marca: </Label>
-              <Select 
-                name="marca" 
-                id="marca" 
+              <Select
+                name="marca"
+                id="marca"
                 onChange={(event) => setDadoMarcaUnica(event.target.value)}
               >
                 <Option>Selecione</Option>
                 {dadosMarcas.map((infoMarcas, index) => {
                   return (
-                    <Option 
-                      key={index}
-                      value={infoMarcas.idMarca}
-                    >
+                    <Option key={index} value={infoMarcas.idMarca}>
                       {infoMarcas.nomeMarca}
-                    
                     </Option>
-                  )
+                  );
                 })}
               </Select>
-              
             </DivContentInfo>
             <DivContentInfo>
               <Label>Informe o modelo: </Label>
@@ -138,7 +166,9 @@ function ModalModelo(props) {
             </BotaoCancelar>
             <BotaoAdicionar
               type="submit"
-              onClick={(event) => {CadastroModelo(event)}}
+              onClick={(event) => {
+                CadastroModelo(event);
+              }}
             >
               {props.botaoSubmit}
             </BotaoAdicionar>

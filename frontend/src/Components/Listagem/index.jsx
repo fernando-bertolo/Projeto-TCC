@@ -53,6 +53,13 @@ function Listagem(props) {
   //Dados Modelos
   const [dadosModeloSelecionado, setDadosModeloSelecionado] = useState("");
 
+  //Modal Versao
+  const [modalOpenVersao, setModalOpenVersao] = useState("");
+  const [modalEditVersao, setModalEditVersao] = useState("");
+
+  //Dados Versao
+  const [dadosVersaoSelecionada, setDadosVersaoSelecionada] = useState("");
+
   return (
     <>
       <DivMain>
@@ -84,12 +91,15 @@ function Listagem(props) {
                     />
                     <IconeEditar
                       onClick={() => {
-                        props.rota === "usuarios" ? (
+                        props.rota === "usuarios" && dadosUsuarioSelecionado ? (
                           setModalEditUser(true)
-                        ) : props.rota === "clientes" ? (
+                        ) : props.rota === "clientes" && dataCustomerSelect ? (
                           setModalEditClient(true)
-                        ) : props.rota === "marca" ? (
+                        ) : props.rota === "marca" && dadoMarcaSelecionada ? (
                           setModalEditMarcas(true)
+                        ) : props.rota === "modelo" &&
+                          dadosModeloSelecionado ? (
+                          setModalEditModelos(true)
                         ) : (
                           <></>
                         );
@@ -103,6 +113,8 @@ function Listagem(props) {
                           props.excluirCliente(dataCustomerSelect)
                         ) : props.rota === "marca" ? (
                           props.excluirMarca(dadoMarcaSelecionada)
+                        ) : props.rota === "modelo" ? (
+                          props.excluirModelo(dadosModeloSelecionado)
                         ) : (
                           <></>
                         )
@@ -142,6 +154,12 @@ function Listagem(props) {
                     <>
                       <Th>{props.primeiraColuna}</Th>
                       <Th>{props.segundaColuna}</Th>
+                    </>
+                  ) : props.rota === "versao" ? (
+                    <>
+                      <Th>{props.primeiraColuna}</Th>
+                      <Th>{props.segundaColuna}</Th>
+                      <Th>{props.terceiraColuna}</Th>
                     </>
                   ) : (
                     <></>
@@ -237,6 +255,28 @@ function Listagem(props) {
                       </TrBody>
                     );
                   })
+                ) : props.rota === "versao" && props.dadosVersao ? (
+                  props.dadosVersao.map((infoVersao) => {
+                    return (
+                      <TrBody
+                        key={infoVersao.idVersao}
+                        onClick={() => {
+                          setDadosVersaoSelecionada(infoVersao);
+                        }}
+                        style={{
+                          backgroundColor:
+                            dadosVersaoSelecionada.idVersao ===
+                            infoVersao.idVersao
+                              ? "#514869"
+                              : "2f2841",
+                        }}
+                      >
+                        <Td>{infoVersao.Modelo.Marca.nomeMarca}</Td>
+                        <Td>{infoVersao.Modelo.nomeModelo}</Td>
+                        <Td>{infoVersao.nomeVersao}</Td>
+                      </TrBody>
+                    );
+                  })
                 ) : (
                   <></>
                 )}
@@ -319,6 +359,7 @@ function Listagem(props) {
             botaoSubmit="Cadastrar"
             setModalOpenModelos={setModalOpenModelos}
             dadosModeloSelecionado={dadosModeloSelecionado}
+            atualizaModelos={props.atualizaModelo}
           />
         ) : modalEditModelos && props.rota === "modelo" ? (
           <ModalModelo
@@ -327,6 +368,7 @@ function Listagem(props) {
             botaoSubmit="Alterar"
             setModalEditModelos={setModalEditModelos}
             dadosModeloSelecionado={dadosModeloSelecionado}
+            atualizaModelos={props.atualizaModelo}
           />
         ) : (
           <></>
