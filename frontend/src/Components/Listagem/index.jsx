@@ -1,6 +1,9 @@
 import ModalUsuario from "../Modals/Usuarios/index";
 import ModalClientes from "../Modals/Clientes/index";
 import ModalMarca from "../Modals/Cadastros/Marcas/index";
+import ModalModelo from "../Modals/Cadastros/Modelos/ModalModelo.jsx";
+import ModalVersao from "../Modals/Cadastros/Versao/ModalVersao.jsx";
+
 import { useState } from "react";
 
 import {
@@ -25,7 +28,7 @@ import {
   SegundaDivTitulo,
   TerceiraDivTitulo,
 } from "./style.jsx";
-import ModalModelo from "../Modals/Cadastros/Modelos/ModalModelo.jsx";
+
 
 function Listagem(props) {
   //Modal Usuario
