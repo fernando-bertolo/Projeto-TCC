@@ -29,7 +29,6 @@ import {
   TerceiraDivTitulo,
 } from "./style.jsx";
 
-
 function Listagem(props) {
   //Modal Usuario
   const [modalOpenUser, setModalOpenUser] = useState(false);
@@ -87,6 +86,8 @@ function Listagem(props) {
                           setModalOpenMarcas(true)
                         ) : props.rota === "modelo" ? (
                           setModalOpenModelos(true)
+                        ) : props.rota === "versao" ? (
+                          setModalOpenVersao(true)
                         ) : (
                           <></>
                         )
@@ -103,6 +104,9 @@ function Listagem(props) {
                         ) : props.rota === "modelo" &&
                           dadosModeloSelecionado ? (
                           setModalEditModelos(true)
+                        ) : props.rota === "versao" &&
+                          dadosVersaoSelecionada ? (
+                          setModalEditVersao(true)
                         ) : (
                           <></>
                         );
@@ -372,6 +376,24 @@ function Listagem(props) {
             setModalEditModelos={setModalEditModelos}
             dadosModeloSelecionado={dadosModeloSelecionado}
             atualizaModelos={props.atualizaModelo}
+          />
+        ) : (
+          <></>
+        )}
+
+        {modalOpenVersao && props.rota === "versao" ? (
+          <ModalVersao
+            modo="criacao"
+            titulo="Cadastro de Versão"
+            botaoSubmit="Cadastrar"
+            setModalEditVersao={setModalEditVersao}
+          />
+        ) : modalEditVersao && props.rota === "versao" ? (
+          <ModalVersao
+            modo="edit"
+            titulo="Alteração de Versão"
+            botaoSubmit="Alterar"
+            setModalOpenVersao={setModalOpenVersao}
           />
         ) : (
           <></>
