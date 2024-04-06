@@ -21,6 +21,9 @@ import axios from "axios";
 function ModalVersao(props) {
   const [dadosModelos, setDadosModelos] = useState([]);
   const [dadoModeloUnico, setDadoModeloUnico] = useState("");
+  const [inputVersao, setInputVersao] = useState(
+    props.modo === "edicao" ? props.dadosVersaoSelecionada.nomeVersao : ""
+  );
 
   const buscaModelos = async () => {
     try {
@@ -66,7 +69,13 @@ function ModalVersao(props) {
             </DivContentInfo>
             <DivContentInfo>
               <Label>Informe a Versão: </Label>
-              <Input type="text" id="nomeVersao" name="nomeVersao" />
+              <Input
+                type="text"
+                id="nomeVersao"
+                name="nomeVersao"
+                value={inputVersao}
+                onChange={(event) => setInputVersao(event.target.value)}
+              />
             </DivContentInfo>
           </DivContent>
           <DivBotoes>

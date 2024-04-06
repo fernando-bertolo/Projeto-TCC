@@ -386,14 +386,16 @@ function Listagem(props) {
             modo="criacao"
             titulo="Cadastro de Versão"
             botaoSubmit="Cadastrar"
-            setModalEditVersao={setModalEditVersao}
+            setModalOpenVersao={setModalOpenVersao}
+            dadosVersaoSelecionada={dadosVersaoSelecionada}
           />
         ) : modalEditVersao && props.rota === "versao" ? (
           <ModalVersao
-            modo="edit"
+            modo="edicao"
             titulo="Alteração de Versão"
             botaoSubmit="Alterar"
-            setModalOpenVersao={setModalOpenVersao}
+            setModalEditVersao={setModalEditVersao}
+            dadosVersaoSelecionada={dadosVersaoSelecionada}
           />
         ) : (
           <></>
