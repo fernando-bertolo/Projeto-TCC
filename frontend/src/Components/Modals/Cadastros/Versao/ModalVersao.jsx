@@ -41,6 +41,59 @@ function ModalVersao(props) {
     buscaModelos();
   }, []);
 
+  // Função de delay
+  function delay(n) {
+    return new Promise(function (resolve) {
+      setTimeout(resolve, n * 1000);
+    });
+  }
+
+  const CadastraVersao = async (event) => {
+    try {
+      event.preventDefault();
+      
+
+      if(props.rota === "criacao") {
+
+        console.log("teste")
+        await axios.post("http://localhost:3010/criacao-versao", {
+          idModelo: dadoModeloUnico,
+          idMarca: dadosModelos[0].idMarca,
+          nomeVersao: inputVersao
+        })
+
+        // Mensagem de sucesso
+        toast.success("Versão cadastrado com sucesso!!", {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        await delay(3.5);
+        props.setModalOpenVersao(false);
+      } 
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        toast.warn(error.response.data.Error, {
+          position: "bottom-right",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      } else {
+        console.log(error);
+      }
+    }
+  }
+
   return (
     <>
       <MainContentbackground>
@@ -92,7 +145,7 @@ function ModalVersao(props) {
             >
               Cancelar
             </BotaoCancelar>
-            <BotaoAdicionar type="submit">{props.botaoSubmit}</BotaoAdicionar>
+            <BotaoAdicionar type="submit" onClick={(event) => CadastraVersao(event)}>{props.botaoSubmit}</BotaoAdicionar>
           </DivBotoes>
           <ToastContainer />
         </SectionMainContent>
