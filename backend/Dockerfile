@@ -1,12 +1,12 @@
 FROM node:18-alpine3.19
 
-WORKDIR /app/frontend
+WORKDIR /app/backend
 
 COPY package*.json ./
 RUN npm install
 
 COPY . .
 
-EXPOSE 3000
+EXPOSE 3010
 
-CMD [ "npm", "start" ]
+CMD [ "node", "api/server.js" ]
