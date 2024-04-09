@@ -38,10 +38,7 @@ function Modelos() {
     try {
       if (dadosModelos.idModelo) {
         await axios.delete(
-          `http://localhost:3010/deletar-modelos/${dadosModelos.idModelo}`,
-          {
-            idModelo: dadosModelos.idModelo,
-          }
+          `http://localhost:3010/deletar-modelos/${dadosModelos.idModelo}`
         );
 
         // Mensagem de sucesso

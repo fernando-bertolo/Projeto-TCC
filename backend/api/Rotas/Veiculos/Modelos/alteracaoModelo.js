@@ -2,6 +2,7 @@ const express = require("express");
 const alteracaoModelos = express();
 const tabelaModelos = require("../../../../Database/Tabelas/Modelos/modelos.js");
 const tabelaMarcas = require("../../../../Database/Tabelas/Marcas/marcas.js");
+const { Op } = require("sequelize");
 
 alteracaoModelos.put("/alterar-modelo/:id", async (request, response) => {
   const { id } = request.params;
@@ -15,6 +16,7 @@ alteracaoModelos.put("/alterar-modelo/:id", async (request, response) => {
 
     const modelo = await tabelaModelos.findOne({
       where: {
+        idModelo: { [Op.ne]: id },
         nomeModelo: nomeModelo,
       },
     });
@@ -26,7 +28,9 @@ alteracaoModelos.put("/alterar-modelo/:id", async (request, response) => {
     });
 
     if (!marcaID) {
-      return response.status(400).json({ Error: "ID da marca inválido!!" });
+      return response
+        .status(400)
+        .json({ Error: "Seleciona o campo Marca corretamente!!" });
     }
 
     if (!idModelo) {

@@ -122,6 +122,8 @@ function Listagem(props) {
                           props.excluirMarca(dadoMarcaSelecionada)
                         ) : props.rota === "modelo" ? (
                           props.excluirModelo(dadosModeloSelecionado)
+                        ) : props.rota === "versao" ? (
+                          props.excluirVersao(dadosVersaoSelecionada)
                         ) : (
                           <></>
                         )
@@ -275,7 +277,7 @@ function Listagem(props) {
                             dadosVersaoSelecionada.idVersao ===
                             infoVersao.idVersao
                               ? "#514869"
-                              : "2f2841",
+                              : "#2f2841",
                         }}
                       >
                         <Td>{infoVersao.Modelo.Marca.nomeMarca}</Td>
@@ -388,6 +390,7 @@ function Listagem(props) {
             botaoSubmit="Cadastrar"
             setModalOpenVersao={setModalOpenVersao}
             dadosVersaoSelecionada={dadosVersaoSelecionada}
+            atualizaVersao={props.atualizaVersao}
           />
         ) : modalEditVersao && props.rota === "versao" ? (
           <ModalVersao
@@ -396,6 +399,7 @@ function Listagem(props) {
             botaoSubmit="Alterar"
             setModalEditVersao={setModalEditVersao}
             dadosVersaoSelecionada={dadosVersaoSelecionada}
+            atualizaVersao={props.atualizaVersao}
           />
         ) : (
           <></>

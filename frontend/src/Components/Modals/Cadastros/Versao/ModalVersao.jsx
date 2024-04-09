@@ -51,19 +51,16 @@ function ModalVersao(props) {
   const CadastraVersao = async (event) => {
     try {
       event.preventDefault();
-      
 
-      if(props.rota === "criacao") {
-
-        console.log("teste")
+      if (props.modo === "criacao") {
         await axios.post("http://localhost:3010/criacao-versao", {
           idModelo: dadoModeloUnico,
           idMarca: dadosModelos[0].idMarca,
-          nomeVersao: inputVersao
-        })
+          nomeVersao: inputVersao,
+        });
 
         // Mensagem de sucesso
-        toast.success("Versão cadastrado com sucesso!!", {
+        toast.success("Versão cadastrada com sucesso!!", {
           position: "bottom-right",
           autoClose: 2000,
           hideProgressBar: false,
@@ -75,7 +72,31 @@ function ModalVersao(props) {
         });
         await delay(3.5);
         props.setModalOpenVersao(false);
-      } 
+        props.atualizaVersao();
+      } else if (props.modo === "edicao") {
+        await axios.put(
+          `http://localhost:3010/alterar-versao/${props.dadosVersaoSelecionada.idVersao}`,
+          {
+            idModelo: dadoModeloUnico,
+            nomeVersao: inputVersao,
+          }
+        );
+
+        // Mensagem de sucesso
+        toast.success("Versão alterada com sucesso!!", {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        await delay(3.5);
+        props.setModalEditVersao(false);
+        props.atualizaVersao();
+      }
     } catch (error) {
       if (error.response && error.response.status === 400) {
         toast.warn(error.response.data.Error, {
@@ -92,7 +113,7 @@ function ModalVersao(props) {
         console.log(error);
       }
     }
-  }
+  };
 
   return (
     <>
@@ -145,7 +166,12 @@ function ModalVersao(props) {
             >
               Cancelar
             </BotaoCancelar>
-            <BotaoAdicionar type="submit" onClick={(event) => CadastraVersao(event)}>{props.botaoSubmit}</BotaoAdicionar>
+            <BotaoAdicionar
+              type="submit"
+              onClick={(event) => CadastraVersao(event)}
+            >
+              {props.botaoSubmit}
+            </BotaoAdicionar>
           </DivBotoes>
           <ToastContainer />
         </SectionMainContent>

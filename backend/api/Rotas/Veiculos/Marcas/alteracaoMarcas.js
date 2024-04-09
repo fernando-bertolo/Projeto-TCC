@@ -1,6 +1,7 @@
 const express = require("express");
 const alteracaoMarcas = express();
 const tabelaMarcas = require("../../../../Database/Tabelas/Marcas/marcas.js");
+const { Op } = require("sequelize");
 
 alteracaoMarcas.put("/alteracao-marcas/:id", async (request, response) => {
   try {
@@ -9,6 +10,7 @@ alteracaoMarcas.put("/alteracao-marcas/:id", async (request, response) => {
 
     const marca = await tabelaMarcas.findOne({
       where: {
+        idMarca: { [Op.ne]: id },
         nomeMarca: nomeMarca,
       },
     });
