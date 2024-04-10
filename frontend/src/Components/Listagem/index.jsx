@@ -453,6 +453,7 @@ function Listagem(props) {
             botaoSubmit="Cadastrar"
             setModalOpenAcessorio={setModalOpenAcessorio}
             atualizaAcessorio={props.atualizaAcessorio}
+            dadosAcessorioSelecionado={dadosAcessorioSelecionado}
           />
         ) : modalEditAcessorio && props.rota === "acessorio" ? (
           <ModalAcessorio
@@ -461,6 +462,7 @@ function Listagem(props) {
             botaoSubmit="Alterar"
             setModalEditAcessorio={setModalEditAcessorio}
             atualizaAcessorio={props.atualizaAcessorio}
+            dadosAcessorioSelecionado={dadosAcessorioSelecionado}
           />
         ) : (
           <></>
