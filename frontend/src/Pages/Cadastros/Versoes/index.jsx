@@ -27,7 +27,20 @@ function Versoes() {
           setDadosVersao(response.data);
         });
     } catch (error) {
-      console.log(error);
+      if (error.response && error.response.status === 400) {
+        toast.warn(error.response.data.Error, {
+          position: "bottom-right",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      } else {
+        console.log(error);
+      }
     }
   };
 
@@ -37,6 +50,7 @@ function Versoes() {
 
   const excluirVersao = async (dadosVersao) => {
     try {
+      console.log(dadosVersao);
       if (dadosVersao) {
         await axios.delete(
           `http://localhost:3010/deletar-versao/${dadosVersao.idVersao}`

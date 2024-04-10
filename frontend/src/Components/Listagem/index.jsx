@@ -3,6 +3,7 @@ import ModalClientes from "../Modals/Clientes/index";
 import ModalMarca from "../Modals/Cadastros/Marcas/index";
 import ModalModelo from "../Modals/Cadastros/Modelos/ModalModelo.jsx";
 import ModalVersao from "../Modals/Cadastros/Versao/ModalVersao.jsx";
+import ModalAcessorio from "../Modals/Cadastros/Acessorios/ModalAcessorio.jsx";
 
 import { useState } from "react";
 
@@ -62,6 +63,15 @@ function Listagem(props) {
   //Dados Versao
   const [dadosVersaoSelecionada, setDadosVersaoSelecionada] = useState("");
 
+  // Modal Acessorios
+  const [modalOpenAcessorio, setModalOpenAcessorio] = useState("");
+  const [modalEditAcessorio, setModalEditAcessorio] = useState("");
+
+  // Dados Acessorios
+
+  const [dadosAcessorioSelecionado, setDadosAcessorioSelecionado] =
+    useState("");
+
   return (
     <>
       <DivMain>
@@ -88,6 +98,8 @@ function Listagem(props) {
                           setModalOpenModelos(true)
                         ) : props.rota === "versao" ? (
                           setModalOpenVersao(true)
+                        ) : props.rota === "acessorio" ? (
+                          setModalOpenAcessorio(true)
                         ) : (
                           <></>
                         )
@@ -107,6 +119,9 @@ function Listagem(props) {
                         ) : props.rota === "versao" &&
                           dadosVersaoSelecionada ? (
                           setModalEditVersao(true)
+                        ) : props.rota === "acessorio" &&
+                          dadosAcessorioSelecionado ? (
+                          setModalEditAcessorio(true)
                         ) : (
                           <></>
                         );
@@ -124,6 +139,8 @@ function Listagem(props) {
                           props.excluirModelo(dadosModeloSelecionado)
                         ) : props.rota === "versao" ? (
                           props.excluirVersao(dadosVersaoSelecionada)
+                        ) : props.rota === "acessorio" ? (
+                          props.excluirAcessorio(dadosAcessorioSelecionado)
                         ) : (
                           <></>
                         )
@@ -169,6 +186,10 @@ function Listagem(props) {
                       <Th>{props.primeiraColuna}</Th>
                       <Th>{props.segundaColuna}</Th>
                       <Th>{props.terceiraColuna}</Th>
+                    </>
+                  ) : props.rota === "acessorio" ? (
+                    <>
+                      <Th>{props.primeiraColuna}</Th>
                     </>
                   ) : (
                     <></>
@@ -286,6 +307,26 @@ function Listagem(props) {
                       </TrBody>
                     );
                   })
+                ) : props.rota === "acessorio" && props.dadosAcessorio ? (
+                  props.dadosAcessorio.map((infoAcessorio) => {
+                    return (
+                      <TrBody
+                        key={infoAcessorio.idAcessorio}
+                        onClick={() => {
+                          setDadosAcessorioSelecionado(infoAcessorio);
+                        }}
+                        style={{
+                          backgroundColor:
+                            dadosAcessorioSelecionado.idAcessorio ===
+                            infoAcessorio.idAcessorio
+                              ? "#514869"
+                              : "#2f2841",
+                        }}
+                      >
+                        <Td>{infoAcessorio.nomeAcessorio}</Td>
+                      </TrBody>
+                    );
+                  })
                 ) : (
                   <></>
                 )}
@@ -400,6 +441,26 @@ function Listagem(props) {
             setModalEditVersao={setModalEditVersao}
             dadosVersaoSelecionada={dadosVersaoSelecionada}
             atualizaVersao={props.atualizaVersao}
+          />
+        ) : (
+          <></>
+        )}
+
+        {modalOpenAcessorio && props.rota === "acessorio" ? (
+          <ModalAcessorio
+            modo="criacao"
+            titulo="Cadastro de Acessório"
+            botaoSubmit="Cadastrar"
+            setModalOpenAcessorio={setModalOpenAcessorio}
+            atualizaAcessorio={props.atualizaAcessorio}
+          />
+        ) : modalEditAcessorio && props.rota === "acessorio" ? (
+          <ModalAcessorio
+            modo="edicao"
+            titulo="Alteração de Acessório"
+            botaoSubmit="Alterar"
+            setModalEditAcessorio={setModalEditAcessorio}
+            atualizaAcessorio={props.atualizaAcessorio}
           />
         ) : (
           <></>
