@@ -44,6 +44,16 @@ deletarAcessorios.delete(
           .status(200)
           .json({ message: "Acessório excluído com sucesso!!" });
       }
+
+      tabelaAcessorio.destroy({
+        where: {
+          idAcessorio: id,
+        },
+      });
+
+      return response
+        .status(200)
+        .json({ message: "Acessório excluído com sucesso!!" });
     } catch (error) {
       console.log(error);
       return response

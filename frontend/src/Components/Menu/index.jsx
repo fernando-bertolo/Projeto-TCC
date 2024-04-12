@@ -17,6 +17,7 @@ import {
 } from "./style.jsx";
 
 import LogoImagem from "../../assets/Imagens/Logo.jpeg";
+import LogoImagem2 from "../../assets/Imagens/Logo2.jpeg";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -47,7 +48,7 @@ const Menu = () => {
     <>
       <NavMenu>
         <DivLogo>
-          <Logo src={LogoImagem} />
+          <Logo src={LogoImagem2} />
         </DivLogo>
         <SectionGeral>
           <DivTextoGeral>
