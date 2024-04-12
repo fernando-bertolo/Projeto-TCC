@@ -54,23 +54,23 @@ function Acessorios() {
     try {
       if (dadosAcessorios) {
         console.log(dadosAcessorio);
-        // await axios.delete(
-        //   `http://localhost:3010/deletar-acessorio/${dadosAcessorios.idAcessorio}`
-        // );
+        await axios.delete(
+          `http://localhost:3010/deletar-acessorio/${dadosAcessorios.idAcessorio}`
+        );
 
-        // // Mensagem de sucesso
-        // toast.success("Acessório excluído com sucesso!!", {
-        //   position: "bottom-right",
-        //   autoClose: 2000,
-        //   hideProgressBar: false,
-        //   closeOnClick: true,
-        //   pauseOnHover: true,
-        //   draggable: true,
-        //   progress: undefined,
-        //   theme: "light",
-        // });
-        // await delay(3.5);
-        // buscaAcessorio();
+        // Mensagem de sucesso
+        toast.success("Acessório excluído com sucesso!!", {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        await delay(3.5);
+        buscaAcessorio();
       } else {
         // Mensagem de warning
         toast.warn("Não é possível excluir este acessório", {

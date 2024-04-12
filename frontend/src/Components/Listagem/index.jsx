@@ -72,6 +72,15 @@ function Listagem(props) {
   const [dadosAcessorioSelecionado, setDadosAcessorioSelecionado] =
     useState("");
 
+  // Modal Veiculos
+
+  const [modalOpenVeiculo, setModalOpenVeiculo] = useState("");
+  const [modalEditVeiculo, setModalEditVeiculo] = useState("");
+
+  // Dados Veiculos
+
+  const [dadosVeiculoSelecionado, setDadosVeiculoSelecionado] = useState("");
+
   return (
     <>
       <DivMain>
@@ -189,6 +198,18 @@ function Listagem(props) {
                   ) : props.rota === "acessorio" ? (
                     <>
                       <Th>{props.primeiraColuna}</Th>
+                    </>
+                  ) : props.rota === "veiculo" ? (
+                    <>
+                      <Th>{props.marca}</Th>
+                      <Th>{props.modelo}</Th>
+                      <Th>{props.versao}</Th>
+                      <Th>{props.ano}</Th>
+                      <Th>{props.combustivel}</Th>
+                      <Th>{props.cor}</Th>
+                      <Th>{props.quilometragem}</Th>
+                      <Th>{props.placa}</Th>
+                      <Th>{props.valor}</Th>
                     </>
                   ) : (
                     <></>
@@ -322,6 +343,34 @@ function Listagem(props) {
                         }}
                       >
                         <Td>{infoAcessorio.nomeAcessorio}</Td>
+                      </TrBody>
+                    );
+                  })
+                ) : props.rota === "veiculo" && props.dadosVeiculos ? (
+                  props.dadosVeiculos.map((infoVeiculos) => {
+                    return (
+                      <TrBody
+                        key={infoVeiculos.idVeiculo}
+                        onClick={() => {
+                          setDadosVeiculoSelecionado(infoVeiculos);
+                        }}
+                        style={{
+                          backgroundColor:
+                            dadosVeiculoSelecionado.idVeiculo ===
+                            infoVeiculos.idVeiculo
+                              ? "#514869"
+                              : "#2f2841",
+                        }}
+                      >
+                        <Td>{infoVeiculos.Verso.Modelo.Marca.nomeMarca}</Td>
+                        <Td>{infoVeiculos.Verso.Modelo.nomeModelo}</Td>
+                        <Td>{infoVeiculos.Verso.nomeVersao}</Td>
+                        <Td>{infoVeiculos.ano}</Td>
+                        <Td>{infoVeiculos.combustivel}</Td>
+                        <Td>{infoVeiculos.cor}</Td>
+                        <Td>{infoVeiculos.quilometragem}</Td>
+                        <Td>{infoVeiculos.placa}</Td>
+                        <Td>{infoVeiculos.valor}</Td>
                       </TrBody>
                     );
                   })
