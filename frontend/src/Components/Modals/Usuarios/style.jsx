@@ -30,7 +30,7 @@ export const FormCadastro = styled.form`
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  //gap: 1rem;
+  gap: 1rem;
 `;
 
 export const DivTitulo = styled.div`

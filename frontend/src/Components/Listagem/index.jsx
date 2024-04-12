@@ -160,7 +160,6 @@ function Listagem(props) {
                       <Th>{props.segundaColuna}</Th>
                       <Th>{props.terceiraColuna}</Th>
                       <Th>{props.quartaColuna}</Th>
-                      <Th>{props.quintaColuna}</Th>
                     </>
                   ) : props.rota === "clientes" ? (
                     <>
@@ -216,7 +215,6 @@ function Listagem(props) {
                         <Td>{usuario.nome}</Td>
                         <Td>{usuario.usuario}</Td>
                         <Td>{usuario.email}</Td>
-                        <Td>{usuario.permissao}</Td>
                       </TrBody>
                     );
                   })

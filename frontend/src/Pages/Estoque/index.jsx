@@ -1,5 +1,6 @@
 import Menu from "../../Components/Menu/index.jsx";
-import {Body} from "../../Components/BodyPages/style.jsx";
+import Listagem from "../../Components/Listagem/index.jsx";
+import {Body, DivContentCadastros} from "../../Components/BodyPages/style.jsx";
 
 
 function Estoque(){
@@ -7,7 +8,9 @@ function Estoque(){
         <>
             <Body>
                 <Menu/>
-                <h1>Estoque</h1>
+                <DivContentCadastros>
+                    <Listagem/>
+                </DivContentCadastros>
             </Body>
         </>
     );

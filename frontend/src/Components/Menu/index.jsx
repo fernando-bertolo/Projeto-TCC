@@ -93,9 +93,6 @@ const Menu = () => {
             <TextoUsuario>{data}</TextoUsuario>
           </DivConteudoUsuario>
           <DivConteudoUsuario>
-            <TextoUsuario>Admin</TextoUsuario>
-          </DivConteudoUsuario>
-          <DivConteudoUsuario>
             <Sair to={"/"} onClick={() => removeToken()}>
               Sair
             </Sair>

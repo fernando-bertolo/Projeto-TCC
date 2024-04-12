@@ -70,29 +70,30 @@ function Clientes() {
     <>
       <Body>
         <Menu />
-
-        <Listagem
-          dataCustomer={dataCustomer}
-          excluirCliente={excluirCliente}
-          title="Listagem de Clientes"
-          rota="clientes"
-          atualizaClientes={buscaClientes}
-          nome="Nome"
-          nacionalidade="Nacionalidade"
-          estadoCivil="Estado Civil"
-          cpf="CPF"
-          email="E-mail"
-          dataNascimento="Data de Nascimento"
-          rg="RG"
-          celular="Celular"
-          cep="CEP"
-          endereco="Endereço"
-          bairro="Bairro"
-          cidade="Cidade"
-          numero="Número"
-          estado="Estado"
-        />
-        <ToastContainer />
+        <DivContentCadastros>
+          <Listagem
+            dataCustomer={dataCustomer}
+            excluirCliente={excluirCliente}
+            title="Listagem de Clientes"
+            rota="clientes"
+            atualizaClientes={buscaClientes}
+            nome="Nome"
+            nacionalidade="Nacionalidade"
+            estadoCivil="Estado Civil"
+            cpf="CPF"
+            email="E-mail"
+            dataNascimento="Data de Nascimento"
+            rg="RG"
+            celular="Celular"
+            cep="CEP"
+            endereco="Endereço"
+            bairro="Bairro"
+            cidade="Cidade"
+            numero="Número"
+            estado="Estado"
+          />
+          <ToastContainer />
+        </DivContentCadastros>
       </Body>
     </>
   );

@@ -262,16 +262,6 @@ function ModalUser(props) {
                 }}
               />
             </DivInputs>
-
-            <DivInputs>
-              <DivNomeInput>
-                <NomeInput>Informe a permissão</NomeInput>
-              </DivNomeInput>
-              <Select>
-                <Option value="Administrador">Administrador</Option>
-                <Option value="Funcionario">Funcionario</Option>
-              </Select>
-            </DivInputs>
           </FormCadastro>
           <DivBotoes>
             <BotaoCancelar

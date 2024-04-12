@@ -121,12 +121,14 @@ export const Tabela = styled.table`
 
 export const THead = styled.thead`
   background-color: #7176ff;
+  width: 100%;
 `;
 export const Th = styled.th`
   padding: 1.1rem;
   //border-right: 1px solid white;
   border-bottom: 1px solid white;
   font-size: 1vw;
+  //width: 100%;
 `;
 export const Tr = styled.tr``;
 
