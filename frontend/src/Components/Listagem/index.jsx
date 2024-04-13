@@ -4,6 +4,7 @@ import ModalMarca from "../Modals/Cadastros/Marcas/index";
 import ModalModelo from "../Modals/Cadastros/Modelos/ModalModelo.jsx";
 import ModalVersao from "../Modals/Cadastros/Versao/ModalVersao.jsx";
 import ModalAcessorio from "../Modals/Cadastros/Acessorios/ModalAcessorio.jsx";
+import ModalEstoque from "../Modals/Estoque/ModalEstoque.jsx";
 
 import { useState } from "react";
 
@@ -109,6 +110,8 @@ function Listagem(props) {
                           setModalOpenVersao(true)
                         ) : props.rota === "acessorio" ? (
                           setModalOpenAcessorio(true)
+                        ) : props.rota === "veiculo" ? (
+                          setModalOpenVeiculo(true)
                         ) : (
                           <></>
                         )
@@ -510,6 +513,26 @@ function Listagem(props) {
             setModalEditAcessorio={setModalEditAcessorio}
             atualizaAcessorio={props.atualizaAcessorio}
             dadosAcessorioSelecionado={dadosAcessorioSelecionado}
+          />
+        ) : (
+          <></>
+        )}
+
+        {modalOpenVeiculo && props.rota === "veiculo" ? (
+          <ModalEstoque
+            modo="criacao"
+            titulo="Cadastro de Veículo"
+            setModalOpenVeiculo={setModalOpenVeiculo}
+            botaoSubmit="Cadastrar"
+            dadosVeiculos={props.dadosVeiculos}
+          />
+        ) : modalEditVeiculo && props.rota === "veiculo" ? (
+          <ModalEstoque
+            modo="edicao"
+            titulo="Edição de Veículo"
+            setModalEditVeiculo={setModalEditVeiculo}
+            botaoSubmit="Alterar"
+            dadosVeiculos={props.dadosVeiculos}
           />
         ) : (
           <></>

@@ -14,8 +14,6 @@ import {
   NomeInput,
   DivNomeInput,
   Input,
-  Select,
-  Option,
   DivBotoes,
   BotaoCancelar,
   BotaoAdicionar,

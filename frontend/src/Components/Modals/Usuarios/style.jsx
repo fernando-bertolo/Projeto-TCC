@@ -84,18 +84,6 @@ export const Input = styled.input`
   }
 `;
 
-export const Select = styled.select`
-  width: 60%;
-  height: 50%;
-  color: #fff;
-  border-radius: 10px;
-  padding-left: 20px;
-  background-color: #514869;
-  border-style: none;
-`;
-
-export const Option = styled.option``;
-
 export const DivBotoes = styled.div`
   width: 100%;
   height: 10%;
