@@ -525,6 +525,7 @@ function Listagem(props) {
             setModalOpenVeiculo={setModalOpenVeiculo}
             botaoSubmit="Cadastrar"
             dadosVeiculos={props.dadosVeiculos}
+            dadosVeiculoSelecionado={dadosVeiculoSelecionado}
           />
         ) : modalEditVeiculo && props.rota === "veiculo" ? (
           <ModalEstoque
@@ -533,6 +534,7 @@ function Listagem(props) {
             setModalEditVeiculo={setModalEditVeiculo}
             botaoSubmit="Alterar"
             dadosVeiculos={props.dadosVeiculos}
+            dadosVeiculoSelecionado={dadosVeiculoSelecionado}
           />
         ) : (
           <></>

@@ -30,6 +30,18 @@ function EstoqueModal(props) {
   const [dadosVersoes, setDadosVersoes] = useState([]);
   const [dadoVersaoUnica, setDadoVersaoUnica] = useState("");
 
+  const [inputVeiculo, setInputVeiculo] = useState({
+    ano: "",
+    placa: "",
+    combustivel: "",
+    cor: "",
+    quilometragem: "",
+    valor: "",
+    acessorios: {}
+  },
+  props.modo === "edicao" ? props.dadosVeiculoSelecioano : ""
+)
+
   const buscaMarcas = async () => {
     await axios
       .get("http://localhost:3010/visualizar-marcas")
@@ -98,9 +110,16 @@ function EstoqueModal(props) {
                   <Label>Combustível: </Label>
                   <Input2
                     type="text"
-                    id="nacionalidade"
-                    name="nome"
-                    placeholder="Digite a nacionalidade"
+                    id="combustivel"
+                    name="combustivel"
+                    placeholder="Digite o combustível"
+                    value={inputVeiculo.combustivel}
+                    onChange={(event) => {
+                      setInputVeiculo({
+                        ...inputVeiculo,
+                        combustivel: event.target.value
+                      })
+                    }}
                   />
                 </DivInternaInput>
               </DivInput>
@@ -131,9 +150,16 @@ function EstoqueModal(props) {
                   <Label>Cor: </Label>
                   <Input2
                     type="text"
-                    id="nacionalidade"
-                    name="nome"
-                    placeholder="Digite a nacionalidade"
+                    id="cor"
+                    name="cor"
+                    placeholder="Digite a cor"
+                    value={inputVeiculo.cor}
+                    onChange={(event) => {
+                      setInputVeiculo({
+                        ...inputVeiculo,
+                        cor: event.target.value
+                      })
+                    }}
                   />
                 </DivInternaInput>
               </DivInput>
@@ -161,12 +187,19 @@ function EstoqueModal(props) {
                 </DivInternaInput>
 
                 <DivInternaInput>
-                  <Label>KM: </Label>
+                  <Label>Quilometragem: </Label>
                   <Input2
                     type="text"
-                    id="nacionalidade"
-                    name="nome"
-                    placeholder="Digite a nacionalidade"
+                    id="quilometragem"
+                    name="quilometragem"
+                    placeholder="Digite a quilometragem"
+                    value={inputVeiculo.quilometragem}
+                    onChange={(event) => {
+                      setInputVeiculo({
+                        ...inputVeiculo,
+                        quilometragem: event.target.value
+                      })
+                    }}
                   />
                 </DivInternaInput>
               </DivInput>
@@ -176,9 +209,16 @@ function EstoqueModal(props) {
                   <Label>Ano: </Label>
                   <Input2
                     type="text"
-                    id="nome"
-                    name="nome"
-                    placeholder="Digite o nome"
+                    id="ano"
+                    name="ano"
+                    placeholder="Digite o ano"
+                    value={inputVeiculo.ano}
+                    onChange={(event) => {
+                      setInputVeiculo({
+                        ...inputVeiculo,
+                        ano: event.target.value
+                      })
+                    }}
                   />
                 </DivInternaInput>
 
@@ -186,9 +226,16 @@ function EstoqueModal(props) {
                   <Label>Valor: </Label>
                   <Input2
                     type="text"
-                    id="nacionalidade"
-                    name="nome"
-                    placeholder="Digite a nacionalidade"
+                    id="valor"
+                    name="valor"
+                    placeholder="Digite o valor"
+                    value={inputVeiculo.valor}
+                    onChange={(event) => {
+                      setInputVeiculo({
+                        ...inputVeiculo,
+                        valor: event.target.value
+                      })
+                    }}
                   />
                 </DivInternaInput>
               </DivInput>
@@ -198,9 +245,16 @@ function EstoqueModal(props) {
                   <Label>Placa: </Label>
                   <Input2
                     type="text"
-                    id="nome"
-                    name="nome"
-                    placeholder="Digite o nome"
+                    id="placa"
+                    name="placa"
+                    placeholder="Digite a placa"
+                    value={inputVeiculo.placa}
+                    onChange={(event) => {
+                      setInputVeiculo({
+                        ...inputVeiculo,
+                        placa: event.target.value
+                      })
+                    }}
                   />
                 </DivInternaInput>
 
