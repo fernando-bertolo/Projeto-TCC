@@ -134,9 +134,11 @@ function Listagem(props) {
                         ) : props.rota === "acessorio" &&
                           dadosAcessorioSelecionado ? (
                           setModalEditAcessorio(true)
+                        ) : props.rota === "veiculo" && dadosVeiculoSelecionado ? (
+                          setModalEditVeiculo(true)
                         ) : (
                           <></>
-                        );
+                        )
                       }}
                     />
                     <IconeExcluir
@@ -213,6 +215,7 @@ function Listagem(props) {
                       <Th>{props.quilometragem}</Th>
                       <Th>{props.placa}</Th>
                       <Th>{props.valor}</Th>
+                      <Th>{props.idStatus}</Th>
                     </>
                   ) : (
                     <></>
@@ -374,6 +377,7 @@ function Listagem(props) {
                         <Td>{infoVeiculos.quilometragem}</Td>
                         <Td>{infoVeiculos.placa}</Td>
                         <Td>{infoVeiculos.valor}</Td>
+                        <Td>{infoVeiculos.idStatus}</Td>
                       </TrBody>
                     );
                   })
@@ -535,6 +539,7 @@ function Listagem(props) {
             botaoSubmit="Alterar"
             dadosVeiculos={props.dadosVeiculos}
             dadosVeiculoSelecionado={dadosVeiculoSelecionado}
+            atualizaVeiculos={props.atualizaVeiculos}
           />
         ) : (
           <></>

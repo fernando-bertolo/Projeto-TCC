@@ -37,10 +37,9 @@ function EstoqueModal(props) {
     cor: "",
     quilometragem: "",
     valor: "",
-    acessorios: {}
-  },
-  props.modo === "edicao" ? props.dadosVeiculoSelecioano : ""
-)
+    acessorios: [],
+    ...props.modo === "edicao" ? props.dadosVeiculoSelecionado : {}
+  });
 
   const buscaMarcas = async () => {
     await axios
@@ -71,6 +70,98 @@ function EstoqueModal(props) {
     buscaModelos();
     buscaVersoes();
   }, []);
+
+
+
+    // Função de delay
+    function delay(n) {
+      return new Promise(function (resolve) {
+        setTimeout(resolve, n * 1000);
+      });
+    }
+
+
+  const CadastrarVeiculo = async (event) => {
+    try {
+      event.preventDefault();
+      if(props.modo === "criacao") {
+        await axios.post("http://localhost:3010/criacao-veiculos", {
+          idMarca: dadoMarcaUnica,
+          idModelo: dadoModeloUnico,
+          idVersao: dadoVersaoUnica,
+          idStatus: "Em estoque",
+          ano: inputVeiculo.ano,
+          combustivel: inputVeiculo.combustivel,
+          cor: inputVeiculo.cor,
+          quilometragem: inputVeiculo.quilometragem,
+          valor: inputVeiculo.valor,
+          placa: inputVeiculo.placa
+        })
+
+        // Mensagem de sucesso
+        toast.success("Veículo cadastrado com sucesso!!", {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        delay(3.5)
+        props.setModalOpenVeiculo(false)
+        props.atualizaVeiculos()
+
+
+
+      } else if (props.modo === "edicao") {
+        await axios.put(`http://localhost:3010/alteracao-veiculo/${props.dadosVeiculoSelecionado.idVeiculo}`, {
+          idMarca: dadoMarcaUnica,
+          idModelo: dadoModeloUnico,
+          idVersao: dadoVersaoUnica,
+          idStatus: "Em estoque",
+          ano: inputVeiculo.ano,
+          combustivel: inputVeiculo.combustivel,
+          cor: inputVeiculo.cor,
+          quilometragem: inputVeiculo.quilometragem,
+          valor: inputVeiculo.valor,
+          placa: inputVeiculo.placa
+        })
+
+        // Mensagem de sucesso
+        toast.success("Veículo alterado com sucesso!!", {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+
+
+
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        toast.error(error.response.data.Error, {
+          position: "bottom-right",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      } else {
+        console.log(error);
+      }
+    }
+
+  }
 
   return (
     <>
@@ -285,7 +376,7 @@ function EstoqueModal(props) {
             >
               Cancelar
             </BotaoCancelar>
-            <BotaoAdicionar type="submit">{props.botaoSubmit}</BotaoAdicionar>
+            <BotaoAdicionar type="submit" onClick={(event) => CadastrarVeiculo(event)}>{props.botaoSubmit}</BotaoAdicionar>
           </DivBotoes>
         </SectionMainContent>
         <ToastContainer />

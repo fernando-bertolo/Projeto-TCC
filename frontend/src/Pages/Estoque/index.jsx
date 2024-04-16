@@ -51,6 +51,7 @@ function Estoque() {
             title="Estoque"
             rota="veiculo"
             dadosVeiculos={dadosVeiculos}
+            atualizaVeiculos={buscaVeiculos}
             marca="Marca"
             modelo="Modelo"
             versao="Versão"
@@ -60,6 +61,7 @@ function Estoque() {
             cor="Cor"
             placa="Placa"
             valor="Valor"
+            idStatus="Status"
           />
           <ToastContainer />
         </DivContentCadastros>
