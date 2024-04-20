@@ -16,7 +16,7 @@ npm install express sequelize mysql2 bcrypt jsonwebtoken nodemon cors nodemailer
 Para realizar a instalação dessas dependências, basta rodar o seguinte comando:
 
 ```
-npm install styled-components axios react-icons react-router-dom react-toastify validator
+npm install styled-components axios react-icons react-router-dom react-toastify validator @mui/material @emotion/react @emotion/styled
 ```
 
 > Esta sendo utilizado o docker para rodar o Banco de Dados MYSQL

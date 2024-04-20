@@ -19,6 +19,7 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import MultipleSelectCheckmarks from "../../Select/SelectMUI";
 
 function EstoqueModal(props) {
   const [dadosMarcas, setDadosMarcas] = useState([]);
@@ -206,12 +207,7 @@ function EstoqueModal(props) {
 
                 <DivInternaInput>
                   <Label>Acessórios: </Label>
-                  <Input2
-                    type="text"
-                    id="nacionalidade"
-                    name="nome"
-                    placeholder="Digite a nacionalidade"
-                  />
+                  <MultipleSelectCheckmarks></MultipleSelectCheckmarks>
                 </DivInternaInput>
               </DivInput>
             </SectionInfoVeiculo>
