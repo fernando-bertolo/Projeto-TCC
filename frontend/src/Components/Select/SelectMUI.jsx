@@ -21,19 +21,6 @@ const MenuProps = {
   },
 };
 
-const names = [
-  "Oliver Hansen",
-  "Van Henry",
-  "April Tucker",
-  "Ralph Hubbard",
-  "Omar Alexander",
-  "Carlos Abbott",
-  "Miriam Wagner",
-  "Bradley Wilkerson",
-  "Virginia Andrews",
-  "Kelly Snyder",
-];
-
 export default function MultipleSelectCheckmarks() {
   const [personName, setPersonName] = React.useState([]);
   const [dadosAcessorios, setDadosAcessorios] = useState([]);
@@ -72,19 +59,19 @@ export default function MultipleSelectCheckmarks() {
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
           multiple
-          value={dadosAcessorios.nomeAcessorio}
+          value={personName}
           onChange={handleChange}
           input={<OutlinedInput label="Tag" />}
           renderValue={(selected) => selected.join(", ")}
           MenuProps={MenuProps}
         >
-          {dadosAcessorios.map((infoAcessorios) => (
+          {dadosAcessorios.map((infoAcessorio) => (
             <MenuItem
-              key={infoAcessorios.idAcessorio}
-              value={infoAcessorios.nomeAcessorio}
+              key={infoAcessorio.idAcessorio}
+              value={infoAcessorio.nomeAcessorio}
             >
-              <Checkbox checked={personName.indexOf(infoAcessorios) > -1} />
-              <ListItemText primary={infoAcessorios} />
+              <Checkbox checked={personName.indexOf(infoAcessorio) > -1} />
+              <ListItemText primary={infoAcessorio.nomeAcessorio} />
             </MenuItem>
           ))}
         </Select>
