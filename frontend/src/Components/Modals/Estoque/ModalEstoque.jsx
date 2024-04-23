@@ -39,7 +39,7 @@ function EstoqueModal(props) {
     quilometragem: "",
     valor: "",
     acessorios: [],
-    ...props.modo === "edicao" ? props.dadosVeiculoSelecionado : {}
+    ...(props.modo === "edicao" ? props.dadosVeiculoSelecionado : {}),
   });
 
   const buscaMarcas = async () => {
@@ -72,20 +72,17 @@ function EstoqueModal(props) {
     buscaVersoes();
   }, []);
 
-
-
-    // Função de delay
-    function delay(n) {
-      return new Promise(function (resolve) {
-        setTimeout(resolve, n * 1000);
-      });
-    }
-
+  // Função de delay
+  function delay(n) {
+    return new Promise(function (resolve) {
+      setTimeout(resolve, n * 1000);
+    });
+  }
 
   const CadastrarVeiculo = async (event) => {
     try {
       event.preventDefault();
-      if(props.modo === "criacao") {
+      if (props.modo === "criacao") {
         await axios.post("http://localhost:3010/criacao-veiculos", {
           idMarca: dadoMarcaUnica,
           idModelo: dadoModeloUnico,
@@ -96,8 +93,8 @@ function EstoqueModal(props) {
           cor: inputVeiculo.cor,
           quilometragem: inputVeiculo.quilometragem,
           valor: inputVeiculo.valor,
-          placa: inputVeiculo.placa
-        })
+          placa: inputVeiculo.placa,
+        });
 
         // Mensagem de sucesso
         toast.success("Veículo cadastrado com sucesso!!", {
@@ -110,25 +107,25 @@ function EstoqueModal(props) {
           progress: undefined,
           theme: "light",
         });
-        delay(3.5)
-        props.setModalOpenVeiculo(false)
-        props.atualizaVeiculos()
-
-
-
+        delay(3.5);
+        props.setModalOpenVeiculo(false);
+        props.atualizaVeiculos();
       } else if (props.modo === "edicao") {
-        await axios.put(`http://localhost:3010/alteracao-veiculo/${props.dadosVeiculoSelecionado.idVeiculo}`, {
-          idMarca: dadoMarcaUnica,
-          idModelo: dadoModeloUnico,
-          idVersao: dadoVersaoUnica,
-          idStatus: "Em estoque",
-          ano: inputVeiculo.ano,
-          combustivel: inputVeiculo.combustivel,
-          cor: inputVeiculo.cor,
-          quilometragem: inputVeiculo.quilometragem,
-          valor: inputVeiculo.valor,
-          placa: inputVeiculo.placa
-        })
+        await axios.put(
+          `http://localhost:3010/alteracao-veiculo/${props.dadosVeiculoSelecionado.idVeiculo}`,
+          {
+            idMarca: dadoMarcaUnica,
+            idModelo: dadoModeloUnico,
+            idVersao: dadoVersaoUnica,
+            idStatus: "Em estoque",
+            ano: inputVeiculo.ano,
+            combustivel: inputVeiculo.combustivel,
+            cor: inputVeiculo.cor,
+            quilometragem: inputVeiculo.quilometragem,
+            valor: inputVeiculo.valor,
+            placa: inputVeiculo.placa,
+          }
+        );
 
         // Mensagem de sucesso
         toast.success("Veículo alterado com sucesso!!", {
@@ -141,9 +138,6 @@ function EstoqueModal(props) {
           progress: undefined,
           theme: "light",
         });
-
-
-
       }
     } catch (error) {
       if (error.response && error.response.status === 400) {
@@ -161,8 +155,7 @@ function EstoqueModal(props) {
         console.log(error);
       }
     }
-
-  }
+  };
 
   return (
     <>
@@ -209,8 +202,8 @@ function EstoqueModal(props) {
                     onChange={(event) => {
                       setInputVeiculo({
                         ...inputVeiculo,
-                        combustivel: event.target.value
-                      })
+                        combustivel: event.target.value,
+                      });
                     }}
                   />
                 </DivInternaInput>
@@ -249,8 +242,8 @@ function EstoqueModal(props) {
                     onChange={(event) => {
                       setInputVeiculo({
                         ...inputVeiculo,
-                        cor: event.target.value
-                      })
+                        cor: event.target.value,
+                      });
                     }}
                   />
                 </DivInternaInput>
@@ -289,8 +282,8 @@ function EstoqueModal(props) {
                     onChange={(event) => {
                       setInputVeiculo({
                         ...inputVeiculo,
-                        quilometragem: event.target.value
-                      })
+                        quilometragem: event.target.value,
+                      });
                     }}
                   />
                 </DivInternaInput>
@@ -308,8 +301,8 @@ function EstoqueModal(props) {
                     onChange={(event) => {
                       setInputVeiculo({
                         ...inputVeiculo,
-                        ano: event.target.value
-                      })
+                        ano: event.target.value,
+                      });
                     }}
                   />
                 </DivInternaInput>
@@ -325,8 +318,8 @@ function EstoqueModal(props) {
                     onChange={(event) => {
                       setInputVeiculo({
                         ...inputVeiculo,
-                        valor: event.target.value
-                      })
+                        valor: event.target.value,
+                      });
                     }}
                   />
                 </DivInternaInput>
@@ -344,14 +337,14 @@ function EstoqueModal(props) {
                     onChange={(event) => {
                       setInputVeiculo({
                         ...inputVeiculo,
-                        placa: event.target.value
-                      })
+                        placa: event.target.value,
+                      });
                     }}
                   />
                 </DivInternaInput>
 
                 <DivInternaInput>
-                  <Label>Acessórios: </Label>
+                  <Label>Acessórios:</Label>
                   <MultipleSelectCheckmarks></MultipleSelectCheckmarks>
                 </DivInternaInput>
               </DivInput>
@@ -372,7 +365,12 @@ function EstoqueModal(props) {
             >
               Cancelar
             </BotaoCancelar>
-            <BotaoAdicionar type="submit" onClick={(event) => CadastrarVeiculo(event)}>{props.botaoSubmit}</BotaoAdicionar>
+            <BotaoAdicionar
+              type="submit"
+              onClick={(event) => CadastrarVeiculo(event)}
+            >
+              {props.botaoSubmit}
+            </BotaoAdicionar>
           </DivBotoes>
         </SectionMainContent>
         <ToastContainer />

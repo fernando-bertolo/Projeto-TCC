@@ -4,6 +4,8 @@ const tabelaVeiculo = require("../../../Database/Tabelas/Veiculos/veiculos.js");
 const tabelaMarca = require("../../../Database/Tabelas/Marcas/marcas.js");
 const tabelaModelo = require("../../../Database/Tabelas/Modelos/modelos.js");
 const tabelaVersao = require("../../../Database/Tabelas/Versoes/versoes.js");
+const tabelaAcessorioVeiculo = require("../../../Database/Tabelas/Acessorios_veiculos/acessoriosVeiculos.js");
+const tabelaAcessorio = require("../../../Database/Tabelas/Acessorios/acessorios.js");
 
 criacaoVeiculo.post("/criacao-veiculos", async (request, response) => {
   const {
@@ -17,31 +19,32 @@ criacaoVeiculo.post("/criacao-veiculos", async (request, response) => {
     quilometragem,
     valor,
     placa,
+    idAcessorio,
   } = request.body;
   try {
-    const marcaID = tabelaMarca.findOne({
+    const marca = await tabelaMarca.findOne({
       where: {
         idMarca: idMarca,
       },
     });
 
-    const modeloID = tabelaModelo.findOne({
+    const modelo = await tabelaModelo.findOne({
       where: {
         idModelo: idModelo,
       },
     });
 
-    const versaoID = tabelaVersao.findOne({
+    const versao = await tabelaVersao.findOne({
       where: {
         idVersao: idVersao,
       },
     });
 
-    if (!marcaID || !modeloID || !versaoID) {
+    if (!marca || !modelo || !versao) {
       return response.status(400).json({ Error: "Parâmetros inválidos!!" });
     }
 
-    tabelaVeiculo.create({
+    const veiculo = await tabelaVeiculo.create({
       idMarca: idMarca,
       idModelo: idModelo,
       idVersao: idVersao,
@@ -53,6 +56,22 @@ criacaoVeiculo.post("/criacao-veiculos", async (request, response) => {
       valor: valor,
       placa: placa,
     });
+
+    const acessorio = await tabelaAcessorio.findOne({
+      where: {
+        idAcessorio: idAcessorio,
+      },
+    });
+
+    if (!acessorio) {
+      return response.status(400).json({ Error: "Acessório inválido!!" });
+    }
+
+    await tabelaAcessorioVeiculo.create({
+      idVeiculo: veiculo.idVeiculo,
+      idAcessorio: idAcessorio,
+    });
+
     return response
       .status(200)
       .json({ message: "Veículo criado com sucesso!!" });

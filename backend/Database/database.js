@@ -3,8 +3,8 @@
 const Sequelize = require("sequelize");
 const sequelize = new Sequelize("databasecar", "root", "root", {
   dialect: "mysql", // o banco que vai utilizar e o sequelize traduzir o js
-  host: "database", // host é onde esta o banco
-  port: "3306", // porta do banco
+  host: "localhost", // host é onde esta o banco
+  port: "3030", // porta do banco
   logging: console.log,
 });
 
