@@ -21,5 +21,12 @@ Modelos.hasMany(Veiculos, { foreignKey: "idModelo" }); // um modelo possui diver
 Versoes.hasMany(Veiculos, { foreignKey: "idVersao" }); // uma versão possui diversos veiculos
 
 // Definindo a associação belongsToMany para Acessorios e Veiculos
-Acessorios.belongsToMany(Veiculos, { through: "AcessoriosVeiculos" }); // through é usado para especificar a tabela intermediaria que gerencia o relacionamento muitos para muitos
-Veiculos.belongsToMany(Acessorios, { through: "AcessoriosVeiculos" });
+// Definindo a associação entre Acessorios e Veiculos através de AcessoriosVeiculos
+Acessorios.belongsToMany(Veiculos, {
+  through: AcessoriosVeiculos,
+  foreignKey: "idAcessorio",
+});
+Veiculos.belongsToMany(Acessorios, {
+  through: AcessoriosVeiculos,
+  foreignKey: "idVeiculo",
+}); // through é usado para especificar a tabela intermediaria que gerencia o relacionamento muitos para muitos

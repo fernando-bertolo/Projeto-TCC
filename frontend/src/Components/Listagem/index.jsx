@@ -134,11 +134,12 @@ function Listagem(props) {
                         ) : props.rota === "acessorio" &&
                           dadosAcessorioSelecionado ? (
                           setModalEditAcessorio(true)
-                        ) : props.rota === "veiculo" && dadosVeiculoSelecionado ? (
+                        ) : props.rota === "veiculo" &&
+                          dadosVeiculoSelecionado ? (
                           setModalEditVeiculo(true)
                         ) : (
                           <></>
-                        )
+                        );
                       }}
                     />
                     <IconeExcluir
@@ -368,8 +369,8 @@ function Listagem(props) {
                               : "#2f2841",
                         }}
                       >
-                        <Td>{infoVeiculos.Verso.Modelo.Marca.nomeMarca}</Td>
-                        <Td>{infoVeiculos.Verso.Modelo.nomeModelo}</Td>
+                        <Td>{infoVeiculos.Marca.nomeMarca}</Td>
+                        <Td>{infoVeiculos.Modelo.nomeModelo}</Td>
                         <Td>{infoVeiculos.Verso.nomeVersao}</Td>
                         <Td>{infoVeiculos.ano}</Td>
                         <Td>{infoVeiculos.combustivel}</Td>

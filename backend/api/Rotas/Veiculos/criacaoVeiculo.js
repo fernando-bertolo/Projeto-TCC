@@ -5,7 +5,6 @@ const tabelaMarca = require("../../../Database/Tabelas/Marcas/marcas.js");
 const tabelaModelo = require("../../../Database/Tabelas/Modelos/modelos.js");
 const tabelaVersao = require("../../../Database/Tabelas/Versoes/versoes.js");
 const tabelaAcessorioVeiculo = require("../../../Database/Tabelas/Acessorios_veiculos/acessoriosVeiculos.js");
-const tabelaAcessorio = require("../../../Database/Tabelas/Acessorios/acessorios.js");
 
 criacaoVeiculo.post("/criacao-veiculos", async (request, response) => {
   const {
@@ -19,28 +18,28 @@ criacaoVeiculo.post("/criacao-veiculos", async (request, response) => {
     quilometragem,
     valor,
     placa,
-    idAcessorio,
+    idAcessorios,
   } = request.body;
   try {
-    const marca = await tabelaMarca.findOne({
+    const marcaID = tabelaMarca.findOne({
       where: {
         idMarca: idMarca,
       },
     });
 
-    const modelo = await tabelaModelo.findOne({
+    const modeloID = tabelaModelo.findOne({
       where: {
         idModelo: idModelo,
       },
     });
 
-    const versao = await tabelaVersao.findOne({
+    const versaoID = tabelaVersao.findOne({
       where: {
         idVersao: idVersao,
       },
     });
 
-    if (!marca || !modelo || !versao) {
+    if (!marcaID || !modeloID || !versaoID) {
       return response.status(400).json({ Error: "Parâmetros inválidos!!" });
     }
 
@@ -57,20 +56,14 @@ criacaoVeiculo.post("/criacao-veiculos", async (request, response) => {
       placa: placa,
     });
 
-    const acessorio = await tabelaAcessorio.findOne({
-      where: {
-        idAcessorio: idAcessorio,
-      },
+    const teste = await idAcessorios.map((acessorioID) => {
+      tabelaAcessorioVeiculo.create({
+        idVeiculo: veiculo.idVeiculo,
+        idAcessorio: acessorioID,
+      });
     });
 
-    if (!acessorio) {
-      return response.status(400).json({ Error: "Acessório inválido!!" });
-    }
-
-    await tabelaAcessorioVeiculo.create({
-      idVeiculo: veiculo.idVeiculo,
-      idAcessorio: idAcessorio,
-    });
+    console.log(teste);
 
     return response
       .status(200)
