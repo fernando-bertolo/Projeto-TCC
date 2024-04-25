@@ -39,7 +39,9 @@ export default function MultipleSelectCheckmarks(props) {
   return (
     <div>
       <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-checkbox-label">Selecione</InputLabel>
+        <InputLabel id="demo-multiple-checkbox-label" sx={{ color: "#FFF" }}>
+          Selecione
+        </InputLabel>
         <Select
           labelId="demo-multiple-checkbox-label"
           id="demo-multiple-checkbox"
@@ -49,6 +51,7 @@ export default function MultipleSelectCheckmarks(props) {
           input={<OutlinedInput label="Selecione" />}
           renderValue={(selected) => selected.join(", ")}
           MenuProps={MenuProps}
+          sx={{ backgroundColor: "#514869", borderRadius: 3 }}
         >
           {props.dadosAcessorios.map((infoAcessorio) => (
             <MenuItem
@@ -56,7 +59,7 @@ export default function MultipleSelectCheckmarks(props) {
               value={infoAcessorio.idAcessorio}
             >
               <Checkbox
-                checked={personName.includes(infoAcessorio.nomeAcessorio)}
+                checked={personName.includes(infoAcessorio.idAcessorio)}
               />
               <ListItemText primary={infoAcessorio.nomeAcessorio} />
             </MenuItem>
