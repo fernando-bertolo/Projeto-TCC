@@ -31,6 +31,9 @@ function EstoqueModal(props) {
   const [dadosVersoes, setDadosVersoes] = useState([]);
   const [dadoVersaoUnica, setDadoVersaoUnica] = useState("");
 
+  const [dadosAcessorios, setDadosAcessorios] = useState([]);
+  // const [dadoAcessorioSelecionado, setDadoAcessorioSelecionado] = useState([]);
+
   const [inputVeiculo, setInputVeiculo] = useState({
     ano: "",
     placa: "",
@@ -66,10 +69,23 @@ function EstoqueModal(props) {
       });
   };
 
+  const buscaAcessorio = async () => {
+    try {
+      await axios
+        .get("http://localhost:3010/visualizar-acessorio")
+        .then((response) => {
+          setDadosAcessorios(response.data);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     buscaMarcas();
     buscaModelos();
     buscaVersoes();
+    buscaAcessorio();
   }, []);
 
   // Função de delay
@@ -94,6 +110,7 @@ function EstoqueModal(props) {
           quilometragem: inputVeiculo.quilometragem,
           valor: inputVeiculo.valor,
           placa: inputVeiculo.placa,
+          acessorios: inputVeiculo.acessorios,
         });
 
         // Mensagem de sucesso
@@ -124,6 +141,7 @@ function EstoqueModal(props) {
             quilometragem: inputVeiculo.quilometragem,
             valor: inputVeiculo.valor,
             placa: inputVeiculo.placa,
+            acessorios: inputVeiculo.acessorios,
           }
         );
 
@@ -345,7 +363,19 @@ function EstoqueModal(props) {
 
                 <DivInternaInput>
                   <Label>Acessórios:</Label>
-                  <MultipleSelectCheckmarks></MultipleSelectCheckmarks>
+                  <MultipleSelectCheckmarks
+                    dadosAcessorios={dadosAcessorios}
+                    setInputVeiculo={setInputVeiculo}
+                    inputVeiculo={inputVeiculo}
+                  ></MultipleSelectCheckmarks>
+
+                  <button
+                    onClick={() => {
+                      console.log(inputVeiculo.acessorios);
+                    }}
+                  >
+                    teste
+                  </button>
                 </DivInternaInput>
               </DivInput>
             </SectionInfoVeiculo>

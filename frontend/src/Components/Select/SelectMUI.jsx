@@ -7,9 +7,6 @@ import ListItemText from "@mui/material/ListItemText";
 import Select from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
 
-import { useState, useEffect } from "react";
-import axios from "axios";
-
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -21,9 +18,8 @@ const MenuProps = {
   },
 };
 
-export default function MultipleSelectCheckmarks() {
+export default function MultipleSelectCheckmarks(props) {
   const [personName, setPersonName] = React.useState([]);
-  const [dadosAcessorios, setDadosAcessorios] = useState([]);
 
   const handleChange = (event) => {
     const {
@@ -33,23 +29,12 @@ export default function MultipleSelectCheckmarks() {
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
-  };
 
-  const buscaAcessorio = async () => {
-    try {
-      await axios
-        .get("http://localhost:3010/visualizar-acessorio")
-        .then((response) => {
-          setDadosAcessorios(response.data);
-        });
-    } catch (error) {
-      console.log(error);
-    }
+    props.setInputVeiculo({
+      ...props.inputVeiculo,
+      acessorios: event.target.value,
+    });
   };
-
-  useEffect(() => {
-    buscaAcessorio();
-  }, []);
 
   return (
     <div>
@@ -65,12 +50,14 @@ export default function MultipleSelectCheckmarks() {
           renderValue={(selected) => selected.join(", ")}
           MenuProps={MenuProps}
         >
-          {dadosAcessorios.map((infoAcessorio) => (
+          {props.dadosAcessorios.map((infoAcessorio) => (
             <MenuItem
               key={infoAcessorio.idAcessorio}
               value={infoAcessorio.nomeAcessorio}
             >
-              <Checkbox checked={personName.indexOf(infoAcessorio) > -1} />
+              <Checkbox
+                checked={personName.includes(infoAcessorio.nomeAcessorio)}
+              />
               <ListItemText primary={infoAcessorio.nomeAcessorio} />
             </MenuItem>
           ))}
