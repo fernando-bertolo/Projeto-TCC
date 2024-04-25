@@ -110,7 +110,7 @@ function EstoqueModal(props) {
           quilometragem: inputVeiculo.quilometragem,
           valor: inputVeiculo.valor,
           placa: inputVeiculo.placa,
-          acessorios: inputVeiculo.acessorios,
+          idAcessorios: inputVeiculo.acessorios,
         });
 
         // Mensagem de sucesso
@@ -368,14 +368,6 @@ function EstoqueModal(props) {
                     setInputVeiculo={setInputVeiculo}
                     inputVeiculo={inputVeiculo}
                   ></MultipleSelectCheckmarks>
-
-                  <button
-                    onClick={() => {
-                      console.log(inputVeiculo.acessorios);
-                    }}
-                  >
-                    teste
-                  </button>
                 </DivInternaInput>
               </DivInput>
             </SectionInfoVeiculo>

@@ -53,7 +53,7 @@ export default function MultipleSelectCheckmarks(props) {
           {props.dadosAcessorios.map((infoAcessorio) => (
             <MenuItem
               key={infoAcessorio.idAcessorio}
-              value={infoAcessorio.nomeAcessorio}
+              value={infoAcessorio.idAcessorio}
             >
               <Checkbox
                 checked={personName.includes(infoAcessorio.nomeAcessorio)}
