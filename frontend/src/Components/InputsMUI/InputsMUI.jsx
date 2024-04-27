@@ -6,14 +6,6 @@ import InputLabel from '@mui/material/InputLabel';
 
 export default function InputsMUI(props) {
 
-    const [inputUsuario, setInputUsuario] = React.useState({
-        nome: "",
-        email: "",
-        usuario: "",
-        senha: "",
-        confirmaSenha: ""
-    });
-
 
   return (
     <Box
@@ -37,10 +29,10 @@ export default function InputsMUI(props) {
             name="nome" 
             placeholder='Insira o Nome'
             required
-            value={inputUsuario.nome}
+            value={props.userData.nome}
             onChange={(event) => {
-                setInputUsuario({
-                    ...inputUsuario,
+              props.setUserData({
+                    ...props.userData,
                     nome: event.target.value
                 });
             }}
@@ -55,11 +47,11 @@ export default function InputsMUI(props) {
             name='email'
             placeholder='Insira o E-mail'
             required
-            value={inputUsuario.email}
+            value={props.userData.email}
             onChange={(event) => {
-                setInputUsuario({
-                    ...inputUsuario,
-                    email: event.target.value
+                props.setUserData({
+                    ...props.userData,
+                    email: event.target.value,
                 })
             }}
         />
@@ -73,10 +65,10 @@ export default function InputsMUI(props) {
             name='usuario'
             placeholder='Insira o Usuário'
             required
-            value={inputUsuario.usuario}
+            value={props.userData.usuario}
             onChange={(event) => {
-                setInputUsuario({
-                    ...inputUsuario,
+                props.setUserData({
+                    ...props.userData,
                     usuario: event.target.value
                 })
             }}
@@ -92,8 +84,8 @@ export default function InputsMUI(props) {
             placeholder='Insira a Senha'
             required
             onChange={(event) => {
-                setInputUsuario({
-                    ...inputUsuario,
+                props.setUserData({
+                    ...props.userData,
                     senha: event.target.value
                 })
             }}
@@ -109,11 +101,11 @@ export default function InputsMUI(props) {
             placeholder='Confirme sua Senha' 
             required
             onChange={(event) => {
-                setInputUsuario({
-                    ...inputUsuario,
+                props.setUserData({
+                    ...props.userData,
                     confirmaSenha: event.target.value
                 })
-            }}
+            }}web
         />
       </FormControl>
 

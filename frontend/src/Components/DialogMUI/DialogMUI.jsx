@@ -7,9 +7,15 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/material/Icon/Icon';
-import Typography from '@mui/material/Typography';
 import BotoesListagem from '../ButtonMUI/ButtonMUI';
 import InputsMUI from '../InputsMUI/InputsMUI';
+//import AlertMUI from '../AlertMUI/AlertMUI';
+import axios from 'axios';
+import validator from "validator";
+import { ToastContainer, toast } from "react-toastify";
+
+
+
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   '& .MuiDialogContent-root': {
@@ -30,7 +36,44 @@ function ModalDialog() {
     setOpen(false);
   };
 
-  const [userData, setUserData] = React.useState();
+  const [userData, setUserData] = React.useState({
+    nome: "",
+    email: "",
+    usuario: "",
+    senha: "",
+    confirmaSenha: ""
+  });
+
+
+  const SendUserData = async (event) => {
+    event.preventDefault();
+    try {
+        // Enviando os dados para a rota /criacao-usuario
+        await axios.post("http://localhost:3010/criacao-usuario", {
+          nome: userData.nome,
+          email: userData.email,
+          usuario: userData.usuario,
+          senha: userData.senha,
+          confirmaSenha: userData.confirmaSenha,
+        });
+
+        // Mensagem de sucesso
+        toast.success("Usuario criado com sucesso", {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      
+      
+    } catch (error) {
+      
+    }
+  }
 
 
   return (
@@ -57,14 +100,15 @@ function ModalDialog() {
           <CloseIcon />
         </IconButton>
         <DialogContent dividers>
-        <InputsMUI setUserData={setUserData}></InputsMUI>
+        <InputsMUI setUserData={setUserData} userData={userData}></InputsMUI>
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose}>
+          <Button type='submit' autoFocus onClick={(event) => SendUserData(event)}>
             Salvar
           </Button>
         </DialogActions>
       </BootstrapDialog>
+      <ToastContainer/>
     </React.Fragment>
   );
 }
