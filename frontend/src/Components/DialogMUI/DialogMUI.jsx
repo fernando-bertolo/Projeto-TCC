@@ -100,7 +100,7 @@ function ModalDialog() {
           <CloseIcon />
         </IconButton>
         <DialogContent dividers>
-        <InputsMUI setUserData={setUserData} userData={userData}></InputsMUI>
+        <InputsMUI setUserData={setUserData} userData={userData} SendUserData={SendUserData}></InputsMUI>
         </DialogContent>
         <DialogActions>
           <Button type='submit' autoFocus onClick={(event) => SendUserData(event)}>
