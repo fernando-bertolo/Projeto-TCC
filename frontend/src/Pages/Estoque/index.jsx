@@ -7,19 +7,30 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import DataTableMUI from "../../Components/MaterialUI/DataTables/DataTableMUI.jsx";
+
+const columnsCars = [
+  { field: "nomeMarca", headerName: "Marca", width: 150 },
+  { field: "nomeModelo", headerName: "Modelo", width: 150 },
+  { field: "nomeVersao", headerName: "Versão", width: 150 },
+  { field: "ano", headerName: "Ano", width: 80 },
+  { field: "cor", headerName: "Cor", width: 100 },
+  { field: "quilometragem", headerName: "Quilometragem", width: 120 },
+  { field: "placa", headerName: "Placa", width: 150 },
+  { field: "valor", headerName: "Valor", width: 150 },
+  { field: "idStatus", headerName: "idStatus", width: 150 },
+];
 
 function Estoque() {
-  const [dadosVeiculos, setDadosVeiculos] = useState();
+  const [dadosVeiculos, setDadosVeiculos] = useState([]);
 
   const buscaVeiculos = async () => {
     try {
-      const response = await axios
+      await axios
         .get("http://localhost:3010/visualizar-veiculo")
         .then((response) => {
           setDadosVeiculos(response.data);
         });
-
-      console.log(response);
     } catch (error) {
       if (error.response && error.response.status === 400) {
         toast.warn(error.response.data.Error, {
@@ -42,12 +53,26 @@ function Estoque() {
     buscaVeiculos();
   }, []);
 
+  const rowsCars = dadosVeiculos.map((cars) => ({
+    id: cars.idVeiculo,
+    nomeMarca: cars.Marca.nomeMarca,
+    nomeModelo: cars.Modelo.nomeModelo,
+    nomeVersao: cars.Verso.nomeVersao,
+    ano: cars.ano,
+    combustivel: cars.combustivel,
+    cor: cars.cor,
+    quilometragem: cars.quilometragem,
+    valor: cars.valor,
+    placa: cars.placa,
+    acessorios: cars.acessorios,
+  }));
+
   return (
     <>
       <Body>
         <Menu />
         <DivContentCadastros>
-          <Listagem
+          {/* <Listagem
             title="Estoque"
             rota="veiculo"
             dadosVeiculos={dadosVeiculos}
@@ -62,7 +87,9 @@ function Estoque() {
             placa="Placa"
             valor="Valor"
             idStatus="Status"
-          />
+          /> */}
+
+          <DataTableMUI rowsCars={rowsCars} columnsCars={columnsCars} />
           <ToastContainer />
         </DivContentCadastros>
       </Body>

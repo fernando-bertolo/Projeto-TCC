@@ -11,6 +11,7 @@ visualizarVeiculos.get("/visualizar-veiculo", async (request, response) => {
   try {
     const veiculos = await tabelaVeiculo.findAll({
       attributes: [
+        "idVeiculo",
         "idMarca",
         "idModelo",
         "idVersao",

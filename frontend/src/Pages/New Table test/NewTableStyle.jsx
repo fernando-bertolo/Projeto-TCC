@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-
 export const Main = styled.div`
   width: 100vw;
   height: 100vh;
@@ -12,16 +11,16 @@ export const Main = styled.div`
 `;
 
 export const SectionListagem = styled.section`
-    width: 80%;
-    height: 80%;
-    background-color: pink;
-    border-radius: 10px;
+  width: 80%;
+  height: 80%;
+  background-color: pink;
+  border-radius: 10px;
 `;
 
 export const DivTitulo = styled.div`
-    width: 100%;
-    height: 10%;
-    //background-color: green;
+  width: 100%;
+  height: 10%;
+  //background-color: green;
 `;
 
 export const PrimeiraDivTitulo = styled.div`

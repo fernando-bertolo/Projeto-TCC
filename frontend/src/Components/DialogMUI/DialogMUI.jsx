@@ -7,13 +7,14 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/material/Icon/Icon";
-import BotoesListagem from "../ButtonMUI/ButtonMUI";
+import BotoesListagem from "../MaterialUI/Buttons/ButtonMUI";
 import InputsMUI from "../InputsMUI/InputsMUI";
 //import AlertMUI from '../AlertMUI/AlertMUI';
 import axios from "axios";
-import validator from "validator";
 import { ToastContainer, toast } from "react-toastify";
 import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 // Defina o esquema zod para validar os campos do formulário
 const schemaZod = z.object({
@@ -43,6 +44,9 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 function ModalDialog() {
+  const { register, handleSubmit } = useForm({
+    resolver: zodResolver(schemaZod),
+  });
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -52,35 +56,17 @@ function ModalDialog() {
     setOpen(false);
   };
 
-  const [userData, setUserData] = React.useState({
-    nome: "",
-    email: "",
-    usuario: "",
-    senha: "",
-    confirmaSenha: "",
-  });
-
-  const SendUserData = async (event) => {
-    event.preventDefault();
+  const SendUserData = async (userData) => {
     try {
-      const userDataValidate = schemaZod.parse({
-        nome: userData.nome,
-        email: userData.email,
-        usuario: userData.usuario,
-        senha: userData.senha,
-        confirmaSenha: userData.confirmaSenha,
-      });
+      const userDataValidate = schemaZod.parse(userData);
 
+      console.log("User Data Abaixo:");
+      console.log(userData);
+      console.log("userDataValidate abaixo:");
       console.log(userDataValidate);
 
       // Enviando os dados para a rota /criacao-usuario
-      await axios.post("http://localhost:3010/criacao-usuario", {
-        nome: userData.nome,
-        email: userData.email,
-        usuario: userData.usuario,
-        senha: userData.senha,
-        confirmaSenha: userData.confirmaSenha,
-      });
+      await axios.post("http://localhost:3010/criacao-usuario", userData);
 
       // Mensagem de sucesso
       toast.success("Usuario criado com sucesso", {
@@ -94,19 +80,20 @@ function ModalDialog() {
         theme: "light",
       });
     } catch (error) {
-      // Mensagem de aviso
-      toast.warn(error.errors[0].message, {
-        position: "bottom-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-
-      console.log(error);
+      if (error.response && error.response.status === 400) {
+        toast.warn(error.response.data.Error, {
+          position: "bottom-right",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      } else {
+        console.log(error);
+      }
     }
   };
 
@@ -142,18 +129,16 @@ function ModalDialog() {
         >
           <CloseIcon />
         </IconButton>
-        <DialogContent dividers>
-          <InputsMUI setUserData={setUserData} userData={userData}></InputsMUI>
-        </DialogContent>
-        <DialogActions>
-          <Button
-            type="submit"
-            autoFocus
-            onClick={(event) => SendUserData(event)}
-          >
-            Salvar
-          </Button>
-        </DialogActions>
+        <form onSubmit={handleSubmit(SendUserData)}>
+          <DialogContent dividers>
+            <InputsMUI register={register}></InputsMUI>
+          </DialogContent>
+          <DialogActions>
+            <Button type="submit" autoFocus>
+              Salvar
+            </Button>
+          </DialogActions>
+        </form>
       </BootstrapDialog>
       <ToastContainer />
     </React.Fragment>
