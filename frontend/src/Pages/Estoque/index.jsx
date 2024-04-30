@@ -71,8 +71,7 @@ function Estoque() {
     <>
       <Body>
         <Menu />
-        <DivContentCadastros>
-          {/* <Listagem
+        {/* <Listagem
             title="Estoque"
             rota="veiculo"
             dadosVeiculos={dadosVeiculos}
@@ -89,9 +88,8 @@ function Estoque() {
             idStatus="Status"
           /> */}
 
-          <DataTableMUI rowsCars={rowsCars} columnsCars={columnsCars} />
-          <ToastContainer />
-        </DivContentCadastros>
+        <DataTableMUI rowsCars={rowsCars} columnsCars={columnsCars} />
+        <ToastContainer />
       </Body>
     </>
   );

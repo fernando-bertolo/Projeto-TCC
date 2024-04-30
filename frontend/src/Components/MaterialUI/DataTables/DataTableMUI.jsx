@@ -1,11 +1,29 @@
 import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { DivMain } from "../../Listagem/style";
+import {
+  DivTable,
+  SectionSearch,
+  DivPrimaria,
+  DivSecundaria,
+  DivTerciaria,
+  Title,
+} from "./DataTableMUIStyles";
+import BotoesListagem from "../Buttons/ButtonMUI";
+import ModalDialog from "../../DialogMUI/DialogMUI";
 
 function DataTableMUI(props) {
   return (
     <>
-      <DivMain>
+      <DivTable>
+        <SectionSearch>
+          <DivPrimaria></DivPrimaria>
+          <DivSecundaria>
+            <Title>Estoque</Title>
+          </DivSecundaria>
+          <DivTerciaria>
+            <ModalDialog></ModalDialog>
+          </DivTerciaria>
+        </SectionSearch>
         <div
           style={{
             height: "60%",
@@ -27,7 +45,7 @@ function DataTableMUI(props) {
             }}
           />
         </div>
-      </DivMain>
+      </DivTable>
     </>
   );
 }
