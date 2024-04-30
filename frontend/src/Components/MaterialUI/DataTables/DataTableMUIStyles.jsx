@@ -12,7 +12,7 @@ export const DivTable = styled.div`
 
 export const SectionSearch = styled.section`
   width: 60%;
-  height: 5%;
+  height: 6%;
   display: flex;
   //background-color: pink;
 `;

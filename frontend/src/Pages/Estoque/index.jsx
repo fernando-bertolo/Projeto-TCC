@@ -8,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import DataTableMUI from "../../Components/MaterialUI/DataTables/DataTableMUI.jsx";
+import ModalDialog from "../../Components/DialogMUI/DialogMUI";
 
 const columnsCars = [
   { field: "nomeMarca", headerName: "Marca", width: 150 },
@@ -88,7 +89,7 @@ function Estoque() {
             idStatus="Status"
           /> */}
 
-        <DataTableMUI rowsCars={rowsCars} columnsCars={columnsCars} />
+        <DataTableMUI rows={rowsCars} columns={columnsCars} />
         <ToastContainer />
       </Body>
     </>

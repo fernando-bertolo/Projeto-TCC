@@ -28,11 +28,12 @@ function DataTableMUI(props) {
           style={{
             height: "60%",
             width: "60%",
+            backgroundColor: "pink",
           }}
         >
           <DataGrid
-            rows={props.rowsCars}
-            columns={props.columnsCars}
+            rows={props.rows}
+            columns={props.columns}
             initialState={{
               pagination: {
                 paginationModel: { page: 0, pageSize: 5 },

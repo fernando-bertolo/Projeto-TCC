@@ -131,7 +131,52 @@ function ModalDialog() {
         </IconButton>
         <form onSubmit={handleSubmit(SendUserData)}>
           <DialogContent dividers>
-            <InputsMUI register={register}></InputsMUI>
+            <InputsMUI
+              inputs={[
+                {
+                  name: "nome",
+                  label: "Nome",
+                  type: "text",
+                  placeholder: "Insira o Nome",
+                  required: true,
+                  register: register("nome"),
+                },
+                {
+                  name: "email",
+                  label: "E-mail",
+                  type: "email",
+                  placeholder: "Insira o E-mail",
+                  required: true,
+                  register: register("email"),
+                },
+                {
+                  name: "usuario",
+                  label: "Usuário",
+                  type: "text",
+                  placeholder: "Insira o Usuário",
+                  required: true,
+                  register: register("usuario", {
+                    required: "Campo Usuário Obrigatório",
+                  }),
+                },
+                {
+                  name: "senha",
+                  label: "Senha",
+                  type: "password",
+                  placeholder: "Insira a Senha",
+                  required: true,
+                  register: register("senha"),
+                },
+                {
+                  name: "confirmaSenha",
+                  label: "Confirme sua Senha",
+                  type: "password",
+                  placeholder: "Confirme sua Senha",
+                  required: true,
+                  register: register("confirmaSenha"),
+                },
+              ]}
+            />
           </DialogContent>
           <DialogActions>
             <Button type="submit" autoFocus>

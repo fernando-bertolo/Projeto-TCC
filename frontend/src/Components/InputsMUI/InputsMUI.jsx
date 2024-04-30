@@ -18,67 +18,19 @@ export default function InputsMUI(props) {
       noValidate
       autoComplete="off"
     >
-      <FormControl variant="standard">
-        <InputLabel htmlFor="nome">Nome</InputLabel>
-        <Input
-          type="text"
-          id="nome"
-          name="nome"
-          placeholder="Insira o Nome"
-          required
-          {...props.register("nome")}
-        />
-      </FormControl>
-
-      <FormControl variant="standard">
-        <InputLabel htmlFor="email">E-mail</InputLabel>
-        <Input
-          type="email"
-          id="email"
-          name="email"
-          placeholder="Insira o E-mail"
-          required
-          {...props.register("email")}
-        />
-      </FormControl>
-
-      <FormControl variant="standard">
-        <InputLabel htmlFor="usuario">Usuário</InputLabel>
-        <Input
-          type="text"
-          id="usuario"
-          name="usuario"
-          placeholder="Insira o Usuário"
-          required
-          {...props.register("usuario", {
-            required: "Campo Usuário Obrigatório",
-          })}
-        />
-      </FormControl>
-
-      <FormControl variant="standard">
-        <InputLabel htmlFor="senha">Senha</InputLabel>
-        <Input
-          type="password"
-          id="senha"
-          name="senha"
-          placeholder="Insira a Senha"
-          required
-          {...props.register("senha")}
-        />
-      </FormControl>
-
-      <FormControl variant="standard">
-        <InputLabel htmlFor="confirmaSenha">Confirme sua Senha</InputLabel>
-        <Input
-          type="password"
-          id="confirmaSenha"
-          name="confirmaSenha"
-          placeholder="Confirme sua Senha"
-          required
-          {...props.register("confirmaSenha")}
-        />
-      </FormControl>
+      {props.inputs.map((input, index) => (
+        <FormControl key={index} variant="standard">
+          <InputLabel htmlFor={input.name}>{input.label}</InputLabel>
+          <Input
+            type={input.type}
+            id={input.name}
+            name={input.name}
+            placeholder={input.placeholder}
+            required={input.required}
+            {...input.register}
+          />
+        </FormControl>
+      ))}
     </Box>
   );
 }
