@@ -7,9 +7,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/material/Icon/Icon";
-import BotoesListagem from "../MaterialUI/Buttons/ButtonMUI";
-import InputsMUI from "../InputsMUI/InputsMUI";
-//import AlertMUI from '../AlertMUI/AlertMUI';
+import BotoesListagem from "../Buttons/ButtonMUI";
+import InputsMUI from "../InputMUI/InputsMUI";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import { z } from "zod";
@@ -18,25 +17,27 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 // Defina o esquema zod para validar os campos do formulário
 const schemaZod = z.object({
-  nome: z
-    .string()
-    .min(3, { message: "O nome deve ter no mínimo 3 caracteres" })
-    .max(50),
-  email: z.string().email({ message: "Insira um e-mail válido" }),
-  usuario: z.string().min(3, { message: "Insira um usuário válido" }).max(20),
-  senha: z
-    .string()
-    .min(5, { message: "A senha deve ter no mínimo 5 caracteres" })
-    .max(20),
-  confirmaSenha: z
-    .string()
-    .min(5, { message: "A senha deve ter no mínimo 5 caracteres" })
-    .max(20),
+  ano: z.string(),
+  combustivel: z.string(),
+  cor: z.string(),
+  idStatus: z.string(),
+  quilometragem: z
+    .number()
+    .min(0)
+    .max(9999999.999, { message: "Digite um valor válido!!" }),
+  valor: z
+    .number()
+    .min(0)
+    .max(9999999.999, { message: "Digite um valor válido!!" }),
 });
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
     padding: theme.spacing(2),
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
   "& .MuiDialogActions-root": {
     padding: theme.spacing(1),
@@ -56,20 +57,15 @@ function ModalDialog() {
     setOpen(false);
   };
 
-  const SendUserData = async (userData) => {
+  const SendCarsData = async (carsData) => {
     try {
-      const userDataValidate = schemaZod.parse(userData);
-
-      console.log("User Data Abaixo:");
-      console.log(userData);
-      console.log("userDataValidate abaixo:");
-      console.log(userDataValidate);
+      schemaZod.parse(carsData);
 
       // Enviando os dados para a rota /criacao-usuario
-      await axios.post("http://localhost:3010/criacao-usuario", userData);
+      await axios.post("http://localhost:3010/criacao-veiculos", carsData);
 
       // Mensagem de sucesso
-      toast.success("Usuario criado com sucesso", {
+      toast.success("Veículo criado com sucesso", {
         position: "bottom-right",
         autoClose: 2000,
         hideProgressBar: false,
@@ -108,14 +104,14 @@ function ModalDialog() {
         <DialogTitle
           sx={{
             m: 0,
-            p: 2,
+            p: 4,
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
           }}
           id="customized-dialog-title"
         >
-          Cadastro de Usuário
+          Cadastro de Veículo
         </DialogTitle>
         <IconButton
           aria-label="close"
@@ -127,56 +123,11 @@ function ModalDialog() {
             color: (theme) => theme.palette.grey[500],
           }}
         >
-          <CloseIcon />
+          {/* <CloseIcon /> */}X
         </IconButton>
-        <form onSubmit={handleSubmit(SendUserData)}>
+        <form onSubmit={handleSubmit(SendCarsData)}>
           <DialogContent dividers>
-            <InputsMUI
-              inputs={[
-                {
-                  name: "nome",
-                  label: "Nome",
-                  type: "text",
-                  placeholder: "Insira o Nome",
-                  required: true,
-                  register: register("nome"),
-                },
-                {
-                  name: "email",
-                  label: "E-mail",
-                  type: "email",
-                  placeholder: "Insira o E-mail",
-                  required: true,
-                  register: register("email"),
-                },
-                {
-                  name: "usuario",
-                  label: "Usuário",
-                  type: "text",
-                  placeholder: "Insira o Usuário",
-                  required: true,
-                  register: register("usuario", {
-                    required: "Campo Usuário Obrigatório",
-                  }),
-                },
-                {
-                  name: "senha",
-                  label: "Senha",
-                  type: "password",
-                  placeholder: "Insira a Senha",
-                  required: true,
-                  register: register("senha"),
-                },
-                {
-                  name: "confirmaSenha",
-                  label: "Confirme sua Senha",
-                  type: "password",
-                  placeholder: "Confirme sua Senha",
-                  required: true,
-                  register: register("confirmaSenha"),
-                },
-              ]}
-            />
+            <InputsMUI register={register} />
           </DialogContent>
           <DialogActions>
             <Button type="submit" autoFocus>

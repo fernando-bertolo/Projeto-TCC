@@ -1,0 +1,148 @@
+import * as React from "react";
+import Box from "@mui/material/Box";
+import FormControl from "@mui/material/FormControl";
+import Input from "@mui/material/Input";
+import InputLabel from "@mui/material/InputLabel";
+import SelectMarcaMUI from "../Select/SelectMarcaMUI";
+import axios from "axios";
+import SelectModeloMUI from "../Select/SelectModeloMUI";
+import SelectVersaoMUI from "../Select/SelectVersaoMUI";
+
+export default function InputsMUI(props) {
+  const [dadosMarcas, setDadosMarcas] = React.useState([]);
+  const [dadosModelos, setDadosModelos] = React.useState([]);
+  const [dadosVersao, setDadosVersao] = React.useState([]);
+  const [dadosAcessorios, setDadosAcessorios] = React.useState([]);
+
+  const [inputAcessorio, setInputAcessorio] = React.useState({
+    acessorios: [],
+  });
+
+  const buscaMarcas = async () => {
+    await axios
+      .get("http://localhost:3010/visualizar-marcas")
+      .then((response) => {
+        setDadosMarcas(response.data);
+      });
+  };
+
+  const buscaModelos = async () => {
+    await axios
+      .get("http://localhost:3010/visualizar-modelos/")
+      .then((response) => {
+        setDadosModelos(response.data);
+      });
+  };
+
+  const buscaVersoes = async () => {
+    await axios
+      .get("http://localhost:3010/visualizar-versao")
+      .then((response) => {
+        setDadosVersao(response.data);
+      });
+  };
+
+  const buscaAcessorio = async () => {
+    try {
+      await axios
+        .get("http://localhost:3010/visualizar-acessorio")
+        .then((response) => {
+          setDadosAcessorios(response.data);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  React.useEffect(() => {
+    buscaMarcas();
+    buscaModelos();
+    buscaVersoes();
+    buscaAcessorio();
+  }, []);
+
+  return (
+    <Box
+      component="form"
+      sx={{
+        "& > :not(style)": { m: 4 },
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+      noValidate
+      autoComplete="off"
+    >
+      <SelectMarcaMUI dadosMarcas={dadosMarcas} />
+      <SelectModeloMUI dadosModelos={dadosModelos} />
+      <SelectVersaoMUI dadosVersao={dadosVersao} />
+
+      <FormControl variant="standard">
+        <InputLabel htmlFor="ano">Ano</InputLabel>
+        <Input
+          type="text"
+          id="ano"
+          placeholder="Insira o ano"
+          required
+          {...props.register("ano")}
+        />
+      </FormControl>
+
+      <FormControl variant="standard">
+        <InputLabel htmlFor="combustivel">Combustivel</InputLabel>
+        <Input
+          type="text"
+          id="combustivel"
+          placeholder="Insira o Combustível"
+          required
+          {...props.register("combustivel")}
+        />
+      </FormControl>
+
+      <FormControl variant="standard">
+        <InputLabel htmlFor="cor">Cor</InputLabel>
+        <Input
+          type="text"
+          id="cor"
+          placeholder="Insira a cor"
+          required
+          {...props.register("cor")}
+        />
+      </FormControl>
+
+      <FormControl variant="standard">
+        <InputLabel htmlFor="quilometragem">Quilometragem</InputLabel>
+        <Input
+          type="text"
+          id="quilometragem"
+          placeholder="Insira a quilometragem"
+          required
+          {...props.register("quilometragem")}
+        />
+      </FormControl>
+
+      <FormControl variant="standard">
+        <InputLabel htmlFor="valor">Valor</InputLabel>
+        <Input
+          type="text"
+          id="valor"
+          placeholder="Insira o valor"
+          required
+          {...props.register("valor")}
+        />
+      </FormControl>
+
+      <FormControl variant="standard">
+        <InputLabel htmlFor="placa">Placa</InputLabel>
+        <Input
+          type="text"
+          id="placa"
+          placeholder="Insira a placa"
+          required
+          {...props.register("placa")}
+        />
+      </FormControl>
+    </Box>
+  );
+}

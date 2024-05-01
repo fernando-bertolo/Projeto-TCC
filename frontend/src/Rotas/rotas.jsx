@@ -12,14 +12,12 @@ import Acessorios from "../Pages/Cadastros/Acessorios/index.jsx";
 import Relatorios from "../Pages/Relatorios/index.jsx";
 import Usuarios from "../Pages/Usuarios/index.jsx";
 import Historico from "../Pages/Historico/index.jsx";
-import NewTable from "../Pages/New Table test/NewTable.jsx";
 import { Route, Routes } from "react-router-dom";
 import ValidaAutenticacao from "../Services/validaAutenticacao.jsx";
 
 function Rotas() {
   return (
     <Routes>
-      <Route path="/NewTable" element={<NewTable/>}/>
       <Route exact path="/" element={<Login />} />
 
       <Route path="/esquecer-senha" element={<EsquecerSenha />} />

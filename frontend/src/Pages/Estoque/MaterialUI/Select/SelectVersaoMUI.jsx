@@ -18,7 +18,7 @@ const MenuProps = {
   },
 };
 
-export default function MultipleSelectCheckmarks(props) {
+export default function SelectVersaoMUI(props) {
   const [personName, setPersonName] = React.useState([]);
 
   const handleChange = (event) => {
@@ -29,39 +29,28 @@ export default function MultipleSelectCheckmarks(props) {
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
-
-    props.setInputVeiculo({
-      ...props.inputVeiculo,
-      acessorios: event.target.value,
-    });
   };
 
   return (
     <div>
-      <FormControl sx={{ m: 1, width: 300 }}>
-        <InputLabel id="demo-multiple-checkbox-label" sx={{ color: "#FFF" }}>
-          Selecione
+      <FormControl sx={{ m: 1, width: 200 }}>
+        <InputLabel id="demo-simple-select-label" sx={{ color: "black" }}>
+          Selecione a versão
         </InputLabel>
         <Select
-          labelId="demo-multiple-checkbox-label"
-          id="demo-multiple-checkbox"
-          multiple
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
           value={personName}
           onChange={handleChange}
-          input={<OutlinedInput label="Selecione" />}
+          input={<OutlinedInput label="Selecione a versão" />}
           renderValue={(selected) => selected.join(", ")}
           MenuProps={MenuProps}
-          sx={{ backgroundColor: "#514869", borderRadius: 3 }}
+          sx={{ borderRadius: 3 }}
         >
-          {props.dadosAcessorios.map((infoAcessorio) => (
-            <MenuItem
-              key={infoAcessorio.idAcessorio}
-              value={infoAcessorio.idAcessorio}
-            >
-              <Checkbox
-                checked={personName.includes(infoAcessorio.idAcessorio)}
-              />
-              <ListItemText primary={infoAcessorio.nomeAcessorio} />
+          {props.dadosVersao.map((infoVersao) => (
+            <MenuItem key={infoVersao.idVersao} value={infoVersao.nomeVersao}>
+              <Checkbox checked={personName.includes(infoVersao.idVersao)} />
+              <ListItemText primary={infoVersao.nomeVersao} />
             </MenuItem>
           ))}
         </Select>

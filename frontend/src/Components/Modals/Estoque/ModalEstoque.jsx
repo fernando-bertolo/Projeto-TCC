@@ -19,7 +19,7 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import MultipleSelectCheckmarks from "../../Select/SelectMUI";
+import MultipleSelectCheckmarks from "../../../Pages/Estoque/MaterialUI/Select/SelectMarcaMUI";
 
 function EstoqueModal(props) {
   const [dadosMarcas, setDadosMarcas] = useState([]);

@@ -11,7 +11,7 @@ export const DivTable = styled.div`
 `;
 
 export const SectionSearch = styled.section`
-  width: 60%;
+  width: 80%;
   height: 6%;
   display: flex;
   //background-color: pink;
@@ -38,4 +38,12 @@ export const DivTerciaria = styled.div`
   //background-color: blue;
   display: flex;
   justify-content: flex-end;
+`;
+
+export const SectionNavigator = styled.section`
+  width: 80%;
+  height: 5%;
+  display: flex;
+  gap: 1rem;
+  //background-color: brown;
 `;

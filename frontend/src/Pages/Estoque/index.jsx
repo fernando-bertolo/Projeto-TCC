@@ -7,8 +7,7 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import DataTableMUI from "../../Components/MaterialUI/DataTables/DataTableMUI.jsx";
-import ModalDialog from "../../Components/DialogMUI/DialogMUI";
+import DataTableMUI from "./MaterialUI/DataTables/DataTableMUI";
 
 const columnsCars = [
   { field: "nomeMarca", headerName: "Marca", width: 150 },

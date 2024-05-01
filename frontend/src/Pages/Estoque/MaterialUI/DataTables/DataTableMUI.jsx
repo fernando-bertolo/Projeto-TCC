@@ -7,14 +7,23 @@ import {
   DivSecundaria,
   DivTerciaria,
   Title,
+  SectionNavigator,
 } from "./DataTableMUIStyles";
-import BotoesListagem from "../Buttons/ButtonMUI";
-import ModalDialog from "../../DialogMUI/DialogMUI";
+import ModalDialog from "../ModalDialog/DialogMUI";
+import Button from "@mui/material/Button";
 
 function DataTableMUI(props) {
   return (
     <>
       <DivTable>
+        <SectionNavigator>
+          <Button variant="contained" href="#">
+            Despesas
+          </Button>
+          <Button variant="outlined" href="#">
+            Vendas
+          </Button>
+        </SectionNavigator>
         <SectionSearch>
           <DivPrimaria></DivPrimaria>
           <DivSecundaria>
@@ -26,9 +35,9 @@ function DataTableMUI(props) {
         </SectionSearch>
         <div
           style={{
-            height: "60%",
-            width: "60%",
-            backgroundColor: "pink",
+            height: "80%",
+            width: "80%",
+            borderRadius: 10,
           }}
         >
           <DataGrid
