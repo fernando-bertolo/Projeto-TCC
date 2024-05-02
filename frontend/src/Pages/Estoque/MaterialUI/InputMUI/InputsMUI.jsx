@@ -7,6 +7,7 @@ import SelectMarcaMUI from "../Select/SelectMarcaMUI";
 import axios from "axios";
 import SelectModeloMUI from "../Select/SelectModeloMUI";
 import SelectVersaoMUI from "../Select/SelectVersaoMUI";
+import SelectAcessorioMUI from "../Select/SelectAcessorioMUI";
 
 export default function InputsMUI(props) {
   const [dadosMarcas, setDadosMarcas] = React.useState([]);
@@ -86,6 +87,7 @@ export default function InputsMUI(props) {
           placeholder="Insira o ano"
           required
           {...props.register("ano")}
+          sx={{ width: 250 }}
         />
       </FormControl>
 
@@ -97,6 +99,7 @@ export default function InputsMUI(props) {
           placeholder="Insira o Combustível"
           required
           {...props.register("combustivel")}
+          sx={{ width: 250 }}
         />
       </FormControl>
 
@@ -108,6 +111,7 @@ export default function InputsMUI(props) {
           placeholder="Insira a cor"
           required
           {...props.register("cor")}
+          sx={{ width: 250 }}
         />
       </FormControl>
 
@@ -119,6 +123,7 @@ export default function InputsMUI(props) {
           placeholder="Insira a quilometragem"
           required
           {...props.register("quilometragem")}
+          sx={{ width: 250 }}
         />
       </FormControl>
 
@@ -130,6 +135,7 @@ export default function InputsMUI(props) {
           placeholder="Insira o valor"
           required
           {...props.register("valor")}
+          sx={{ width: 250 }}
         />
       </FormControl>
 
@@ -141,8 +147,14 @@ export default function InputsMUI(props) {
           placeholder="Insira a placa"
           required
           {...props.register("placa")}
+          sx={{ width: 250 }}
         />
       </FormControl>
+
+      <SelectAcessorioMUI
+        dadosAcessorio={dadosAcessorios}
+        register={props.register}
+      />
     </Box>
   );
 }

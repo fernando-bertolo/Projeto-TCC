@@ -33,7 +33,7 @@ export default function SelectVersaoMUI(props) {
 
   return (
     <div>
-      <FormControl sx={{ m: 1, width: 200 }}>
+      <FormControl sx={{ m: 1, width: 250 }}>
         <InputLabel id="demo-simple-select-label" sx={{ color: "black" }}>
           Selecione a versão
         </InputLabel>
@@ -46,6 +46,7 @@ export default function SelectVersaoMUI(props) {
           renderValue={(selected) => selected.join(", ")}
           MenuProps={MenuProps}
           sx={{ borderRadius: 3 }}
+          defaultValue=""
         >
           {props.dadosVersao.map((infoVersao) => (
             <MenuItem key={infoVersao.idVersao} value={infoVersao.nomeVersao}>

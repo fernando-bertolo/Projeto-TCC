@@ -17,18 +17,21 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 // Defina o esquema zod para validar os campos do formulário
 const schemaZod = z.object({
-  ano: z.string(),
-  combustivel: z.string(),
-  cor: z.string(),
-  idStatus: z.string(),
+  ano: z.string().max(4, { message: "Ano deve ter no máximo 4 caracteres" }),
+  combustivel: z
+    .string()
+    .max(10, { message: "Combustivel deve ter no maximo 10 caracteres" }),
+  cor: z
+    .string()
+    .max(10, { message: "A cor deve ter no maximo 10 caracteres" }),
+  idStatus: z.string({ message: "ID do status deve ser uma string" }),
   quilometragem: z
     .number()
-    .min(0)
-    .max(9999999.999, { message: "Digite um valor válido!!" }),
+    .max(10, { message: "A quilometragem deve ter no maximo 10 caracteres" }),
   valor: z
     .number()
-    .min(0)
-    .max(9999999.999, { message: "Digite um valor válido!!" }),
+    .max(10, { message: "O valor deve ter no maximo 10 caracteres" }),
+  selectAcessorios: z.array({ message: "Não é um array" }),
 });
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -60,6 +63,7 @@ function ModalDialog() {
   const SendCarsData = async (carsData) => {
     try {
       schemaZod.parse(carsData);
+      console.log("teste 2");
 
       // Enviando os dados para a rota /criacao-usuario
       await axios.post("http://localhost:3010/criacao-veiculos", carsData);
@@ -125,7 +129,7 @@ function ModalDialog() {
         >
           {/* <CloseIcon /> */}X
         </IconButton>
-        <form onSubmit={handleSubmit(SendCarsData)}>
+        <form onSubmit={handleSubmit(SendCarsData())}>
           <DialogContent dividers>
             <InputsMUI register={register} />
           </DialogContent>
