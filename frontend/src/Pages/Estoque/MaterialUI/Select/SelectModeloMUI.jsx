@@ -49,7 +49,11 @@ export default function SelectModeloMUI(props) {
           defaultValue=""
         >
           {props.dadosModelos.map((infoModelo) => (
-            <MenuItem key={infoModelo.idModelo} value={infoModelo.nomeModelo}>
+            <MenuItem
+              key={infoModelo.idModelo}
+              value={infoModelo.idModelo}
+              {...props.register("idModelo")}
+            >
               <Checkbox checked={personName.includes(infoModelo.idModelo)} />
               <ListItemText primary={infoModelo.nomeModelo} />
             </MenuItem>

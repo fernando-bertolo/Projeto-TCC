@@ -46,10 +46,13 @@ export default function SelectVersaoMUI(props) {
           renderValue={(selected) => selected.join(", ")}
           MenuProps={MenuProps}
           sx={{ borderRadius: 3 }}
-          defaultValue=""
         >
           {props.dadosVersao.map((infoVersao) => (
-            <MenuItem key={infoVersao.idVersao} value={infoVersao.nomeVersao}>
+            <MenuItem
+              key={infoVersao.idVersao}
+              value={infoVersao.idVersao}
+              {...props.register("idVersao")}
+            >
               <Checkbox checked={personName.includes(infoVersao.idVersao)} />
               <ListItemText primary={infoVersao.nomeVersao} />
             </MenuItem>

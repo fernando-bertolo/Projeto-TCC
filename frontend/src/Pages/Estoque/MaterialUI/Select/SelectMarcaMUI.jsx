@@ -49,7 +49,11 @@ export default function SelectMarcaMUI(props) {
           defaultValue=""
         >
           {props.dadosMarcas.map((infoMarca) => (
-            <MenuItem key={infoMarca.idMarca} value={infoMarca.nomeMarca}>
+            <MenuItem
+              key={infoMarca.idMarca}
+              value={infoMarca.idMarca}
+              {...props.register("idMarca")}
+            >
               <Checkbox checked={personName.includes(infoMarca.idMarca)} />
               <ListItemText primary={infoMarca.nomeMarca} />
             </MenuItem>

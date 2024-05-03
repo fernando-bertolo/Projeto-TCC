@@ -48,12 +48,12 @@ export default function SelectAcessorioMUI(props) {
           MenuProps={MenuProps}
           sx={{ borderRadius: 3 }}
           defaultValue=""
-          {...props.register("selectAcessorios")}
         >
           {props.dadosAcessorio.map((infoAcessorio) => (
             <MenuItem
               key={infoAcessorio.idAcessorio}
               value={infoAcessorio.idAcessorio}
+              {...props.register("acessorios")}
             >
               <Checkbox
                 checked={personName.includes(infoAcessorio.idAcessorio)}

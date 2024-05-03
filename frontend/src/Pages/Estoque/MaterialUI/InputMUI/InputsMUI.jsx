@@ -9,7 +9,11 @@ import SelectModeloMUI from "../Select/SelectModeloMUI";
 import SelectVersaoMUI from "../Select/SelectVersaoMUI";
 import SelectAcessorioMUI from "../Select/SelectAcessorioMUI";
 
+import { messageError } from "./InputsMUIStyle";
+
 export default function InputsMUI(props) {
+  const { errors } = props;
+
   const [dadosMarcas, setDadosMarcas] = React.useState([]);
   const [dadosModelos, setDadosModelos] = React.useState([]);
   const [dadosVersao, setDadosVersao] = React.useState([]);
@@ -75,9 +79,9 @@ export default function InputsMUI(props) {
       noValidate
       autoComplete="off"
     >
-      <SelectMarcaMUI dadosMarcas={dadosMarcas} />
-      <SelectModeloMUI dadosModelos={dadosModelos} />
-      <SelectVersaoMUI dadosVersao={dadosVersao} />
+      <SelectMarcaMUI dadosMarcas={dadosMarcas} register={props.register} />
+      <SelectModeloMUI dadosModelos={dadosModelos} register={props.register} />
+      <SelectVersaoMUI dadosVersao={dadosVersao} register={props.register} />
 
       <FormControl variant="standard">
         <InputLabel htmlFor="ano">Ano</InputLabel>
@@ -89,6 +93,11 @@ export default function InputsMUI(props) {
           {...props.register("ano")}
           sx={{ width: 250 }}
         />
+        {
+          <messageError style={{ color: "red", fontSize: "0.8rem" }}>
+            {errors?.ano?.message}
+          </messageError>
+        }
       </FormControl>
 
       <FormControl variant="standard">
@@ -101,6 +110,12 @@ export default function InputsMUI(props) {
           {...props.register("combustivel")}
           sx={{ width: 250 }}
         />
+
+        {
+          <messageError style={{ color: "red", fontSize: "0.8rem" }}>
+            {errors?.combustivel?.message}
+          </messageError>
+        }
       </FormControl>
 
       <FormControl variant="standard">
@@ -113,6 +128,12 @@ export default function InputsMUI(props) {
           {...props.register("cor")}
           sx={{ width: 250 }}
         />
+
+        {
+          <messageError style={{ color: "red", fontSize: "0.8rem" }}>
+            {errors?.cor?.message}
+          </messageError>
+        }
       </FormControl>
 
       <FormControl variant="standard">
@@ -125,6 +146,12 @@ export default function InputsMUI(props) {
           {...props.register("quilometragem")}
           sx={{ width: 250 }}
         />
+
+        {
+          <messageError style={{ color: "red", fontSize: "0.8rem" }}>
+            {errors?.quilometragem?.message}
+          </messageError>
+        }
       </FormControl>
 
       <FormControl variant="standard">
@@ -137,6 +164,12 @@ export default function InputsMUI(props) {
           {...props.register("valor")}
           sx={{ width: 250 }}
         />
+
+        {
+          <messageError style={{ color: "red", fontSize: "0.8rem" }}>
+            {errors?.valor?.message}
+          </messageError>
+        }
       </FormControl>
 
       <FormControl variant="standard">
@@ -149,6 +182,12 @@ export default function InputsMUI(props) {
           {...props.register("placa")}
           sx={{ width: 250 }}
         />
+
+        {
+          <messageError style={{ color: "red", fontSize: "0.8rem" }}>
+            {errors?.placa?.message}
+          </messageError>
+        }
       </FormControl>
 
       <SelectAcessorioMUI
