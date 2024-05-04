@@ -29,7 +29,7 @@ const Veiculos = database.define("Veiculos", {
     },
   },
   idStatus: {
-    type: Sequelize.UUID,
+    type: Sequelize.NUMBER,
   },
   ano: {
     type: Sequelize.STRING,

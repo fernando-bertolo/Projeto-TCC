@@ -29,6 +29,11 @@ export default function SelectAcessorioMUI(props) {
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
+
+    props.setfieldInputsCars({
+      ...props.fieldInputsCars,
+      acessorios: event.target.value,
+    });
   };
 
   return (
@@ -53,7 +58,6 @@ export default function SelectAcessorioMUI(props) {
             <MenuItem
               key={infoAcessorio.idAcessorio}
               value={infoAcessorio.idAcessorio}
-              {...props.register("acessorios")}
             >
               <Checkbox
                 checked={personName.includes(infoAcessorio.idAcessorio)}

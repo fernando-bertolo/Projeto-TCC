@@ -72,21 +72,21 @@ function Estoque() {
       <Body>
         <Menu />
         {/* <Listagem
-            title="Estoque"
-            rota="veiculo"
-            dadosVeiculos={dadosVeiculos}
-            atualizaVeiculos={buscaVeiculos}
-            marca="Marca"
-            modelo="Modelo"
-            versao="Versão"
-            ano="Ano"
-            combustivel="Combustível"
-            quilometragem="Quilometragem"
-            cor="Cor"
-            placa="Placa"
-            valor="Valor"
-            idStatus="Status"
-          /> */}
+          title="Estoque"
+          rota="veiculo"
+          dadosVeiculos={dadosVeiculos}
+          atualizaVeiculos={buscaVeiculos}
+          marca="Marca"
+          modelo="Modelo"
+          versao="Versão"
+          ano="Ano"
+          combustivel="Combustível"
+          quilometragem="Quilometragem"
+          cor="Cor"
+          placa="Placa"
+          valor="Valor"
+          idStatus="Status"
+        /> */}
 
         <DataTableMUI rows={rowsCars} columns={columnsCars} />
         <ToastContainer />

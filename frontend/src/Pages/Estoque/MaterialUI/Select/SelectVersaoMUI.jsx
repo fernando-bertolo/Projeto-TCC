@@ -29,6 +29,11 @@ export default function SelectVersaoMUI(props) {
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
+
+    props.setfieldSelectCarsUnique({
+      ...props.fieldSelectCarsUnique,
+      versao: event.target.value,
+    });
   };
 
   return (
@@ -46,13 +51,10 @@ export default function SelectVersaoMUI(props) {
           renderValue={(selected) => selected.join(", ")}
           MenuProps={MenuProps}
           sx={{ borderRadius: 3 }}
+          defaultValue=""
         >
           {props.dadosVersao.map((infoVersao) => (
-            <MenuItem
-              key={infoVersao.idVersao}
-              value={infoVersao.idVersao}
-              {...props.register("idVersao")}
-            >
+            <MenuItem key={infoVersao.idVersao} value={infoVersao.idVersao}>
               <Checkbox checked={personName.includes(infoVersao.idVersao)} />
               <ListItemText primary={infoVersao.nomeVersao} />
             </MenuItem>

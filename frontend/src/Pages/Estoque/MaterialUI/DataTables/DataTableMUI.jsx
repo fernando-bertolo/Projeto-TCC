@@ -37,7 +37,6 @@ function DataTableMUI(props) {
           style={{
             height: "80%",
             width: "80%",
-            borderRadius: 10,
           }}
         >
           <DataGrid
@@ -52,6 +51,7 @@ function DataTableMUI(props) {
             style={{
               borderRadius: 10,
               backgroundColor: "#FFF",
+              color: "black",
             }}
           />
         </div>

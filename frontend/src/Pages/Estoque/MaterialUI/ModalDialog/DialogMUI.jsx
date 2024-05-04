@@ -11,9 +11,6 @@ import BotoesListagem from "../Buttons/ButtonMUI";
 import InputsMUI from "../InputMUI/InputsMUI";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -28,56 +25,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-//Definindo acessorio, array de objetos
-const schemaAcessorios = z.array(
-  z.object({
-    nomeAcessorio: z.string().min(1, "Valor inválido"),
-  })
-);
-
-// Define o esquema zod para validar os campos do formulário
-const schemaZod = z.object({
-  idMarca: z.string(),
-  idModelo: z.string(),
-  idVersao: z.string(),
-  ano: z
-    .string()
-    .min(1, "Por favor, digite um valor válido")
-    .max(4, "Ano deve ter no máximo 4 caracteres"),
-  combustivel: z
-    .string()
-    .min(1, "Por favor, digite um valor válido")
-    .max(10, "Combustivel deve ter no maximo 10 caracteres"),
-  cor: z
-    .string()
-    .min(1, "Por favor, digite um valor válido")
-    .max(10, "A cor deve ter no maximo 10 caracteres"),
-  idStatus: z.string("ID do status deve ser uma string"),
-  quilometragem: z
-    .string()
-    .min(1, "Por favor, digite um valor válido")
-    .max(10, "Por favor, digite um valor válido!!"),
-  valor: z
-    .string()
-    .min(1, "Por favor, digite um valor válido")
-    .max(10, "Por favor, digite um valor válido!!"),
-  placa: z
-    .string()
-    .min(1, "Por favor, digite um valor válido!!!")
-    .max(10, "Por favor, Digite um valor válido!!!"),
-  acessorios: schemaAcessorios,
-});
-
 function ModalDialog() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({
-    mode: "all",
-    criteriaMode: "all",
-    resolver: zodResolver(schemaZod),
-  });
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -87,45 +35,70 @@ function ModalDialog() {
     setOpen(false);
   };
 
-  const onSubmit = (data) => {
-    console.log("Cheguei aqui");
-    console.log(data);
+  const [fieldInputsCars, setfieldInputsCars] = React.useState({
+    ano: "",
+    placa: "",
+    combustivel: "",
+    cor: "",
+    quilometragem: "",
+    valor: "",
+    acessorios: [{}],
+  });
 
-    // console.log(carsData);
-    // try {
-    //   schemaZod.parse(carsData);
-    //   console.log("teste 2");
+  const [fieldSelectCarsUnique, setfieldSelectCarsUnique] = React.useState({
+    marca: "",
+    modelo: "",
+    versao: "",
+  });
 
-    //   // Enviando os dados para a rota /criacao-usuario
-    //   await axios.post("http://localhost:3010/criacao-veiculos", carsData);
+  const sendDataCars = async (event) => {
+    event.preventDefault();
+    try {
+      console.log(fieldSelectCarsUnique);
+      console.log(fieldInputsCars);
 
-    //   // Mensagem de sucesso
-    //   toast.success("Veículo criado com sucesso", {
-    //     position: "bottom-right",
-    //     autoClose: 2000,
-    //     hideProgressBar: false,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     progress: undefined,
-    //     theme: "light",
-    //   });
-    // } catch (error) {
-    //   if (error.response && error.response.status === 400) {
-    //     toast.warn(error.response.data.Error, {
-    //       position: "bottom-right",
-    //       autoClose: 2500,
-    //       hideProgressBar: false,
-    //       closeOnClick: true,
-    //       pauseOnHover: true,
-    //       draggable: true,
-    //       progress: undefined,
-    //       theme: "light",
-    //     });
-    //   } else {
-    //     console.log(error);
-    //   }
-    // }
+      // Enviando os dados para a rota /criacao-usuario
+      await axios.post("http://localhost:3010/criacao-veiculos", {
+        idMarca: fieldSelectCarsUnique.marca,
+        idModelo: fieldSelectCarsUnique.modelo,
+        idVersao: fieldSelectCarsUnique.versao,
+        idStatus: 1, //true => Veículo disponível
+        ano: fieldInputsCars.ano,
+        combustivel: fieldInputsCars.combustivel,
+        cor: fieldInputsCars.cor,
+        quilometragem: fieldInputsCars.quilometragem,
+        valor: fieldInputsCars.valor,
+        placa: fieldInputsCars.placa,
+        idAcessorios: fieldInputsCars.acessorios,
+      });
+
+      // Mensagem de sucesso
+      toast.success("Veículo criado com sucesso", {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        toast.warn(error.response.data.Error, {
+          position: "bottom-right",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      } else {
+        console.log(error);
+      }
+    }
   };
 
   return (
@@ -160,16 +133,25 @@ function ModalDialog() {
         >
           {/* <CloseIcon /> */}X
         </IconButton>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <DialogContent dividers>
-            <InputsMUI register={register} errors={errors} />
-          </DialogContent>
-          <DialogActions>
-            <Button type="submit" autoFocus>
-              Salvar
-            </Button>
-          </DialogActions>
-        </form>
+        <DialogContent dividers>
+          <InputsMUI
+            setfieldInputsCars={setfieldInputsCars}
+            fieldInputsCars={fieldInputsCars}
+            setfieldSelectCarsUnique={setfieldSelectCarsUnique}
+            fieldSelectCarsUnique={fieldSelectCarsUnique}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button
+            type="submit"
+            autoFocus
+            onClick={(event) => {
+              sendDataCars(event);
+            }}
+          >
+            Salvar
+          </Button>
+        </DialogActions>
       </BootstrapDialog>
       <ToastContainer />
     </React.Fragment>

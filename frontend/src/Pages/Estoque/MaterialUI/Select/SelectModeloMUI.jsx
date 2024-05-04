@@ -29,6 +29,11 @@ export default function SelectModeloMUI(props) {
       // On autofill we get a stringified value.
       typeof value === "string" ? value.split(",") : value
     );
+
+    props.setfieldSelectCarsUnique({
+      ...props.fieldSelectCarsUnique,
+      modelo: event.target.value,
+    });
   };
 
   return (
@@ -49,11 +54,7 @@ export default function SelectModeloMUI(props) {
           defaultValue=""
         >
           {props.dadosModelos.map((infoModelo) => (
-            <MenuItem
-              key={infoModelo.idModelo}
-              value={infoModelo.idModelo}
-              {...props.register("idModelo")}
-            >
+            <MenuItem key={infoModelo.idModelo} value={infoModelo.idModelo}>
               <Checkbox checked={personName.includes(infoModelo.idModelo)} />
               <ListItemText primary={infoModelo.nomeModelo} />
             </MenuItem>

@@ -9,19 +9,11 @@ import SelectModeloMUI from "../Select/SelectModeloMUI";
 import SelectVersaoMUI from "../Select/SelectVersaoMUI";
 import SelectAcessorioMUI from "../Select/SelectAcessorioMUI";
 
-import { messageError } from "./InputsMUIStyle";
-
 export default function InputsMUI(props) {
-  const { errors } = props;
-
   const [dadosMarcas, setDadosMarcas] = React.useState([]);
   const [dadosModelos, setDadosModelos] = React.useState([]);
   const [dadosVersao, setDadosVersao] = React.useState([]);
   const [dadosAcessorios, setDadosAcessorios] = React.useState([]);
-
-  const [inputAcessorio, setInputAcessorio] = React.useState({
-    acessorios: [],
-  });
 
   const buscaMarcas = async () => {
     await axios
@@ -77,11 +69,24 @@ export default function InputsMUI(props) {
         alignItems: "center",
       }}
       noValidate
-      autoComplete="off"
+      autoComplete="on"
     >
-      <SelectMarcaMUI dadosMarcas={dadosMarcas} register={props.register} />
-      <SelectModeloMUI dadosModelos={dadosModelos} register={props.register} />
-      <SelectVersaoMUI dadosVersao={dadosVersao} register={props.register} />
+      <SelectMarcaMUI
+        dadosMarcas={dadosMarcas}
+        setfieldSelectCarsUnique={props.setfieldSelectCarsUnique}
+        fieldSelectCarsUnique={props.fieldSelectCarsUnique}
+      />
+      <SelectModeloMUI
+        dadosModelos={dadosModelos}
+        setfieldSelectCarsUnique={props.setfieldSelectCarsUnique}
+        fieldSelectCarsUnique={props.fieldSelectCarsUnique}
+      />
+
+      <SelectVersaoMUI
+        dadosVersao={dadosVersao}
+        setfieldSelectCarsUnique={props.setfieldSelectCarsUnique}
+        fieldSelectCarsUnique={props.fieldSelectCarsUnique}
+      />
 
       <FormControl variant="standard">
         <InputLabel htmlFor="ano">Ano</InputLabel>
@@ -90,14 +95,15 @@ export default function InputsMUI(props) {
           id="ano"
           placeholder="Insira o ano"
           required
-          {...props.register("ano")}
           sx={{ width: 250 }}
+          value={props.fieldInputsCars.ano}
+          onChange={(event) => {
+            props.setfieldInputsCars({
+              ...props.fieldInputsCars,
+              ano: event.target.value,
+            });
+          }}
         />
-        {
-          <messageError style={{ color: "red", fontSize: "0.8rem" }}>
-            {errors?.ano?.message}
-          </messageError>
-        }
       </FormControl>
 
       <FormControl variant="standard">
@@ -107,15 +113,15 @@ export default function InputsMUI(props) {
           id="combustivel"
           placeholder="Insira o Combustível"
           required
-          {...props.register("combustivel")}
+          value={props.fieldInputsCars.combustivel}
+          onChange={(event) => {
+            props.setfieldInputsCars({
+              ...props.fieldInputsCars,
+              combustivel: event.target.value,
+            });
+          }}
           sx={{ width: 250 }}
         />
-
-        {
-          <messageError style={{ color: "red", fontSize: "0.8rem" }}>
-            {errors?.combustivel?.message}
-          </messageError>
-        }
       </FormControl>
 
       <FormControl variant="standard">
@@ -125,15 +131,15 @@ export default function InputsMUI(props) {
           id="cor"
           placeholder="Insira a cor"
           required
-          {...props.register("cor")}
+          value={props.fieldInputsCars.cor}
+          onChange={(event) => {
+            props.setfieldInputsCars({
+              ...props.fieldInputsCars,
+              cor: event.target.value,
+            });
+          }}
           sx={{ width: 250 }}
         />
-
-        {
-          <messageError style={{ color: "red", fontSize: "0.8rem" }}>
-            {errors?.cor?.message}
-          </messageError>
-        }
       </FormControl>
 
       <FormControl variant="standard">
@@ -143,15 +149,15 @@ export default function InputsMUI(props) {
           id="quilometragem"
           placeholder="Insira a quilometragem"
           required
-          {...props.register("quilometragem")}
+          value={props.fieldInputsCars.quilometragem}
+          onChange={(event) => {
+            props.setfieldInputsCars({
+              ...props.fieldInputsCars,
+              quilometragem: event.target.value,
+            });
+          }}
           sx={{ width: 250 }}
         />
-
-        {
-          <messageError style={{ color: "red", fontSize: "0.8rem" }}>
-            {errors?.quilometragem?.message}
-          </messageError>
-        }
       </FormControl>
 
       <FormControl variant="standard">
@@ -161,15 +167,15 @@ export default function InputsMUI(props) {
           id="valor"
           placeholder="Insira o valor"
           required
-          {...props.register("valor")}
+          value={props.fieldInputsCars.valor}
+          onChange={(event) => {
+            props.setfieldInputsCars({
+              ...props.fieldInputsCars,
+              valor: event.target.value,
+            });
+          }}
           sx={{ width: 250 }}
         />
-
-        {
-          <messageError style={{ color: "red", fontSize: "0.8rem" }}>
-            {errors?.valor?.message}
-          </messageError>
-        }
       </FormControl>
 
       <FormControl variant="standard">
@@ -179,20 +185,21 @@ export default function InputsMUI(props) {
           id="placa"
           placeholder="Insira a placa"
           required
-          {...props.register("placa")}
+          value={props.fieldInputsCars.placa}
+          onChange={(event) => {
+            props.setfieldInputsCars({
+              ...props.fieldInputsCars,
+              placa: event.target.value,
+            });
+          }}
           sx={{ width: 250 }}
         />
-
-        {
-          <messageError style={{ color: "red", fontSize: "0.8rem" }}>
-            {errors?.placa?.message}
-          </messageError>
-        }
       </FormControl>
 
       <SelectAcessorioMUI
         dadosAcessorio={dadosAcessorios}
-        register={props.register}
+        setfieldInputsCars={props.setfieldInputsCars}
+        fieldInputsCars={props.fieldInputsCars}
       />
     </Box>
   );
