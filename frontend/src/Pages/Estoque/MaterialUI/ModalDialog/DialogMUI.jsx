@@ -14,14 +14,10 @@ import { ToastContainer, toast } from "react-toastify";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
-    padding: theme.spacing(2),
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
+    padding: theme.spacing(4),
   },
   "& .MuiDialogActions-root": {
-    padding: theme.spacing(1),
+    padding: theme.spacing(2),
   },
 }));
 
@@ -42,13 +38,13 @@ function ModalDialog() {
     cor: "",
     quilometragem: "",
     valor: "",
-    acessorios: [{}],
   });
 
   const [fieldSelectCarsUnique, setfieldSelectCarsUnique] = React.useState({
     marca: "",
     modelo: "",
     versao: "",
+    acessorios: [{}],
   });
 
   const sendDataCars = async (event) => {
@@ -57,35 +53,59 @@ function ModalDialog() {
       console.log(fieldSelectCarsUnique);
       console.log(fieldInputsCars);
 
-      // Enviando os dados para a rota /criacao-usuario
-      await axios.post("http://localhost:3010/criacao-veiculos", {
-        idMarca: fieldSelectCarsUnique.marca,
-        idModelo: fieldSelectCarsUnique.modelo,
-        idVersao: fieldSelectCarsUnique.versao,
-        idStatus: 1, //true => Veículo disponível
-        ano: fieldInputsCars.ano,
-        combustivel: fieldInputsCars.combustivel,
-        cor: fieldInputsCars.cor,
-        quilometragem: fieldInputsCars.quilometragem,
-        valor: fieldInputsCars.valor,
-        placa: fieldInputsCars.placa,
-        idAcessorios: fieldInputsCars.acessorios,
-      });
+      if (
+        fieldInputsCars.acessorios === "" ||
+        fieldInputsCars.ano === "" ||
+        fieldInputsCars.combustivel === "" ||
+        fieldInputsCars.cor === "" ||
+        fieldInputsCars.placa === "" ||
+        fieldInputsCars.quilometragem === "" ||
+        fieldInputsCars.valor === ""
+      ) {
+        toast.warn("Por favor, preencha os campos corretamente !!", {
+          position: "bottom-right",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      } else {
+        // Enviando os dados para a rota /criacao-usuario
+        await axios.post("http://localhost:3010/criacao-veiculos", {
+          idMarca: fieldSelectCarsUnique.marca,
+          idModelo: fieldSelectCarsUnique.modelo,
+          idVersao: fieldSelectCarsUnique.versao,
+          idStatus: 1, //true => Veículo disponível
+          ano: fieldInputsCars.ano,
+          combustivel: fieldInputsCars.combustivel,
+          cor: fieldInputsCars.cor,
+          quilometragem: fieldInputsCars.quilometragem,
+          valor: fieldInputsCars.valor,
+          placa: fieldInputsCars.placa,
+          idAcessorios: fieldSelectCarsUnique.acessorios,
+        });
 
-      // Mensagem de sucesso
-      toast.success("Veículo criado com sucesso", {
-        position: "bottom-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+        // Mensagem de sucesso
+        toast.success("Veículo criado com sucesso", {
+          position: "bottom-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      }
     } catch (error) {
-      if (error.response && error.response.status === 400) {
-        toast.warn(error.response.data.Error, {
+      if (
+        (error.response && error.response.status === 400) ||
+        (error.response && error.response.status === 500)
+      ) {
+        toast.error(error.response.data.Error, {
           position: "bottom-right",
           autoClose: 2500,
           hideProgressBar: false,

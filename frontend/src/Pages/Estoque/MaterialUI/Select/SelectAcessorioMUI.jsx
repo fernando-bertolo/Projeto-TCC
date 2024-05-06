@@ -30,8 +30,8 @@ export default function SelectAcessorioMUI(props) {
       typeof value === "string" ? value.split(",") : value
     );
 
-    props.setfieldInputsCars({
-      ...props.fieldInputsCars,
+    props.setfieldSelectCarsUnique({
+      ...props.fieldSelectCarsUnique,
       acessorios: event.target.value,
     });
   };

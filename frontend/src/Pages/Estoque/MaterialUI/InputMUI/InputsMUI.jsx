@@ -198,8 +198,8 @@ export default function InputsMUI(props) {
 
       <SelectAcessorioMUI
         dadosAcessorio={dadosAcessorios}
-        setfieldInputsCars={props.setfieldInputsCars}
-        fieldInputsCars={props.fieldInputsCars}
+        setfieldSelectCarsUnique={props.setfieldSelectCarsUnique}
+        fieldSelectCarsUnique={props.fieldSelectCarsUnique}
       />
     </Box>
   );

@@ -70,7 +70,12 @@ criacaoVeiculo.post("/criacao-veiculos", async (request, response) => {
       .json({ message: "Veículo criado com sucesso!!" });
   } catch (error) {
     console.log(error);
-    return response.status(500).json({ Error: "Erro na criação do veículo!!" });
+    return response
+      .status(500)
+      .json({
+        Error:
+          "Erro na criação do veículo, valide se os campos estão preenchidos corretamente!!",
+      });
   }
 });
 
