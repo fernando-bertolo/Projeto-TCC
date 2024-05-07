@@ -7,7 +7,6 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/material/Icon/Icon";
-import BotoesListagem from "../Buttons/ButtonMUI";
 import InputsMUI from "../InputMUI/InputsMUI";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
@@ -23,8 +22,6 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 function ModalDialog(props) {
-  const [open, setOpen] = React.useState(false);
-
   const [veiculo, setVeiculo] = React.useState();
 
   const buscaVeiculos = async () => {
@@ -50,13 +47,6 @@ function ModalDialog(props) {
         console.log(error);
       }
     }
-  };
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
   };
 
   const [fieldInputsCars, setfieldInputsCars] = React.useState({
@@ -126,7 +116,7 @@ function ModalDialog(props) {
         });
         await Delay(3.5);
         buscaVeiculos();
-        handleClose(false);
+        props.handleClose(false);
       }
     } catch (error) {
       if (
@@ -151,59 +141,120 @@ function ModalDialog(props) {
 
   return (
     <React.Fragment>
-      <BotoesListagem
-        handleClickOpen={handleClickOpen}
-        deleteCar={props.deleteCar}
-      />
-      <BootstrapDialog
-        onClose={handleClose}
-        aria-labelledby="customized-dialog-title"
-        open={open}
-      >
-        <DialogTitle
-          sx={{
-            m: 0,
-            p: 4,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-          id="customized-dialog-title"
+      {props.modo === "criacao" ? (
+        <BootstrapDialog
+          onClose={props.handleClose}
+          aria-labelledby="customized-dialog-title"
+          open={props.open}
         >
-          Cadastro de Veículo
-        </DialogTitle>
-        <IconButton
-          aria-label="close"
-          onClick={handleClose}
-          sx={{
-            position: "absolute",
-            right: 8,
-            top: 8,
-            color: (theme) => theme.palette.grey[500],
-          }}
-        >
-          {/* <CloseIcon /> */}X
-        </IconButton>
-        <DialogContent dividers>
-          <InputsMUI
-            setfieldInputsCars={setfieldInputsCars}
-            fieldInputsCars={fieldInputsCars}
-            setfieldSelectCarsUnique={setfieldSelectCarsUnique}
-            fieldSelectCarsUnique={fieldSelectCarsUnique}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button
-            type="submit"
-            autoFocus
-            onClick={(event) => {
-              sendDataCars(event);
+          <DialogTitle
+            sx={{
+              m: 0,
+              p: 4,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            id="customized-dialog-title"
+          >
+            {props.title}
+          </DialogTitle>
+          <IconButton
+            aria-label="close"
+            onClick={props.handleClose}
+            sx={{
+              position: "absolute",
+              right: 8,
+              top: 8,
+              color: (theme) => theme.palette.grey[500],
             }}
           >
-            Salvar
-          </Button>
-        </DialogActions>
-      </BootstrapDialog>
+            {/* <CloseIcon /> */}X
+          </IconButton>
+          <DialogContent dividers>
+            <InputsMUI
+              setfieldInputsCars={setfieldInputsCars}
+              fieldInputsCars={fieldInputsCars}
+              setfieldSelectCarsUnique={setfieldSelectCarsUnique}
+              fieldSelectCarsUnique={fieldSelectCarsUnique}
+              dataCar={props.dataCar}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button
+              type="submit"
+              autoFocus
+              onClick={(event) => {
+                sendDataCars(event);
+              }}
+            >
+              Salvar
+            </Button>
+          </DialogActions>
+        </BootstrapDialog>
+      ) : props.modo === "edicao" ? (
+        <BootstrapDialog
+          onClose={props.handleCloseEdit}
+          aria-labelledby="customized-dialog-title"
+          open={props.editOpen}
+        >
+          <DialogTitle
+            sx={{
+              m: 0,
+              p: 4,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+            id="customized-dialog-title"
+          >
+            {props.title}
+          </DialogTitle>
+          <IconButton
+            aria-label="close"
+            onClick={props.handleClose}
+            sx={{
+              position: "absolute",
+              right: 8,
+              top: 8,
+              color: (theme) => theme.palette.grey[500],
+            }}
+          >
+            {/* <CloseIcon /> */}X
+          </IconButton>
+          <DialogContent dividers>
+            <InputsMUI
+              setfieldInputsCars={setfieldInputsCars}
+              fieldInputsCars={fieldInputsCars}
+              setfieldSelectCarsUnique={setfieldSelectCarsUnique}
+              fieldSelectCarsUnique={fieldSelectCarsUnique}
+              modo="edicao"
+              dataCar={props.dataCar}
+            />
+
+            <button
+              onClick={() => {
+                console.log(props.dataCar);
+              }}
+            >
+              teste
+            </button>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              type="submit"
+              autoFocus
+              onClick={(event) => {
+                sendDataCars(event);
+              }}
+            >
+              Salvar
+            </Button>
+          </DialogActions>
+        </BootstrapDialog>
+      ) : (
+        <></>
+      )}
       <ToastContainer />
     </React.Fragment>
   );

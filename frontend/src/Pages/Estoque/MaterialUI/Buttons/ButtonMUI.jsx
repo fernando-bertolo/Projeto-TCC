@@ -13,7 +13,14 @@ function BotoesListagem(props) {
     >
       Criar
     </Button>,
-    <Button key="Editar">Editar</Button>,
+    <Button
+      key="Editar"
+      onClick={() => {
+        props.handleClickEditOpen(true);
+      }}
+    >
+      Editar
+    </Button>,
     <Button
       key="Excluir"
       onClick={() => {

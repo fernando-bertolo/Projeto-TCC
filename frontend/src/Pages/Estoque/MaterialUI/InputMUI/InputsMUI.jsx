@@ -96,7 +96,7 @@ export default function InputsMUI(props) {
           placeholder="Insira o ano"
           required
           sx={{ width: 250 }}
-          value={props.fieldInputsCars.ano}
+          value={props.dataCar.ano}
           onChange={(event) => {
             props.setfieldInputsCars({
               ...props.fieldInputsCars,
@@ -113,7 +113,7 @@ export default function InputsMUI(props) {
           id="combustivel"
           placeholder="Insira o Combustível"
           required
-          value={props.fieldInputsCars.combustivel}
+          value={props.dataCar.combustivel}
           onChange={(event) => {
             props.setfieldInputsCars({
               ...props.fieldInputsCars,
@@ -131,7 +131,7 @@ export default function InputsMUI(props) {
           id="cor"
           placeholder="Insira a cor"
           required
-          value={props.fieldInputsCars.cor}
+          value={props.dataCar.cor}
           onChange={(event) => {
             props.setfieldInputsCars({
               ...props.fieldInputsCars,
@@ -149,7 +149,7 @@ export default function InputsMUI(props) {
           id="quilometragem"
           placeholder="Insira a quilometragem"
           required
-          value={props.fieldInputsCars.quilometragem}
+          value={props.dataCar.quilometragem}
           onChange={(event) => {
             props.setfieldInputsCars({
               ...props.fieldInputsCars,
@@ -167,7 +167,7 @@ export default function InputsMUI(props) {
           id="valor"
           placeholder="Insira o valor"
           required
-          value={props.fieldInputsCars.valor}
+          value={props.dataCar.valor}
           onChange={(event) => {
             props.setfieldInputsCars({
               ...props.fieldInputsCars,
@@ -185,7 +185,7 @@ export default function InputsMUI(props) {
           id="placa"
           placeholder="Insira a placa"
           required
-          value={props.fieldInputsCars.placa}
+          value={props.dataCar.placa}
           onChange={(event) => {
             props.setfieldInputsCars({
               ...props.fieldInputsCars,

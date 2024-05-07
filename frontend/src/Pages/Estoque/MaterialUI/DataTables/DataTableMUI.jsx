@@ -13,9 +13,26 @@ import ModalDialog from "../ModalDialog/DialogMUI";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import BotoesListagem from "../Buttons/ButtonMUI";
 
 function DataTableMUI(props) {
   const [rowSelectCar, setRowSelectCar] = React.useState();
+  const [open, setOpen] = React.useState(false);
+  const [editOpen, setEditOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleClickEditOpen = () => {
+    setEditOpen(true);
+  };
+  const handleCloseEdit = () => {
+    setEditOpen(false);
+  };
 
   const handleRowSelectionChange = async (newSelection) => {
     if (newSelection && newSelection.length > 0) {
@@ -63,10 +80,11 @@ function DataTableMUI(props) {
             <Title>Estoque</Title>
           </DivSecundaria>
           <DivTerciaria>
-            <ModalDialog
-              setDadosVeiculos={props.setDadosVeiculos}
+            <BotoesListagem
+              handleClickOpen={handleClickOpen}
+              handleClickEditOpen={handleClickEditOpen}
               deleteCar={deleteCar}
-            ></ModalDialog>
+            />
           </DivTerciaria>
         </SectionSearch>
         <div
@@ -93,7 +111,33 @@ function DataTableMUI(props) {
           />
         </div>
         <ToastContainer />
+
+        <button
+          onClick={() => {
+            console.log(rowSelectCar);
+          }}
+        >
+          Teste
+        </button>
       </DivTable>
+
+      <ModalDialog
+        setDadosVeiculos={props.setDadosVeiculos}
+        deleteCar={deleteCar}
+        handleClose={handleClose}
+        open={open}
+        modo="criacao"
+        title="Cadastro de Veículos"
+      />
+      <ModalDialog
+        setDadosVeiculos={props.setDadosVeiculos}
+        deleteCar={deleteCar}
+        handleCloseEdit={handleCloseEdit}
+        editOpen={editOpen}
+        modo="edicao"
+        title="Alteração de Veículos"
+        dataCar={rowSelectCar}
+      />
     </>
   );
 }
