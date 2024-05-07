@@ -11,6 +11,7 @@ import BotoesListagem from "../Buttons/ButtonMUI";
 import InputsMUI from "../InputMUI/InputsMUI";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import Delay from "../../../../Services/Delay/Delay";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -21,8 +22,35 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   },
 }));
 
-function ModalDialog() {
+function ModalDialog(props) {
   const [open, setOpen] = React.useState(false);
+
+  const [veiculo, setVeiculo] = React.useState();
+
+  const buscaVeiculos = async () => {
+    try {
+      await axios
+        .get("http://localhost:3010/visualizar-veiculo")
+        .then((response) => {
+          setVeiculo(response.data);
+        });
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        toast.warn(error.response.data.Error, {
+          position: "bottom-right",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      } else {
+        console.log(error);
+      }
+    }
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -50,9 +78,6 @@ function ModalDialog() {
   const sendDataCars = async (event) => {
     event.preventDefault();
     try {
-      console.log(fieldSelectCarsUnique);
-      console.log(fieldInputsCars);
-
       if (
         fieldInputsCars.acessorios === "" ||
         fieldInputsCars.ano === "" ||
@@ -99,6 +124,9 @@ function ModalDialog() {
           progress: undefined,
           theme: "light",
         });
+        await Delay(3.5);
+        buscaVeiculos();
+        handleClose(false);
       }
     } catch (error) {
       if (
@@ -123,7 +151,10 @@ function ModalDialog() {
 
   return (
     <React.Fragment>
-      <BotoesListagem handleClickOpen={handleClickOpen} />
+      <BotoesListagem
+        handleClickOpen={handleClickOpen}
+        deleteCar={props.deleteCar}
+      />
       <BootstrapDialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"

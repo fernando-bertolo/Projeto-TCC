@@ -14,7 +14,14 @@ function BotoesListagem(props) {
       Criar
     </Button>,
     <Button key="Editar">Editar</Button>,
-    <Button key="Excluir">Excluir</Button>,
+    <Button
+      key="Excluir"
+      onClick={() => {
+        props.deleteCar();
+      }}
+    >
+      Excluir
+    </Button>,
   ];
   return (
     <Box
