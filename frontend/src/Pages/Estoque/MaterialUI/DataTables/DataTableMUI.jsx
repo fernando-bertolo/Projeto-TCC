@@ -1,6 +1,7 @@
 import * as React from "react";
-import { DataGrid } from "@mui/x-data-grid";
+//import { DataGrid } from "@mui/x-data-grid";
 import {
+  DataGridCustom,
   DivTable,
   SectionSearch,
   DivPrimaria,
@@ -93,7 +94,7 @@ function DataTableMUI(props) {
             width: "80%",
           }}
         >
-          <DataGrid
+          <DataGridCustom
             rows={props.rows}
             columns={props.columns}
             onRowSelectionModelChange={handleRowSelectionChange}
@@ -104,21 +105,13 @@ function DataTableMUI(props) {
             }}
             checkboxSelection
             style={{
-              borderRadius: 10,
-              backgroundColor: "#FFF",
-              color: "black",
+              borderRadius: 20,
+              color: "#fff",
+              border: "none",
             }}
           />
         </div>
         <ToastContainer />
-
-        <button
-          onClick={() => {
-            console.log(rowSelectCar);
-          }}
-        >
-          Teste
-        </button>
       </DivTable>
 
       <ModalDialog

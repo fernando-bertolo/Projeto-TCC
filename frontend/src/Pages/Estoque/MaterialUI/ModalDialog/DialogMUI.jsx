@@ -49,13 +49,26 @@ function ModalDialog(props) {
     }
   };
 
-  const [fieldInputsCars, setfieldInputsCars] = React.useState({
-    ano: "",
-    placa: "",
-    combustivel: "",
-    cor: "",
-    quilometragem: "",
-    valor: "",
+  const [fieldInputsCars, setfieldInputsCars] = React.useState(() => {
+    if (props.modo === "edicao" && props.dataCar) {
+      return {
+        ano: props.dataCar.ano || "",
+        placa: props.dataCar.placa || "",
+        combustivel: props.dataCar.combustivel || "",
+        cor: props.dataCar.cor || "",
+        quilometragem: props.dataCar.quilometragem || "",
+        valor: props.dataCar.valor || "",
+      };
+    } else {
+      return {
+        ano: "",
+        placa: "",
+        combustivel: "",
+        cor: "",
+        quilometragem: "",
+        valor: "",
+      };
+    }
   });
 
   const [fieldSelectCarsUnique, setfieldSelectCarsUnique] = React.useState({
@@ -68,55 +81,111 @@ function ModalDialog(props) {
   const sendDataCars = async (event) => {
     event.preventDefault();
     try {
-      if (
-        fieldInputsCars.acessorios === "" ||
-        fieldInputsCars.ano === "" ||
-        fieldInputsCars.combustivel === "" ||
-        fieldInputsCars.cor === "" ||
-        fieldInputsCars.placa === "" ||
-        fieldInputsCars.quilometragem === "" ||
-        fieldInputsCars.valor === ""
-      ) {
-        toast.warn("Por favor, preencha os campos corretamente !!", {
-          position: "bottom-right",
-          autoClose: 2500,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-      } else {
-        // Enviando os dados para a rota /criacao-usuario
-        await axios.post("http://localhost:3010/criacao-veiculos", {
-          idMarca: fieldSelectCarsUnique.marca,
-          idModelo: fieldSelectCarsUnique.modelo,
-          idVersao: fieldSelectCarsUnique.versao,
-          idStatus: 1, //true => Veículo disponível
-          ano: fieldInputsCars.ano,
-          combustivel: fieldInputsCars.combustivel,
-          cor: fieldInputsCars.cor,
-          quilometragem: fieldInputsCars.quilometragem,
-          valor: fieldInputsCars.valor,
-          placa: fieldInputsCars.placa,
-          idAcessorios: fieldSelectCarsUnique.acessorios,
-        });
+      if (props.modo === "criacao") {
+        if (
+          fieldInputsCars.acessorios === "" ||
+          fieldInputsCars.ano === "" ||
+          fieldInputsCars.combustivel === "" ||
+          fieldInputsCars.cor === "" ||
+          fieldInputsCars.placa === "" ||
+          fieldInputsCars.quilometragem === "" ||
+          fieldInputsCars.valor === ""
+        ) {
+          toast.warn("Por favor, preencha os campos corretamente !!", {
+            position: "bottom-right",
+            autoClose: 2500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        } else {
+          // Enviando os dados para a rota /criacao-veiculos
+          await axios.post("http://localhost:3010/criacao-veiculos", {
+            idMarca: fieldSelectCarsUnique.marca,
+            idModelo: fieldSelectCarsUnique.modelo,
+            idVersao: fieldSelectCarsUnique.versao,
+            idStatus: 1, //true => Veículo disponível
+            ano: fieldInputsCars.ano,
+            combustivel: fieldInputsCars.combustivel,
+            cor: fieldInputsCars.cor,
+            quilometragem: fieldInputsCars.quilometragem,
+            valor: fieldInputsCars.valor,
+            placa: fieldInputsCars.placa,
+            idAcessorios: fieldSelectCarsUnique.acessorios,
+          });
 
-        // Mensagem de sucesso
-        toast.success("Veículo criado com sucesso", {
-          position: "bottom-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
-        await Delay(3.5);
-        buscaVeiculos();
-        props.handleClose(false);
+          // Mensagem de sucesso
+          toast.success("Veículo criado com sucesso", {
+            position: "bottom-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          await Delay(3.5);
+          buscaVeiculos();
+          props.handleClose(false);
+        }
+      } else if (props.modo === "edicao") {
+        if (
+          fieldInputsCars.acessorios === "" ||
+          fieldInputsCars.ano === "" ||
+          fieldInputsCars.combustivel === "" ||
+          fieldInputsCars.cor === "" ||
+          fieldInputsCars.placa === "" ||
+          fieldInputsCars.quilometragem === "" ||
+          fieldInputsCars.valor === ""
+        ) {
+          toast.warn("Por favor, preencha os campos corretamente !!", {
+            position: "bottom-right",
+            autoClose: 2500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        } else {
+          // Enviando os dados para a rota /alteracao-veiculo
+          await axios.put(
+            `http://localhost:3010/alteracao-veiculo/${props.dataCar.id}`,
+            {
+              idMarca: fieldSelectCarsUnique.marca,
+              idModelo: fieldSelectCarsUnique.modelo,
+              idVersao: fieldSelectCarsUnique.versao,
+              idStatus: 1, //true => Veículo disponível
+              ano: fieldInputsCars.ano,
+              combustivel: fieldInputsCars.combustivel,
+              cor: fieldInputsCars.cor,
+              quilometragem: fieldInputsCars.quilometragem,
+              valor: fieldInputsCars.valor,
+              placa: fieldInputsCars.placa,
+              idAcessorios: fieldSelectCarsUnique.acessorios,
+            }
+          );
+
+          // Mensagem de sucesso
+          toast.success("Veículo alterado com sucesso", {
+            position: "bottom-right",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          await Delay(3.5);
+          buscaVeiculos();
+          props.handleClose(false);
+        }
       }
     } catch (error) {
       if (
@@ -177,7 +246,7 @@ function ModalDialog(props) {
               fieldInputsCars={fieldInputsCars}
               setfieldSelectCarsUnique={setfieldSelectCarsUnique}
               fieldSelectCarsUnique={fieldSelectCarsUnique}
-              dataCar={props.dataCar}
+              modo="criacao"
             />
           </DialogContent>
           <DialogActions>
@@ -192,7 +261,7 @@ function ModalDialog(props) {
             </Button>
           </DialogActions>
         </BootstrapDialog>
-      ) : props.modo === "edicao" ? (
+      ) : props.modo === "edicao" && props.dataCar ? (
         <BootstrapDialog
           onClose={props.handleCloseEdit}
           aria-labelledby="customized-dialog-title"
@@ -212,7 +281,7 @@ function ModalDialog(props) {
           </DialogTitle>
           <IconButton
             aria-label="close"
-            onClick={props.handleClose}
+            onClick={props.handleCloseEdit}
             sx={{
               position: "absolute",
               right: 8,
@@ -231,14 +300,6 @@ function ModalDialog(props) {
               modo="edicao"
               dataCar={props.dataCar}
             />
-
-            <button
-              onClick={() => {
-                console.log(props.dataCar);
-              }}
-            >
-              teste
-            </button>
           </DialogContent>
           <DialogActions>
             <Button

@@ -59,148 +59,150 @@ export default function InputsMUI(props) {
   }, []);
 
   return (
-    <Box
-      component="form"
-      sx={{
-        "& > :not(style)": { m: 4 },
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-      noValidate
-      autoComplete="on"
-    >
-      <SelectMarcaMUI
-        dadosMarcas={dadosMarcas}
-        setfieldSelectCarsUnique={props.setfieldSelectCarsUnique}
-        fieldSelectCarsUnique={props.fieldSelectCarsUnique}
-      />
-      <SelectModeloMUI
-        dadosModelos={dadosModelos}
-        setfieldSelectCarsUnique={props.setfieldSelectCarsUnique}
-        fieldSelectCarsUnique={props.fieldSelectCarsUnique}
-      />
-
-      <SelectVersaoMUI
-        dadosVersao={dadosVersao}
-        setfieldSelectCarsUnique={props.setfieldSelectCarsUnique}
-        fieldSelectCarsUnique={props.fieldSelectCarsUnique}
-      />
-
-      <FormControl variant="standard">
-        <InputLabel htmlFor="ano">Ano</InputLabel>
-        <Input
-          type="text"
-          id="ano"
-          placeholder="Insira o ano"
-          required
-          sx={{ width: 250 }}
-          value={props.dataCar.ano}
-          onChange={(event) => {
-            props.setfieldInputsCars({
-              ...props.fieldInputsCars,
-              ano: event.target.value,
-            });
-          }}
+    <>
+      <Box
+        component="form"
+        sx={{
+          "& > :not(style)": { m: 4 },
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+        noValidate
+        autoComplete="on"
+      >
+        <SelectMarcaMUI
+          dadosMarcas={dadosMarcas}
+          setfieldSelectCarsUnique={props.setfieldSelectCarsUnique}
+          fieldSelectCarsUnique={props.fieldSelectCarsUnique}
         />
-      </FormControl>
-
-      <FormControl variant="standard">
-        <InputLabel htmlFor="combustivel">Combustivel</InputLabel>
-        <Input
-          type="text"
-          id="combustivel"
-          placeholder="Insira o Combustível"
-          required
-          value={props.dataCar.combustivel}
-          onChange={(event) => {
-            props.setfieldInputsCars({
-              ...props.fieldInputsCars,
-              combustivel: event.target.value,
-            });
-          }}
-          sx={{ width: 250 }}
+        <SelectModeloMUI
+          dadosModelos={dadosModelos}
+          setfieldSelectCarsUnique={props.setfieldSelectCarsUnique}
+          fieldSelectCarsUnique={props.fieldSelectCarsUnique}
         />
-      </FormControl>
 
-      <FormControl variant="standard">
-        <InputLabel htmlFor="cor">Cor</InputLabel>
-        <Input
-          type="text"
-          id="cor"
-          placeholder="Insira a cor"
-          required
-          value={props.dataCar.cor}
-          onChange={(event) => {
-            props.setfieldInputsCars({
-              ...props.fieldInputsCars,
-              cor: event.target.value,
-            });
-          }}
-          sx={{ width: 250 }}
+        <SelectVersaoMUI
+          dadosVersao={dadosVersao}
+          setfieldSelectCarsUnique={props.setfieldSelectCarsUnique}
+          fieldSelectCarsUnique={props.fieldSelectCarsUnique}
         />
-      </FormControl>
 
-      <FormControl variant="standard">
-        <InputLabel htmlFor="quilometragem">Quilometragem</InputLabel>
-        <Input
-          type="text"
-          id="quilometragem"
-          placeholder="Insira a quilometragem"
-          required
-          value={props.dataCar.quilometragem}
-          onChange={(event) => {
-            props.setfieldInputsCars({
-              ...props.fieldInputsCars,
-              quilometragem: event.target.value,
-            });
-          }}
-          sx={{ width: 250 }}
+        <FormControl variant="standard">
+          <InputLabel htmlFor="ano">Ano</InputLabel>
+          <Input
+            type="text"
+            id="ano"
+            placeholder="Insira o ano"
+            required
+            sx={{ width: 250 }}
+            value={props.fieldInputsCars.ano}
+            onChange={(event) => {
+              props.setfieldInputsCars({
+                ...props.fieldInputsCars,
+                ano: event.target.value,
+              });
+            }}
+          />
+        </FormControl>
+
+        <FormControl variant="standard">
+          <InputLabel htmlFor="combustivel">Combustivel</InputLabel>
+          <Input
+            type="text"
+            id="combustivel"
+            placeholder="Insira o Combustível"
+            required
+            value={props.fieldInputsCars.combustivel}
+            onChange={(event) => {
+              props.setfieldInputsCars({
+                ...props.fieldInputsCars,
+                combustivel: event.target.value,
+              });
+            }}
+            sx={{ width: 250 }}
+          />
+        </FormControl>
+
+        <FormControl variant="standard">
+          <InputLabel htmlFor="cor">Cor</InputLabel>
+          <Input
+            type="text"
+            id="cor"
+            placeholder="Insira a cor"
+            required
+            value={props.fieldInputsCars.cor}
+            onChange={(event) => {
+              props.setfieldInputsCars({
+                ...props.fieldInputsCars,
+                cor: event.target.value,
+              });
+            }}
+            sx={{ width: 250 }}
+          />
+        </FormControl>
+
+        <FormControl variant="standard">
+          <InputLabel htmlFor="quilometragem">Quilometragem</InputLabel>
+          <Input
+            type="text"
+            id="quilometragem"
+            placeholder="Insira a quilometragem"
+            required
+            value={props.fieldInputsCars.quilometragem}
+            onChange={(event) => {
+              props.setfieldInputsCars({
+                ...props.fieldInputsCars,
+                quilometragem: event.target.value,
+              });
+            }}
+            sx={{ width: 250 }}
+          />
+        </FormControl>
+
+        <FormControl variant="standard">
+          <InputLabel htmlFor="valor">Valor</InputLabel>
+          <Input
+            type="text"
+            id="valor"
+            placeholder="Insira o valor"
+            required
+            value={props.fieldInputsCars.valor}
+            onChange={(event) => {
+              props.setfieldInputsCars({
+                ...props.fieldInputsCars,
+                valor: event.target.value,
+              });
+            }}
+            sx={{ width: 250 }}
+          />
+        </FormControl>
+
+        <FormControl variant="standard">
+          <InputLabel htmlFor="placa">Placa</InputLabel>
+          <Input
+            type="text"
+            id="placa"
+            placeholder="Insira a placa"
+            required
+            value={props.fieldInputsCars.placa}
+            onChange={(event) => {
+              props.setfieldInputsCars({
+                ...props.fieldInputsCars,
+                placa: event.target.value,
+              });
+            }}
+            sx={{ width: 250 }}
+          />
+        </FormControl>
+
+        <SelectAcessorioMUI
+          dadosAcessorio={dadosAcessorios}
+          setfieldSelectCarsUnique={props.setfieldSelectCarsUnique}
+          fieldSelectCarsUnique={props.fieldSelectCarsUnique}
         />
-      </FormControl>
-
-      <FormControl variant="standard">
-        <InputLabel htmlFor="valor">Valor</InputLabel>
-        <Input
-          type="text"
-          id="valor"
-          placeholder="Insira o valor"
-          required
-          value={props.dataCar.valor}
-          onChange={(event) => {
-            props.setfieldInputsCars({
-              ...props.fieldInputsCars,
-              valor: event.target.value,
-            });
-          }}
-          sx={{ width: 250 }}
-        />
-      </FormControl>
-
-      <FormControl variant="standard">
-        <InputLabel htmlFor="placa">Placa</InputLabel>
-        <Input
-          type="text"
-          id="placa"
-          placeholder="Insira a placa"
-          required
-          value={props.dataCar.placa}
-          onChange={(event) => {
-            props.setfieldInputsCars({
-              ...props.fieldInputsCars,
-              placa: event.target.value,
-            });
-          }}
-          sx={{ width: 250 }}
-        />
-      </FormControl>
-
-      <SelectAcessorioMUI
-        dadosAcessorio={dadosAcessorios}
-        setfieldSelectCarsUnique={props.setfieldSelectCarsUnique}
-        fieldSelectCarsUnique={props.fieldSelectCarsUnique}
-      />
-    </Box>
+      </Box>
+    </>
   );
 }
