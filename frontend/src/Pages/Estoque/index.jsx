@@ -10,15 +10,14 @@ import axios from "axios";
 import DataTableMUI from "./MaterialUI/DataTables/DataTableMUI";
 
 const columnsCars = [
-  { field: "nomeMarca", headerName: "Marca", width: 150 },
-  { field: "nomeModelo", headerName: "Modelo", width: 150 },
-  { field: "nomeVersao", headerName: "Versão", width: 150 },
-  { field: "ano", headerName: "Ano", width: 80 },
-  { field: "cor", headerName: "Cor", width: 100 },
-  { field: "quilometragem", headerName: "Quilometragem", width: 120 },
-  { field: "placa", headerName: "Placa", width: 150 },
-  { field: "valor", headerName: "Valor", width: 150 },
-  { field: "idStatus", headerName: "idStatus", width: 150 },
+  { field: "nomeMarca", headerName: "Marca", width: 160 },
+  { field: "nomeModelo", headerName: "Modelo", width: 160 },
+  { field: "nomeVersao", headerName: "Versão", width: 160 },
+  { field: "ano", headerName: "Ano", width: 160 },
+  { field: "cor", headerName: "Cor", width: 160 },
+  { field: "quilometragem", headerName: "Quilometragem", width: 160 },
+  { field: "placa", headerName: "Placa", width: 160 },
+  { field: "valor", headerName: "Valor", width: 146 },
 ];
 
 function Estoque() {

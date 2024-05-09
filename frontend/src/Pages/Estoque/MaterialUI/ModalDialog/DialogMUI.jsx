@@ -49,27 +49,33 @@ function ModalDialog(props) {
     }
   };
 
-  const [fieldInputsCars, setfieldInputsCars] = React.useState(() => {
-    if (props.modo === "edicao" && props.dataCar) {
-      return {
-        ano: props.dataCar.ano || "",
-        placa: props.dataCar.placa || "",
-        combustivel: props.dataCar.combustivel || "",
-        cor: props.dataCar.cor || "",
-        quilometragem: props.dataCar.quilometragem || "",
-        valor: props.dataCar.valor || "",
-      };
-    } else {
-      return {
-        ano: "",
-        placa: "",
-        combustivel: "",
-        cor: "",
-        quilometragem: "",
-        valor: "",
-      };
-    }
+  React.useEffect(() => {
+    buscaVeiculos();
+  }, []);
+
+  console.log(props.modo);
+
+  const [fieldInputsCars, setfieldInputsCars] = React.useState({
+    ano: "",
+    placa: "",
+    combustivel: "",
+    cor: "",
+    quilometragem: "",
+    valor: "",
   });
+
+  React.useEffect(() => {
+    if (props.modo === "edicao" && props.dataCar) {
+      setfieldInputsCars({
+        ano: props.dataCar.ano,
+        placa: props.dataCar.placa,
+        combustivel: props.dataCar.combustivel,
+        cor: props.dataCar.cor,
+        quilometragem: props.dataCar.quilometragem,
+        valor: props.dataCar.valor,
+      });
+    }
+  }, [props.dataCar]);
 
   const [fieldSelectCarsUnique, setfieldSelectCarsUnique] = React.useState({
     marca: "",
@@ -184,7 +190,7 @@ function ModalDialog(props) {
           });
           await Delay(3.5);
           buscaVeiculos();
-          props.handleClose(false);
+          props.handleCloseEdit(false);
         }
       }
     } catch (error) {

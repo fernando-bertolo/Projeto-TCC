@@ -122,15 +122,18 @@ function DataTableMUI(props) {
         modo="criacao"
         title="Cadastro de Veículos"
       />
-      <ModalDialog
-        setDadosVeiculos={props.setDadosVeiculos}
-        deleteCar={deleteCar}
-        handleCloseEdit={handleCloseEdit}
-        editOpen={editOpen}
-        modo="edicao"
-        title="Alteração de Veículos"
-        dataCar={rowSelectCar}
-      />
+
+      {rowSelectCar && (
+        <ModalDialog
+          setDadosVeiculos={props.setDadosVeiculos}
+          deleteCar={deleteCar}
+          handleCloseEdit={handleCloseEdit}
+          editOpen={editOpen}
+          modo="edicao"
+          title="Alteração de Veículos"
+          dataCar={rowSelectCar}
+        />
+      )}
     </>
   );
 }
