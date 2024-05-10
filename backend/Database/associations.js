@@ -4,6 +4,8 @@ const Versoes = require("./Tabelas/Versoes/versoes");
 const Veiculos = require("./Tabelas/Veiculos/veiculos");
 const Acessorios = require("./Tabelas/Acessorios/acessorios");
 const AcessoriosVeiculos = require("./Tabelas/Acessorios_veiculos/acessoriosVeiculos");
+const Despesas = require("./Tabelas/Despesas/Despesas");
+const DespesasVeiculos = require("./Tabelas/Despesas_veiculos/despesasVeiculos");
 
 Marcas.hasMany(Modelos, { foreignKey: "idMarca" }); // hasMany devido a uma marca poder pertencer a diversos modelos
 Modelos.belongsTo(Marcas, { foreignKey: "idMarca" }); // belongsTo devido a um modelo pertencer a somente uma marca
@@ -30,3 +32,13 @@ Veiculos.belongsToMany(Acessorios, {
   through: AcessoriosVeiculos,
   foreignKey: "idVeiculo",
 }); // through é usado para especificar a tabela intermediaria que gerencia o relacionamento muitos para muitos
+
+Despesas.belongsToMany(Veiculos, {
+  through: DespesasVeiculos,
+  foreignKey: "idDespesa",
+});
+
+Veiculos.belongsToMany(Despesas, {
+  through: DespesasVeiculos,
+  foreignKey: "idVeiculo",
+});

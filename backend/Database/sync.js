@@ -10,6 +10,7 @@
   const Veiculos = require("./Tabelas/Veiculos/veiculos");
   const Acessorios = require("./Tabelas/Acessorios/acessorios");
   const AcessoriosVeiculos = require("./Tabelas/Acessorios_veiculos/acessoriosVeiculos");
-
+  const Despesas = require("./Tabelas/Despesas/Despesas");
+  const DespesasVeiculos = require("./Tabelas/Despesas_veiculos/despesasVeiculos");
   await database.sync();
 })();

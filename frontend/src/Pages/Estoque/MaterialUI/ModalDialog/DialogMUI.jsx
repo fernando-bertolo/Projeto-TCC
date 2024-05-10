@@ -49,10 +49,6 @@ function ModalDialog(props) {
     }
   };
 
-  React.useEffect(() => {
-    buscaVeiculos();
-  }, []);
-
   console.log(props.modo);
 
   const [fieldInputsCars, setfieldInputsCars] = React.useState({
@@ -75,7 +71,7 @@ function ModalDialog(props) {
         valor: props.dataCar.valor,
       });
     }
-  }, [props.dataCar]);
+  }, [props.dataCar, props.modo]);
 
   const [fieldSelectCarsUnique, setfieldSelectCarsUnique] = React.useState({
     marca: "",
@@ -213,6 +209,10 @@ function ModalDialog(props) {
       }
     }
   };
+
+  React.useEffect(() => {
+    buscaVeiculos();
+  }, []);
 
   return (
     <React.Fragment>
