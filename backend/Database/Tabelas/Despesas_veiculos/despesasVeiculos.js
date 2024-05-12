@@ -4,7 +4,8 @@ const database = require("../../database");
 const DespesasVeiculos = database.define("DespesasVeiculos", {
   idDespesaVeiculo: {
     type: Sequelize.UUID,
-    allowNull: false,
+    defaultValue: Sequelize.UUIDV4,
+    primaryKey: true,
   },
   idVeiculo: {
     type: Sequelize.UUID,
