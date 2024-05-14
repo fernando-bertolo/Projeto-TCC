@@ -15,11 +15,13 @@ import Button from "@mui/material/Button";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import BotoesListagem from "../Buttons/ButtonMUI";
+import DialogDespesas from "../ModalDialogDespesas/DialogDespesasMUI";
 
 function DataTableMUI(props) {
   const [rowSelectCar, setRowSelectCar] = React.useState();
   const [open, setOpen] = React.useState(false);
   const [editOpen, setEditOpen] = React.useState(false);
+  const [openDespesas, setOpenDespesas] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -33,6 +35,14 @@ function DataTableMUI(props) {
   };
   const handleCloseEdit = () => {
     setEditOpen(false);
+  };
+
+  const handleClickOpenDespesas = () => {
+    setOpenDespesas(true);
+  };
+
+  const handleClickCloseDespesas = () => {
+    setOpenDespesas(false);
   };
 
   const handleRowSelectionChange = async (newSelection) => {
@@ -68,7 +78,14 @@ function DataTableMUI(props) {
     <>
       <DivTable>
         <SectionNavigator>
-          <Button variant="contained" href="#">
+          <Button
+            variant="contained"
+            href="#"
+            key="Despesas"
+            onClick={() => {
+              handleClickOpenDespesas(true);
+            }}
+          >
             Despesas
           </Button>
           <Button variant="outlined" href="#">
@@ -132,6 +149,13 @@ function DataTableMUI(props) {
           modo="edicao"
           title="Alteração de Veículos"
           dataCar={rowSelectCar}
+        />
+      )}
+
+      {rowSelectCar && (
+        <DialogDespesas
+          handleClickCloseDespesas={handleClickCloseDespesas}
+          openDespesas={openDespesas}
         />
       )}
     </>
