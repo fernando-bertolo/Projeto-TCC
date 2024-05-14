@@ -21,11 +21,11 @@ const Vendas = database.define("Vendas", {
       key: "id",
     },
   },
-  cpfCliente: {
-    type: Sequelize.String,
+  idCliente: {
+    type: Sequelize.UUID,
     references: {
       model: "Clientes",
-      key: "cpf",
+      key: "id",
     },
   },
   valorVenda: {
@@ -34,7 +34,7 @@ const Vendas = database.define("Vendas", {
   },
   dataVenda: {
     type: Sequelize.DATE,
-    defaultValue: Sequelize.NOW, //Será inserido a data atual
+    allowNull: false,
   },
 });
 

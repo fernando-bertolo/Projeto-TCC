@@ -12,5 +12,6 @@
   const AcessoriosVeiculos = require("./Tabelas/Acessorios_veiculos/acessoriosVeiculos");
   const Despesas = require("./Tabelas/Despesas/Despesas");
   const DespesasVeiculos = require("./Tabelas/Despesas_veiculos/despesasVeiculos");
+  const Vendas = require("./Tabelas/Vendas/Vendas");
   await database.sync();
 })();

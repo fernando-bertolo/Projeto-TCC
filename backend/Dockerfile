@@ -4,6 +4,7 @@ WORKDIR /app/backend
 
 COPY package*.json ./
 RUN npm install
+RUN node
 
 COPY . .
 

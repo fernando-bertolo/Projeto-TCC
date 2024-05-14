@@ -29,25 +29,32 @@ const Veiculos = database.define("Veiculos", {
     },
   },
   idStatus: {
-    type: Sequelize.NUMBER,
+    type: Sequelize.STRING,
+    allowNull: false,
   },
   ano: {
     type: Sequelize.STRING,
+    allowNull: false,
   },
   combustivel: {
     type: Sequelize.STRING,
+    allowNull: false,
   },
   cor: {
     type: Sequelize.STRING,
+    allowNull: false,
   },
   quilometragem: {
     type: Sequelize.DECIMAL(10, 3), //  Permite até 10 dígitos no total, com 3 dígitos após o ponto decimal
+    allowNull: false,
   },
   valor: {
     type: Sequelize.DECIMAL(10, 3), //  Permite até 10 dígitos no total, com 3 dígitos após o ponto decimal
+    allowNull: false,
   },
   placa: {
     type: Sequelize.STRING,
+    allowNull: false,
   },
 });
 

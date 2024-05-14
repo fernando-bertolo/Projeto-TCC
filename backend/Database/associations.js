@@ -6,6 +6,9 @@ const Acessorios = require("./Tabelas/Acessorios/acessorios");
 const AcessoriosVeiculos = require("./Tabelas/Acessorios_veiculos/acessoriosVeiculos");
 const Despesas = require("./Tabelas/Despesas/Despesas");
 const DespesasVeiculos = require("./Tabelas/Despesas_veiculos/despesasVeiculos");
+const Vendas = require("./Tabelas/Vendas/Vendas");
+const Usuarios = require("./Tabelas/Usuarios/usuarios");
+const Clientes = require("./Tabelas/Clientes/clientes");
 
 Marcas.hasMany(Modelos, { foreignKey: "idMarca" }); // hasMany devido a uma marca poder pertencer a diversos modelos
 Modelos.belongsTo(Marcas, { foreignKey: "idMarca" }); // belongsTo devido a um modelo pertencer a somente uma marca
@@ -33,6 +36,7 @@ Veiculos.belongsToMany(Acessorios, {
   foreignKey: "idVeiculo",
 }); // through é usado para especificar a tabela intermediaria que gerencia o relacionamento muitos para muitos
 
+//Definindo relacionamento muitos para muitos entre Despesas e Veiculos
 Despesas.belongsToMany(Veiculos, {
   through: DespesasVeiculos,
   foreignKey: "idDespesa",
@@ -41,4 +45,28 @@ Despesas.belongsToMany(Veiculos, {
 Veiculos.belongsToMany(Despesas, {
   through: DespesasVeiculos,
   foreignKey: "idVeiculo",
+});
+
+//Definindo relacionamento da tabela Vendas
+Vendas.hasOne(Veiculos, {
+  foreignKey: "idVeiculo",
+});
+Veiculos.hasOne(Vendas, {
+  foreignKey: "idVeiculo",
+});
+
+Vendas.hasOne(Clientes, {
+  foreignKey: "id",
+});
+
+Clientes.hasMany(Vendas, {
+  foreignKey: "idCliente",
+});
+
+Vendas.hasOne(Usuarios, {
+  foreignKey: "id",
+});
+
+Usuarios.hasMany(Vendas, {
+  foreignKey: "idUsuario",
 });
