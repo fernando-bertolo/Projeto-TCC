@@ -10,6 +10,9 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import Delay from "../../../../Services/Delay/Delay";
 import { DataGridCustom } from "./DialogDespesasMUIStyle";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import ButtonGroup from "@mui/material/ButtonGroup";
 
 const columnsDespesa = [
   {
@@ -83,27 +86,65 @@ function DialogDespesas(props) {
       >
         <DialogTitle
           sx={{
-            m: 0,
-            p: 4,
+            paddingTop: 1,
+            paddingBottom: 1,
+            paddingLeft: 0,
+            paddingRight: 0,
             display: "flex",
-            justifyContent: "center",
             alignItems: "center",
+            justifyContent: "center",
             backgroundColor: "#2f2841",
           }}
           id="customized-dialog-title"
-        ></DialogTitle>
-        <IconButton
-          aria-label="close"
-          onClick={props.handleClickCloseDespesas}
-          sx={{
-            position: "absolute",
-            right: 8,
-            top: 8,
-            color: (theme) => theme.palette.grey[500],
-          }}
         >
-          {/* <CloseIcon /> */}X
-        </IconButton>
+          <div
+            style={{
+              width: "20%",
+              display: "flex",
+              justifyContent: "flex-start",
+              alignItems: "center",
+              //backgroundColor: "red",
+            }}
+          >
+            <IconButton
+              aria-label="close"
+              onClick={props.handleClickCloseDespesas}
+              sx={{
+                color: (theme) => theme.palette.grey[500],
+              }}
+            >
+              {/* <CloseIcon /> */}X
+            </IconButton>
+          </div>
+
+          <div
+            style={{
+              //backgroundColor: "blue",
+              width: "40%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            teste
+          </div>
+
+          <div
+            style={{
+              //backgroundColor: "pink",
+              width: "40%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <ButtonGroup size="small" aria-label="Small button group">
+              <Button key="Criar">Criar</Button>
+              <Button key="Editar">Editar</Button>
+              <Button key="Excluir">Excluir</Button>
+            </ButtonGroup>
+          </div>
+        </DialogTitle>
         <DialogContent>
           <DataGridCustom
             rows={rowsDespesa}
