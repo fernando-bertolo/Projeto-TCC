@@ -12,7 +12,11 @@ import Delay from "../../../../Services/Delay/Delay";
 import { DataGridCustom } from "./DialogDespesasMUIStyle";
 
 const columnsDespesa = [
-  { field: "Data", headerName: "Data", width: 160 },
+  {
+    field: "Data",
+    headerName: "Data",
+    width: 160,
+  },
   { field: "Titulo", headerName: "Titulo", width: 160 },
   { field: "responsavel", headerName: "Responsável", width: 160 },
   //{ field: "descricao", headerName: "descricao", width: 160 },
@@ -47,14 +51,28 @@ function DialogDespesas(props) {
     buscaDespesaIdVeiculo();
   }, [props.dataCar]);
 
-  const rowsDespesa = dadosDespesa.map((dadosDespesa) => ({
-    id: dadosDespesa.idDespesa,
-    Data: dadosDespesa.Data,
-    Titulo: dadosDespesa.Titulo,
-    descricao: dadosDespesa.descricao,
-    responsavel: dadosDespesa.Usuario.nome,
-    valor: dadosDespesa.valor,
-  }));
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    const day = date.getDate() + 1;
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  }
+
+  const rowsDespesa = dadosDespesa.map((dadosDespesa) => {
+    const formattedDate = dadosDespesa.Data
+      ? formatDate(dadosDespesa.Data)
+      : "";
+    console.log(formatDate);
+    return {
+      id: dadosDespesa.idDespesa,
+      Data: formattedDate,
+      Titulo: dadosDespesa.Titulo,
+      descricao: dadosDespesa.descricao,
+      responsavel: dadosDespesa.Usuario.nome,
+      valor: dadosDespesa.valor,
+    };
+  });
 
   return (
     <React.Fragment>
