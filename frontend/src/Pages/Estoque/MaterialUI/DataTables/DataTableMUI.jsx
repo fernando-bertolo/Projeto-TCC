@@ -156,6 +156,7 @@ function DataTableMUI(props) {
         <DialogDespesas
           handleClickCloseDespesas={handleClickCloseDespesas}
           openDespesas={openDespesas}
+          dataCar={rowSelectCar}
         />
       )}
     </>

@@ -90,13 +90,15 @@ export default function InputsMUI(props) {
         />
 
         <FormControl variant="standard">
-          <InputLabel htmlFor="ano">Ano</InputLabel>
+          <InputLabel htmlFor="ano" sx={{ color: "#FFF" }}>
+            Ano
+          </InputLabel>
           <Input
             type="text"
             id="ano"
             placeholder="Insira o ano"
             required
-            sx={{ width: 250 }}
+            sx={{ width: 250, color: "#FFF" }}
             value={props.fieldInputsCars.ano}
             onChange={(event) => {
               props.setfieldInputsCars({
@@ -108,7 +110,9 @@ export default function InputsMUI(props) {
         </FormControl>
 
         <FormControl variant="standard">
-          <InputLabel htmlFor="combustivel">Combustivel</InputLabel>
+          <InputLabel htmlFor="combustivel" sx={{ color: "#FFF" }}>
+            Combustivel
+          </InputLabel>
           <Input
             type="text"
             id="combustivel"
@@ -121,12 +125,14 @@ export default function InputsMUI(props) {
                 combustivel: event.target.value,
               });
             }}
-            sx={{ width: 250 }}
+            sx={{ width: 250, color: "#FFF" }}
           />
         </FormControl>
 
         <FormControl variant="standard">
-          <InputLabel htmlFor="cor">Cor</InputLabel>
+          <InputLabel htmlFor="cor" sx={{ color: "#FFF" }}>
+            Cor
+          </InputLabel>
           <Input
             type="text"
             id="cor"
@@ -139,12 +145,14 @@ export default function InputsMUI(props) {
                 cor: event.target.value,
               });
             }}
-            sx={{ width: 250 }}
+            sx={{ width: 250, color: "#FFF" }}
           />
         </FormControl>
 
         <FormControl variant="standard">
-          <InputLabel htmlFor="quilometragem">Quilometragem</InputLabel>
+          <InputLabel htmlFor="quilometragem" sx={{ color: "#FFF" }}>
+            Quilometragem
+          </InputLabel>
           <Input
             type="text"
             id="quilometragem"
@@ -157,12 +165,14 @@ export default function InputsMUI(props) {
                 quilometragem: event.target.value,
               });
             }}
-            sx={{ width: 250 }}
+            sx={{ width: 250, color: "#FFF" }}
           />
         </FormControl>
 
         <FormControl variant="standard">
-          <InputLabel htmlFor="valor">Valor</InputLabel>
+          <InputLabel htmlFor="valor" sx={{ color: "#FFF" }}>
+            Valor
+          </InputLabel>
           <Input
             type="text"
             id="valor"
@@ -175,12 +185,14 @@ export default function InputsMUI(props) {
                 valor: event.target.value,
               });
             }}
-            sx={{ width: 250 }}
+            sx={{ width: 250, color: "#FFF" }}
           />
         </FormControl>
 
         <FormControl variant="standard">
-          <InputLabel htmlFor="placa">Placa</InputLabel>
+          <InputLabel htmlFor="placa" sx={{ color: "#FFF" }}>
+            Placa
+          </InputLabel>
           <Input
             type="text"
             id="placa"
@@ -193,7 +205,7 @@ export default function InputsMUI(props) {
                 placa: event.target.value,
               });
             }}
-            sx={{ width: 250 }}
+            sx={{ width: 250, color: "#FFF" }}
           />
         </FormControl>
 

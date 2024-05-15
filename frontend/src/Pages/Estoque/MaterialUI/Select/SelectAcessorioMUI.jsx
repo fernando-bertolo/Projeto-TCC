@@ -39,7 +39,7 @@ export default function SelectAcessorioMUI(props) {
   return (
     <div>
       <FormControl sx={{ m: 1, width: 250 }}>
-        <InputLabel id="demo-multiple-checkbox-labe" sx={{ color: "black" }}>
+        <InputLabel id="demo-multiple-checkbox-labe" sx={{ color: "#FFF" }}>
           Selecione os Acessórios
         </InputLabel>
         <Select

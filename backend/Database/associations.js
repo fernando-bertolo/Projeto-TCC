@@ -47,6 +47,16 @@ Veiculos.belongsToMany(Despesas, {
   foreignKey: "idVeiculo",
 });
 
+Usuarios.hasMany(Despesas, {
+  foreignKey: "idUsuario",
+  sourceKey: "id",
+});
+
+Despesas.belongsTo(Usuarios, {
+  foreignKey: "idUsuario",
+  targetKey: "id",
+});
+
 //Definindo relacionamento da tabela Vendas
 Vendas.hasOne(Veiculos, {
   foreignKey: "idVeiculo",

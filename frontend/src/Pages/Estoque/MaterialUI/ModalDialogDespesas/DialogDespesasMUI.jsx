@@ -9,15 +9,23 @@ import CloseIcon from "@mui/material/Icon/Icon";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import Delay from "../../../../Services/Delay/Delay";
-import { Paper } from "@mui/material";
+import { DataGridCustom } from "./DialogDespesasMUIStyle";
+
+const columnsDespesa = [
+  { field: "Data", headerName: "Data", width: 160 },
+  { field: "Titulo", headerName: "Titulo", width: 160 },
+  { field: "responsavel", headerName: "Responsável", width: 160 },
+  //{ field: "descricao", headerName: "descricao", width: 160 },
+  { field: "valor", headerName: "valor", width: 160 },
+];
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-  "& .MuiDialog-root": {
-    width: "80%", // Adjust as needed
-    height: "10%", // Adjust as needed
-  },
+  "& .MuiDialog-root": {},
   "& .MuiDialogContent-root": {
-    padding: theme.spacing(4),
+    padding: theme.spacing(0),
+    //width: 900,
+    height: 450,
+    backgroundColor: "red",
   },
   "& .MuiDialogActions-root": {
     padding: theme.spacing(2),
@@ -25,6 +33,29 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 function DialogDespesas(props) {
+  const [dadosDespesa, setDadosDespesa] = React.useState([]);
+
+  const buscaDespesaIdVeiculo = async () => {
+    await axios
+      .get(`http://localhost:3010/visualizar-despesa/${props.dataCar.id}`)
+      .then((response) => {
+        setDadosDespesa(response.data);
+      });
+  };
+
+  React.useEffect(() => {
+    buscaDespesaIdVeiculo();
+  }, [props.dataCar]);
+
+  const rowsDespesa = dadosDespesa.map((dadosDespesa) => ({
+    id: dadosDespesa.idDespesa,
+    Data: dadosDespesa.Data,
+    Titulo: dadosDespesa.Titulo,
+    descricao: dadosDespesa.descricao,
+    responsavel: dadosDespesa.Usuario.nome,
+    valor: dadosDespesa.valor,
+  }));
+
   return (
     <React.Fragment>
       <BootstrapDialog
@@ -39,6 +70,7 @@ function DialogDespesas(props) {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
+            backgroundColor: "#2f2841",
           }}
           id="customized-dialog-title"
         ></DialogTitle>
@@ -54,17 +86,32 @@ function DialogDespesas(props) {
         >
           {/* <CloseIcon /> */}X
         </IconButton>
-        <DialogContent dividers elevation={4} sx={{ p: 8, width: 600 }}>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
-          <h1>teste</h1>
+        <DialogContent>
+          <DataGridCustom
+            rows={rowsDespesa}
+            columns={columnsDespesa}
+            initialState={{
+              pagination: {
+                paginationModel: { page: 0, pageSize: 10 },
+              },
+            }}
+            checkboxSelection
+            style={{
+              color: "#fff",
+              border: "none",
+              //width: 600,
+            }}
+          />
+
+          {/* <button
+            onClick={() => {
+              console.log(dadosDespesa);
+            }}
+          >
+            teste
+          </button> */}
         </DialogContent>
-        <DialogActions></DialogActions>
+        <DialogActions sx={{ backgroundColor: "#2f2841" }}></DialogActions>
       </BootstrapDialog>
       <ToastContainer />
     </React.Fragment>

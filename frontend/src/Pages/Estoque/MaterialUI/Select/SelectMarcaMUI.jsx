@@ -39,7 +39,7 @@ export default function SelectMarcaMUI(props) {
   return (
     <div>
       <FormControl sx={{ m: 1, width: 250 }}>
-        <InputLabel id="demo-simple-select-label" sx={{ color: "black" }}>
+        <InputLabel id="demo-simple-select-label" sx={{ color: "#FFF" }}>
           Selecione a marca
         </InputLabel>
         <Select
@@ -50,7 +50,7 @@ export default function SelectMarcaMUI(props) {
           input={<OutlinedInput label="Selecione a marca" />}
           renderValue={(selected) => selected.join(", ")}
           MenuProps={MenuProps}
-          sx={{ borderRadius: 3 }}
+          sx={{ borderRadius: 3, borderBottomColor: "red" }}
           defaultValue=""
         >
           {props.dadosMarcas.map((infoMarca) => (

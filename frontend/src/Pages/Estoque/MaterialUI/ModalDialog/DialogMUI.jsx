@@ -229,6 +229,8 @@ function ModalDialog(props) {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              backgroundColor: "#2f2841",
+              color: "#FFF",
             }}
             id="customized-dialog-title"
           >
@@ -246,7 +248,10 @@ function ModalDialog(props) {
           >
             {/* <CloseIcon /> */}X
           </IconButton>
-          <DialogContent dividers>
+          <DialogContent
+            dividers
+            sx={{ backgroundColor: "#2f2841", color: "#FFF" }}
+          >
             <InputsMUI
               setfieldInputsCars={setfieldInputsCars}
               fieldInputsCars={fieldInputsCars}
@@ -255,7 +260,7 @@ function ModalDialog(props) {
               modo="criacao"
             />
           </DialogContent>
-          <DialogActions>
+          <DialogActions sx={{ backgroundColor: "#2f2841", color: "#FFF" }}>
             <Button
               type="submit"
               autoFocus
@@ -280,6 +285,7 @@ function ModalDialog(props) {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              backgroundColor: "#2f2841",
             }}
             id="customized-dialog-title"
           >

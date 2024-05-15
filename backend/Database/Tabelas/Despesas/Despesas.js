@@ -17,6 +17,7 @@ const Despesas = database.define("Despesas", {
   },
   idUsuario: {
     type: Sequelize.UUID,
+    allowNull: false,
     references: {
       model: "Usuarios",
       key: "id",

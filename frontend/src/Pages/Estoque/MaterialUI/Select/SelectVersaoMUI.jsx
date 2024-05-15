@@ -39,7 +39,7 @@ export default function SelectVersaoMUI(props) {
   return (
     <div>
       <FormControl sx={{ m: 1, width: 250 }}>
-        <InputLabel id="demo-simple-select-label" sx={{ color: "black" }}>
+        <InputLabel id="demo-simple-select-label" sx={{ color: "#FFF" }}>
           Selecione a versão
         </InputLabel>
         <Select
