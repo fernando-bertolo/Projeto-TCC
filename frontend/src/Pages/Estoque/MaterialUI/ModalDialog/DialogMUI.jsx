@@ -13,6 +13,12 @@ import { ToastContainer, toast } from "react-toastify";
 import Delay from "../../../../Services/Delay/Delay";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
+  "& .MuiPaper-root": {
+    width: 900,
+    maxWidth: "none",
+    borderRadius: 30,
+    height: 600,
+  },
   "& .MuiDialogContent-root": {
     padding: theme.spacing(4),
   },

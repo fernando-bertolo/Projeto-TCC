@@ -11,28 +11,30 @@ import { ToastContainer, toast } from "react-toastify";
 import Delay from "../../../../Services/Delay/Delay";
 import { DataGridCustom } from "./DialogDespesasMUIStyle";
 import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
 import ButtonGroup from "@mui/material/ButtonGroup";
 
 const columnsDespesa = [
   {
     field: "Data",
     headerName: "Data",
-    width: 160,
+    width: 210,
   },
-  { field: "Titulo", headerName: "Titulo", width: 160 },
-  { field: "responsavel", headerName: "Responsável", width: 160 },
+  { field: "Titulo", headerName: "Titulo", width: 210 },
+  { field: "responsavel", headerName: "Responsável", width: 210 },
   //{ field: "descricao", headerName: "descricao", width: 160 },
-  { field: "valor", headerName: "valor", width: 160 },
+  { field: "valor", headerName: "valor", width: 220 },
 ];
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-  "& .MuiDialog-root": {},
+  "& .MuiPaper-root": {
+    width: 900,
+    maxWidth: "none",
+    borderRadius: 30
+  },
   "& .MuiDialogContent-root": {
     padding: theme.spacing(0),
-    //width: 900,
-    height: 450,
-    backgroundColor: "red",
+    width: 900,
+    height: 600,
   },
   "& .MuiDialogActions-root": {
     padding: theme.spacing(2),
@@ -83,6 +85,9 @@ function DialogDespesas(props) {
         onClose={props.handleClickCloseDespesas}
         aria-labelledby="customized-dialog-title"
         open={props.openDespesas}
+        sx={{
+          //backgroundColor: "red"
+        }}
       >
         <DialogTitle
           sx={{
@@ -99,11 +104,12 @@ function DialogDespesas(props) {
         >
           <div
             style={{
-              width: "20%",
+              width: "30%",
               display: "flex",
               justifyContent: "flex-start",
               alignItems: "center",
               //backgroundColor: "red",
+              paddingLeft: "1rem"
             }}
           >
             <IconButton
@@ -124,15 +130,20 @@ function DialogDespesas(props) {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              flexDirection: "column",
+              color: "#FFF"
             }}
           >
-            teste
+            <h3>Despesa</h3>
+            <p>
+              {dadosDespesa[0].Veiculos[0].Marca.nomeMarca} {dadosDespesa[0].Veiculos[0].Marca.Modelos[0].nomeModelo} {dadosDespesa[0].Veiculos[0].Marca.Modelos[0].Versoes[0].nomeVersao}
+            </p>
           </div>
 
           <div
             style={{
               //backgroundColor: "pink",
-              width: "40%",
+              width: "30%",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -158,17 +169,10 @@ function DialogDespesas(props) {
             style={{
               color: "#fff",
               border: "none",
+              borderRadius: 0,
               //width: 600,
             }}
           />
-
-          {/* <button
-            onClick={() => {
-              console.log(dadosDespesa);
-            }}
-          >
-            teste
-          </button> */}
         </DialogContent>
         <DialogActions sx={{ backgroundColor: "#2f2841" }}></DialogActions>
       </BootstrapDialog>
