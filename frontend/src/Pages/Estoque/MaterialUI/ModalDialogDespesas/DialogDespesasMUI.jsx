@@ -12,6 +12,8 @@ import Delay from "../../../../Services/Delay/Delay";
 import { DataGridCustom } from "./DialogDespesasMUIStyle";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
+import Lottie from "lottie-react";
+import animationData from "./lottieAnimations/AnimationNotFound.json";
 
 const columnsDespesa = [
   {
@@ -22,14 +24,14 @@ const columnsDespesa = [
   { field: "Titulo", headerName: "Titulo", width: 210 },
   { field: "responsavel", headerName: "Responsável", width: 210 },
   //{ field: "descricao", headerName: "descricao", width: 160 },
-  { field: "valor", headerName: "valor", width: 220 },
+  { field: "valor", headerName: "Valor", width: 220 },
 ];
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiPaper-root": {
     width: 900,
     maxWidth: "none",
-    borderRadius: 30
+    borderRadius: 30,
   },
   "& .MuiDialogContent-root": {
     padding: theme.spacing(0),
@@ -68,7 +70,7 @@ function DialogDespesas(props) {
     const formattedDate = dadosDespesa.Data
       ? formatDate(dadosDespesa.Data)
       : "";
-    console.log(formatDate);
+    //console.log(formatDate);
     return {
       id: dadosDespesa.idDespesa,
       Data: formattedDate,
@@ -79,15 +81,26 @@ function DialogDespesas(props) {
     };
   });
 
+  const defaultOptionsAnimation = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
+
   return (
     <React.Fragment>
       <BootstrapDialog
         onClose={props.handleClickCloseDespesas}
         aria-labelledby="customized-dialog-title"
         open={props.openDespesas}
-        sx={{
-          //backgroundColor: "red"
-        }}
+        sx={
+          {
+            //backgroundColor: "red"
+          }
+        }
       >
         <DialogTitle
           sx={{
@@ -109,7 +122,7 @@ function DialogDespesas(props) {
               justifyContent: "flex-start",
               alignItems: "center",
               //backgroundColor: "red",
-              paddingLeft: "1rem"
+              paddingLeft: "1rem",
             }}
           >
             <IconButton
@@ -131,12 +144,13 @@ function DialogDespesas(props) {
               justifyContent: "center",
               alignItems: "center",
               flexDirection: "column",
-              color: "#FFF"
+              color: "#FFF",
             }}
           >
             <h3>Despesa</h3>
             <p>
-              {dadosDespesa[0].Veiculos[0].Marca.nomeMarca} {dadosDespesa[0].Veiculos[0].Marca.Modelos[0].nomeModelo} {dadosDespesa[0].Veiculos[0].Marca.Modelos[0].Versoes[0].nomeVersao}
+              {props.dataCar.nomeMarca} {props.dataCar.nomeModelo}{" "}
+              {props.dataCar.nomeVersao}
             </p>
           </div>
 
@@ -157,22 +171,40 @@ function DialogDespesas(props) {
           </div>
         </DialogTitle>
         <DialogContent>
-          <DataGridCustom
-            rows={rowsDespesa}
-            columns={columnsDespesa}
-            initialState={{
-              pagination: {
-                paginationModel: { page: 0, pageSize: 10 },
-              },
-            }}
-            checkboxSelection
-            style={{
-              color: "#fff",
-              border: "none",
-              borderRadius: 0,
-              //width: 600,
-            }}
-          />
+          {rowsDespesa.length > 0 ? (
+            <DataGridCustom
+              rows={rowsDespesa}
+              columns={columnsDespesa}
+              initialState={{
+                pagination: {
+                  paginationModel: { page: 0, pageSize: 10 },
+                },
+              }}
+              checkboxSelection
+              style={{
+                color: "#fff",
+                border: "none",
+                borderRadius: 0,
+                //width: 600,
+              }}
+            />
+          ) : (
+            <div
+              style={{
+                backgroundColor: "#2f2841",
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Lottie
+                animationData={animationData}
+                style={{ height: 300, width: 300 }}
+              />
+            </div>
+          )}
         </DialogContent>
         <DialogActions sx={{ backgroundColor: "#2f2841" }}></DialogActions>
       </BootstrapDialog>
