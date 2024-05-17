@@ -14,13 +14,13 @@ import Delay from "../../../../Services/Delay/Delay";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiPaper-root": {
-    width: 900,
+    //width: 900,
     maxWidth: "none",
     borderRadius: 30,
-    height: 600,
+    height: 700,
   },
   "& .MuiDialogContent-root": {
-    padding: theme.spacing(4),
+    padding: theme.spacing(0),
   },
   "& .MuiDialogActions-root": {
     padding: theme.spacing(2),
@@ -256,7 +256,7 @@ function ModalDialog(props) {
           </IconButton>
           <DialogContent
             dividers
-            sx={{ backgroundColor: "#2f2841", color: "#FFF" }}
+            sx={{ backgroundColor: "#2f2841", color: "#FFF"}}
           >
             <InputsMUI
               setfieldInputsCars={setfieldInputsCars}

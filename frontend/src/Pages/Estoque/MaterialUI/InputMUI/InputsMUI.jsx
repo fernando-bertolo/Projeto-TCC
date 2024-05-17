@@ -68,6 +68,7 @@ export default function InputsMUI(props) {
           flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
+          //backgroundColor: "red",
         }}
         noValidate
         autoComplete="on"

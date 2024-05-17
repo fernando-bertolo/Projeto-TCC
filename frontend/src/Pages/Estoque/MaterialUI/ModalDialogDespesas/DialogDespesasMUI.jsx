@@ -14,6 +14,7 @@ import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Lottie from "lottie-react";
 import animationData from "./lottieAnimations/AnimationNotFound.json";
+import SubDialogDespesas from "./SubDialogDespesas/SubDialogDespesas";
 
 const columnsDespesa = [
   {
@@ -81,14 +82,15 @@ function DialogDespesas(props) {
     };
   });
 
-  const defaultOptionsAnimation = {
-    loop: true,
-    autoplay: true,
-    animationData: animationData,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
-    },
-  };
+  const [openSubDialog, setOpenSubDialog] = React.useState(false);
+
+  const handleOpenSubDialog = () => {
+    setOpenSubDialog(true);
+  }
+
+  const handleCloseSubDialog = () => {
+    setOpenSubDialog(false);
+  }
 
   return (
     <React.Fragment>
@@ -96,11 +98,6 @@ function DialogDespesas(props) {
         onClose={props.handleClickCloseDespesas}
         aria-labelledby="customized-dialog-title"
         open={props.openDespesas}
-        sx={
-          {
-            //backgroundColor: "red"
-          }
-        }
       >
         <DialogTitle
           sx={{
@@ -164,12 +161,14 @@ function DialogDespesas(props) {
             }}
           >
             <ButtonGroup size="small" aria-label="Small button group">
-              <Button key="Criar">Criar</Button>
+              <Button key="Criar" onClick={() => {handleOpenSubDialog()}}>Criar</Button>
               <Button key="Editar">Editar</Button>
               <Button key="Excluir">Excluir</Button>
             </ButtonGroup>
           </div>
         </DialogTitle>
+
+
         <DialogContent>
           {rowsDespesa.length > 0 ? (
             <DataGridCustom
@@ -209,6 +208,13 @@ function DialogDespesas(props) {
         <DialogActions sx={{ backgroundColor: "#2f2841" }}></DialogActions>
       </BootstrapDialog>
       <ToastContainer />
+
+      <SubDialogDespesas
+        handleOpenSubDialog={handleOpenSubDialog}
+        handleCloseSubDialog={handleCloseSubDialog}
+        openSubDialog={openSubDialog}
+        teste={props.handleClickCloseDespesas}
+      />
     </React.Fragment>
   );
 }
