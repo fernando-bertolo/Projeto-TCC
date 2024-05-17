@@ -86,11 +86,11 @@ function DialogDespesas(props) {
 
   const handleOpenSubDialog = () => {
     setOpenSubDialog(true);
-  }
+  };
 
   const handleCloseSubDialog = () => {
     setOpenSubDialog(false);
-  }
+  };
 
   return (
     <React.Fragment>
@@ -161,13 +161,19 @@ function DialogDespesas(props) {
             }}
           >
             <ButtonGroup size="small" aria-label="Small button group">
-              <Button key="Criar" onClick={() => {handleOpenSubDialog()}}>Criar</Button>
+              <Button
+                key="Criar"
+                onClick={() => {
+                  handleOpenSubDialog();
+                }}
+              >
+                Criar
+              </Button>
               <Button key="Editar">Editar</Button>
               <Button key="Excluir">Excluir</Button>
             </ButtonGroup>
           </div>
         </DialogTitle>
-
 
         <DialogContent>
           {rowsDespesa.length > 0 ? (
@@ -214,6 +220,7 @@ function DialogDespesas(props) {
         handleCloseSubDialog={handleCloseSubDialog}
         openSubDialog={openSubDialog}
         teste={props.handleClickCloseDespesas}
+        dataCar={props.dataCar}
       />
     </React.Fragment>
   );
