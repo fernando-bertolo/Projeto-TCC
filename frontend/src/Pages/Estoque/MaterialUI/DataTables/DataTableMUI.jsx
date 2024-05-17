@@ -16,6 +16,8 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import BotoesListagem from "../Buttons/ButtonMUI";
 import DialogDespesas from "../ModalDialogDespesas/DialogDespesasMUI";
+import Lottie from "lottie-react";
+import animationData from "../ModalDialogDespesas/lottieAnimations/AnimationNotFound.json";
 
 function DataTableMUI(props) {
   const [rowSelectCar, setRowSelectCar] = React.useState();
@@ -111,22 +113,41 @@ function DataTableMUI(props) {
             width: "80%",
           }}
         >
-          <DataGridCustom
-            rows={props.rows}
-            columns={props.columns}
-            onRowSelectionModelChange={handleRowSelectionChange}
-            initialState={{
-              pagination: {
-                paginationModel: { page: 0, pageSize: 10 },
-              },
-            }}
-            checkboxSelection
-            style={{
-              borderRadius: 20,
-              color: "#fff",
-              border: "none",
-            }}
-          />
+          {props.rows.length > 0 ? (
+            <DataGridCustom
+              rows={props.rows}
+              columns={props.columns}
+              onRowSelectionModelChange={handleRowSelectionChange}
+              initialState={{
+                pagination: {
+                  paginationModel: { page: 0, pageSize: 10 },
+                },
+              }}
+              checkboxSelection
+              style={{
+                borderRadius: "10px 10px 10px 10px",
+                color: "#fff",
+                border: "none",
+              }}
+            />
+          ) : (
+            <div
+              style={{
+                backgroundColor: "#2f2841",
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                borderRadius: "5px 5px 30px 30px",
+              }}
+            >
+              <Lottie
+                animationData={animationData}
+                style={{ height: 300, width: 300 }}
+              />
+            </div>
+          )}
         </div>
         <ToastContainer />
       </DivTable>

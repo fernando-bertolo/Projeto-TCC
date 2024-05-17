@@ -219,7 +219,11 @@ function SubDialogDespesas(props) {
               </div>
             </div>
 
-            <TextArea name="" id=""></TextArea>
+            <TextArea
+              name=""
+              id=""
+              placeholder="Insira uma descrição"
+            ></TextArea>
 
             <FormControl variant="standard">
               <InputLabel htmlFor="valor" sx={{ color: "#FFF" }}>
