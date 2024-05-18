@@ -13,7 +13,7 @@ import { DataGridCustom } from "./DialogDespesasMUIStyle";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import Lottie from "lottie-react";
-import animationData from "./lottieAnimations/AnimationNotFound.json";
+import animationData from "../../../../assets/lottieAnimations/AnimationNotFound.json";
 import SubDialogDespesas from "./SubDialogDespesas/SubDialogDespesas";
 
 const columnsDespesa = [

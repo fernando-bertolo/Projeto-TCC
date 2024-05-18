@@ -64,6 +64,7 @@ autenticacao.get("/", async (request, response) => {
     response.json({
       usuario: user.usuario,
       nome: user.nome,
+      idUsuario: user.id
     });
   } catch (error) {
     console.log(error);

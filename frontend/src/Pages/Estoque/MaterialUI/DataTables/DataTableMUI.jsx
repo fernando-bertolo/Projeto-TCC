@@ -17,7 +17,7 @@ import { ToastContainer, toast } from "react-toastify";
 import BotoesListagem from "../Buttons/ButtonMUI";
 import DialogDespesas from "../ModalDialogDespesas/DialogDespesasMUI";
 import Lottie from "lottie-react";
-import animationData from "../ModalDialogDespesas/lottieAnimations/AnimationNotFound.json";
+import animationData from "../../../../assets/lottieAnimations/AnimationNotFound.json";
 
 function DataTableMUI(props) {
   const [rowSelectCar, setRowSelectCar] = React.useState();

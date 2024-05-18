@@ -13,6 +13,8 @@ import InputLabel from "@mui/material/InputLabel";
 import { TextArea } from "./SubDialogDespesasStyle";
 import Button from "@mui/material/Button";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiPaper-root": {
@@ -41,12 +43,46 @@ function SubDialogDespesas(props) {
       })
       .then((response) => {
         if (localStorage.getItem("@TokenUsuario")) {
-          setUserLogged(response.data.nome);
+          setUserLogged(response.data);
         } else {
           setUserLogged("Error");
         }
       });
   }, []);
+
+
+  const [inputSubDialogDespesas, setInputSubDialogDespesas] = React.useState({
+    Titulo: "",
+    Data: "",
+    descricao: "",
+    valor: "",
+  })
+
+  const SendDataDespesas = async (event) => {
+    event.preventDefault();
+    try {
+      await axios.post("http://localhost:3010/criacao-despesa", {
+        Titulo: inputSubDialogDespesas.Titulo,
+        Data: inputSubDialogDespesas.Data,
+        idUsuario: userLogged.idUsuario,
+        descricao: inputSubDialogDespesas.descricao,
+        valor: inputSubDialogDespesas.valor
+      })
+      toast.success("Despesa cadastrada com sucesso!!", {
+        position: "bottom-right",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <React.Fragment>
@@ -136,13 +172,13 @@ function SubDialogDespesas(props) {
                 placeholder="Insira o titulo"
                 required
                 sx={{ width: 250, color: "#FFF" }}
-                //value={props.fieldInputsCars.ano}
-                // onChange={(event) => {
-                // props.setfieldInputsCars({
-                //     ...props.fieldInputsCars,
-                //     ano: event.target.value,
-                // });
-                // }}
+                value={inputSubDialogDespesas.Titulo}
+                onChange={(event) => {
+                setInputSubDialogDespesas({
+                    ...inputSubDialogDespesas,
+                    Titulo: event.target.value,
+                  });
+                }}
               />
             </FormControl>
 
@@ -176,13 +212,13 @@ function SubDialogDespesas(props) {
                     id="Data"
                     required
                     sx={{ width: 250, color: "#FFF" }}
-                    //value={props.fieldInputsCars.ano}
-                    // onChange={(event) => {
-                    // props.setfieldInputsCars({
-                    //     ...props.fieldInputsCars,
-                    //     ano: event.target.value,
-                    // });
-                    // }}
+                    value={inputSubDialogDespesas.Data}
+                    onChange={(event) => {
+                    setInputSubDialogDespesas({
+                        ...inputSubDialogDespesas,
+                        Data: event.target.value,
+                      });
+                    }}
                   />
                 </FormControl>
               </div>
@@ -205,15 +241,8 @@ function SubDialogDespesas(props) {
                     type="responsavel"
                     id="responsavel"
                     required
-                    value={userLogged}
                     sx={{ width: 250, color: "#FFF" }}
-                    //value={props.fieldInputsCars.ano}
-                    // onChange={(event) => {
-                    // props.setfieldInputsCars({
-                    //     ...props.fieldInputsCars,
-                    //     ano: event.target.value,
-                    // });
-                    // }}
+                    value={userLogged}
                   />
                 </FormControl>
               </div>
@@ -223,6 +252,14 @@ function SubDialogDespesas(props) {
               name=""
               id=""
               placeholder="Insira uma descrição"
+              value={inputSubDialogDespesas.descricao}
+              onChange={(event) => {
+              setInputSubDialogDespesas({
+                  ...inputSubDialogDespesas,
+                  descricao: event.target.value,
+                });
+              }}
+
             ></TextArea>
 
             <FormControl variant="standard">
@@ -235,29 +272,32 @@ function SubDialogDespesas(props) {
                 placeholder="Insira o valor"
                 required
                 sx={{ width: 250, color: "#FFF" }}
-                //value={props.fieldInputsCars.ano}
-                // onChange={(event) => {
-                // props.setfieldInputsCars({
-                //     ...props.fieldInputsCars,
-                //     ano: event.target.value,
-                // });
-                // }}
+                value={inputSubDialogDespesas.valor}
+                onChange={(event) => {
+                setInputSubDialogDespesas({
+                    ...inputSubDialogDespesas,
+                    valor: event.target.value,
+                  });
+                }}
               />
             </FormControl>
           </Box>
+
+          <button onClick={() => {console.log(userLogged)}}>teste</button>
         </DialogContent>
 
         <DialogActions sx={{ backgroundColor: "#2f2841" }}>
           <Button
             type="submit"
             autoFocus
-            //   onClick={(event) => {
-            //     sendDataCars(event);
-            //   }}
+              onClick={(event) => {
+                SendDataDespesas(event);
+              }}
           >
             Salvar
           </Button>
         </DialogActions>
+        <ToastContainer/>
       </BootstrapDialog>
     </React.Fragment>
   );
