@@ -14,7 +14,7 @@ import { TextArea } from "./SubDialogDespesasStyle";
 import Button from "@mui/material/Button";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-
+import Delay from "../../../../../Services/Delay/Delay";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiPaper-root": {
@@ -32,42 +32,52 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 }));
 
 function SubDialogDespesas(props) {
-  const [userLogged, setUserLogged] = React.useState();
+  const [userLoggedName, setUserLoggedName] = React.useState();
+  const [userLoggedID, setUserLoggedID] = React.useState();
+
+  function buscaUsuarioLogado() {
+    try {
+      axios
+        .get("http://localhost:3010/", {
+          headers: {
+            Authorization: localStorage.getItem("@TokenUsuario"),
+          },
+        })
+        .then((response) => {
+          if (localStorage.getItem("@TokenUsuario")) {
+            setUserLoggedName(response.data.nome);
+            setUserLoggedID(response.data.idUsuario);
+          } else {
+            setUserLoggedName("Error");
+          }
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   React.useEffect(() => {
-    axios
-      .get("http://localhost:3010/", {
-        headers: {
-          Authorization: localStorage.getItem("@TokenUsuario"),
-        },
-      })
-      .then((response) => {
-        if (localStorage.getItem("@TokenUsuario")) {
-          setUserLogged(response.data);
-        } else {
-          setUserLogged("Error");
-        }
-      });
+    buscaUsuarioLogado();
   }, []);
-
 
   const [inputSubDialogDespesas, setInputSubDialogDespesas] = React.useState({
     Titulo: "",
     Data: "",
     descricao: "",
     valor: "",
-  })
+  });
 
   const SendDataDespesas = async (event) => {
     event.preventDefault();
     try {
       await axios.post("http://localhost:3010/criacao-despesa", {
+        idVeiculo: props.dataCar.id,
         Titulo: inputSubDialogDespesas.Titulo,
         Data: inputSubDialogDespesas.Data,
-        idUsuario: userLogged.idUsuario,
+        idUsuario: userLoggedID,
         descricao: inputSubDialogDespesas.descricao,
-        valor: inputSubDialogDespesas.valor
-      })
+        valor: inputSubDialogDespesas.valor,
+      });
       toast.success("Despesa cadastrada com sucesso!!", {
         position: "bottom-right",
         autoClose: 2500,
@@ -78,11 +88,26 @@ function SubDialogDespesas(props) {
         progress: undefined,
         theme: "light",
       });
-      
+      await Delay(3);
+      props.handleCloseSubDialog();
+      props.buscaDespesaIdVeiculo();
     } catch (error) {
-      console.log(error)
+      if (error.response && error.response.status === 400) {
+        toast.warn(error.response.data.Error, {
+          position: "bottom-right",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      } else {
+        console.log(error);
+      }
     }
-  }
+  };
 
   return (
     <React.Fragment>
@@ -174,7 +199,7 @@ function SubDialogDespesas(props) {
                 sx={{ width: 250, color: "#FFF" }}
                 value={inputSubDialogDespesas.Titulo}
                 onChange={(event) => {
-                setInputSubDialogDespesas({
+                  setInputSubDialogDespesas({
                     ...inputSubDialogDespesas,
                     Titulo: event.target.value,
                   });
@@ -214,7 +239,7 @@ function SubDialogDespesas(props) {
                     sx={{ width: 250, color: "#FFF" }}
                     value={inputSubDialogDespesas.Data}
                     onChange={(event) => {
-                    setInputSubDialogDespesas({
+                      setInputSubDialogDespesas({
                         ...inputSubDialogDespesas,
                         Data: event.target.value,
                       });
@@ -242,7 +267,7 @@ function SubDialogDespesas(props) {
                     id="responsavel"
                     required
                     sx={{ width: 250, color: "#FFF" }}
-                    value={userLogged}
+                    value={userLoggedName}
                   />
                 </FormControl>
               </div>
@@ -254,12 +279,11 @@ function SubDialogDespesas(props) {
               placeholder="Insira uma descrição"
               value={inputSubDialogDespesas.descricao}
               onChange={(event) => {
-              setInputSubDialogDespesas({
+                setInputSubDialogDespesas({
                   ...inputSubDialogDespesas,
                   descricao: event.target.value,
                 });
               }}
-
             ></TextArea>
 
             <FormControl variant="standard">
@@ -274,7 +298,7 @@ function SubDialogDespesas(props) {
                 sx={{ width: 250, color: "#FFF" }}
                 value={inputSubDialogDespesas.valor}
                 onChange={(event) => {
-                setInputSubDialogDespesas({
+                  setInputSubDialogDespesas({
                     ...inputSubDialogDespesas,
                     valor: event.target.value,
                   });
@@ -282,22 +306,20 @@ function SubDialogDespesas(props) {
               />
             </FormControl>
           </Box>
-
-          <button onClick={() => {console.log(userLogged)}}>teste</button>
         </DialogContent>
 
         <DialogActions sx={{ backgroundColor: "#2f2841" }}>
           <Button
             type="submit"
             autoFocus
-              onClick={(event) => {
-                SendDataDespesas(event);
-              }}
+            onClick={(event) => {
+              SendDataDespesas(event);
+            }}
           >
             Salvar
           </Button>
         </DialogActions>
-        <ToastContainer/>
+        <ToastContainer />
       </BootstrapDialog>
     </React.Fragment>
   );

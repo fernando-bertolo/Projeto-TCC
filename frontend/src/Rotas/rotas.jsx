@@ -12,8 +12,9 @@ import Acessorios from "../Pages/Cadastros/Acessorios/index.jsx";
 import Relatorios from "../Pages/Relatorios/index.jsx";
 import Usuarios from "../Pages/Usuarios/index.jsx";
 import Historico from "../Pages/Historico/index.jsx";
-import { Route, Routes } from "react-router-dom";
 import ValidaAutenticacao from "../Services/validaAutenticacao.jsx";
+import PageNotFound from "../Components/PageNotFound/PageNotFound.jsx";
+import { Route, Routes } from "react-router-dom";
 
 function Rotas() {
   return (
@@ -121,6 +122,8 @@ function Rotas() {
           </ValidaAutenticacao>
         }
       />
+
+      <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
 }

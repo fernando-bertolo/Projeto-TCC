@@ -56,26 +56,22 @@ criacaoVeiculo.post("/criacao-veiculos", async (request, response) => {
       placa: placa,
     });
 
-    const teste = await idAcessorios.map((acessorioID) => {
+    await idAcessorios.map((acessorioID) => {
       tabelaAcessorioVeiculo.create({
         idVeiculo: veiculo.idVeiculo,
         idAcessorio: acessorioID,
       });
     });
 
-    console.log(teste);
-
     return response
       .status(200)
       .json({ message: "Veículo criado com sucesso!!" });
   } catch (error) {
     console.log(error);
-    return response
-      .status(500)
-      .json({
-        Error:
-          "Erro na criação do veículo, valide se os campos estão preenchidos corretamente!!",
-      });
+    return response.status(500).json({
+      Error:
+        "Erro na criação do veículo, valide se os campos estão preenchidos corretamente!!",
+    });
   }
 });
 

@@ -221,6 +221,7 @@ function DialogDespesas(props) {
         openSubDialog={openSubDialog}
         teste={props.handleClickCloseDespesas}
         dataCar={props.dataCar}
+        buscaDespesaIdVeiculo={buscaDespesaIdVeiculo}
       />
     </React.Fragment>
   );
