@@ -51,6 +51,7 @@ function DataTableMUI(props) {
     if (newSelection && newSelection.length > 0) {
       const selectRow = props.rows.find((row) => row.id === newSelection[0]);
       setRowSelectCar(selectRow);
+      //console.log(selectRow);
     }
   };
 

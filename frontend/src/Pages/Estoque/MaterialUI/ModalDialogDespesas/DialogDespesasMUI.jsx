@@ -46,6 +46,7 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 
 function DialogDespesas(props) {
   const [dadosDespesa, setDadosDespesa] = React.useState([]);
+  const [rowSelectDespesa, setRowSelectDespesa] = React.useState();
 
   const buscaDespesaIdVeiculo = async () => {
     await axios
@@ -64,7 +65,7 @@ function DialogDespesas(props) {
     const day = date.getDate() + 1;
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
+    return `${day}-${month}-${year}`;
   }
 
   const rowsDespesa = dadosDespesa.map((dadosDespesa) => {
@@ -83,6 +84,7 @@ function DialogDespesas(props) {
   });
 
   const [openSubDialog, setOpenSubDialog] = React.useState(false);
+  const [openEditSubDialog, setOpenEditSubDialog] = React.useState(false);
 
   const handleOpenSubDialog = () => {
     setOpenSubDialog(true);
@@ -90,6 +92,62 @@ function DialogDespesas(props) {
 
   const handleCloseSubDialog = () => {
     setOpenSubDialog(false);
+  };
+
+  const handleOpenEditSubDialog = () => {
+    setOpenEditSubDialog(true);
+  };
+
+  const handleCloseEditSubDialog = () => {
+    setOpenEditSubDialog(false);
+  };
+
+  const handleRowSelectionChangeDespesa = async (newSelection) => {
+    if (newSelection && newSelection.length > 0) {
+      const selectRow = rowsDespesa.find((row) => row.id === newSelection[0]);
+      setRowSelectDespesa(selectRow);
+      console.log(selectRow);
+    }
+  };
+
+  const exclusaoDespesa = async (event) => {
+    event.preventDefault();
+    try {
+      await axios.delete(
+        `http://localhost:3010/exclusao-despesa/${rowSelectDespesa.id}`
+      );
+
+      toast.success("Despesa excluída com sucesso!!", {
+        position: "bottom-right",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      await Delay(3);
+      buscaDespesaIdVeiculo();
+    } catch (error) {
+      if (
+        (error.response && error.response.status === 400) ||
+        (error.response && error.response.status === 500)
+      ) {
+        toast.error(error.response.data.Error, {
+          position: "bottom-right",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      } else {
+        console.log(error);
+      }
+    }
   };
 
   return (
@@ -169,8 +227,22 @@ function DialogDespesas(props) {
               >
                 Criar
               </Button>
-              <Button key="Editar">Editar</Button>
-              <Button key="Excluir">Excluir</Button>
+              <Button
+                key="Editar"
+                onClick={() => {
+                  handleOpenEditSubDialog();
+                }}
+              >
+                Editar
+              </Button>
+              <Button
+                key="Excluir"
+                onClick={(event) => {
+                  exclusaoDespesa(event);
+                }}
+              >
+                Excluir
+              </Button>
             </ButtonGroup>
           </div>
         </DialogTitle>
@@ -180,6 +252,7 @@ function DialogDespesas(props) {
             <DataGridCustom
               rows={rowsDespesa}
               columns={columnsDespesa}
+              onRowSelectionModelChange={handleRowSelectionChangeDespesa}
               initialState={{
                 pagination: {
                   paginationModel: { page: 0, pageSize: 10 },
@@ -222,7 +295,22 @@ function DialogDespesas(props) {
         teste={props.handleClickCloseDespesas}
         dataCar={props.dataCar}
         buscaDespesaIdVeiculo={buscaDespesaIdVeiculo}
+        modo="criacao"
+        title="Cadastro de Despesa"
       />
+      {rowSelectDespesa && (
+        <SubDialogDespesas
+          handleOpenEditSubDialog={handleOpenEditSubDialog}
+          handleCloseEditSubDialog={handleCloseEditSubDialog}
+          openEditSubDialog={openEditSubDialog}
+          teste={props.handleClickCloseDespesas}
+          dataCar={props.dataCar}
+          buscaDespesaIdVeiculo={buscaDespesaIdVeiculo}
+          modo="edicao"
+          title="Alteração de Despesa"
+          rowSelectDespesa={rowSelectDespesa}
+        />
+      )}
     </React.Fragment>
   );
 }

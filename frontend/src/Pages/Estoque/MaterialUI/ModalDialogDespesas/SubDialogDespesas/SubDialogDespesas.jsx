@@ -61,36 +61,81 @@ function SubDialogDespesas(props) {
   }, []);
 
   const [inputSubDialogDespesas, setInputSubDialogDespesas] = React.useState({
-    Titulo: "",
-    Data: "",
-    descricao: "",
-    valor: "",
+    Titulo: props.modo === "edicao" ? props.rowSelectDespesa.Titulo : "",
+    Data: props.modo === "edicao" ? props.rowSelectDespesa.Data : "",
+    descricao: props.modo === "edicao" ? props.rowSelectDespesa.descricao : "",
+    valor: props.modo === "edicao" ? props.rowSelectDespesa.valor : "",
   });
+
+  React.useEffect(() => {
+    if (props.modo === "edicao" && props.rowSelectDespesa) {
+      setInputSubDialogDespesas({
+        Titulo: props.rowSelectDespesa.Titulo,
+        Data: props.rowSelectDespesa.Data,
+        descricao: props.rowSelectDespesa.descricao,
+        valor: props.rowSelectDespesa.valor,
+      });
+    } else {
+      setInputSubDialogDespesas({
+        Titulo: "",
+        Data: "",
+        descricao: "",
+        valor: "",
+      });
+    }
+  }, [props.modo, props.rowSelectDespesa]);
 
   const SendDataDespesas = async (event) => {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:3010/criacao-despesa", {
-        idVeiculo: props.dataCar.id,
-        Titulo: inputSubDialogDespesas.Titulo,
-        Data: inputSubDialogDespesas.Data,
-        idUsuario: userLoggedID,
-        descricao: inputSubDialogDespesas.descricao,
-        valor: inputSubDialogDespesas.valor,
-      });
-      toast.success("Despesa cadastrada com sucesso!!", {
-        position: "bottom-right",
-        autoClose: 2500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
-      await Delay(3);
-      props.handleCloseSubDialog();
-      props.buscaDespesaIdVeiculo();
+      if (props.modo === "criacao") {
+        await axios.post("http://localhost:3010/criacao-despesa", {
+          idVeiculo: props.dataCar.id,
+          Titulo: inputSubDialogDespesas.Titulo,
+          Data: inputSubDialogDespesas.Data,
+          idUsuario: userLoggedID,
+          descricao: inputSubDialogDespesas.descricao,
+          valor: inputSubDialogDespesas.valor,
+        });
+        toast.success("Despesa cadastrada com sucesso!!", {
+          position: "bottom-right",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        await Delay(3);
+        props.handleCloseSubDialog();
+        props.buscaDespesaIdVeiculo();
+      } else if (props.modo === "edicao") {
+        await axios.put(
+          `http://localhost:3010/alteracao-despesa/${props.rowSelectDespesa.id}`,
+          {
+            idVeiculo: props.dataCar.id,
+            Titulo: inputSubDialogDespesas.Titulo,
+            Data: inputSubDialogDespesas.Data,
+            idUsuario: userLoggedID,
+            descricao: inputSubDialogDespesas.descricao,
+            valor: inputSubDialogDespesas.valor,
+          }
+        );
+        toast.success("Despesa alterada com sucesso!!", {
+          position: "bottom-right",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+        await Delay(3);
+        props.handleCloseEditSubDialog();
+        props.buscaDespesaIdVeiculo();
+      }
     } catch (error) {
       if (error.response && error.response.status === 400) {
         toast.warn(error.response.data.Error, {
@@ -111,216 +156,438 @@ function SubDialogDespesas(props) {
 
   return (
     <React.Fragment>
-      <BootstrapDialog
-        onClose={props.handleCloseSubDialog}
-        aria-labelledby="customized-dialog-title"
-        open={props.openSubDialog}
-      >
-        <DialogTitle
-          sx={{
-            height: 70,
-            paddingTop: 0,
-            paddingBottom: 0,
-            paddingLeft: 0,
-            paddingRight: 0,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "flex-end",
-            //borderBottom: "1px solid #FFF",
-            backgroundColor: "#2f2841",
-            //backgroundColor: "red",
-          }}
-          id="customized-dialog-title"
+      {props.modo === "criacao" ? (
+        <BootstrapDialog
+          onClose={props.handleCloseSubDialog}
+          aria-labelledby="customized-dialog-title"
+          open={props.openSubDialog}
         >
-          <div
-            style={{
-              //backgroundColor: "green",
-              width: "80%",
-              height: "100%",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              color: "#FFF",
-            }}
-          >
-            <h3>Cadastro de Despesas</h3>
-            <h5>
-              {props.dataCar.nomeMarca} {props.dataCar.nomeModelo}{" "}
-              {props.dataCar.nomeVersao}
-            </h5>
-          </div>
-
-          <div
-            style={{
-              width: "10%",
-              display: "flex",
-              justifyContent: "flex-end",
-              alignItems: "center",
-              //backgroundColor: "blue",
-              paddingRight: "1rem",
-            }}
-          >
-            <IconButton
-              aria-label="close"
-              onClick={props.handleCloseSubDialog}
-              sx={{
-                color: (theme) => theme.palette.grey[500],
-              }}
-            >
-              {/* <CloseIcon /> */}X
-            </IconButton>
-          </div>
-        </DialogTitle>
-
-        <DialogContent dividers style={{ backgroundColor: "#2f2841" }}>
-          <Box
-            component="form"
+          <DialogTitle
             sx={{
-              "& > :not(style)": { m: 4 },
+              height: 70,
+              paddingTop: 0,
+              paddingBottom: 0,
+              paddingLeft: 0,
+              paddingRight: 0,
               display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
               alignItems: "center",
+              justifyContent: "flex-end",
+              //borderBottom: "1px solid #FFF",
+              backgroundColor: "#2f2841",
               //backgroundColor: "red",
             }}
-            noValidate
-            autoComplete="on"
+            id="customized-dialog-title"
           >
-            <FormControl variant="standard">
-              <InputLabel htmlFor="Titulo" sx={{ color: "#FFF" }}>
-                Titulo
-              </InputLabel>
-              <Input
-                type="text"
-                id="titulo"
-                placeholder="Insira o titulo"
-                required
-                sx={{ width: 250, color: "#FFF" }}
-                value={inputSubDialogDespesas.Titulo}
-                onChange={(event) => {
-                  setInputSubDialogDespesas({
-                    ...inputSubDialogDespesas,
-                    Titulo: event.target.value,
-                  });
-                }}
-              />
-            </FormControl>
+            <div
+              style={{
+                //backgroundColor: "green",
+                width: "80%",
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                color: "#FFF",
+              }}
+            >
+              <h3>{props.title}</h3>
+              <h5>
+                {props.dataCar.nomeMarca} {props.dataCar.nomeModelo}{" "}
+                {props.dataCar.nomeVersao}
+              </h5>
+            </div>
 
             <div
               style={{
-                width: "100%",
-                height: 100,
-                //backgroundColor: "green",
+                width: "10%",
                 display: "flex",
-                justifyContent: "center",
+                justifyContent: "flex-end",
                 alignItems: "center",
+                //backgroundColor: "blue",
+                paddingRight: "1rem",
               }}
             >
-              <div
-                style={{
-                  width: "50%",
-                  height: "100%",
-                  //backgroundColor: "pink",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
+              <IconButton
+                aria-label="close"
+                onClick={props.handleCloseSubDialog}
+                sx={{
+                  color: (theme) => theme.palette.grey[500],
                 }}
               >
-                <FormControl variant="standard">
-                  <InputLabel
-                    htmlFor="Titulo"
-                    sx={{ color: "#FFF" }}
-                  ></InputLabel>
-                  <Input
-                    type="date"
-                    id="Data"
-                    required
-                    sx={{ width: 250, color: "#FFF" }}
-                    value={inputSubDialogDespesas.Data}
-                    onChange={(event) => {
-                      setInputSubDialogDespesas({
-                        ...inputSubDialogDespesas,
-                        Data: event.target.value,
-                      });
-                    }}
-                  />
-                </FormControl>
-              </div>
-
-              <div
-                style={{
-                  width: "50%",
-                  height: "100%",
-                  //backgroundColor: "orange",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <FormControl variant="standard">
-                  <InputLabel htmlFor="responsavel" sx={{ color: "#FFF" }}>
-                    Responsável
-                  </InputLabel>
-                  <Input
-                    type="responsavel"
-                    id="responsavel"
-                    required
-                    sx={{ width: 250, color: "#FFF" }}
-                    value={userLoggedName}
-                  />
-                </FormControl>
-              </div>
+                {/* <CloseIcon /> */}X
+              </IconButton>
             </div>
+          </DialogTitle>
 
-            <TextArea
-              name=""
-              id=""
-              placeholder="Insira uma descrição"
-              value={inputSubDialogDespesas.descricao}
-              onChange={(event) => {
-                setInputSubDialogDespesas({
-                  ...inputSubDialogDespesas,
-                  descricao: event.target.value,
-                });
+          <DialogContent dividers style={{ backgroundColor: "#2f2841" }}>
+            <Box
+              component="form"
+              sx={{
+                "& > :not(style)": { m: 4 },
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                //backgroundColor: "red",
               }}
-            ></TextArea>
+              noValidate
+              autoComplete="on"
+            >
+              <FormControl variant="standard">
+                <InputLabel htmlFor="Titulo" sx={{ color: "#FFF" }}>
+                  Titulo
+                </InputLabel>
+                <Input
+                  type="text"
+                  id="titulo"
+                  placeholder="Insira o titulo"
+                  required
+                  sx={{ width: 250, color: "#FFF" }}
+                  value={inputSubDialogDespesas.Titulo}
+                  onChange={(event) => {
+                    setInputSubDialogDespesas({
+                      ...inputSubDialogDespesas,
+                      Titulo: event.target.value,
+                    });
+                  }}
+                />
+              </FormControl>
 
-            <FormControl variant="standard">
-              <InputLabel htmlFor="valor" sx={{ color: "#FFF" }}>
-                Valor
-              </InputLabel>
-              <Input
-                type="text"
-                id="valor"
-                placeholder="Insira o valor"
-                required
-                sx={{ width: 250, color: "#FFF" }}
-                value={inputSubDialogDespesas.valor}
+              <div
+                style={{
+                  width: "100%",
+                  height: 100,
+                  //backgroundColor: "green",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <div
+                  style={{
+                    width: "50%",
+                    height: "100%",
+                    //backgroundColor: "pink",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <FormControl variant="standard">
+                    <InputLabel
+                      htmlFor="Titulo"
+                      sx={{ color: "#FFF" }}
+                    ></InputLabel>
+                    <Input
+                      type="date"
+                      id="Data"
+                      required
+                      sx={{ width: 250, color: "#FFF" }}
+                      value={inputSubDialogDespesas.Data}
+                      onChange={(event) => {
+                        setInputSubDialogDespesas({
+                          ...inputSubDialogDespesas,
+                          Data: event.target.value,
+                        });
+                      }}
+                    />
+                  </FormControl>
+                </div>
+
+                <div
+                  style={{
+                    width: "50%",
+                    height: "100%",
+                    //backgroundColor: "orange",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <FormControl variant="standard">
+                    <InputLabel htmlFor="responsavel" sx={{ color: "#FFF" }}>
+                      Responsável
+                    </InputLabel>
+                    <Input
+                      type="responsavel"
+                      id="responsavel"
+                      required
+                      sx={{ width: 250, color: "#FFF" }}
+                      value={userLoggedName}
+                    />
+                  </FormControl>
+                </div>
+              </div>
+
+              <TextArea
+                name=""
+                id=""
+                placeholder="Insira uma descrição"
+                value={inputSubDialogDespesas.descricao}
                 onChange={(event) => {
                   setInputSubDialogDespesas({
                     ...inputSubDialogDespesas,
-                    valor: event.target.value,
+                    descricao: event.target.value,
                   });
                 }}
-              />
-            </FormControl>
-          </Box>
-        </DialogContent>
+              ></TextArea>
 
-        <DialogActions sx={{ backgroundColor: "#2f2841" }}>
-          <Button
-            type="submit"
-            autoFocus
-            onClick={(event) => {
-              SendDataDespesas(event);
+              <FormControl variant="standard">
+                <InputLabel htmlFor="valor" sx={{ color: "#FFF" }}>
+                  Valor
+                </InputLabel>
+                <Input
+                  type="text"
+                  id="valor"
+                  placeholder="Insira o valor"
+                  required
+                  sx={{ width: 250, color: "#FFF" }}
+                  value={inputSubDialogDespesas.valor}
+                  onChange={(event) => {
+                    setInputSubDialogDespesas({
+                      ...inputSubDialogDespesas,
+                      valor: event.target.value,
+                    });
+                  }}
+                />
+              </FormControl>
+            </Box>
+          </DialogContent>
+
+          <DialogActions sx={{ backgroundColor: "#2f2841" }}>
+            <Button
+              type="submit"
+              autoFocus
+              onClick={(event) => {
+                SendDataDespesas(event);
+              }}
+            >
+              Salvar
+            </Button>
+          </DialogActions>
+          <ToastContainer />
+        </BootstrapDialog>
+      ) : props.modo === "edicao" ? (
+        <BootstrapDialog
+          onClose={props.handleCloseEditSubDialog}
+          aria-labelledby="customized-dialog-title"
+          open={props.openEditSubDialog}
+        >
+          <DialogTitle
+            sx={{
+              height: 70,
+              paddingTop: 0,
+              paddingBottom: 0,
+              paddingLeft: 0,
+              paddingRight: 0,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-end",
+              //borderBottom: "1px solid #FFF",
+              backgroundColor: "#2f2841",
+              //backgroundColor: "red",
             }}
+            id="customized-dialog-title"
           >
-            Salvar
-          </Button>
-        </DialogActions>
-        <ToastContainer />
-      </BootstrapDialog>
+            <button
+              onClick={() => {
+                console.log(props.rowSelectDespesa);
+              }}
+            >
+              teste
+            </button>
+            <div
+              style={{
+                //backgroundColor: "green",
+                width: "80%",
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                color: "#FFF",
+              }}
+            >
+              <h3>{props.title}</h3>
+              <h5>
+                {props.dataCar.nomeMarca} {props.dataCar.nomeModelo}{" "}
+                {props.dataCar.nomeVersao}
+              </h5>
+            </div>
+
+            <div
+              style={{
+                width: "10%",
+                display: "flex",
+                justifyContent: "flex-end",
+                alignItems: "center",
+                //backgroundColor: "blue",
+                paddingRight: "1rem",
+              }}
+            >
+              <IconButton
+                aria-label="close"
+                onClick={props.handleCloseEditSubDialog}
+                sx={{
+                  color: (theme) => theme.palette.grey[500],
+                }}
+              >
+                {/* <CloseIcon /> */}X
+              </IconButton>
+            </div>
+          </DialogTitle>
+
+          <DialogContent dividers style={{ backgroundColor: "#2f2841" }}>
+            <Box
+              component="form"
+              sx={{
+                "& > :not(style)": { m: 4 },
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                //backgroundColor: "red",
+              }}
+              noValidate
+              autoComplete="on"
+            >
+              <FormControl variant="standard">
+                <InputLabel htmlFor="Titulo" sx={{ color: "#FFF" }}>
+                  Titulo
+                </InputLabel>
+                <Input
+                  type="text"
+                  id="titulo"
+                  placeholder="Insira o titulo"
+                  required
+                  sx={{ width: 250, color: "#FFF" }}
+                  value={inputSubDialogDespesas.Titulo}
+                  onChange={(event) => {
+                    setInputSubDialogDespesas({
+                      ...inputSubDialogDespesas,
+                      Titulo: event.target.value,
+                    });
+                  }}
+                />
+              </FormControl>
+
+              <div
+                style={{
+                  width: "100%",
+                  height: 100,
+                  //backgroundColor: "green",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <div
+                  style={{
+                    width: "50%",
+                    height: "100%",
+                    //backgroundColor: "pink",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <FormControl variant="standard">
+                    <InputLabel
+                      htmlFor="Titulo"
+                      sx={{ color: "#FFF" }}
+                    ></InputLabel>
+                    <Input
+                      type="date"
+                      id="Data"
+                      required
+                      sx={{ width: 250, color: "#FFF" }}
+                      value={inputSubDialogDespesas.Data}
+                      onChange={(event) => {
+                        setInputSubDialogDespesas({
+                          ...inputSubDialogDespesas,
+                          Data: event.target.value,
+                        });
+                      }}
+                    />
+                  </FormControl>
+                </div>
+
+                <div
+                  style={{
+                    width: "50%",
+                    height: "100%",
+                    //backgroundColor: "orange",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <FormControl variant="standard">
+                    <InputLabel htmlFor="responsavel" sx={{ color: "#FFF" }}>
+                      Responsável
+                    </InputLabel>
+                    <Input
+                      type="responsavel"
+                      id="responsavel"
+                      required
+                      sx={{ width: 250, color: "#FFF" }}
+                      value={userLoggedName}
+                    />
+                  </FormControl>
+                </div>
+              </div>
+
+              <TextArea
+                name=""
+                id=""
+                placeholder="Insira uma descrição"
+                value={inputSubDialogDespesas.descricao}
+                onChange={(event) => {
+                  setInputSubDialogDespesas({
+                    ...inputSubDialogDespesas,
+                    descricao: event.target.value,
+                  });
+                }}
+              ></TextArea>
+
+              <FormControl variant="standard">
+                <InputLabel htmlFor="valor" sx={{ color: "#FFF" }}>
+                  Valor
+                </InputLabel>
+                <Input
+                  type="text"
+                  id="valor"
+                  placeholder="Insira o valor"
+                  required
+                  sx={{ width: 250, color: "#FFF" }}
+                  value={inputSubDialogDespesas.valor}
+                  onChange={(event) => {
+                    setInputSubDialogDespesas({
+                      ...inputSubDialogDespesas,
+                      valor: event.target.value,
+                    });
+                  }}
+                />
+              </FormControl>
+            </Box>
+          </DialogContent>
+
+          <DialogActions sx={{ backgroundColor: "#2f2841" }}>
+            <Button
+              type="submit"
+              autoFocus
+              onClick={(event) => {
+                SendDataDespesas(event);
+              }}
+            >
+              Salvar
+            </Button>
+          </DialogActions>
+          <ToastContainer />
+        </BootstrapDialog>
+      ) : (
+        <></>
+      )}
     </React.Fragment>
   );
 }
