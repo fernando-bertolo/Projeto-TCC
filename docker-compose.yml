@@ -23,6 +23,7 @@ services:
       - RedeDockerTCC
 
   frontend:
+    image: novo/frontend:latest
     build:
       context: ./frontend
       dockerfile: Dockerfile

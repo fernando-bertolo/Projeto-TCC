@@ -29,7 +29,7 @@ autenticacao.post("/", async (request, response) => {
     }
 
     const token = jwt.sign({ id: user.id }, "your_jwt_secret", {
-      expiresIn: "1hr",
+      expiresIn: "5hr",
     });
 
     response.send({

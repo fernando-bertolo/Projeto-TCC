@@ -389,13 +389,6 @@ function SubDialogDespesas(props) {
             }}
             id="customized-dialog-title"
           >
-            <button
-              onClick={() => {
-                console.log(props.rowSelectDespesa);
-              }}
-            >
-              teste
-            </button>
             <div
               style={{
                 //backgroundColor: "green",

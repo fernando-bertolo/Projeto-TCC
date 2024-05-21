@@ -58,23 +58,23 @@ Despesas.belongsTo(Usuarios, {
 });
 
 //Definindo relacionamento da tabela Vendas
-Vendas.hasOne(Veiculos, {
+Vendas.belongsTo(Veiculos, {
   foreignKey: "idVeiculo",
 });
-Veiculos.hasOne(Vendas, {
+Veiculos.hasMany(Vendas, {
   foreignKey: "idVeiculo",
 });
 
-Vendas.hasOne(Clientes, {
-  foreignKey: "id",
+Vendas.belongsTo(Clientes, {
+  foreignKey: "idCliente",
 });
 
 Clientes.hasMany(Vendas, {
   foreignKey: "idCliente",
 });
 
-Vendas.hasOne(Usuarios, {
-  foreignKey: "id",
+Vendas.belongsTo(Usuarios, {
+  foreignKey: "idUsuario",
 });
 
 Usuarios.hasMany(Vendas, {

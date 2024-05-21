@@ -64,6 +64,7 @@ function ModalDialog(props) {
     cor: "",
     quilometragem: "",
     valor: "",
+    status: "",
   });
 
   React.useEffect(() => {

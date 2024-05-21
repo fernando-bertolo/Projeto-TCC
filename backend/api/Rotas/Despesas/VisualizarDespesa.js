@@ -23,8 +23,6 @@ visualizarDespesa.get("/visualizar-despesa", async (request, response) => {
           model: Usuario,
           attributes: ["nome"],
         },
-      ],
-      include: [
         {
           model: Veiculo,
           attributes: [

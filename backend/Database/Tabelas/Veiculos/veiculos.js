@@ -28,7 +28,7 @@ const Veiculos = database.define("Veiculos", {
       key: "idVersao",
     },
   },
-  idStatus: {
+  status: {
     type: Sequelize.STRING,
     allowNull: false,
   },
