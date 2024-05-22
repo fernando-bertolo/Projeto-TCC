@@ -65,6 +65,7 @@ function DialogDespesas(props) {
     const day = date.getDate() + 1;
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
+    if (month < 9) return `${day}-0${month}-${year}`;
     return `${day}-${month}-${year}`;
   }
 

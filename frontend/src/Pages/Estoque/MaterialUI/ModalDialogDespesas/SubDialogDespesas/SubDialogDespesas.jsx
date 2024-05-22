@@ -229,6 +229,8 @@ function SubDialogDespesas(props) {
                 justifyContent: "center",
                 alignItems: "center",
                 //backgroundColor: "red",
+                width: "100%",
+                height: "100%",
               }}
               noValidate
               autoComplete="on"

@@ -18,12 +18,14 @@ import BotoesListagem from "../Buttons/ButtonMUI";
 import DialogDespesas from "../ModalDialogDespesas/DialogDespesasMUI";
 import Lottie from "lottie-react";
 import animationData from "../../../../assets/lottieAnimations/AnimationNotFound.json";
+import ModalDialogVendas from "../ModalDialogVendas/ModalDialogVendas";
 
 function DataTableMUI(props) {
   const [rowSelectCar, setRowSelectCar] = React.useState();
   const [open, setOpen] = React.useState(false);
   const [editOpen, setEditOpen] = React.useState(false);
   const [openDespesas, setOpenDespesas] = React.useState(false);
+  const [openVendas, setOpenVendas] = React.useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -45,6 +47,14 @@ function DataTableMUI(props) {
 
   const handleClickCloseDespesas = () => {
     setOpenDespesas(false);
+  };
+
+  const handleClickOpenVendas = () => {
+    setOpenVendas(true);
+  };
+
+  const handleClickCloseVendas = () => {
+    setOpenVendas(false);
   };
 
   const handleRowSelectionChange = async (newSelection) => {
@@ -96,7 +106,6 @@ function DataTableMUI(props) {
         <SectionNavigator>
           <Button
             variant="contained"
-            href="#"
             key="Despesas"
             onClick={() => {
               handleClickOpenDespesas(true);
@@ -104,7 +113,12 @@ function DataTableMUI(props) {
           >
             Despesas
           </Button>
-          <Button variant="outlined" href="#">
+          <Button
+            variant="outlined"
+            onClick={() => {
+              handleClickOpenVendas(true);
+            }}
+          >
             Vendas
           </Button>
         </SectionNavigator>
@@ -191,6 +205,14 @@ function DataTableMUI(props) {
         <DialogDespesas
           handleClickCloseDespesas={handleClickCloseDespesas}
           openDespesas={openDespesas}
+          dataCar={rowSelectCar}
+        />
+      )}
+
+      {rowSelectCar && (
+        <ModalDialogVendas
+          handleClickCloseVendas={handleClickCloseVendas}
+          openVendas={openVendas}
           dataCar={rowSelectCar}
         />
       )}
