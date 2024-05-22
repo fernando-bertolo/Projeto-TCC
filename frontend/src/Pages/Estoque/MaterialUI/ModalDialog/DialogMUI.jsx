@@ -64,7 +64,7 @@ function ModalDialog(props) {
     cor: "",
     quilometragem: "",
     valor: "",
-    status: "",
+    status: "teste",
   });
 
   React.useEffect(() => {
@@ -116,7 +116,7 @@ function ModalDialog(props) {
             idMarca: fieldSelectCarsUnique.marca,
             idModelo: fieldSelectCarsUnique.modelo,
             idVersao: fieldSelectCarsUnique.versao,
-            idStatus: 1, //true => Veículo disponível
+            status: "teste", //true => Veículo disponível
             ano: fieldInputsCars.ano,
             combustivel: fieldInputsCars.combustivel,
             cor: fieldInputsCars.cor,
@@ -257,7 +257,7 @@ function ModalDialog(props) {
           </IconButton>
           <DialogContent
             dividers
-            sx={{ backgroundColor: "#2f2841", color: "#FFF"}}
+            sx={{ backgroundColor: "#2f2841", color: "#FFF" }}
           >
             <InputsMUI
               setfieldInputsCars={setfieldInputsCars}

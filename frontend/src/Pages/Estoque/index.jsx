@@ -18,7 +18,6 @@ const columnsCars = [
   { field: "quilometragem", headerName: "Quilometragem", width: 160 },
   { field: "placa", headerName: "Placa", width: 160 },
   { field: "valor", headerName: "Valor", width: 146 },
-  { field: "status", headerName: "Status", width: 140},
 ];
 
 function Estoque() {
@@ -89,7 +88,6 @@ function Estoque() {
         /> */}
 
         <DataTableMUI rows={rowsCars} columns={columnsCars} />
-        <button onClick={() => {console.log(dadosVeiculos)}}>teste</button>
         <ToastContainer />
       </Body>
     </>
