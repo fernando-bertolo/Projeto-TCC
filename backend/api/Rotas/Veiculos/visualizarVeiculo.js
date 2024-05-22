@@ -67,6 +67,11 @@ visualizarVeiculos.get(
   async (request, response) => {
     try {
       const veiculosVendidos = await tabelaVeiculo.findAll({
+        where: {
+          idVeiculo: {
+            [Op.in]: sequelize.literal("(SELECT idVeiculo FROM Vendas)"),
+          },
+        },
         include: [
           {
             model: Vendas,
