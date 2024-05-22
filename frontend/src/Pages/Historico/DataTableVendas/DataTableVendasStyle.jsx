@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { DataGrid } from "@mui/x-data-grid";
+import Button from "@mui/material/Button";
 
 export const DataGridCustom = styled(DataGrid)`
   background-color: #2f2841;
@@ -30,7 +31,7 @@ export const DivTable = styled.div`
 
 export const SectionSearch = styled.section`
   width: 80%;
-  height: 6%;
+  height: 10%;
   display: flex;
   //background-color: pink;
 `;
@@ -53,7 +54,13 @@ export const Title = styled.h1`
 `;
 export const DivTerciaria = styled.div`
   width: 25%;
-  //background-color: blue;
+  //background-color: orange;
   display: flex;
   justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+`;
+
+export const ButtonCustom = styled(Button)`
+  height: 50%;
 `;

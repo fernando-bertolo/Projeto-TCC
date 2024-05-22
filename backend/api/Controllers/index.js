@@ -66,10 +66,10 @@ const exclusaoDespesa = require("../Rotas/Despesas/exclusaoDespesa.js");
 const criacaoDespesaVeiculo = require("../Rotas/Despesas_Veiculos/criacaoDespesaVeiculos.js");
 const visualizarDespesaVeiculo = require("../Rotas/Despesas_Veiculos/vizualizarDespesaVeiculos.js");
 
-
 //Importando Vendas
 const criacaoVenda = require("../Rotas/Vendas/criacaoVendas.js");
-const visualizarVenda = require("../Rotas/Vendas/visualizarVenda.js")
+const visualizarVenda = require("../Rotas/Vendas/visualizarVenda.js");
+const deletarVendas = require("../Rotas/Vendas/deletarVendas.js");
 
 //Rota Usuarios
 rotas.use(criacaoUsuario);
@@ -138,6 +138,6 @@ rotas.use(visualizarDespesaVeiculo);
 // Rota de Vendas
 rotas.use(criacaoVenda);
 rotas.use(visualizarVenda);
-
+rotas.use(deletarVendas);
 
 module.exports = rotas;
