@@ -5,12 +5,12 @@ import axios from "axios";
 import DataTableVendas from "./DataTableVendas/DataTableVendas";
 
 const columnsSellCars = [
-  { field: "dataVenda", headerName: "Data da Venda", width: 120 },
-  { field: "nomeMarca", headerName: "Marca", width: 120 },
-  { field: "nomeModelo", headerName: "Modelo", width: 120 },
-  { field: "nomeVersao", headerName: "Versão", width: 120 },
-  { field: "ano", headerName: "Ano", width: 120 },
-  { field: "placa", headerName: "Placa", width: 120 },
+  { field: "dataVenda", headerName: "Data da Venda", width: 110 },
+  { field: "nomeMarca", headerName: "Marca", width: 100 },
+  { field: "nomeModelo", headerName: "Modelo", width: 100 },
+  { field: "nomeVersao", headerName: "Versão", width: 100 },
+  { field: "ano", headerName: "Ano", width: 100 },
+  { field: "placa", headerName: "Placa", width: 100 },
   { field: "responsavel", headerName: "Responsável", width: 150 },
   { field: "nomeCliente", headerName: "Nome do Cliente", width: 150 },
   { field: "valorVenda", headerName: "Valor da Venda", width: 146 },

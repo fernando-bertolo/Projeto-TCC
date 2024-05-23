@@ -30,9 +30,11 @@ export const DivTable = styled.div`
 
 export const SectionSearch = styled.section`
   width: 80%;
-  height: 6%;
+  height: 10%;
   display: flex;
   //background-color: pink;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const DivPrimaria = styled.div`

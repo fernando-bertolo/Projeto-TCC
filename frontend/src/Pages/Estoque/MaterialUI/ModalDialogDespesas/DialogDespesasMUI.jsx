@@ -48,17 +48,17 @@ function DialogDespesas(props) {
   const [dadosDespesa, setDadosDespesa] = React.useState([]);
   const [rowSelectDespesa, setRowSelectDespesa] = React.useState();
 
-  const buscaDespesaIdVeiculo = async () => {
+  const buscaDespesaIdVeiculo = React.useCallback(async () => {
     await axios
       .get(`http://localhost:3010/visualizar-despesa/${props.dataCar.id}`)
       .then((response) => {
         setDadosDespesa(response.data);
       });
-  };
+  }, [props.dataCar]);
 
   React.useEffect(() => {
     buscaDespesaIdVeiculo();
-  }, [props.dataCar]);
+  }, [props.dataCar, buscaDespesaIdVeiculo]);
 
   function formatDate(dateString) {
     const date = new Date(dateString);
