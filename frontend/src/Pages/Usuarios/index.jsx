@@ -2,7 +2,7 @@ import Listagem from "../../Components/Listagem/index.jsx";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-import { Body } from "../../Components/BodyPages/style";
+import { Body, DivContentCadastros } from "../../Components/BodyPages/style";
 import Menu from "../../Components/Menu/index";
 
 function Usuarios() {
@@ -15,9 +15,12 @@ function Usuarios() {
     });
   };
 
-  useEffect(() => {
-    buscaUsuarios();
-  }, []);
+  // Função de delay
+  function delay(n) {
+    return new Promise(function (resolve) {
+      setTimeout(resolve, n * 1000);
+    });
+  }
 
   const excluirUsuario = async (usuario) => {
     try {
@@ -40,6 +43,8 @@ function Usuarios() {
           progress: undefined,
           theme: "light",
         });
+        await delay(3.5);
+        buscaUsuarios();
       } else if (mensagemError === 400) {
         toast.error("Falha ao excluir usuário", {
           position: "bottom-right",
@@ -57,23 +62,29 @@ function Usuarios() {
     }
   };
 
+  useEffect(() => {
+    buscaUsuarios();
+  }, []);
+
   return (
     <>
       <Body>
         <Menu />
-        <Listagem
-          title="Listagem de Usuários"
-          rota="usuarios"
-          atualizaUsuarios={buscaUsuarios}
-          data={data}
-          primeiraColuna="ID"
-          segundaColuna="Nome"
-          terceiraColuna="Usuário"
-          quartaColuna="E-mail"
-          quintaColuna="Permissão"
-          excluirUsuario={excluirUsuario}
-        />
-        <ToastContainer />
+        <DivContentCadastros>
+          <Listagem
+            title="Listagem de Usuários"
+            rota="usuarios"
+            atualizaUsuarios={buscaUsuarios}
+            data={data}
+            primeiraColuna="ID"
+            segundaColuna="Nome"
+            terceiraColuna="Usuário"
+            quartaColuna="E-mail"
+            quintaColuna="Permissão"
+            excluirUsuario={excluirUsuario}
+          />
+          <ToastContainer />
+        </DivContentCadastros>
       </Body>
     </>
   );

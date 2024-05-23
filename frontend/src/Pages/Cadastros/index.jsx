@@ -1,15 +1,22 @@
 import Menu from "../../Components/Menu/index.jsx";
-import { Body } from "../../Components/BodyPages/style.jsx";
+import {
+  Body,
+  DivContentCadastros,
+} from "../../Components/BodyPages/style.jsx";
 
-function Cadastros(){
-    return(
-        <>
-            <Body>
-                <Menu/>
-                <h1>Cadastros</h1>
-            </Body>
-        </>
-    );
+import NavegacaoCadastros from "../../Components/NavegacaoCadastros/index.jsx";
+
+function Cadastros() {
+  return (
+    <>
+      <Body>
+        <Menu />
+        <DivContentCadastros>
+          <NavegacaoCadastros />
+        </DivContentCadastros>
+      </Body>
+    </>
+  );
 }
 
 export default Cadastros;

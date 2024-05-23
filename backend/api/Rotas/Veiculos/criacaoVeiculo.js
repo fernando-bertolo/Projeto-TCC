@@ -4,19 +4,21 @@ const tabelaVeiculo = require("../../../Database/Tabelas/Veiculos/veiculos.js");
 const tabelaMarca = require("../../../Database/Tabelas/Marcas/marcas.js");
 const tabelaModelo = require("../../../Database/Tabelas/Modelos/modelos.js");
 const tabelaVersao = require("../../../Database/Tabelas/Versoes/versoes.js");
+const tabelaAcessorioVeiculo = require("../../../Database/Tabelas/Acessorios_veiculos/acessoriosVeiculos.js");
 
 criacaoVeiculo.post("/criacao-veiculos", async (request, response) => {
   const {
     idMarca,
     idModelo,
     idVersao,
-    idStatus,
+    status,
     ano,
     combustivel,
     cor,
     quilometragem,
     valor,
     placa,
+    idAcessorios,
   } = request.body;
   try {
     const marcaID = tabelaMarca.findOne({
@@ -41,11 +43,11 @@ criacaoVeiculo.post("/criacao-veiculos", async (request, response) => {
       return response.status(400).json({ Error: "Parâmetros inválidos!!" });
     }
 
-    tabelaVeiculo.create({
+    const veiculo = await tabelaVeiculo.create({
       idMarca: idMarca,
       idModelo: idModelo,
       idVersao: idVersao,
-      idStatus: idStatus,
+      status: status,
       ano: ano,
       combustivel: combustivel,
       cor: cor,
@@ -53,12 +55,23 @@ criacaoVeiculo.post("/criacao-veiculos", async (request, response) => {
       valor: valor,
       placa: placa,
     });
+
+    await idAcessorios.map((acessorioID) => {
+      tabelaAcessorioVeiculo.create({
+        idVeiculo: veiculo.idVeiculo,
+        idAcessorio: acessorioID,
+      });
+    });
+
     return response
       .status(200)
       .json({ message: "Veículo criado com sucesso!!" });
   } catch (error) {
     console.log(error);
-    return response.status(500).json({ Error: "Erro na criação do veículo!!" });
+    return response.status(500).json({
+      Error:
+        "Erro na criação do veículo, valide se os campos estão preenchidos corretamente!!",
+    });
   }
 });
 

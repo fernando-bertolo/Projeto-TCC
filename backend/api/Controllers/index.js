@@ -50,11 +50,26 @@ const criacaoAcessorioVeiculo = require("../Rotas/Veiculos/Acessorios_Veiculos/c
 const visualizarAcessorioVeiculo = require("../Rotas/Veiculos/Acessorios_Veiculos/visualizarAcessoriosVeiculos.js");
 const deletarAcessorioVeiculo = require("../Rotas/Veiculos/Acessorios_Veiculos/exclusaoAcessorioVeiculos.js");
 
-// Importanto Veiculos
+// Importando Veiculos
 const criacaoVeiculo = require("../Rotas/Veiculos/criacaoVeiculo.js");
 const visualizarVeiculos = require("../Rotas/Veiculos/visualizarVeiculo.js");
 const alteracaoVeiculo = require("../Rotas/Veiculos/alteracaoVeiculo.js");
 const deletarVeiculo = require("../Rotas/Veiculos/exclusaoVeiculo.js");
+
+//Importando Despesas
+const criacaoDespesa = require("../Rotas/Despesas/criacaoDespesa.js");
+const visualizarDespesa = require("../Rotas/Despesas/VisualizarDespesa.js");
+const alteracaoDespesa = require("../Rotas/Despesas/alteracaoDespesa.js");
+const exclusaoDespesa = require("../Rotas/Despesas/exclusaoDespesa.js");
+
+//Importando DespesasVeiculos
+const criacaoDespesaVeiculo = require("../Rotas/Despesas_Veiculos/criacaoDespesaVeiculos.js");
+const visualizarDespesaVeiculo = require("../Rotas/Despesas_Veiculos/vizualizarDespesaVeiculos.js");
+
+//Importando Vendas
+const criacaoVenda = require("../Rotas/Vendas/criacaoVendas.js");
+const visualizarVenda = require("../Rotas/Vendas/visualizarVenda.js");
+const deletarVendas = require("../Rotas/Vendas/deletarVendas.js");
 
 //Rota Usuarios
 rotas.use(criacaoUsuario);
@@ -107,5 +122,22 @@ rotas.use(criacaoVeiculo);
 rotas.use(visualizarVeiculos);
 rotas.use(alteracaoVeiculo);
 rotas.use(deletarVeiculo);
+
+// Rota de Despesa
+
+rotas.use(criacaoDespesa);
+rotas.use(visualizarDespesa);
+rotas.use(alteracaoDespesa);
+rotas.use(exclusaoDespesa);
+
+// Rota de DespesaVeiculo
+
+rotas.use(criacaoDespesaVeiculo);
+rotas.use(visualizarDespesaVeiculo);
+
+// Rota de Vendas
+rotas.use(criacaoVenda);
+rotas.use(visualizarVenda);
+rotas.use(deletarVendas);
 
 module.exports = rotas;

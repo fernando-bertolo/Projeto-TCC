@@ -30,7 +30,7 @@ export const FormCadastro = styled.form`
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  //gap: 1rem;
+  gap: 1rem;
 `;
 
 export const DivTitulo = styled.div`
@@ -84,18 +84,6 @@ export const Input = styled.input`
   }
 `;
 
-export const Select = styled.select`
-  width: 60%;
-  height: 50%;
-  color: #fff;
-  border-radius: 10px;
-  padding-left: 20px;
-  background-color: #514869;
-  border-style: none;
-`;
-
-export const Option = styled.option``;
-
 export const DivBotoes = styled.div`
   width: 100%;
   height: 10%;
@@ -115,7 +103,7 @@ export const BotaoCancelar = styled.button`
 `;
 
 export const BotaoAdicionar = styled.button`
-  background-color: green;
+  background-color: #27ff00;
   border-radius: 10px;
   border-style: none;
   cursor: pointer;

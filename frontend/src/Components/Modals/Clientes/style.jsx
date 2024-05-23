@@ -132,7 +132,7 @@ export const BotaoCancelar = styled.button`
 `;
 
 export const BotaoAdicionar = styled.button`
-  background-color: green;
+  background-color: #27ff00;
   border-radius: 10px;
   border-style: none;
   cursor: pointer;

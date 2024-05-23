@@ -11,6 +11,28 @@ visualizarClientes.get("/clientes", async (request, response) => {
   }
 });
 
+visualizarClientes.get("/cliente-cpf/:cpf", async (request, response) => {
+  const { cpf } = request.params;
+  try {
+    const searchCpfCustomer = await tabelaClientes.findOne({
+      where: {
+        cpf: cpf,
+      },
+    });
+
+    if (!searchCpfCustomer) {
+      return response.status(400).json({ Error: "CPF não encontrado!!!" });
+    } else {
+      return response.status(200).send(searchCpfCustomer);
+    }
+  } catch (error) {
+    console.log(error);
+    return response
+      .status(500)
+      .json({ Error: "Falha na busca de clientes por CPF" });
+  }
+});
+
 visualizarClientes.get("/clientes/:id", async (request, response) => {
   try {
     const clienteUnico = await tabelaClientes.findByPk(request.params.id);
@@ -18,10 +40,13 @@ visualizarClientes.get("/clientes/:id", async (request, response) => {
     if (clienteUnico) {
       return response.status(200).send(clienteUnico);
     } else {
-      return response.status(400).json({ Error: "Usuário não existe" });
+      return response.status(400).json({ Error: "Cliente não existe" });
     }
   } catch (error) {
     console.log(error);
+    return response
+      .status(500)
+      .json({ Error: "Falha na busca de clientes por ID" });
   }
 });
 

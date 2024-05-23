@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const app = express();
+//require("../Database/sync.js");
+require("../Database/associations.js");
 app.use(express.json());
 app.use(cors());
 const rotas = require("./Controllers/index.js");

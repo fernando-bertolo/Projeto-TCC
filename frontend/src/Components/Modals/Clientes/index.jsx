@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { SectionMainContent, MainContentbackground } from "../Clientes/style";
 import validator from "validator";
 import { ToastContainer, toast } from "react-toastify";
 import validaCPF from "../../../Services/CPF/validaCPF";
 import axios from "axios";
 
 import {
+  SectionMainContent,
+  MainContentbackground,
   DivTitulo,
   Titulo,
   MainContent,

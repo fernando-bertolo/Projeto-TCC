@@ -14,8 +14,6 @@ import {
   NomeInput,
   DivNomeInput,
   Input,
-  Select,
-  Option,
   DivBotoes,
   BotaoCancelar,
   BotaoAdicionar,
@@ -261,16 +259,6 @@ function ModalUser(props) {
                   setInputConfirmaSenha(event.target.value);
                 }}
               />
-            </DivInputs>
-
-            <DivInputs>
-              <DivNomeInput>
-                <NomeInput>Informe a permissão</NomeInput>
-              </DivNomeInput>
-              <Select>
-                <Option value="Administrador">Administrador</Option>
-                <Option value="Funcionario">Funcionario</Option>
-              </Select>
             </DivInputs>
           </FormCadastro>
           <DivBotoes>
