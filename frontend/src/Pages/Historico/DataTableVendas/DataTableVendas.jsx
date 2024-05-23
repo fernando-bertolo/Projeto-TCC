@@ -3,6 +3,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import Lottie from "lottie-react";
 import AnimationData from "../../../assets/lottieAnimations/AnimationNotFound.json";
+import DialogVendas from "../ModalDialogVendas/DialogVendas";
 
 import {
   DataGridCustom,
@@ -17,6 +18,16 @@ import {
 
 function DataTableVendas(props) {
   const [rowSelectCar, setRowSelectCar] = React.useState();
+
+  const [openModalVendas, setOpenModalVendas] = React.useState(false);
+
+  const handleClickOpenModalVendas = () => {
+    setOpenModalVendas(true);
+  };
+
+  const handleClickCloseModalVendas = () => {
+    setOpenModalVendas(false);
+  };
 
   const handleRowSelectionChange = async (newSelection) => {
     if (newSelection && newSelection.length > 0) {
@@ -71,7 +82,13 @@ function DataTableVendas(props) {
             <Title>Histórico de Vendas</Title>
           </DivSecundaria>
           <DivTerciaria>
-            <ButtonCustom key="detalhes" variant="contained">
+            <ButtonCustom
+              key="detalhes"
+              variant="contained"
+              onClick={() => {
+                handleClickOpenModalVendas();
+              }}
+            >
               Detalhes
             </ButtonCustom>
             <ButtonCustom
@@ -130,8 +147,16 @@ function DataTableVendas(props) {
             </div>
           )}
         </div>
+        <ToastContainer />
       </DivTable>
-      <ToastContainer />
+
+      {rowSelectCar && (
+        <DialogVendas
+          handleClickCloseModalVendas={handleClickCloseModalVendas}
+          openModalVendas={openModalVendas}
+          rowSelectCar={rowSelectCar}
+        />
+      )}
     </>
   );
 }

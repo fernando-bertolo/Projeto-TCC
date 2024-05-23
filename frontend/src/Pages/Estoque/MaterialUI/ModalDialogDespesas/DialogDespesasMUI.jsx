@@ -62,10 +62,11 @@ function DialogDespesas(props) {
 
   function formatDate(dateString) {
     const date = new Date(dateString);
-    const day = date.getDate() + 1;
-    const month = date.getMonth() + 1;
+    let day = date.getDate() + 1;
+    let month = date.getMonth() + 1;
     const year = date.getFullYear();
-    if (month < 9) return `${day}-0${month}-${year}`;
+    if (day < 9) day = `0${day}`;
+    if (month < 9) month = `0${month}`;
     return `${day}-${month}-${year}`;
   }
 
