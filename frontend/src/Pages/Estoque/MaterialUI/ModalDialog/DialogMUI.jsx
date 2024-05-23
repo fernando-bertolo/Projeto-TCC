@@ -84,7 +84,7 @@ function ModalDialog(props) {
     marca: "",
     modelo: "",
     versao: "",
-    acessorios: [{}],
+    acessorios: [],
   });
 
   const sendDataCars = async (event) => {
@@ -116,7 +116,6 @@ function ModalDialog(props) {
             idMarca: fieldSelectCarsUnique.marca,
             idModelo: fieldSelectCarsUnique.modelo,
             idVersao: fieldSelectCarsUnique.versao,
-            status: "teste", //true => Veículo disponível
             ano: fieldInputsCars.ano,
             combustivel: fieldInputsCars.combustivel,
             cor: fieldInputsCars.cor,
@@ -169,7 +168,6 @@ function ModalDialog(props) {
               idMarca: fieldSelectCarsUnique.marca,
               idModelo: fieldSelectCarsUnique.modelo,
               idVersao: fieldSelectCarsUnique.versao,
-              idStatus: 1, //true => Veículo disponível
               ano: fieldInputsCars.ano,
               combustivel: fieldInputsCars.combustivel,
               cor: fieldInputsCars.cor,

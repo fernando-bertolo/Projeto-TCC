@@ -11,7 +11,6 @@ criacaoVeiculo.post("/criacao-veiculos", async (request, response) => {
     idMarca,
     idModelo,
     idVersao,
-    status,
     ano,
     combustivel,
     cor,
@@ -43,11 +42,14 @@ criacaoVeiculo.post("/criacao-veiculos", async (request, response) => {
       return response.status(400).json({ Error: "Parâmetros inválidos!!" });
     }
 
+    if(!idAcessorios.length > 0) {
+      return response.status(400).json({Error: "Preencha o campo de acessórios!!"})
+    } 
+
     const veiculo = await tabelaVeiculo.create({
       idMarca: idMarca,
       idModelo: idModelo,
       idVersao: idVersao,
-      status: status,
       ano: ano,
       combustivel: combustivel,
       cor: cor,
