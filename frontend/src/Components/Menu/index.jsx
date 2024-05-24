@@ -76,10 +76,6 @@ const Menu = () => {
             <DivOpcaoControle>Cadastros</DivOpcaoControle>
           </LinkNavegacao>
 
-          <LinkNavegacao to={"/relatorios"}>
-            <DivOpcaoControle>Relatórios</DivOpcaoControle>
-          </LinkNavegacao>
-
           <LinkNavegacao to={"/usuarios"}>
             <DivOpcaoControle>Usuários</DivOpcaoControle>
           </LinkNavegacao>

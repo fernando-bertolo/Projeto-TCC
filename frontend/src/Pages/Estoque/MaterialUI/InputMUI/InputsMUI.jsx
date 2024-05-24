@@ -73,6 +73,8 @@ export default function InputsMUI(props) {
         noValidate
         autoComplete="on"
       >
+
+        <button type="button" onClick={() => {console.log(dadosModelos)}}>teste</button>
         <SelectMarcaMUI
           dadosMarcas={dadosMarcas}
           setfieldSelectCarsUnique={props.setfieldSelectCarsUnique}

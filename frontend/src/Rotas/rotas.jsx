@@ -9,7 +9,6 @@ import Marcas from "../Pages/Cadastros/Marcas/index.jsx";
 import Modelos from "../Pages/Cadastros/Modelos/index.jsx";
 import Versoes from "../Pages/Cadastros/Versoes/index.jsx";
 import Acessorios from "../Pages/Cadastros/Acessorios/index.jsx";
-import Relatorios from "../Pages/Relatorios/index.jsx";
 import Usuarios from "../Pages/Usuarios/index.jsx";
 import Historico from "../Pages/Historico/index.jsx";
 import ValidaAutenticacao from "../Services/validaAutenticacao.jsx";
@@ -92,15 +91,6 @@ function Rotas() {
         element={
           <ValidaAutenticacao>
             <Acessorios />
-          </ValidaAutenticacao>
-        }
-      />
-
-      <Route
-        path="/relatorios"
-        element={
-          <ValidaAutenticacao>
-            <Relatorios />
           </ValidaAutenticacao>
         }
       />

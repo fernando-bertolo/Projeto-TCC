@@ -4,8 +4,8 @@ services:
   database:
     image: mysql:8.3.0
     environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=databasecar
     ports:
       - "3030:3306"
     networks:
