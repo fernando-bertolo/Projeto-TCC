@@ -30,14 +30,18 @@ visualizarVersao.get("/visualizar-versao", async (request, response) => {
 });
 
 //Rota get para visualizar versão específica
-visualizarVersao.get("/visualizar-versao/:id", async (request, response) => {
+visualizarVersao.get("/visualizar-versao/:idModelo", async (request, response) => {
   try {
-    const visualizaVersaoUnica = await tabelaVersao.findByPk(request.params.id);
+    const seeUniqueVersionByID = await tabelaVersao.findAll({
+      where: {
+        idModelo: request.params.idModelo,
+      },
+    });
 
-    if (!visualizaVersaoUnica) {
+    if (!seeUniqueVersionByID) {
       return response.status(400).json({ Error: "ID inválido" });
     } else {
-      response.send(visualizaVersaoUnica);
+      response.send(seeUniqueVersionByID);
     }
   } catch (error) {
     console.log(error);

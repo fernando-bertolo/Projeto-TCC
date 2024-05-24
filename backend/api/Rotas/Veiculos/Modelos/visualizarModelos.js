@@ -24,11 +24,14 @@ visualizarModelos.get("/visualizar-modelos", async (request, response) => {
 
 //Rota get para visualizar modelos específicos
 
-visualizarModelos.get("/visualizar-modelos/:id", async (request, response) => {
+visualizarModelos.get("/visualizar-modelos/:idMarca", async (request, response) => {
+  const {idMarca} = request.params;
   try {
-    const visualizaModeloEspecifico = await tabelaModelos.findByPk(
-      request.params.id
-    );
+    const visualizaModeloEspecifico = await tabelaModelos.findAll({
+        where:{
+          idMarca: idMarca,
+        }
+      });
 
     if (!visualizaModeloEspecifico) {
       return response.status(400).json({ Error: "Modelo não existe!!" });

@@ -23,21 +23,18 @@ export default function InputsMUI(props) {
       });
   };
 
-  const buscaModelos = async () => {
-    await axios
-      .get("http://localhost:3010/visualizar-modelos/")
-      .then((response) => {
-        setDadosModelos(response.data);
-      });
-  };
+  const buscaModelos = React.useCallback( async () => {
+    const response = await axios.get(`http://localhost:3010/visualizar-modelos/${props.fieldSelectCarsUnique.marca}`)
+      setDadosModelos(response.data);
+  }, [props.fieldSelectCarsUnique.marca]);
 
-  const buscaVersoes = async () => {
+  const buscaVersoes = React.useCallback( async () => {
     await axios
-      .get("http://localhost:3010/visualizar-versao")
+      .get(`http://localhost:3010/visualizar-versao/${props.fieldSelectCarsUnique.modelo}`)
       .then((response) => {
         setDadosVersao(response.data);
       });
-  };
+  },[props.fieldSelectCarsUnique.modelo]);
 
   const buscaAcessorio = async () => {
     try {
@@ -56,7 +53,7 @@ export default function InputsMUI(props) {
     buscaModelos();
     buscaVersoes();
     buscaAcessorio();
-  }, []);
+  }, [props.fieldSelectCarsUnique.marca, buscaModelos, props.fieldSelectCarsUnique.modelo, buscaVersoes]);
 
   return (
     <>
@@ -73,8 +70,6 @@ export default function InputsMUI(props) {
         noValidate
         autoComplete="on"
       >
-
-        <button type="button" onClick={() => {console.log(dadosModelos)}}>teste</button>
         <SelectMarcaMUI
           dadosMarcas={dadosMarcas}
           setfieldSelectCarsUnique={props.setfieldSelectCarsUnique}
