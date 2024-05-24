@@ -14,7 +14,7 @@ import Delay from "../../../../Services/Delay/Delay";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiPaper-root": {
-    //width: 900,
+    width: 900,
     maxWidth: "none",
     borderRadius: 30,
     height: 700,
@@ -230,7 +230,7 @@ function ModalDialog(props) {
           <DialogTitle
             sx={{
               m: 0,
-              p: 4,
+              p: 2,
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -286,7 +286,7 @@ function ModalDialog(props) {
           <DialogTitle
             sx={{
               m: 0,
-              p: 4,
+              p: 2,
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
