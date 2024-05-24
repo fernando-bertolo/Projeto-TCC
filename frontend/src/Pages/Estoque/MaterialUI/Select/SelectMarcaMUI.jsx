@@ -7,7 +7,6 @@ import ListItemText from "@mui/material/ListItemText";
 import Select from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
 
-
 export default function SelectMarcaMUI(props) {
   const [personName, setPersonName] = React.useState([]);
 
@@ -26,6 +25,12 @@ export default function SelectMarcaMUI(props) {
     });
   };
 
+  // Cria um mapeamento de ID para Nome
+  const idToNameMap = props.dadosMarcas.reduce((map, marcas) => {
+    map[marcas.idMarca] = marcas.nomeMarca;
+    return map;
+  }, {});
+
   return (
     <>
       <FormControl sx={{ m: 1, width: 250 }}>
@@ -38,8 +43,10 @@ export default function SelectMarcaMUI(props) {
           value={personName}
           onChange={handleChange}
           input={<OutlinedInput label="Selecione a marca" />}
-          renderValue={(selected) => selected.join(", ")}
-          sx={{ borderRadius: 3, borderBottomColor: "red"}}
+          renderValue={(selected) =>
+            selected.map((id) => idToNameMap[id]).join(", ")
+          }
+          sx={{ borderRadius: 3, color: "#FFF" }}
           defaultValue=""
         >
           {props.dadosMarcas.map((infoMarca) => (

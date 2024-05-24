@@ -36,6 +36,12 @@ export default function SelectAcessorioMUI(props) {
     });
   };
 
+  // Cria um mapeamento de ID para Nome
+  const idToNameMap = props.dadosAcessorio.reduce((map, acessorio) => {
+    map[acessorio.idAcessorio] = acessorio.nomeAcessorio;
+    return map;
+  }, {});
+
   return (
     <div>
       <FormControl sx={{ m: 1, width: 250 }}>
@@ -49,9 +55,11 @@ export default function SelectAcessorioMUI(props) {
           value={personName}
           onChange={handleChange}
           input={<OutlinedInput label="Selecione os Acessórios" />}
-          renderValue={(selected) => selected.join(", ")}
+          renderValue={(selected) =>
+            selected.map((id) => idToNameMap[id]).join(", ")
+          }
           MenuProps={MenuProps}
-          sx={{ borderRadius: 3 }}
+          sx={{ borderRadius: 3, color: "#FFF" }}
           defaultValue=""
         >
           {props.dadosAcessorio.map((infoAcessorio) => (

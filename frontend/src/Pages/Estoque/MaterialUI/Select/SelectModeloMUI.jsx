@@ -36,6 +36,12 @@ export default function SelectModeloMUI(props) {
     });
   };
 
+  // Cria um mapeamento de ID para Nome
+  const idToNameMap = props.dadosModelos.reduce((map, modelo) => {
+    map[modelo.idModelo] = modelo.nomeModelo;
+    return map;
+  }, {});
+
   return (
     <div>
       <FormControl sx={{ m: 1, width: 250 }}>
@@ -48,9 +54,11 @@ export default function SelectModeloMUI(props) {
           value={personName}
           onChange={handleChange}
           input={<OutlinedInput label="Selecione o modelo" />}
-          renderValue={(selected) => selected.join(", ")}
+          renderValue={(selected) =>
+            selected.map((id) => idToNameMap[id]).join(", ")
+          }
           MenuProps={MenuProps}
-          sx={{ borderRadius: 3 }}
+          sx={{ borderRadius: 3, color: "#FFF" }}
           defaultValue=""
         >
           {props.dadosModelos.map((infoModelo) => (

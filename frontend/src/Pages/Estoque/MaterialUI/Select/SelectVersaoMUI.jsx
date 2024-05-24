@@ -36,6 +36,12 @@ export default function SelectVersaoMUI(props) {
     });
   };
 
+  // Cria um mapeamento de ID para Nome
+  const idToNameMap = props.dadosVersao.reduce((map, versao) => {
+    map[versao.idVersao] = versao.nomeVersao;
+    return map;
+  }, {});
+
   return (
     <div>
       <FormControl sx={{ m: 1, width: 250 }}>
@@ -48,9 +54,11 @@ export default function SelectVersaoMUI(props) {
           value={personName}
           onChange={handleChange}
           input={<OutlinedInput label="Selecione a versão" />}
-          renderValue={(selected) => selected.join(", ")}
+          renderValue={(selected) =>
+            selected.map((id) => idToNameMap[id]).join(", ")
+          }
           MenuProps={MenuProps}
-          sx={{ borderRadius: 3 }}
+          sx={{ borderRadius: 3, color: "#FFF" }}
           defaultValue=""
         >
           {props.dadosVersao.map((infoVersao) => (

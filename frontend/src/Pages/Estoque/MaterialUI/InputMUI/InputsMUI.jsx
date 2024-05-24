@@ -7,13 +7,7 @@ import axios from "axios";
 import SelectModeloMUI from "../Select/SelectModeloMUI";
 import SelectVersaoMUI from "../Select/SelectVersaoMUI";
 import SelectAcessorioMUI from "../Select/SelectAcessorioMUI";
-import {
-  MainContent,
-  SectionInputs
-} from "./InputsMUIStyle"
-
-
-
+import { MainContent, SectionInputs } from "./InputsMUIStyle";
 
 export default function InputsMUI(props) {
   const [dadosMarcas, setDadosMarcas] = React.useState([]);
@@ -29,18 +23,22 @@ export default function InputsMUI(props) {
       });
   };
 
-  const buscaModelos = React.useCallback( async () => {
-    const response = await axios.get(`http://localhost:3010/visualizar-modelos/${props.fieldSelectCarsUnique.marca}`)
-      setDadosModelos(response.data);
+  const buscaModelos = React.useCallback(async () => {
+    const response = await axios.get(
+      `http://localhost:3010/visualizar-modelos/${props.fieldSelectCarsUnique.marca}`
+    );
+    setDadosModelos(response.data);
   }, [props.fieldSelectCarsUnique.marca]);
 
-  const buscaVersoes = React.useCallback( async () => {
+  const buscaVersoes = React.useCallback(async () => {
     await axios
-      .get(`http://localhost:3010/visualizar-versao/${props.fieldSelectCarsUnique.modelo}`)
+      .get(
+        `http://localhost:3010/visualizar-versao/${props.fieldSelectCarsUnique.modelo}`
+      )
       .then((response) => {
         setDadosVersao(response.data);
       });
-  },[props.fieldSelectCarsUnique.modelo]);
+  }, [props.fieldSelectCarsUnique.modelo]);
 
   const buscaAcessorio = async () => {
     try {
@@ -59,91 +57,90 @@ export default function InputsMUI(props) {
     buscaModelos();
     buscaVersoes();
     buscaAcessorio();
-  }, [props.fieldSelectCarsUnique.marca, buscaModelos, props.fieldSelectCarsUnique.modelo, buscaVersoes]);
+  }, [
+    props.fieldSelectCarsUnique.marca,
+    buscaModelos,
+    props.fieldSelectCarsUnique.modelo,
+    buscaVersoes,
+  ]);
 
   return (
     <>
       <MainContent>
-
         <SectionInputs>
-
-
           <SelectMarcaMUI
             dadosMarcas={dadosMarcas}
             setfieldSelectCarsUnique={props.setfieldSelectCarsUnique}
             fieldSelectCarsUnique={props.fieldSelectCarsUnique}
           />
-            <FormControl variant="standard">  
-              <InputLabel htmlFor="ano" sx={{ color: "#FFF" }}>
-                Ano
-              </InputLabel>
-              <Input
-                type="text"
-                id="ano"
-                placeholder="Insira o ano"
-                required
-                sx={{ width: 250, color: "#FFF" }}
-                value={props.fieldInputsCars.ano}
-                onChange={(event) => {
-                  props.setfieldInputsCars({
-                    ...props.fieldInputsCars,
-                    ano: event.target.value,
-                  });
-                }}
-              />
-            </FormControl>
-            <FormControl variant="standard">
-              <InputLabel htmlFor="cor" sx={{ color: "#FFF" }}>
-                Cor
-              </InputLabel>
-              <Input
-                type="text"
-                id="cor"
-                placeholder="Insira a cor"
-                required
-                value={props.fieldInputsCars.cor}
-                onChange={(event) => {
-                  props.setfieldInputsCars({
-                    ...props.fieldInputsCars,
-                    cor: event.target.value,
-                  });
-                }}
-                sx={{ width: 250, color: "#FFF" }}
-              />
-            </FormControl>
-
-
+          <FormControl variant="standard">
+            <InputLabel htmlFor="ano" sx={{ color: "#FFF" }}>
+              Ano
+            </InputLabel>
+            <Input
+              type="text"
+              id="ano"
+              placeholder="Insira o ano"
+              required
+              sx={{ width: 250, color: "#FFF" }}
+              value={props.fieldInputsCars.ano}
+              onChange={(event) => {
+                props.setfieldInputsCars({
+                  ...props.fieldInputsCars,
+                  ano: event.target.value,
+                });
+              }}
+            />
+          </FormControl>
+          <FormControl variant="standard">
+            <InputLabel htmlFor="cor" sx={{ color: "#FFF" }}>
+              Cor
+            </InputLabel>
+            <Input
+              type="text"
+              id="cor"
+              placeholder="Insira a cor"
+              required
+              value={props.fieldInputsCars.cor}
+              onChange={(event) => {
+                props.setfieldInputsCars({
+                  ...props.fieldInputsCars,
+                  cor: event.target.value,
+                });
+              }}
+              sx={{ width: 250, color: "#FFF" }}
+            />
+          </FormControl>
         </SectionInputs>
 
         <SectionInputs>
           <SelectModeloMUI
-              dadosModelos={dadosModelos}
-              setfieldSelectCarsUnique={props.setfieldSelectCarsUnique}
-              fieldSelectCarsUnique={props.fieldSelectCarsUnique}
+            dadosModelos={dadosModelos}
+            setfieldSelectCarsUnique={props.setfieldSelectCarsUnique}
+            fieldSelectCarsUnique={props.fieldSelectCarsUnique}
+          />
+
+          <FormControl variant="standard">
+            <InputLabel htmlFor="combustivel" sx={{ color: "#FFF" }}>
+              Combustivel
+            </InputLabel>
+            <Input
+              type="text"
+              id="combustivel"
+              placeholder="Insira o Combustível"
+              required
+              value={props.fieldInputsCars.combustivel}
+              onChange={(event) => {
+                props.setfieldInputsCars({
+                  ...props.fieldInputsCars,
+                  combustivel: event.target.value,
+                });
+              }}
+              sx={{ width: 250, color: "#FFF" }}
             />
+          </FormControl>
 
-            <FormControl variant="standard">
-              <InputLabel htmlFor="combustivel" sx={{ color: "#FFF" }}>
-                Combustivel
-              </InputLabel>
-              <Input
-                type="text"
-                id="combustivel"
-                placeholder="Insira o Combustível"
-                required
-                value={props.fieldInputsCars.combustivel}
-                onChange={(event) => {
-                  props.setfieldInputsCars({
-                    ...props.fieldInputsCars,
-                    combustivel: event.target.value,
-                  });
-                }}
-                sx={{ width: 250, color: "#FFF"}}
-              />
-            </FormControl>
-
-
-            <FormControl variant="standard">
+          <FormControl variant="standard">
             <InputLabel htmlFor="placa" sx={{ color: "#FFF" }}>
               Placa
             </InputLabel>
@@ -163,7 +160,6 @@ export default function InputsMUI(props) {
             />
           </FormControl>
 
-
           <SelectAcessorioMUI
             dadosAcessorio={dadosAcessorios}
             setfieldSelectCarsUnique={props.setfieldSelectCarsUnique}
@@ -171,16 +167,12 @@ export default function InputsMUI(props) {
           />
         </SectionInputs>
 
-
-
         <SectionInputs>
-
-        <SelectVersaoMUI
+          <SelectVersaoMUI
             dadosVersao={dadosVersao}
             setfieldSelectCarsUnique={props.setfieldSelectCarsUnique}
             fieldSelectCarsUnique={props.fieldSelectCarsUnique}
           />
-
 
           <FormControl variant="standard">
             <InputLabel htmlFor="quilometragem" sx={{ color: "#FFF" }}>
@@ -202,10 +194,6 @@ export default function InputsMUI(props) {
             />
           </FormControl>
 
-
-
-
-
           <FormControl variant="standard">
             <InputLabel htmlFor="valor" sx={{ color: "#FFF" }}>
               Valor
@@ -226,9 +214,6 @@ export default function InputsMUI(props) {
             />
           </FormControl>
         </SectionInputs>
-
-
-
       </MainContent>
     </>
   );
