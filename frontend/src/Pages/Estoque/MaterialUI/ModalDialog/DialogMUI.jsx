@@ -64,7 +64,6 @@ function ModalDialog(props) {
     cor: "",
     quilometragem: "",
     valor: "",
-    status: "teste",
   });
 
   React.useEffect(() => {
@@ -77,6 +76,12 @@ function ModalDialog(props) {
         quilometragem: props.dataCar.quilometragem,
         valor: props.dataCar.valor,
       });
+      setfieldSelectCarsUnique({
+        marca: props.dataCar.nomeMarca,
+        modelo: props.dataCar.nomeModelo,
+        versao: props.dataCar.nomeVersao,
+        acessorios: props.dataCar.acessorios,
+      })
     }
   }, [props.dataCar, props.modo]);
 
@@ -295,6 +300,7 @@ function ModalDialog(props) {
             }}
             id="customized-dialog-title"
           >
+            <button onClick={() => {console.log(props.dataCar)}}>teste</button>
             {props.title}
           </DialogTitle>
           <IconButton

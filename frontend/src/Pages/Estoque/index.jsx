@@ -17,7 +17,7 @@ const columnsCars = [
   { field: "cor", headerName: "Cor", width: 160 },
   { field: "quilometragem", headerName: "Quilometragem", width: 160 },
   { field: "placa", headerName: "Placa", width: 160 },
-  { field: "valor", headerName: "Valor", width: 146 },
+  { field: "valorCompra", headerName: "Valor de Compra", width: 146 },
 ];
 
 function Estoque() {
@@ -54,6 +54,9 @@ function Estoque() {
 
   const rowsCars = dadosVeiculos.map((cars) => ({
     id: cars.idVeiculo,
+    idMarca: cars.idMarca,
+    idModelo: cars.idModelo,
+    idVersao: cars.idVersao,
     nomeMarca: cars.Marca.nomeMarca,
     nomeModelo: cars.Modelo.nomeModelo,
     nomeVersao: cars.Verso.nomeVersao,
@@ -61,9 +64,9 @@ function Estoque() {
     combustivel: cars.combustivel,
     cor: cars.cor,
     quilometragem: cars.quilometragem,
-    valor: cars.valor,
+    valorCompra: cars.valor,
     placa: cars.placa,
-    acessorios: cars.acessorios,
+    acessorios: cars.Acessorios,
   }));
 
   return (

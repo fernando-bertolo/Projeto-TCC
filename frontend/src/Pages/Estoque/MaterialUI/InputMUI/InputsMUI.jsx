@@ -70,6 +70,7 @@ export default function InputsMUI(props) {
         <SectionInputs>
           <SelectMarcaMUI
             dadosMarcas={dadosMarcas}
+            dataCar={props.dataCar}
             setfieldSelectCarsUnique={props.setfieldSelectCarsUnique}
             fieldSelectCarsUnique={props.fieldSelectCarsUnique}
           />
