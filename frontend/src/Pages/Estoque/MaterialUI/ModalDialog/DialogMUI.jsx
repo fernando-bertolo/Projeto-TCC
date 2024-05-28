@@ -63,7 +63,7 @@ function ModalDialog(props) {
     combustivel: "",
     cor: "",
     quilometragem: "",
-    valor: "",
+    valorCompra: "",
   });
 
   React.useEffect(() => {
@@ -74,13 +74,13 @@ function ModalDialog(props) {
         combustivel: props.dataCar.combustivel,
         cor: props.dataCar.cor,
         quilometragem: props.dataCar.quilometragem,
-        valor: props.dataCar.valor,
+        valorCompra: props.dataCar.valorCompra,
       });
       setfieldSelectCarsUnique({
         marca: props.dataCar.nomeMarca,
         modelo: props.dataCar.nomeModelo,
         versao: props.dataCar.nomeVersao,
-        acessorios: props.dataCar.acessorios,
+        acessorios: props.dataCar.acessorios[0].nomeAcessorio,
       })
     }
   }, [props.dataCar, props.modo]);
@@ -103,7 +103,7 @@ function ModalDialog(props) {
           fieldInputsCars.cor === "" ||
           fieldInputsCars.placa === "" ||
           fieldInputsCars.quilometragem === "" ||
-          fieldInputsCars.valor === ""
+          fieldInputsCars.valorCompra === ""
         ) {
           toast.warn("Por favor, preencha os campos corretamente !!", {
             position: "bottom-right",
@@ -125,7 +125,7 @@ function ModalDialog(props) {
             combustivel: fieldInputsCars.combustivel,
             cor: fieldInputsCars.cor,
             quilometragem: fieldInputsCars.quilometragem,
-            valor: fieldInputsCars.valor,
+            valor: fieldInputsCars.valorCompra,
             placa: fieldInputsCars.placa,
             idAcessorios: fieldSelectCarsUnique.acessorios,
           });
@@ -153,7 +153,7 @@ function ModalDialog(props) {
           fieldInputsCars.cor === "" ||
           fieldInputsCars.placa === "" ||
           fieldInputsCars.quilometragem === "" ||
-          fieldInputsCars.valor === ""
+          fieldInputsCars.valorCompra === ""
         ) {
           toast.warn("Por favor, preencha os campos corretamente !!", {
             position: "bottom-right",
@@ -177,7 +177,7 @@ function ModalDialog(props) {
               combustivel: fieldInputsCars.combustivel,
               cor: fieldInputsCars.cor,
               quilometragem: fieldInputsCars.quilometragem,
-              valor: fieldInputsCars.valor,
+              valor: fieldInputsCars.valorCompra,
               placa: fieldInputsCars.placa,
               idAcessorios: fieldSelectCarsUnique.acessorios,
             }

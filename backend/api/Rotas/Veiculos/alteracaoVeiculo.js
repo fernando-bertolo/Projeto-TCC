@@ -4,6 +4,7 @@ const tabelaVeiculo = require("../../../Database/Tabelas/Veiculos/veiculos.js");
 const tabelaMarca = require("../../../Database/Tabelas/Marcas/marcas.js");
 const tabelaModelo = require("../../../Database/Tabelas/Modelos/modelos.js");
 const tabelaVersao = require("../../../Database/Tabelas/Versoes/versoes.js");
+const tabelaAcessorioVeiculo = require("../../../Database/Tabelas/Acessorios_veiculos/acessoriosVeiculos.js");
 
 alteracaoVeiculo.put("/alteracao-veiculo/:id", async (request, response) => {
   const { id } = request.params;
@@ -11,13 +12,13 @@ alteracaoVeiculo.put("/alteracao-veiculo/:id", async (request, response) => {
     idMarca,
     idModelo,
     idVersao,
-    idStatus,
     ano,
     combustivel,
     cor,
     quilometragem,
     valor,
     placa,
+    idAcessorios,
   } = request.body;
   try {
     const marcaID = await tabelaMarca.findOne({
@@ -54,12 +55,11 @@ alteracaoVeiculo.put("/alteracao-veiculo/:id", async (request, response) => {
         .json({ Error: "Parâmetros da requisição inválidos!!" });
     }
 
-    tabelaVeiculo.update(
+    const veiculo = await tabelaVeiculo.update(
       {
         idMarca: idMarca,
         idModelo: idModelo,
         idVersao: idVersao,
-        idStatus: idStatus,
         ano: ano,
         combustivel: combustivel,
         cor: cor,
@@ -69,6 +69,13 @@ alteracaoVeiculo.put("/alteracao-veiculo/:id", async (request, response) => {
       },
       { where: { idVeiculo: request.params.id } }
     );
+
+    await idAcessorios.map((acessorioID) => {
+      tabelaAcessorioVeiculo.create({
+        idVeiculo: veiculo.idVeiculo,
+        idAcessorio: acessorioID,
+      });
+    });
 
     return response
       .status(200)

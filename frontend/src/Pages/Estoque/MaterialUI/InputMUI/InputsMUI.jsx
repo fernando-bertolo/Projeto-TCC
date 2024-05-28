@@ -165,6 +165,7 @@ export default function InputsMUI(props) {
             dadosAcessorio={dadosAcessorios}
             setfieldSelectCarsUnique={props.setfieldSelectCarsUnique}
             fieldSelectCarsUnique={props.fieldSelectCarsUnique}
+            dataCar={props.dataCar}
           />
         </SectionInputs>
 
@@ -204,11 +205,11 @@ export default function InputsMUI(props) {
               id="valor"
               placeholder="Insira o valor"
               required
-              value={props.fieldInputsCars.valor}
+              value={props.fieldInputsCars.valorCompra}
               onChange={(event) => {
                 props.setfieldInputsCars({
                   ...props.fieldInputsCars,
-                  valor: event.target.value,
+                  valorCompra: event.target.value,
                 });
               }}
               sx={{ width: 250, color: "#FFF" }}
