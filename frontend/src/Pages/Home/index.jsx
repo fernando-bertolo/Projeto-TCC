@@ -1,7 +1,5 @@
 import Menu from "../../Components/Menu/index.jsx";
-
-import {Body} from "../../Components/BodyPages/style.jsx"
-
+import { Body } from "../../Components/BodyPages/style.jsx"
 function Home(){
 
 
