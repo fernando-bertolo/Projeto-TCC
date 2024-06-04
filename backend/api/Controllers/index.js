@@ -71,6 +71,10 @@ const criacaoVenda = require("../Rotas/Vendas/criacaoVendas.js");
 const visualizarVenda = require("../Rotas/Vendas/visualizarVenda.js");
 const deletarVendas = require("../Rotas/Vendas/deletarVendas.js");
 
+
+// Importanto Busca Relatório
+const buscaRelatorio = require("../Rotas/ReportPowerBI/ReportBI.js");
+
 //Rota Usuarios
 rotas.use(criacaoUsuario);
 rotas.use(autenticacao);
@@ -139,5 +143,8 @@ rotas.use(visualizarDespesaVeiculo);
 rotas.use(criacaoVenda);
 rotas.use(visualizarVenda);
 rotas.use(deletarVendas);
+
+// Rota buscaRelatorio
+rotas.use(buscaRelatorio);
 
 module.exports = rotas;
