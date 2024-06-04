@@ -30,24 +30,24 @@ const Report = () => {
       const reportData = await getReportData(accessToken);
 
       console.log("accestoken: " + accessToken);
-      //console.log("reportdata: " + reportData);
+      console.log("reportdata: " + reportData);
 
-      // setEmbedConfig({
-      //   type: "report",
-      //   id: reportData.id,
-      //   embedUrl: reportData.embedUrl,
-      //   accessToken: accessToken,
-      //   tokenType: models.TokenType.Embed,
-      //   settings: {
-      //     panes: {
-      //       filters: {
-      //         expanded: false,
-      //         visible: false,
-      //       },
-      //     },
-      //     background: models.BackgroundType.Transparent,
-      //   },
-      // });
+      setEmbedConfig({
+        type: "report",
+        id: reportData.id,
+        embedUrl: reportData.embedUrl,
+        accessToken: accessToken,
+        tokenType: models.TokenType.Embed,
+        settings: {
+          panes: {
+            filters: {
+              expanded: false,
+              visible: false,
+            },
+          },
+          background: models.BackgroundType.Transparent,
+        },
+      });
     };
 
     fetchEmbedConfig();

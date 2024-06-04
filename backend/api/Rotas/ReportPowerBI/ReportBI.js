@@ -7,15 +7,15 @@ const axios = require('axios');
 buscaRelatorio.post('/get-token', async (req, res) => {
     try {
       const tokenResponse = await axios.post(
-        `https://login.microsoftonline.com/2fa5e3b6-2f1e-408c-8fce-b6b650935961/oauth2/v2.0/token`,
+        `https://login.microsoftonline.com/${process.env.POWERBI_TENANTID}/oauth2/v2.0/token`,
         new URLSearchParams({
           grant_type: 'password',
           scope: 'openid',
           //resource: 'https://analysis.windows.net/powerbi/api',
-          client_id: '36ccccb8-c746-4ed8-a63b-83ad222a5453',
-          client_secret: '3vt8Q~3iFSGXdigWN4ZsNMutTk0hLXs-iyHRgauF',
-          username: 'fernando.bertolo@solutionsbi.com.br',
-          password: 'qewZe0-pennyj-ricdoz'
+          client_id: process.env.POWERBI_CLIENTID,
+          client_secret: process.env.POWERBI_CLIENTSECRET,
+          username: process.env.POWERBI_USERNAME,
+          password: process.env.POWERBI_PASSWORD
         }),
         {
           headers: {
