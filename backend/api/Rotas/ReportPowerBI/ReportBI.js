@@ -13,7 +13,6 @@ buscaRelatorio.post('/get-token', async (req, res) => {
           scope: 'openid',
           //resource: 'https://analysis.windows.net/powerbi/api',
           client_id: process.env.POWERBI_CLIENTID,
-          client_secret: process.env.POWERBI_CLIENTSECRET,
           username: process.env.POWERBI_USERNAME,
           password: process.env.POWERBI_PASSWORD
         }),
