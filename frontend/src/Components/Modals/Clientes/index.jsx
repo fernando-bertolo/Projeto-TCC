@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import validator from "validator";
 import { ToastContainer, toast } from "react-toastify";
 import validaCPF from "../../../Services/CPF/validaCPF";
@@ -24,48 +24,61 @@ import {
 } from "./style";
 
 function ModalClientes(props) {
-  const [inputNome, setInputNome] = useState(
-    props.modo === "edicao" ? props.dadosClientes.nome : ""
-  );
-  const [inputNacionalidade, setInputNacionalidade] = useState(
-    props.modo === "edicao" ? props.dadosClientes.nacionalidade : ""
-  );
-  const [inputDataNascimento, setInputDataNascimento] = useState(
-    props.modo === "edicao" ? props.dadosClientes.dataNascimento : ""
-  );
-  const [inputEstadoCivil, setInputEstadoCivil] = useState(
-    props.modo === "edicao" ? props.dadosClientes.estadoCivil : ""
-  );
-  const [inputRG, setInputRG] = useState(
-    props.modo === "edicao" ? props.dadosClientes.rg : ""
-  );
-  const [inputCPF, setInputCPF] = useState(
-    props.modo === "edicao" ? props.dadosClientes.cpf : ""
-  );
-  const [inputCelular, setInputCelular] = useState(
-    props.modo === "edicao" ? props.dadosClientes.celular : ""
-  );
-  const [inputEmail, setInputEmail] = useState(
-    props.modo === "edicao" ? props.dadosClientes.email : ""
-  );
-  const [inputEndereco, setInputEndereco] = useState(
-    props.modo === "edicao" ? props.dadosClientes.endereco : ""
-  );
-  const [inputCEP, setInputCEP] = useState(
-    props.modo === "edicao" ? props.dadosClientes.cep : ""
-  );
-  const [inputBairro, setInputBairro] = useState(
-    props.modo === "edicao" ? props.dadosClientes.bairro : ""
-  );
-  const [inputNumero, setInputNumero] = useState(
-    props.modo === "edicao" ? props.dadosClientes.numero : ""
-  );
-  const [inputCidade, setInputCidade] = useState(
-    props.modo === "edicao" ? props.dadosClientes.cidade : ""
-  );
-  const [inputEstado, setInputEstado] = useState(
-    props.modo === "edicao" ? props.dadosClientes.estado : ""
-  );
+  const [dataInputs, setDataInputs] = useState({
+    nome: "",
+    nacionalidade: "",
+    dataNascimento: "",
+    estadoCivil: "",
+    rg: "",
+    cpf: "",
+    celular: "",
+    email: "",
+    endereco: "",
+    cep: "",
+    bairro: "",
+    numero: "",
+    cidade: "",
+    estado: "",
+  });
+
+  useEffect(() => {
+    if (props.modo === "edicao" && props.dadosClientes) {
+      setDataInputs({
+        nome: props.dadosClientes.nome,
+        nacionalidade: props.dadosClientes.nacionalidade,
+        dataNascimento: props.dadosClientes.dataNascimento,
+        estadoCivil: props.dadosClientes.estadoCivil,
+        rg: props.dadosClientes.rg,
+        cpf: props.dadosClientes.cpf,
+        celular: props.dadosClientes.celular,
+        email: props.dadosClientes.email,
+        endereco: props.dadosClientes.endereco,
+        cep: props.dadosClientes.cep,
+        bairro: props.dadosClientes.bairro,
+        numero: props.dadosClientes.numero,
+        cidade: props.dadosClientes.cidade,
+        estado: props.dadosClientes.estado,
+      });
+    }
+  }, [props.modo, props.dadosClientes]);
+
+  const buscaCEP = (event) => {
+    try {
+      const cep = event.target.value.replace(/\D/g, "");
+      fetch(`https://viacep.com.br/ws/${cep}/json/`)
+        .then((response) => response.json())
+        .then((data) => {
+          setDataInputs({
+            endereco: data.logradouro,
+            bairro: data.bairro,
+            cidade: data.localidade,
+            estado: data.uf,
+          });
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // Função de delay
   function delay(n) {
@@ -79,7 +92,7 @@ function ModalClientes(props) {
       event.preventDefault();
 
       if (props.modo === "criacao") {
-        if (!validaCPF(inputCPF)) {
+        if (!validaCPF(dataInputs.cpf)) {
           toast.warn("CPF inválido", {
             position: "bottom-right",
             autoClose: 2500,
@@ -90,7 +103,7 @@ function ModalClientes(props) {
             progress: undefined,
             theme: "light",
           });
-        } else if (!validator.isEmail(inputEmail)) {
+        } else if (!validator.isEmail(dataInputs.email)) {
           toast.warn("E-mail inválido", {
             position: "bottom-right",
             autoClose: 2500,
@@ -103,20 +116,20 @@ function ModalClientes(props) {
           });
         } else {
           await axios.post("http://localhost:3010/criacao-clientes", {
-            nome: inputNome,
-            nacionalidade: inputNacionalidade,
-            dataNascimento: inputDataNascimento,
-            rg: inputRG,
-            estadoCivil: inputEstadoCivil,
-            cpf: inputCPF,
-            celular: inputCelular,
-            email: inputEmail,
-            endereco: inputEndereco,
-            cep: inputCEP,
-            bairro: inputBairro,
-            numero: inputNumero,
-            cidade: inputCidade,
-            estado: inputEstado,
+            nome: dataInputs.nome,
+            nacionalidade: dataInputs.nacionalidade,
+            dataNascimento: dataInputs.dataNascimento,
+            rg: dataInputs.rg,
+            estadoCivil: dataInputs.estadoCivil,
+            cpf: dataInputs.cpf,
+            celular: dataInputs.celular,
+            email: dataInputs.email,
+            endereco: dataInputs.endereco,
+            cep: dataInputs.cep,
+            bairro: dataInputs.bairro,
+            numero: dataInputs.numero,
+            cidade: dataInputs.cidade,
+            estado: dataInputs.estado,
           });
 
           // Mensagem de sucesso
@@ -135,7 +148,7 @@ function ModalClientes(props) {
           props.setModalOpenClient(false); //Fecha o modal
         }
       } else if (props.modo === "edicao") {
-        if (!validator.isEmail(inputEmail)) {
+        if (!validator.isEmail(dataInputs.email)) {
           toast.warn("E-mail inválido", {
             position: "bottom-right",
             autoClose: 2500,
@@ -150,19 +163,19 @@ function ModalClientes(props) {
           await axios.put(
             `http://localhost:3010/alterar-cliente/${props.dadosClientes.id}`,
             {
-              nome: inputNome,
-              nacionalidade: inputNacionalidade,
-              dataNascimento: inputDataNascimento,
-              rg: inputRG,
-              estadoCivil: inputEstadoCivil,
-              celular: inputCelular,
-              email: inputEmail,
-              endereco: inputEndereco,
-              cep: inputCEP,
-              bairro: inputBairro,
-              numero: inputNumero,
-              cidade: inputCidade,
-              estado: inputEstado,
+              nome: dataInputs.nome,
+              nacionalidade: dataInputs.nacionalidade,
+              dataNascimento: dataInputs.dataNascimento,
+              rg: dataInputs.rg,
+              estadoCivil: dataInputs.estadoCivil,
+              celular: dataInputs.celular,
+              email: dataInputs.email,
+              endereco: dataInputs.endereco,
+              cep: dataInputs.cep,
+              bairro: dataInputs.bairro,
+              numero: dataInputs.numero,
+              cidade: dataInputs.cidade,
+              estado: dataInputs.estado,
             }
           );
 
@@ -232,9 +245,12 @@ function ModalClientes(props) {
                     id="nome"
                     name="nome"
                     placeholder="Digite o nome"
-                    value={inputNome}
+                    value={dataInputs.nome}
                     onChange={(event) => {
-                      setInputNome(event.target.value);
+                      setDataInputs({
+                        ...dataInputs,
+                        nome: event.target.value,
+                      });
                     }}
                   />
                 </DivInternaInput>
@@ -246,9 +262,12 @@ function ModalClientes(props) {
                     id="nacionalidade"
                     name="nome"
                     placeholder="Digite a nacionalidade"
-                    value={inputNacionalidade}
+                    value={dataInputs.nacionalidade}
                     onChange={(event) => {
-                      setInputNacionalidade(event.target.value);
+                      setDataInputs({
+                        ...dataInputs,
+                        nacionalidade: event.target.value,
+                      });
                     }}
                   />
                 </DivInternaInput>
@@ -261,9 +280,12 @@ function ModalClientes(props) {
                     type="date"
                     id="dataNascimento"
                     name="dataNascimento"
-                    value={inputDataNascimento}
+                    value={dataInputs.dataNascimento}
                     onChange={(event) => {
-                      setInputDataNascimento(event.target.value);
+                      setDataInputs({
+                        ...dataInputs,
+                        dataNascimento: event.target.value,
+                      });
                     }}
                   />
                 </DivInternaInput>
@@ -275,9 +297,12 @@ function ModalClientes(props) {
                     id="estadoCivil"
                     name="estadoCivil"
                     placeholder="Digite o estado civil"
-                    value={inputEstadoCivil}
+                    value={dataInputs.estadoCivil}
                     onChange={(event) => {
-                      setInputEstadoCivil(event.target.value);
+                      setDataInputs({
+                        ...dataInputs,
+                        estadoCivil: event.target.value,
+                      });
                     }}
                   />
                 </DivInternaInput>
@@ -292,9 +317,12 @@ function ModalClientes(props) {
                     name="rg"
                     placeholder="Digite o RG"
                     required
-                    value={inputRG}
+                    value={dataInputs.rg}
                     onChange={(event) => {
-                      setInputRG(event.target.value);
+                      setDataInputs({
+                        ...dataInputs,
+                        rg: event.target.value,
+                      });
                     }}
                   />
                 </DivInternaInput>
@@ -307,9 +335,12 @@ function ModalClientes(props) {
                     name="cpf"
                     required
                     placeholder="Digite o CPF"
-                    value={inputCPF}
+                    value={dataInputs.cpf}
                     onChange={(event) => {
-                      setInputCPF(event.target.value);
+                      setDataInputs({
+                        ...dataInputs,
+                        cpf: event.target.value,
+                      });
                     }}
                     readOnly={props.modo === "edicao"}
                   />
@@ -324,9 +355,12 @@ function ModalClientes(props) {
                     id="celular"
                     name="celular"
                     placeholder="Digite o celular"
-                    value={inputCelular}
+                    value={dataInputs.celular}
                     onChange={(event) => {
-                      setInputCelular(event.target.value);
+                      setDataInputs({
+                        ...dataInputs,
+                        celular: event.target.value,
+                      });
                     }}
                   />
                 </DivInternaInput>
@@ -338,9 +372,12 @@ function ModalClientes(props) {
                     id="email"
                     name="email"
                     placeholder="Digite o e-mail"
-                    value={inputEmail}
+                    value={dataInputs.email}
                     onChange={(event) => {
-                      setInputEmail(event.target.value);
+                      setDataInputs({
+                        ...dataInputs,
+                        email: event.target.value,
+                      });
                     }}
                   />
                 </DivInternaInput>
@@ -356,29 +393,36 @@ function ModalClientes(props) {
 
               <DivInput2>
                 <DivInternaInput>
-                  <Label>Endereço: </Label>
-                  <Input2
-                    type="text"
-                    id="endereco"
-                    name="endereco"
-                    placeholder="Digite o endereço"
-                    value={inputEndereco}
-                    onChange={(event) => {
-                      setInputEndereco(event.target.value);
-                    }}
-                  />
-                </DivInternaInput>
-
-                <DivInternaInput>
                   <Label>CEP: </Label>
                   <Input2
                     type="text"
                     id="cep"
                     name="cep"
                     placeholder="Digite o CEP"
-                    value={inputCEP}
+                    value={dataInputs.cep}
                     onChange={(event) => {
-                      setInputCEP(event.target.value);
+                      setDataInputs({
+                        ...dataInputs,
+                        cep: event.target.value,
+                      });
+                    }}
+                    onBlur={buscaCEP}
+                  />
+                </DivInternaInput>
+
+                <DivInternaInput>
+                  <Label>Endereço: </Label>
+                  <Input2
+                    type="text"
+                    id="endereco"
+                    name="endereco"
+                    placeholder="Digite o endereço"
+                    value={dataInputs.endereco}
+                    onChange={(event) => {
+                      setDataInputs({
+                        ...dataInputs,
+                        endereco: event.target.value,
+                      });
                     }}
                   />
                 </DivInternaInput>
@@ -392,9 +436,12 @@ function ModalClientes(props) {
                     id="bairro"
                     name="bairro"
                     placeholder="Digite o bairro"
-                    value={inputBairro}
+                    value={dataInputs.bairro}
                     onChange={(event) => {
-                      setInputBairro(event.target.value);
+                      setDataInputs({
+                        ...dataInputs,
+                        bairro: event.target.value,
+                      });
                     }}
                   />
                 </DivInternaInput>
@@ -406,9 +453,12 @@ function ModalClientes(props) {
                     id="numero"
                     name="numero"
                     placeholder="Digite o número da residência"
-                    value={inputNumero}
+                    value={dataInputs.numero}
                     onChange={(event) => {
-                      setInputNumero(event.target.value);
+                      setDataInputs({
+                        ...dataInputs,
+                        numero: event.target.value,
+                      });
                     }}
                   />
                 </DivInternaInput>
@@ -422,9 +472,12 @@ function ModalClientes(props) {
                     id="cidade"
                     name="cidade"
                     placeholder="Digite o nome da cidade"
-                    value={inputCidade}
+                    value={dataInputs.cidade}
                     onChange={(event) => {
-                      setInputCidade(event.target.value);
+                      setDataInputs({
+                        ...dataInputs,
+                        cidade: event.target.value,
+                      });
                     }}
                   />
                 </DivInternaInput>
@@ -436,9 +489,12 @@ function ModalClientes(props) {
                     id="estado"
                     name="estado"
                     placeholder="Digite o Estado"
-                    value={inputEstado}
+                    value={dataInputs.estado}
                     onChange={(event) => {
-                      setInputEstado(event.target.value);
+                      setDataInputs({
+                        ...dataInputs,
+                        estado: event.target.value,
+                      });
                     }}
                   />
                 </DivInternaInput>

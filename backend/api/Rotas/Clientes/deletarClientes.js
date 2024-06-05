@@ -1,6 +1,7 @@
 const express = require("express");
 const deletarClientes = express();
 const tabelaClientes = require("../../../Database/Tabelas/Clientes/clientes");
+const tabelaVendas = require("../../../Database/Tabelas/Vendas/Vendas");
 
 deletarClientes.delete("/deletar-cliente/:id", async (request, response) => {
   const { id } = request.params;
@@ -10,6 +11,21 @@ deletarClientes.delete("/deletar-cliente/:id", async (request, response) => {
         id: id,
       },
     });
+
+    const idClienteVendas = await tabelaVendas.findOne({
+      where: {
+        idCliente: id,
+      },
+    });
+
+    if (idClienteVendas) {
+      return response
+        .status(400)
+        .json({
+          Error:
+            "Cliente não pode ser excluído devido a estar vinculado a uma venda!!",
+        });
+    }
 
     if (idCliente) {
       tabelaClientes.destroy({
