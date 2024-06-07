@@ -15,10 +15,10 @@ function Home() {
         }}
       >
         <iframe
-          title="Prova-FernandoBertolo"
+          title="TCC"
           width="1140"
           height="541.25"
-          src="https://app.powerbi.com/reportEmbed?reportId=f418fa7f-720f-4ec8-be86-1d14ef520821&autoAuth=true&embeddedDemo=true"
+          src="https://app.powerbi.com/reportEmbed?reportId=91792e70-b058-4489-b36d-08540f3bec49&autoAuth=true&embeddedDemo=true"
           frameborder="0"
           allowFullScreen="true"
         ></iframe>

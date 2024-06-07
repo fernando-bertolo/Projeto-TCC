@@ -48,7 +48,7 @@ export default function SelectAcessorioMUI(props) {
         <InputLabel id="demo-multiple-checkbox-labe" sx={{ color: "#FFF" }}>
           Selecione os Acessórios
         </InputLabel>
-        <button onClick={() => {console.log(props.dataCar)}}>teste</button>
+        {/* <button onClick={() => {console.log(props.dataCar)}}>teste</button> */}
         <Select
           labelId="demo-multiple-checkbox-labe"
           id="demo-multiple-checkbox"

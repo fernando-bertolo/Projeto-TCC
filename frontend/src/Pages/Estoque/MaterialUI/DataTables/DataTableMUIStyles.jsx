@@ -19,7 +19,7 @@ export const DataGridCustom = styled(DataGrid)`
 `;
 
 export const DivTable = styled.div`
-  width: 90%;
+  width: 85%;
   height: 100%;
   display: flex;
   flex-direction: column;
