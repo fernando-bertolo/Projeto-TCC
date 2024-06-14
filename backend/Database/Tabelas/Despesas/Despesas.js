@@ -28,7 +28,7 @@ const Despesas = database.define("Despesas", {
     allowNull: false,
   },
   valor: {
-    type: Sequelize.DECIMAL(10, 2), //  Permite até 10 dígitos no total, com 3 dígitos após o ponto decimal
+    type: Sequelize.DECIMAL(10), //  Permite até 10 dígitos no total, com 3 dígitos após o ponto decimal
   },
 });
 

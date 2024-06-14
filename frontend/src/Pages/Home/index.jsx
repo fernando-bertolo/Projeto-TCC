@@ -1,6 +1,6 @@
 import Menu from "../../Components/Menu/index.jsx";
 import { Body } from "../../Components/BodyPages/style.jsx";
-import Report from "./report.jsx";
+
 function Home() {
   return (
     <Body>
@@ -18,12 +18,11 @@ function Home() {
           title="TCC"
           width="1140"
           height="541.25"
-          src="https://app.powerbi.com/reportEmbed?reportId=91792e70-b058-4489-b36d-08540f3bec49&autoAuth=true&embeddedDemo=true"
+          src="https://app.powerbi.com/reportEmbed?reportId=94530a54-0edb-4cd9-9741-b098b9d420e8&autoAuth=true&ctid=518f66eb-cd4e-4d59-84e3-b3ce1f72b656"
           frameborder="0"
           allowFullScreen="true"
         ></iframe>
       </div>
-      {/* <Report /> */}
     </Body>
   );
 }

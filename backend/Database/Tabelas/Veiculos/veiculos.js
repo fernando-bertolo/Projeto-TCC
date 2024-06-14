@@ -41,11 +41,11 @@ const Veiculos = database.define("Veiculos", {
     allowNull: false,
   },
   quilometragem: {
-    type: Sequelize.DECIMAL(10, 3), //  Permite até 10 dígitos no total, com 3 dígitos após o ponto decimal
+    type: Sequelize.DECIMAL(10), //  Permite até 10 dígitos no total, com 3 dígitos após o ponto decimal
     allowNull: false,
   },
   valor: {
-    type: Sequelize.DECIMAL(10, 3), //  Permite até 10 dígitos no total, com 3 dígitos após o ponto decimal
+    type: Sequelize.DECIMAL(10), //  Permite até 10 dígitos no total, com 3 dígitos após o ponto decimal
     allowNull: false,
   },
   placa: {
