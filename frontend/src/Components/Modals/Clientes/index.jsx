@@ -69,6 +69,7 @@ function ModalClientes(props) {
         .then((response) => response.json())
         .then((data) => {
           setDataInputs({
+            ...dataInputs,
             endereco: data.logradouro,
             bairro: data.bairro,
             cidade: data.localidade,
@@ -92,18 +93,7 @@ function ModalClientes(props) {
       event.preventDefault();
 
       if (props.modo === "criacao") {
-        if (!validaCPF(dataInputs.cpf)) {
-          toast.warn("CPF inválido", {
-            position: "bottom-right",
-            autoClose: 2500,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-        } else if (!validator.isEmail(dataInputs.email)) {
+        if (!validator.isEmail(dataInputs.email)) {
           toast.warn("E-mail inválido", {
             position: "bottom-right",
             autoClose: 2500,
@@ -195,10 +185,13 @@ function ModalClientes(props) {
         }
       }
     } catch (error) {
-      if (error.response === 400) {
-        toast.error("Não foi possível cadastrar o cliente!!", {
+      if (
+        (error.response && error.response.status === 400) ||
+        (error.response && error.response.status === 500)
+      ) {
+        toast.error(error.response.data.Error, {
           position: "bottom-right",
-          autoClose: 2000,
+          autoClose: 2500,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -207,16 +200,7 @@ function ModalClientes(props) {
           theme: "light",
         });
       } else {
-        toast.warn("CPF já cadastrado no sistema", {
-          position: "bottom-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
+        console.log(error);
       }
     }
   };

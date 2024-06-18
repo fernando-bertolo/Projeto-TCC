@@ -81,7 +81,7 @@ function ModalDialog(props) {
         modelo: props.dataCar.nomeModelo,
         versao: props.dataCar.nomeVersao,
         acessorios: props.dataCar.acessorios[0].nomeAcessorio,
-      })
+      });
     }
   }, [props.dataCar, props.modo]);
 
@@ -300,7 +300,6 @@ function ModalDialog(props) {
             }}
             id="customized-dialog-title"
           >
-            <button onClick={() => {console.log(props.dataCar)}}>teste</button>
             {props.title}
           </DialogTitle>
           <IconButton

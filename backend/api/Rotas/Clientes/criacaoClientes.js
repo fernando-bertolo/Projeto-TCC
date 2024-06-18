@@ -29,6 +29,7 @@ criacaoClientes.post("/criacao-clientes", async (request, response) => {
     });
 
     if (cpfCliente) {
+      console.log(cpfCliente);
       return response
         .status(400)
         .json({ Error: "CPF já cadastrado no sistema!!" });
@@ -55,7 +56,12 @@ criacaoClientes.post("/criacao-clientes", async (request, response) => {
     return response
       .status(200)
       .json({ message: "Cliente cadastrado com sucesso" });
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+    return response
+      .status(500)
+      .json({ Error: "Falha na criação do cliente!!" });
+  }
 });
 
 module.exports = criacaoClientes;
